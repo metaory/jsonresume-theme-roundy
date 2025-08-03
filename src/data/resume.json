@@ -196,7 +196,7 @@
   ],
   "meta": {
     "themeOptions": {
-      "color": "cyan",
+      "color": "red",
       "sectionTitles": {
         "contacts": "contacts",
         "summary": "summary",
@@ -238,7 +238,7 @@
       },
       "contactLabels": {
         "email": "Email",
-        "phone": "Phone", 
+        "phone": "Phone",
         "website": "Website",
         "location": "Location"
       },

@@ -92,11 +92,34 @@
   const savedTheme = localStorage.getItem('theme') || 'light';
   html.setAttribute('data-theme', savedTheme);
   
-  toggle?.addEventListener('click', () => {
+  // Function to apply dark mode theme variants
+  const applyDarkModeTheme = async (isDark) => {
+    const currentColor = localStorage.getItem('selectedThemeColor') || 'indigo';
+    const { applyColorTheme, applyDarkModeTheme } = await import('../lib/theme.js');
+    
+    if (isDark) {
+      // Apply dark mode variants
+      const darkThemeVars = applyDarkModeTheme(currentColor);
+      Object.entries(darkThemeVars).forEach(([key, value]) => {
+        html.style.setProperty(key, value);
+      });
+    } else {
+      // Apply light mode variants
+      const lightThemeVars = applyColorTheme(currentColor);
+      Object.entries(lightThemeVars).forEach(([key, value]) => {
+        html.style.setProperty(key, value);
+      });
+    }
+  };
+  
+  toggle?.addEventListener('click', async () => {
     const currentTheme = html.getAttribute('data-theme') || 'light';
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
     
     html.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
+    
+    // Apply appropriate theme variants
+    await applyDarkModeTheme(newTheme === 'dark');
   });
 </script> 

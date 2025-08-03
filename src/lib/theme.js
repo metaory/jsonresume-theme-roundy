@@ -1,5 +1,5 @@
 // Available Open Props color themes
-const OPEN_PROPS_COLORS = [
+export const OPEN_PROPS_COLORS = [
   'gray', 'stone', 'red', 'pink', 'purple', 'violet',
   'indigo', 'blue', 'cyan', 'teal', 'green', 'lime',
   'yellow', 'orange', 'choco', 'brown', 'sand', 'camo', 'jungle'
@@ -25,60 +25,89 @@ export const applyColorTheme = (color) => {
   const normalizedColor = color?.toLowerCase();
   if (!OPEN_PROPS_COLORS.includes(normalizedColor)) {
     return {
-      '--theme-color-primary': 'var(--indigo-7)',
-      '--theme-color-secondary': 'var(--indigo-6)',
-      '--theme-color-accent': 'var(--indigo-8)',
-      '--theme-color-muted': 'var(--indigo-4)',
-      '--theme-color-border': 'var(--indigo-5)',
-      '--theme-surface-primary': 'var(--indigo-0)',
-      '--theme-surface-secondary': 'var(--indigo-0)',
-      '--theme-surface-tertiary': 'var(--indigo-1)',
-      '--theme-surface-border': 'var(--indigo-2)',
-      '--theme-text-primary': 'var(--indigo-12)',
-      '--theme-text-secondary': 'var(--indigo-11)',
-      '--theme-text-muted': 'var(--indigo-10)',
-      '--theme-link': 'var(--indigo-9)',
-      '--theme-link-hover': 'var(--indigo-10)'
+      '--theme-color-primary': 'hsl(var(--indigo-7-hsl) / 0.7)',
+      '--theme-color-secondary': 'hsl(var(--indigo-6-hsl) / 0.6)',
+      '--theme-color-accent': 'hsl(var(--indigo-8-hsl) / 0.8)',
+      '--theme-color-muted': 'hsl(var(--indigo-4-hsl) / 0.4)',
+      '--theme-color-border': 'hsl(var(--indigo-5-hsl) / 0.3)',
+      '--theme-surface-primary': 'hsl(var(--indigo-1-hsl) / 0.6)',
+      '--theme-surface-secondary': 'hsl(var(--indigo-2-hsl) / 0.4)',
+      '--theme-surface-tertiary': 'hsl(var(--indigo-3-hsl) / 0.3)',
+      '--theme-surface-border': 'hsl(var(--indigo-4-hsl) / 0.2)',
+      '--theme-text-primary': 'hsl(var(--indigo-12-hsl) / 0.9)',
+      '--theme-text-secondary': 'hsl(var(--indigo-11-hsl) / 0.7)',
+      '--theme-text-muted': 'hsl(var(--indigo-10-hsl) / 0.5)',
+      '--theme-link': 'hsl(var(--indigo-9-hsl) / 0.8)',
+      '--theme-link-hover': 'hsl(var(--indigo-10-hsl) / 0.9)'
     };
   }
 
   return {
-    // Primary theme colors
-    '--theme-color-primary': `var(--${normalizedColor}-7)`,
-    '--theme-color-secondary': `var(--${normalizedColor}-6)`,
-    '--theme-color-accent': `var(--${normalizedColor}-8)`,
-    '--theme-color-muted': `var(--${normalizedColor}-4)`,
-    '--theme-color-border': `var(--${normalizedColor}-5)`,
+    // Primary theme colors with lower alpha
+    '--theme-color-primary': `hsl(var(--${normalizedColor}-7-hsl) / 0.7)`,
+    '--theme-color-secondary': `hsl(var(--${normalizedColor}-6-hsl) / 0.6)`,
+    '--theme-color-accent': `hsl(var(--${normalizedColor}-8-hsl) / 0.8)`,
+    '--theme-color-muted': `hsl(var(--${normalizedColor}-4-hsl) / 0.4)`,
+    '--theme-color-border': `hsl(var(--${normalizedColor}-5-hsl) / 0.3)`,
 
-    // Surfaces with HSL for transparency
-    '--theme-surface-primary': `hsl(var(--${normalizedColor}-1-hsl) / 0.82)`,
-    '--theme-surface-secondary': `hsl(var(--${normalizedColor}-2-hsl) / 0.84)`,
-    '--theme-surface-tertiary': `hsl(var(--${normalizedColor}-3-hsl) / 0.86)`,
-    '--theme-surface-border': `hsl(var(--${normalizedColor}-4-hsl) / 0.88)`,
+    // Surfaces with lower alpha for subtle backgrounds
+    '--theme-surface-primary': `hsl(var(--${normalizedColor}-1-hsl) / 0.6)`,
+    '--theme-surface-secondary': `hsl(var(--${normalizedColor}-2-hsl) / 0.4)`,
+    '--theme-surface-tertiary': `hsl(var(--${normalizedColor}-3-hsl) / 0.3)`,
+    '--theme-surface-border': `hsl(var(--${normalizedColor}-4-hsl) / 0.2)`,
 
-    // Text colors
-    '--theme-text-primary': `var(--${normalizedColor}-12)`,
-    '--theme-text-secondary': `var(--${normalizedColor}-11)`,
-    '--theme-text-muted': `var(--${normalizedColor}-10)`,
+    // Text colors with lower alpha
+    '--theme-text-primary': `hsl(var(--${normalizedColor}-12-hsl) / 0.9)`,
+    '--theme-text-secondary': `hsl(var(--${normalizedColor}-11-hsl) / 0.7)`,
+    '--theme-text-muted': `hsl(var(--${normalizedColor}-10-hsl) / 0.5)`,
 
-    // Links
-    '--theme-link': `var(--${normalizedColor}-9)`,
-    '--theme-link-hover': `var(--${normalizedColor}-10)`,
-
-    // Dark theme variants
-    '--theme-color-primary-dark': `var(--${normalizedColor}-5)`,
-    '--theme-color-secondary-dark': `var(--${normalizedColor}-6)`,
-    '--theme-color-accent-dark': `var(--${normalizedColor}-4)`,
-    '--theme-color-muted-dark': `var(--${normalizedColor}-7)`,
-    '--theme-color-border-dark': `var(--${normalizedColor}-6)`,
-    '--theme-surface-primary-dark': `hsl(var(--${normalizedColor}-9-hsl) / 0.12)`,
-    '--theme-surface-secondary-dark': `hsl(var(--${normalizedColor}-8-hsl) / 0.02)`,
-    '--theme-surface-tertiary-dark': `hsl(var(--${normalizedColor}-7-hsl) / 0.03)`,
-    '--theme-surface-border-dark': `hsl(var(--${normalizedColor}-6-hsl) / 0.05)`,
-    '--theme-text-primary-dark': `var(--${normalizedColor}-1)`,
-    '--theme-text-secondary-dark': `var(--${normalizedColor}-2)`,
-    '--theme-text-muted-dark': `var(--${normalizedColor}-3)`,
-    '--theme-link-dark': `var(--${normalizedColor}-4)`,
-    '--theme-link-hover-dark': `var(--${normalizedColor}-3)`
+    // Links with lower alpha
+    '--theme-link': `hsl(var(--${normalizedColor}-9-hsl) / 0.8)`,
+    '--theme-link-hover': `hsl(var(--${normalizedColor}-10-hsl) / 0.9)`
   };
+};
+
+// Apply dark mode theme variants
+export const applyDarkModeTheme = (color) => {
+  const normalizedColor = color?.toLowerCase();
+  if (!OPEN_PROPS_COLORS.includes(normalizedColor)) {
+    normalizedColor = 'indigo';
+  }
+
+  return {
+    // Dark mode variants with adjusted colors
+    '--theme-color-primary': `hsl(var(--${normalizedColor}-5-hsl) / 0.6)`,
+    '--theme-color-secondary': `hsl(var(--${normalizedColor}-6-hsl) / 0.5)`,
+    '--theme-color-accent': `hsl(var(--${normalizedColor}-4-hsl) / 0.7)`,
+    '--theme-color-muted': `hsl(var(--${normalizedColor}-7-hsl) / 0.4)`,
+    '--theme-color-border': `hsl(var(--${normalizedColor}-6-hsl) / 0.3)`,
+    '--theme-surface-primary': `hsl(var(--${normalizedColor}-9-hsl) / 0.1)`,
+    '--theme-surface-secondary': `hsl(var(--${normalizedColor}-8-hsl) / 0.05)`,
+    '--theme-surface-tertiary': `hsl(var(--${normalizedColor}-7-hsl) / 0.08)`,
+    '--theme-surface-border': `hsl(var(--${normalizedColor}-6-hsl) / 0.12)`,
+    '--theme-text-primary': `hsl(var(--${normalizedColor}-1-hsl) / 0.9)`,
+    '--theme-text-secondary': `hsl(var(--${normalizedColor}-2-hsl) / 0.7)`,
+    '--theme-text-muted': `hsl(var(--${normalizedColor}-3-hsl) / 0.5)`,
+    '--theme-link': `hsl(var(--${normalizedColor}-4-hsl) / 0.8)`,
+    '--theme-link-hover': `hsl(var(--${normalizedColor}-3-hsl) / 0.9)`
+  };
+};
+
+// Update theme in resume JSON file (background operation)
+export const updateThemeInJson = async (color) => {
+  try {
+    const response = await fetch('/api/update-theme', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ color })
+    });
+    
+    if (!response.ok) {
+      console.error('Failed to update theme in backend');
+    }
+  } catch (error) {
+    console.error('Error updating theme in backend:', error);
+  }
 };

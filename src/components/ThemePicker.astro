@@ -1,0 +1,239 @@
+---
+import { OPEN_PROPS_COLORS } from '../lib/theme.js';
+
+const colors = OPEN_PROPS_COLORS;
+---
+
+<div class="theme-picker" id="theme-picker">
+  <div class="picker-tab">
+    <iconify-icon icon="ph:palette" class="tab-icon"></iconify-icon>
+  </div>
+  <div class="picker-content">
+    <div class="picker-header">
+      <h3>Theme Colors</h3>
+    </div>
+    <div class="color-grid">
+      {colors.map(color => (
+        <button 
+          class="color-btn" 
+          data-color={color}
+          style={`--color: var(--${color}-7); --color-hover: var(--${color}-8);`}
+          title={color}
+        >
+          <div class="color-circle"></div>
+          <span class="color-name">{color}</span>
+        </button>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .theme-picker {
+    position: fixed;
+    top: 50%;
+    right: -200px;
+    transform: translateY(-50%);
+    background: rgba(var(--theme-surface-primary-rgb, 255, 255, 255), 0.85);
+    border: 1px solid rgba(var(--theme-surface-border-rgb, 0, 0, 0), 0.1);
+    border-radius: 12px 0 0 12px;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 280px;
+    display: flex;
+  }
+
+  .theme-picker:hover,
+  .theme-picker.show {
+    right: 0;
+  }
+
+  .picker-tab {
+    position: absolute;
+    left: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 60px;
+    background: rgba(var(--theme-surface-primary-rgb, 255, 255, 255), 0.85);
+    border: 1px solid rgba(var(--theme-surface-border-rgb, 0, 0, 0), 0.1);
+    border-right: none;
+    border-radius: 8px 0 0 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: -2px 0 12px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .picker-tab:hover {
+    background: rgba(var(--theme-surface-primary-rgb, 255, 255, 255), 0.95);
+    transform: translateY(-50%) scale(1.05);
+  }
+
+  .tab-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--theme-text-secondary);
+    transition: color 0.2s ease;
+  }
+
+  .picker-content {
+    padding: 16px;
+    width: 100%;
+  }
+
+  .picker-header {
+    margin-bottom: 12px;
+  }
+
+  .picker-header h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--theme-text-primary);
+  }
+
+  .color-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+
+  .color-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .color-btn:hover {
+    background: rgba(var(--theme-surface-secondary-rgb, 0, 0, 0), 0.05);
+    transform: translateY(-2px);
+  }
+
+  .color-btn.active {
+    background: rgba(var(--theme-color-primary), 0.1);
+    border: 2px solid var(--theme-color-primary);
+  }
+
+  .color-circle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--color);
+    border: 2px solid rgba(var(--theme-surface-border-rgb, 0, 0, 0), 0.1);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .color-btn:hover .color-circle {
+    background: var(--color-hover);
+    transform: scale(1.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .color-name {
+    font-size: 10px;
+    color: var(--theme-text-secondary);
+    text-transform: capitalize;
+    font-weight: 500;
+  }
+
+  @media print {
+    .theme-picker {
+      display: none !important;
+    }
+  }
+</style>
+
+<script>
+  let hideTimeout;
+
+  // Apply theme immediately without page reload
+  const applyThemeImmediately = async (color) => {
+    const { applyColorTheme, applyDarkModeTheme } = await import('../lib/theme.js');
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    
+    // Apply appropriate theme based on current mode
+    const themeVars = isDark ? applyDarkModeTheme(color) : applyColorTheme(color);
+    
+    // Apply CSS variables to root
+    const root = document.documentElement;
+    Object.entries(themeVars).forEach(([key, value]) => {
+      root.style.setProperty(key, value);
+    });
+    
+    // Store in localStorage
+    localStorage.setItem('selectedThemeColor', color);
+    
+    // Update active state
+    document.querySelectorAll('.color-btn').forEach(btn => {
+      btn.classList.remove('active');
+    });
+    document.querySelector(`[data-color="${color}"]`)?.classList.add('active');
+  };
+
+  // Add click handlers to color buttons
+  document.addEventListener('DOMContentLoaded', () => {
+    const colorBtns = document.querySelectorAll('.color-btn');
+    
+    // Set initial active state
+    const currentColor = localStorage.getItem('selectedThemeColor') || 'indigo';
+    document.querySelector(`[data-color="${currentColor}"]`)?.classList.add('active');
+    
+    colorBtns.forEach(btn => {
+      btn.addEventListener('click', async (event) => {
+        const color = btn.getAttribute('data-color');
+        
+        if (!color) return;
+        
+        // Apply theme immediately
+        await applyThemeImmediately(color);
+        
+        // Optional: Save to backend in background (non-blocking)
+        try {
+          const { updateThemeInJson } = await import('../lib/theme.js');
+          updateThemeInJson(color).catch(console.error);
+        } catch (error) {
+          console.error('Error saving theme to backend:', error);
+        }
+      });
+    });
+  });
+
+  // Auto-hide functionality with delay
+  const picker = document.getElementById('theme-picker');
+  
+  picker?.addEventListener('mouseenter', () => {
+    clearTimeout(hideTimeout);
+    picker.classList.add('show');
+  });
+
+  picker?.addEventListener('mouseleave', () => {
+    hideTimeout = setTimeout(() => {
+      picker.classList.remove('show');
+    }, 2000); // 2 second delay
+  });
+
+  // Hide picker on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const picker = document.getElementById('theme-picker');
+      if (picker) {
+        picker.classList.remove('show');
+      }
+    }
+  });
+</script> 
