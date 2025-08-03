@@ -1,7 +1,7 @@
 ---
-import { OPEN_PROPS_COLORS } from '../lib/theme.js';
+import { OPEN_PROPS_COLORS } from '../lib/theme.js'
 
-const colors = OPEN_PROPS_COLORS;
+const colors = OPEN_PROPS_COLORS
 ---
 
 <div class="theme-picker" id="theme-picker">
@@ -14,8 +14,8 @@ const colors = OPEN_PROPS_COLORS;
     </div>
     <div class="color-grid">
       {colors.map(color => (
-        <button 
-          class="color-btn" 
+        <button
+          class="color-btn"
           data-color={color}
           style={`--color: var(--${color}-7); --color-hover: var(--${color}-8);`}
           title={color}
@@ -34,13 +34,11 @@ const colors = OPEN_PROPS_COLORS;
     top: 50%;
     right: -200px;
     transform: translateY(-50%);
-    background: rgba(var(--theme-surface-primary-rgb, 255, 255, 255), 0.85);
-    border: 1px solid rgba(var(--theme-surface-border-rgb, 0, 0, 0), 0.1);
+    background: rgba(var(--theme-surface-primary-rgb, 255, 255, 255), 0.1);
     border-radius: 12px 0 0 12px;
     box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
-    z-index: 1000;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    z-index: var(--theme-z-modal);
+    backdrop-filter: blur(4px) saturate(180%);
     transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     width: 280px;
     display: flex;
@@ -58,8 +56,7 @@ const colors = OPEN_PROPS_COLORS;
     transform: translateY(-50%);
     width: 40px;
     height: 60px;
-    background: rgba(var(--theme-surface-primary-rgb, 255, 255, 255), 0.85);
-    border: 1px solid rgba(var(--theme-surface-border-rgb, 0, 0, 0), 0.1);
+    background: rgba(var(--theme-surface-primary-rgb, 255, 255, 255), 0.3);
     border-right: none;
     border-radius: 8px 0 0 8px;
     display: flex;
@@ -67,13 +64,13 @@ const colors = OPEN_PROPS_COLORS;
     justify-content: center;
     cursor: pointer;
     box-shadow: -2px 0 12px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .picker-tab:hover {
-    background: rgba(var(--theme-surface-primary-rgb, 255, 255, 255), 0.95);
+    background: rgba(var(--theme-surface-primary-rgb, 255, 255, 255), 0.2);
     transform: translateY(-50%) scale(1.05);
   }
 
@@ -151,6 +148,20 @@ const colors = OPEN_PROPS_COLORS;
     font-weight: 500;
   }
 
+  [data-theme="dark"] .theme-picker {
+    background: rgba(var(--theme-surface-primary-rgb, 30, 30, 30), 0.1);
+    border-color: rgba(var(--theme-surface-border-rgb, 255, 255, 255), 0.1);
+  }
+
+  [data-theme="dark"] .picker-tab {
+    background: rgba(var(--theme-surface-primary-rgb, 30, 30, 30), 0.1);
+    border-color: rgba(var(--theme-surface-border-rgb, 255, 255, 255), 0.1);
+  }
+
+  [data-theme="dark"] .picker-tab:hover {
+    background: rgba(var(--theme-surface-primary-rgb, 30, 30, 30), 0.2);
+  }
+
   @media print {
     .theme-picker {
       display: none !important;
@@ -165,19 +176,19 @@ const colors = OPEN_PROPS_COLORS;
   const applyThemeImmediately = async (color) => {
     const { applyColorTheme, applyDarkModeTheme } = await import('../lib/theme.js');
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    
+
     // Apply appropriate theme based on current mode
     const themeVars = isDark ? applyDarkModeTheme(color) : applyColorTheme(color);
-    
+
     // Apply CSS variables to root
     const root = document.documentElement;
     Object.entries(themeVars).forEach(([key, value]) => {
       root.style.setProperty(key, value);
     });
-    
+
     // Store in localStorage
     localStorage.setItem('selectedThemeColor', color);
-    
+
     // Update active state
     document.querySelectorAll('.color-btn').forEach(btn => {
       btn.classList.remove('active');
@@ -188,17 +199,17 @@ const colors = OPEN_PROPS_COLORS;
   // Add click handlers to color buttons
   document.addEventListener('DOMContentLoaded', () => {
     const colorBtns = document.querySelectorAll('.color-btn');
-    
+
     // Set initial active state
     const currentColor = localStorage.getItem('selectedThemeColor') || 'indigo';
     document.querySelector(`[data-color="${currentColor}"]`)?.classList.add('active');
-    
+
     colorBtns.forEach(btn => {
       btn.addEventListener('click', async (event) => {
         const color = btn.getAttribute('data-color');
-        
+
         if (!color) return;
-        
+
         // Apply theme immediately
         await applyThemeImmediately(color);
       });
@@ -207,7 +218,7 @@ const colors = OPEN_PROPS_COLORS;
 
   // Auto-hide functionality with delay
   const picker = document.getElementById('theme-picker');
-  
+
   picker?.addEventListener('mouseenter', () => {
     clearTimeout(hideTimeout);
     picker.classList.add('show');
@@ -216,7 +227,7 @@ const colors = OPEN_PROPS_COLORS;
   picker?.addEventListener('mouseleave', () => {
     hideTimeout = setTimeout(() => {
       picker.classList.remove('show');
-    }, 2000); // 2 second delay
+    }, 28_000)
   });
 
   // Hide picker on escape key
@@ -228,4 +239,4 @@ const colors = OPEN_PROPS_COLORS;
       }
     }
   });
-</script> 
+</script>
