@@ -201,14 +201,6 @@ const colors = OPEN_PROPS_COLORS;
         
         // Apply theme immediately
         await applyThemeImmediately(color);
-        
-        // Optional: Save to backend in background (non-blocking)
-        try {
-          const { updateThemeInJson } = await import('../lib/theme.js');
-          updateThemeInJson(color).catch(console.error);
-        } catch (error) {
-          console.error('Error saving theme to backend:', error);
-        }
       });
     });
   });

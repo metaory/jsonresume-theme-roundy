@@ -11,12 +11,11 @@ import * as resumeData from '../data/resume.json'
 const { basics, meta } = resumeData
 const sections = await loadSections(resumeData)
 
-// Check for stored theme color and apply it
-const storedColor = typeof window !== 'undefined' ? localStorage.getItem('selectedThemeColor') : null;
-const themeColor = storedColor || getThemeConfig(meta).color;
+// Get theme config - will be overridden by client-side script if localStorage exists
+const themeConfig = getThemeConfig(meta)
 
 // Generate CSS for color theme variables
-const colorThemeCSS = Object.entries(applyColorTheme(themeColor))
+const colorThemeCSS = Object.entries(applyColorTheme(themeConfig.color))
   .map(([key, value]) => `${key}: ${value};`)
   .join('\n          ')
 ---
@@ -27,6 +26,43 @@ const colorThemeCSS = Object.entries(applyColorTheme(themeColor))
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{basics?.name || 'Resume'}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    
+    <!-- Prevent FOUC by hiding content until theme is applied -->
+    <script>
+      // Immediately check localStorage and apply theme before any rendering
+      (function() {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        const savedColor = localStorage.getItem('selectedThemeColor') || 'indigo';
+        
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        
+        // Apply saved color theme immediately
+        const themeVars = {
+          '--theme-color-primary': `hsl(var(--${savedColor}-7-hsl) / 0.7)`,
+          '--theme-color-secondary': `hsl(var(--${savedColor}-6-hsl) / 0.6)`,
+          '--theme-color-accent': `hsl(var(--${savedColor}-8-hsl) / 0.8)`,
+          '--theme-color-muted': `hsl(var(--${savedColor}-4-hsl) / 0.4)`,
+          '--theme-color-border': `hsl(var(--${savedColor}-5-hsl) / 0.3)`,
+          '--theme-surface-primary': `hsl(var(--${savedColor}-1-hsl) / 0.6)`,
+          '--theme-surface-secondary': `hsl(var(--${savedColor}-2-hsl) / 0.4)`,
+          '--theme-surface-tertiary': `hsl(var(--${savedColor}-3-hsl) / 0.3)`,
+          '--theme-surface-border': `hsl(var(--${savedColor}-4-hsl) / 0.2)`,
+          '--theme-text-primary': `hsl(var(--${savedColor}-12-hsl) / 0.9)`,
+          '--theme-text-secondary': `hsl(var(--${savedColor}-11-hsl) / 0.7)`,
+          '--theme-text-muted': `hsl(var(--${savedColor}-10-hsl) / 0.5)`,
+          '--theme-link': `hsl(var(--${savedColor}-9-hsl) / 0.8)`,
+          '--theme-link-hover': `hsl(var(--${savedColor}-10-hsl) / 0.9)`
+        };
+        
+        Object.entries(themeVars).forEach(([key, value]) => {
+          document.documentElement.style.setProperty(key, value);
+        });
+        
+        // Show content after theme is applied
+        document.documentElement.style.visibility = 'visible';
+      })();
+    </script>
+    
     <style is:global>
       @import '../styles/global.css';
       @import '../styles/fonts.css';
@@ -35,6 +71,11 @@ const colorThemeCSS = Object.entries(applyColorTheme(themeColor))
         display: inline-block;
         width: 1em;
         height: 1em;
+      }
+      
+      /* Hide content until theme is applied */
+      html {
+        visibility: hidden;
       }
     </style>
     <style is:global set:html={`
@@ -46,22 +87,6 @@ const colorThemeCSS = Object.entries(applyColorTheme(themeColor))
   <body>
     <script>
       import "iconify-icon";
-      
-      // Initialize theme from localStorage
-      const savedTheme = localStorage.getItem('theme') || 'light';
-      const savedColor = localStorage.getItem('selectedThemeColor') || 'indigo';
-      
-      document.documentElement.setAttribute('data-theme', savedTheme);
-      
-      // Apply saved color theme immediately
-      if (typeof window !== 'undefined') {
-        import('../lib/theme.js').then(({ applyColorTheme }) => {
-          const themeVars = applyColorTheme(savedColor);
-          Object.entries(themeVars).forEach(([key, value]) => {
-            document.documentElement.style.setProperty(key, value);
-          });
-        });
-      }
     </script>
     
     <ThemeToggle />

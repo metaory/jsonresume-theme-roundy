@@ -69,7 +69,7 @@ export const applyColorTheme = (color) => {
 
 // Apply dark mode theme variants
 export const applyDarkModeTheme = (color) => {
-  const normalizedColor = color?.toLowerCase();
+  let normalizedColor = color?.toLowerCase();
   if (!OPEN_PROPS_COLORS.includes(normalizedColor)) {
     normalizedColor = 'indigo';
   }
@@ -91,23 +91,4 @@ export const applyDarkModeTheme = (color) => {
     '--theme-link': `hsl(var(--${normalizedColor}-4-hsl) / 0.8)`,
     '--theme-link-hover': `hsl(var(--${normalizedColor}-3-hsl) / 0.9)`
   };
-};
-
-// Update theme in resume JSON file (background operation)
-export const updateThemeInJson = async (color) => {
-  try {
-    const response = await fetch('/api/update-theme', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ color })
-    });
-    
-    if (!response.ok) {
-      console.error('Failed to update theme in backend');
-    }
-  } catch (error) {
-    console.error('Error updating theme in backend:', error);
-  }
 };
