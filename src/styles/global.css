@@ -1,20 +1,30 @@
 /* Open Props - loaded at build time for static generation */
 @import "https://unpkg.com/open-props@1.7.16/open-props.min.css";
+@import "https://unpkg.com/open-props@1.7.16/colors-hsl.min.css";
+
+/* XoC */
+
 
 /* Our internal theme variables - using Open Props values */
 :root {
-  /* Colors */
-  --theme-text-primary: var(--gray-12);
-  --theme-text-secondary: var(--gray-11);
-  --theme-text-muted: var(--gray-10);
-  --theme-surface-primary: var(--gray-0);
-  --theme-surface-secondary: var(--gray-1);
-  --theme-surface-tertiary: var(--gray-2);
-  --theme-surface-border: var(--gray-3);
-  --theme-link: var(--blue-9);
-  --theme-link-hover: var(--blue-10);
+  /* Colors - will be set by theme system */
+  /* --theme-text-primary: var(--gray-12); */
+  /* --theme-text-secondary: var(--gray-11); */
+  /* --theme-text-muted: var(--gray-10); */
+  /* --theme-link: var(--blue-9); */
+  /* --theme-link-hover: var(--blue-10); */
+  
+  /* Surface colors - set by theme system only */
+  /* --theme-surface-primary: var(--gray-0); */
+  /* --theme-surface-secondary: var(--gray-1); */
+  /* --theme-surface-tertiary: var(--gray-2); */
+  /* --theme-surface-border: var(--gray-3); */
   
   /* Color theme - will be set by applyColorTheme */
+  
+  /* RGB values for alpha transparency (light theme defaults) */
+  --theme-surface-secondary-rgb: 255, 255, 255;
+  --theme-link-rgb: 59, 130, 246;
   
   /* Typography */
   --theme-font-family: var(--font-sans);
@@ -225,15 +235,15 @@ a:hover {
 
 [data-theme="dark"] {
   color-scheme: dark;
-  --theme-text-primary: var(--gray-1);
-  --theme-text-secondary: var(--gray-2);
-  --theme-text-muted: var(--gray-3);
-  --theme-surface-primary: var(--gray-9);
-  --theme-surface-secondary: var(--gray-8);
-  --theme-surface-tertiary: var(--gray-7);
-  --theme-surface-border: var(--gray-6);
-  --theme-link: var(--blue-4);
-  --theme-link-hover: var(--blue-3);
+  --theme-text-primary: var(--theme-text-primary-dark, var(--gray-1));
+  --theme-text-secondary: var(--theme-text-secondary-dark, var(--gray-2));
+  --theme-text-muted: var(--theme-text-muted-dark, var(--gray-3));
+  --theme-surface-primary: var(--theme-surface-primary-dark, var(--gray-9));
+  --theme-surface-secondary: var(--theme-surface-secondary-dark, var(--gray-8));
+  --theme-surface-tertiary: var(--theme-surface-tertiary-dark, var(--gray-7));
+  --theme-surface-border: var(--theme-surface-border-dark, var(--gray-6));
+  --theme-link: var(--theme-link-dark, var(--blue-4));
+  --theme-link-hover: var(--theme-link-hover-dark, var(--blue-3));
   
   /* Dark theme color adjustments */
   --theme-color-primary: var(--theme-color-primary-dark, var(--theme-color-primary));
@@ -241,4 +251,8 @@ a:hover {
   --theme-color-accent: var(--theme-color-accent-dark, var(--theme-color-accent));
   --theme-color-muted: var(--theme-color-muted-dark, var(--theme-color-muted));
   --theme-color-border: var(--theme-color-border-dark, var(--theme-color-border));
+  
+  /* RGB values for alpha transparency */
+  --theme-surface-secondary-rgb: 30, 30, 30;
+  --theme-link-rgb: 147, 197, 253;
 } 

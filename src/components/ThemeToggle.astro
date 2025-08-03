@@ -1,10 +1,12 @@
 ---
-import Icon from './shared/Icon.astro';
+// No props needed for this component
 ---
 
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-  <Icon name="ph:sun-bold" class="sun-icon" size="var(--theme-font-size-lg)" />
-  <Icon name="ph:moon-bold" class="moon-icon" size="var(--theme-font-size-lg)" />
+  <div class="icon-container">
+    <object class="light-icon" type="image/svg+xml" data="/src/assets/scheme/light.svg"></object>
+    <object class="dark-icon" type="image/svg+xml" data="/src/assets/scheme/dark.svg"></object>
+  </div>
 </button>
 
 <style>
@@ -13,8 +15,9 @@ import Icon from './shared/Icon.astro';
     top: var(--theme-spacing-lg);
     right: var(--theme-spacing-lg);
     z-index: var(--theme-z-important);
-    background: var(--theme-surface-secondary);
-    border: var(--theme-border-width-thick) solid var(--theme-link);
+    background: rgba(var(--theme-surface-secondary-rgb, 255, 255, 255), 0.8);
+    backdrop-filter: blur(8px);
+    border: var(--theme-border-width-thick) solid rgba(var(--theme-link-rgb, 59, 130, 246), 0.6);
     border-radius: var(--theme-border-radius-full);
     width: var(--theme-spacing-2xl);
     height: var(--theme-spacing-2xl);
@@ -23,43 +26,82 @@ import Icon from './shared/Icon.astro';
     justify-content: center;
     cursor: pointer;
     transition: all var(--theme-transition-normal) var(--theme-easing);
-    box-shadow: var(--theme-shadow-md);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    mix-blend-mode: multiply;
   }
 
   .theme-toggle:hover {
     transform: scale(1.1);
-    box-shadow: var(--theme-shadow-lg);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    border-color: rgba(var(--theme-link-rgb, 59, 130, 246), 0.8);
   }
 
-  .theme-toggle .icon {
-    color: var(--theme-link);
-    transition: all var(--theme-transition-normal) var(--theme-easing);
+  .icon-container {
+    position: relative;
+    width: 1.5em;
+    height: 1.5em;
   }
 
-  .sun-icon {
-    display: block;
+  .theme-toggle object {
+    width: 1.5em;
+    height: 1.5em;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity var(--theme-transition-normal) var(--theme-easing);
+    mix-blend-mode: multiply;
   }
 
-  .moon-icon {
-    display: none;
+  .light-icon {
+    opacity: 1;
   }
 
-  [data-theme="dark"] .sun-icon {
-    display: none;
+  .dark-icon {
+    opacity: 0;
   }
 
-  [data-theme="dark"] .moon-icon {
-    display: block;
+  [data-theme="dark"] .light-icon {
+    opacity: 0;
+  }
+
+  [data-theme="dark"] .dark-icon {
+    opacity: 1;
+  }
+
+  [data-theme="dark"] .theme-toggle {
+    background: rgba(var(--theme-surface-secondary-rgb, 30, 30, 30), 0.8);
+    border-color: rgba(var(--theme-link-rgb, 147, 197, 253), 0.6);
+    mix-blend-mode: screen;
+  }
+
+  [data-theme="dark"] .theme-toggle:hover {
+    border-color: rgba(var(--theme-link-rgb, 147, 197, 253), 0.8);
+  }
+
+  [data-theme="dark"] .theme-toggle object {
+    mix-blend-mode: screen;
   }
 </style>
 
 <script>
   const toggle = document.getElementById('theme-toggle');
   const html = document.documentElement;
+  const lightIcon = document.querySelector('.light-icon') as HTMLObjectElement;
+  const darkIcon = document.querySelector('.dark-icon') as HTMLObjectElement;
   
   // Get saved theme or default to light
   const savedTheme = localStorage.getItem('theme') || 'light';
   html.setAttribute('data-theme', savedTheme);
+  
+  // Set initial icon visibility
+  if (savedTheme === 'dark') {
+    lightIcon.style.display = 'none';
+    darkIcon.style.display = 'block';
+  } else {
+    lightIcon.style.display = 'block';
+    darkIcon.style.display = 'none';
+  }
   
   toggle?.addEventListener('click', () => {
     const currentTheme = html.getAttribute('data-theme') || 'light';
@@ -67,5 +109,22 @@ import Icon from './shared/Icon.astro';
     
     html.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
+    
+    // Trigger animation by refreshing the object data
+    if (newTheme === 'dark') {
+      lightIcon.style.display = 'none';
+      darkIcon.style.display = 'block';
+      // Small delay to ensure display change happens first
+      setTimeout(() => {
+        darkIcon.data = darkIcon.data;
+      }, 10);
+    } else {
+      lightIcon.style.display = 'block';
+      darkIcon.style.display = 'none';
+      // Small delay to ensure display change happens first
+      setTimeout(() => {
+        lightIcon.data = lightIcon.data;
+      }, 10);
+    }
   });
 </script> 
