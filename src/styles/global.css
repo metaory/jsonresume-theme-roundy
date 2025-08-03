@@ -2,24 +2,8 @@
 @import "https://unpkg.com/open-props@1.7.16/open-props.min.css";
 @import "https://unpkg.com/open-props@1.7.16/colors-hsl.min.css";
 
-/* XoC */
-
-
 /* Our internal theme variables - using Open Props values */
 :root {
-  /* Colors - will be set by theme system */
-  /* --theme-text-primary: var(--gray-12); */
-  /* --theme-text-secondary: var(--gray-11); */
-  /* --theme-text-muted: var(--gray-10); */
-  /* --theme-link: var(--blue-9); */
-  /* --theme-link-hover: var(--blue-10); */
-  
-  /* Surface colors - set by theme system only */
-  /* --theme-surface-primary: var(--gray-0); */
-  /* --theme-surface-secondary: var(--gray-1); */
-  /* --theme-surface-tertiary: var(--gray-2); */
-  /* --theme-surface-border: var(--gray-3); */
-  
   /* Color theme - will be set by applyColorTheme */
   
   /* RGB values for alpha transparency (light theme defaults) */
@@ -120,17 +104,7 @@ a:hover {
   color: var(--theme-link-hover);
 }
 
-/* Utility classes */
-.keyword {
-  display: inline-block;
-  background: var(--theme-surface-secondary);
-  color: var(--theme-text-secondary);
-  padding: var(--theme-spacing-xs) var(--theme-spacing-sm);
-  border-radius: var(--theme-border-radius-md);
-  font-size: var(--theme-font-size-xs);
-  margin: var(--theme-spacing-xs);
-  transition: background-color var(--theme-transition-normal), color var(--theme-transition-normal);
-}
+
 
 .section {
   margin-bottom: var(--theme-spacing-2xl);

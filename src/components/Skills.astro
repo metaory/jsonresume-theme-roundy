@@ -1,0 +1,115 @@
+---
+import Icon from './shared/Icon.astro';
+
+const { items, meta } = Astro.props;
+
+// Get skill levels from meta config or use defaults
+const skillLevels = meta?.themeOptions?.componentConfig?.skills?.levels || {
+  'Master': { width: '100%', color: '#10b981' },
+  'Advanced': { width: '85%', color: '#3b82f6' },
+  'Intermediate': { width: '65%', color: '#f59e0b' },
+  'Beginner': { width: '40%', color: '#ef4444' }
+};
+---
+
+<div class="skills">
+  {items.map(skill => {
+    const level = skillLevels[skill.level] || skillLevels['Beginner'];
+    return (
+      <div class="skill-category">
+        <div class="skill-header">
+          <Icon name="ph:star" size="1.2em" class="skill-icon" />
+          <h4 class="skill-name">{skill.name}</h4>
+          <span class="skill-level" style={`color: ${level.color};`}>{skill.level}</span>
+        </div>
+        
+        {skill.keywords && (
+          <div class="skill-progress">
+            <div class="progress-bar">
+              <div class="progress-fill" style={`width: ${level.width}; background: ${level.color};`}></div>
+            </div>
+            <div class="skill-keywords">
+              {skill.keywords.map(keyword => (
+                <span class="skill-tag">{keyword}</span>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  })}
+</div>
+
+<style>
+  .skills {
+    display: flex;
+    flex-direction: column;
+    gap: var(--theme-spacing-xl);
+  }
+  
+  .skill-category {
+    background: var(--theme-surface-secondary);
+    border-radius: var(--theme-border-radius-lg);
+    padding: var(--theme-spacing-lg);
+    border: var(--theme-border-width-thin) solid var(--theme-border-color);
+  }
+  
+  .skill-header {
+    display: flex;
+    align-items: center;
+    gap: var(--theme-spacing-sm);
+    margin-bottom: var(--theme-spacing-md);
+  }
+  
+  .skill-icon {
+    color: var(--theme-color-primary);
+  }
+  
+  .skill-name {
+    margin: 0;
+    font-size: var(--theme-font-size-lg);
+    font-weight: var(--theme-font-weight-semibold);
+    color: var(--theme-text-primary);
+    flex: 1;
+  }
+  
+  .skill-level {
+    font-weight: var(--theme-font-weight-semibold);
+    font-size: var(--theme-font-size-sm);
+  }
+  
+  .skill-progress {
+    display: flex;
+    flex-direction: column;
+    gap: var(--theme-spacing-md);
+  }
+  
+  .progress-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--theme-surface-primary);
+    border-radius: var(--theme-border-radius-full);
+    overflow: hidden;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    border-radius: var(--theme-border-radius-full);
+    transition: width var(--theme-transition-normal) var(--theme-easing);
+  }
+  
+  .skill-keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--theme-spacing-xs);
+  }
+  
+  .skill-tag {
+    background: var(--theme-surface-primary);
+    color: var(--theme-text-secondary);
+    padding: var(--theme-spacing-xs) var(--theme-spacing-sm);
+    border-radius: var(--theme-border-radius-md);
+    font-size: var(--theme-font-size-sm);
+    border: var(--theme-border-width-thin) solid var(--theme-border-color);
+  }
+</style> 

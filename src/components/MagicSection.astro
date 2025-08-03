@@ -1,11 +1,12 @@
 ---
-import { renderData, layouts } from '../lib/render.js';
+import { renderData, getLayouts } from '../lib/render.js';
 import Tag from './shared/Tag.astro';
 import DateRange from './shared/DateRange.astro';
 
 const { items, meta, sectionName } = Astro.props;
 
 // Single-pass processing with layout
+const layouts = getLayouts();
 const processedItems = renderData(items, layouts[sectionName] || layouts.work);
 ---
 

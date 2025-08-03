@@ -1,8 +1,6 @@
 {
   "basics": {
     "name": "John Doe",
-    "image": "/src/assets/avatar-m.png",
-    "logo": "/src/assets/logo.svg",
     "email": "john@gmail.com",
     "phone": "(912) 555-4321",
     "url": "https://github.com/metaory",
@@ -211,6 +209,38 @@
         "volunteers": "volunteers",
         "educations": "education",
         "references": "references"
+      },
+      "componentConfig": {
+        "skills": {
+          "levels": {
+            "Master": { "width": "100%", "color": "#10b981" },
+            "Advanced": { "width": "85%", "color": "#3b82f6" },
+            "Intermediate": { "width": "65%", "color": "#f59e0b" },
+            "Beginner": { "width": "40%", "color": "#ef4444" }
+          }
+        },
+        "languages": {
+          "levels": {
+            "Master": { "dots": 5, "color": "#10b981", "label": "Native" },
+            "Advanced": { "dots": 4, "color": "#3b82f6", "label": "Fluent" },
+            "Intermediate": { "dots": 3, "color": "#f59e0b", "label": "Conversational" },
+            "Beginner": { "dots": 2, "color": "#ef4444", "label": "Basic" }
+          }
+        },
+        "interests": {
+          "categories": {
+            "Terminals": { "icon": "ph:terminal", "color": "#10b981" },
+            "Window Managers": { "icon": "ph:monitor", "color": "#3b82f6" },
+            "Text Editors": { "icon": "ph:file-text", "color": "#f59e0b" },
+            "default": { "icon": "ph:heart", "color": "#ef4444" }
+          }
+        }
+      },
+      "contactLabels": {
+        "email": "Email",
+        "phone": "Phone", 
+        "website": "Website",
+        "location": "Location"
       },
       "lastModified": "2024-09-01T00:00:00.000Z",
       "canonical": "https://github.com/metaory/jsonresume-theme-legacy",

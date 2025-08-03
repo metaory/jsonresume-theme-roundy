@@ -48,9 +48,7 @@ export const getSectionTitleWithTheme = (sectionName, meta) => {
 // Apply color theme to CSS variables (for static generation)
 export const applyColorTheme = (color) => {
   const normalizedColor = color?.toLowerCase();
-  console.log('==> normalizedColor', normalizedColor)
   if (!OPEN_PROPS_COLORS.includes(normalizedColor)) {
-    console.log('!!> OPEN_PROPS_COLORS NOT include normalizedColor', normalizedColor)
     return DEFAULT_COLOR_THEME;
   }
 

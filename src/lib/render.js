@@ -1,5 +1,5 @@
-// Unified field configuration and rendering
-export const fieldMap = {
+// Default field mapping - template-specific, not user configurable
+const fieldMap = {
   'name|title': ['h3', { class: 'title' }],
   'position|role': ['p', { class: 'position' }],
   'description|summary': ['p', { class: 'description' }],
@@ -23,6 +23,48 @@ export const fieldMap = {
   'level|fluency': ['span', { class: 'level' }],
   'courses': ['ul', { class: 'courses', isList: true }],
   'roles': ['ul', { class: 'roles', isList: true }]
+};
+
+// Default layouts - template-specific, not user configurable
+const layouts = {
+  work: {
+    container: 'item',
+    sections: [
+      { class: 'item-header', fields: ['name', 'position', 'company'] },
+      { class: 'item-meta', special: 'dateRange' },
+      { class: 'item-content', fields: ['summary', 'highlights', 'keywords'] }
+    ]
+  },
+  volunteer: {
+    container: 'item',
+    sections: [
+      { class: 'item-header', fields: ['organization', 'position'] },
+      { class: 'item-meta', special: 'dateRange' },
+      { class: 'item-content', fields: ['summary', 'highlights'] }
+    ]
+  },
+  education: {
+    container: 'item',
+    sections: [
+      { class: 'item-header', fields: ['institution', 'area', 'studyType'] },
+      { class: 'item-meta', special: 'dateRange' },
+      { class: 'item-content', fields: ['score', 'courses'] }
+    ]
+  },
+  projects: {
+    container: 'project-item',
+    sections: [
+      { class: 'project-header', fields: ['name', 'url'] },
+      { class: 'project-meta', special: 'dateRange' },
+      { class: 'project-content', fields: ['description', 'highlights', 'keywords', 'roles'] }
+    ]
+  },
+  skills: {
+    container: 'skill-item',
+    sections: [
+      { class: 'skill-content', fields: ['name', 'level', 'keywords'] }
+    ]
+  }
 };
 
 // Single-pass field processor
@@ -74,56 +116,24 @@ export const renderData = (data, layout = null) => {
   }));
 };
 
-// Layout configurations
-export const layouts = {
-  work: {
-    container: 'item',
-    sections: [
-      { class: 'item-header', fields: ['name', 'position', 'company'] },
-      { class: 'item-meta', special: 'dateRange' },
-      { class: 'item-content', fields: ['summary', 'highlights', 'keywords'] }
-    ]
-  },
-  volunteer: {
-    container: 'item',
-    sections: [
-      { class: 'item-header', fields: ['organization', 'position'] },
-      { class: 'item-meta', special: 'dateRange' },
-      { class: 'item-content', fields: ['summary', 'highlights'] }
-    ]
-  },
-  education: {
-    container: 'item',
-    sections: [
-      { class: 'item-header', fields: ['institution', 'area', 'studyType'] },
-      { class: 'item-meta', special: 'dateRange' },
-      { class: 'item-content', fields: ['score', 'courses'] }
-    ]
-  },
-  projects: {
-    container: 'project-item',
-    sections: [
-      { class: 'project-header', fields: ['name', 'url'] },
-      { class: 'project-meta', special: 'dateRange' },
-      { class: 'project-content', fields: ['description', 'highlights', 'keywords', 'roles'] }
-    ]
-  },
-  skills: {
-    container: 'skill-item',
-    sections: [
-      { class: 'skill-content', fields: ['name', 'level', 'keywords'] }
-    ]
-  }
-};
+// Get layouts
+export const getLayouts = () => layouts;
 
-// Special contact items processor
-export const processContactItems = (contactData) => {
+// Special contact items processor with configurable labels
+export const processContactItems = (contactData, meta = null) => {
+  const contactLabels = meta?.themeOptions?.contactLabels || {
+    email: 'Email',
+    phone: 'Phone',
+    website: 'Website',
+    location: 'Location'
+  };
+  
   const items = [
-    { label: 'Email', value: contactData.email, href: contactData.email ? `mailto:${contactData.email}` : null },
-    { label: 'Phone', value: contactData.phone, href: contactData.phone ? `tel:${contactData.phone}` : null },
-    { label: 'Website', value: contactData.url, href: contactData.url },
+    { label: contactLabels.email, value: contactData.email, href: contactData.email ? `mailto:${contactData.email}` : null },
+    { label: contactLabels.phone, value: contactData.phone, href: contactData.phone ? `tel:${contactData.phone}` : null },
+    { label: contactLabels.website, value: contactData.url, href: contactData.url },
     { 
-      label: 'Location', 
+      label: contactLabels.location, 
       value: contactData.location ? [
         contactData.location.address,
         contactData.location.city,
@@ -136,8 +146,4 @@ export const processContactItems = (contactData) => {
   return items;
 };
 
-// Legacy exports for backward compatibility
-export const getFieldConfig = processField;
-export const getFieldConfigs = (data) => renderData(data);
-export const renderBasics = (basics) => renderData(basics);
-export const renderContactItems = processContactItems; 
+ 

@@ -33,6 +33,13 @@ const colorThemeCSS = colorThemeVars
     <style is:global>
       @import '../styles/global.css';
       @import '../styles/fonts.css';
+      
+      /* Prevent layout shift for Iconify icons */
+      iconify-icon {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+      }
     </style>
     {colorThemeCSS && (
       <style is:global set:html={`
@@ -43,6 +50,10 @@ const colorThemeCSS = colorThemeVars
     )}
   </head>
   <body>
+    <script>
+      import "iconify-icon";
+    </script>
+    
     <ThemeToggle />
     
     <main class="resume">
