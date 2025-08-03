@@ -1,5 +1,7 @@
 # JSON Resume Theme - Roundy
 
+## RC 4
+
 <div align="center">
   <img src="src/assets/icons/logo.svg" alt="Roundy Theme Logo" width="120" height="120">
   <h1>Roundy Theme</h1>

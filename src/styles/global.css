@@ -126,13 +126,65 @@ a:hover {
   margin-bottom: var(--theme-spacing-2xl);
 }
 
+/* Magic Section Styles */
 .item {
-  margin-bottom: var(--theme-spacing-lg);
+  margin-bottom: var(--theme-spacing-xl);
+  padding-bottom: var(--theme-spacing-lg);
+  border-bottom: var(--theme-border-width) solid var(--theme-surface-tertiary);
+  transition: border-color var(--theme-transition-normal);
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--theme-spacing-sm);
+}
+
+.item-title h3 {
+  margin: 0;
+  color: var(--theme-text-primary);
+}
+
+.item-meta {
+  text-align: right;
+  font-size: var(--theme-font-size-sm);
+  color: var(--theme-text-secondary);
+}
+
+.item-location {
+  display: block;
+  margin-bottom: var(--theme-spacing-xs);
+}
+
+.project-item {
   padding: var(--theme-spacing-lg);
   background: var(--theme-surface-secondary);
   border-radius: var(--theme-border-radius-lg);
+  margin-bottom: var(--theme-spacing-lg);
   border: var(--theme-border-width) solid var(--theme-surface-tertiary);
   transition: background-color var(--theme-transition-normal), border-color var(--theme-transition-normal);
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--theme-spacing-sm);
+}
+
+.project-dates {
+  font-size: var(--theme-font-size-sm);
+  color: var(--theme-text-secondary);
+  margin-bottom: var(--theme-spacing-sm);
+}
+
+.skill-item {
+  margin-bottom: var(--theme-spacing-lg);
 }
 
 /* Resume container */
@@ -151,6 +203,16 @@ a:hover {
   
   body {
     font-size: var(--theme-font-size-sm);
+  }
+  
+  .item-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .item-meta {
+    text-align: left;
+    margin-top: var(--theme-spacing-xs);
   }
 }
 

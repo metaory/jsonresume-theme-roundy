@@ -4,6 +4,7 @@ import { getThemeConfig, applyColorTheme } from '../lib/theme.js'
 import Basics from '../components/Basics.astro'
 import Section from '../components/shared/Section.astro'
 import ThemeToggle from '../components/ThemeToggle.astro'
+
 import * as resumeData from '../data/resume.json'
 
 const { basics, meta } = resumeData
@@ -46,7 +47,7 @@ const colorThemeCSS = colorThemeVars
     
     <main class="resume">
       <Basics basics={basics} meta={meta} />
-
+      
       {sections.map(({ Component, props, title }) => (
         <Section title={title}>
           <Component {...props} />
