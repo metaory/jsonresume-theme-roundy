@@ -1,34 +1,29 @@
 ---
+import { renderData, processContactItems } from '../lib/render.js';
+import Tag from './shared/Tag.astro';
+
 export interface Props {
   basics: any;
   meta: any;
 }
 
 const { basics, meta } = Astro.props;
-const { name, label, image, email, phone, url, summary, location, profiles } = basics || {};
 
-const contactItems = [
-  { label: 'Email', value: email, href: email ? `mailto:${email}` : null },
-  { label: 'Phone', value: phone, href: phone ? `tel:${phone}` : null },
-  { label: 'Website', value: url, href: url },
-  { 
-    label: 'Location', 
-    value: location ? [
-      location.address,
-      location.city,
-      location.region,
-      location.postalCode
-    ].filter(Boolean).join(', ') : null
-  }
-].filter(item => item.value);
+// Single-pass processing
+const headerFields = renderData({ name: basics.name, label: basics.label });
+const contactItems = processContactItems(basics);
+const profileFields = basics.profiles ? renderData({ profiles: basics.profiles }) : null;
+const summaryFields = basics.summary ? renderData({ summary: basics.summary }) : null;
 ---
 
 <div class="basics">
   <header class="header">
-    {image && <img src={image} alt={name} class="avatar" />}
+    {basics.image && <img src={basics.image} alt={basics.name} class="avatar" />}
     <div class="header-content">
-      <h1>{name}</h1>
-      {label && <p class="label">{label}</p>}
+      {headerFields.map((field) => {
+        const TagName = field.tag;
+        return <TagName class={field.class || ''}>{field.value}</TagName>;
+      })}
     </div>
   </header>
 
@@ -41,23 +36,34 @@ const contactItems = [
     ))}
   </div>
 
-  {profiles?.length && (
+  {profileFields && (
     <div class="profiles">
       <h3>Profiles</h3>
-      <div class="profile-list">
-        {profiles.map((profile: any) => (
-          <a href={profile.url} target="_blank" rel="noopener" class="profile-link">
-            {profile.network}: {profile.username}
-          </a>
-        ))}
-      </div>
+      {profileFields.map((field) => {
+        if (field.isProfiles) {
+          return (
+            <div class={field.class || ''}>
+              {field.value.map(profile => (
+                <a href={profile.url} target="_blank" rel="noopener" class="profile-link">
+                  {profile.network}: {profile.username}
+                </a>
+              ))}
+            </div>
+          );
+        }
+        return null;
+      })}
     </div>
   )}
 
-  {summary && (
+  {summaryFields && (
     <div class="summary">
       <h3>Summary</h3>
-      <div set:html={summary} />
+      {summaryFields.map((field) => {
+        if (field.setHtml) return <div class={field.class || ''} set:html={field.value} />;
+        const TagName = field.tag;
+        return <TagName class={field.class || ''}>{field.value}</TagName>;
+      })}
     </div>
   )}
 </div>
@@ -111,12 +117,6 @@ const contactItems = [
   
   .profiles {
     margin-bottom: var(--theme-spacing-lg);
-  }
-  
-  .profile-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--theme-spacing-sm);
   }
   
   .profile-link {

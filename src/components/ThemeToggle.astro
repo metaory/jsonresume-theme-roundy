@@ -4,8 +4,8 @@
 
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
   <div class="icon-container">
-    <object class="light-icon" type="image/svg+xml" data="/src/assets/scheme/light.svg"></object>
-    <object class="dark-icon" type="image/svg+xml" data="/src/assets/scheme/dark.svg"></object>
+    <object class="light-icon" type="image/svg+xml" data="/assets/scheme/light.svg"></object>
+    <object class="dark-icon" type="image/svg+xml" data="/assets/scheme/dark.svg"></object>
   </div>
 </button>
 
@@ -94,15 +94,6 @@
   const savedTheme = localStorage.getItem('theme') || 'light';
   html.setAttribute('data-theme', savedTheme);
   
-  // Set initial icon visibility
-  if (savedTheme === 'dark') {
-    lightIcon.style.display = 'none';
-    darkIcon.style.display = 'block';
-  } else {
-    lightIcon.style.display = 'block';
-    darkIcon.style.display = 'none';
-  }
-  
   toggle?.addEventListener('click', () => {
     const currentTheme = html.getAttribute('data-theme') || 'light';
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -112,19 +103,9 @@
     
     // Trigger animation by refreshing the object data
     if (newTheme === 'dark') {
-      lightIcon.style.display = 'none';
-      darkIcon.style.display = 'block';
-      // Small delay to ensure display change happens first
-      setTimeout(() => {
-        darkIcon.data = darkIcon.data;
-      }, 10);
+      darkIcon.data = darkIcon.data;
     } else {
-      lightIcon.style.display = 'block';
-      darkIcon.style.display = 'none';
-      // Small delay to ensure display change happens first
-      setTimeout(() => {
-        lightIcon.data = lightIcon.data;
-      }, 10);
+      lightIcon.data = lightIcon.data;
     }
   });
 </script> 
