@@ -1,0 +1,49 @@
+---
+export interface Props {
+  items: any[];
+  meta: any;
+}
+
+const { items, meta } = Astro.props;
+---
+
+<div class="references-grid">
+  {items.map((reference: any) => (
+    <div class="reference-item">
+      <h3>{reference.name}</h3>
+      
+      {reference.reference && (
+        <blockquote class="reference-text">
+          "{reference.reference}"
+        </blockquote>
+      )}
+    </div>
+  ))}
+</div>
+
+<style>
+  .references-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(var(--theme-container-max-width), 1fr));
+    gap: var(--theme-spacing-xl);
+  }
+  
+  .reference-item {
+    padding: var(--theme-spacing-xl);
+    background: var(--theme-surface-secondary);
+    border-radius: var(--theme-border-radius-lg);
+  }
+  
+  .reference-item h3 {
+    margin: 0 0 var(--theme-spacing-sm) 0;
+    color: var(--theme-text-primary);
+  }
+  
+  .reference-text {
+    margin: 0;
+    font-style: italic;
+    color: var(--theme-text-secondary);
+    border-left: var(--theme-border-width-thick) solid var(--theme-color-primary);
+    padding-left: var(--theme-spacing-lg);
+  }
+</style> 

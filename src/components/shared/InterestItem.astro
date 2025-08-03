@@ -1,0 +1,49 @@
+---
+import Tag from './Tag.astro';
+
+export interface Props {
+  items: any[];
+  meta: any;
+}
+
+const { items, meta } = Astro.props;
+---
+
+<div class="interests-grid">
+  {items.map((interest) => (
+    <div class="interest-item">
+      <h3>{interest.name}</h3>
+      
+      {interest.keywords?.length && (
+        <div class="interest-keywords">
+          {interest.keywords.map((keyword) => <Tag text={keyword} />)}
+        </div>
+      )}
+    </div>
+  ))}
+</div>
+
+<style>
+  .interests-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+  }
+  
+  .interest-item {
+    padding: var(--spacing-md);
+    background: var(--background-2);
+    border-radius: var(--border-radius-lg);
+  }
+  
+  .interest-item h3 {
+    margin: 0 0 var(--spacing-sm) 0;
+    color: var(--primary-1);
+  }
+  
+  .interest-keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+  }
+</style> 

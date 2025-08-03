@@ -1,0 +1,22 @@
+---
+export interface Props {
+  text: string;
+  class?: string;
+}
+
+const { text, class: className = '' } = Astro.props;
+---
+
+<span class={`tag ${className}`}>{text}</span>
+
+<style>
+  .tag {
+    display: inline-block;
+    background: var(--theme-color-muted);
+    color: var(--theme-color-primary);
+    padding: var(--theme-spacing-xs) var(--theme-spacing-sm);
+    border-radius: var(--theme-border-radius-md);
+    font-size: var(--theme-font-size-sm);
+    margin: var(--theme-spacing-xs);
+  }
+</style> 

@@ -1,0 +1,12 @@
+---
+import ExperienceItem from './shared/ExperienceItem.astro';
+
+export interface Props {
+  items: any[];
+  meta: any;
+}
+
+const { items, meta } = Astro.props;
+---
+
+<ExperienceItem items={items} meta={meta} /> 

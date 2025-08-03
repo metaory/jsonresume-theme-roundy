@@ -1,0 +1,68 @@
+---
+export interface Props {
+  name: string;
+  size?: string;
+  class?: string;
+}
+
+const { name, size = "1rem", class: className = "" } = Astro.props;
+---
+
+<div class={`icon ${className}`} data-icon={name} style={`width: ${size}; height: ${size};`}></div>
+
+<style>
+  .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .icon svg {
+    width: 100%;
+    height: 100%;
+    color: currentColor;
+  }
+</style>
+
+<script>
+  // Iconify API for fetching icons on demand
+  async function loadIcon(iconName) {
+    const [prefix, name] = iconName.split(':');
+    const url = `https://api.iconify.design/${prefix}/${name}.svg`;
+    
+    try {
+      const response = await fetch(url);
+      if (response.ok) {
+        const svg = await response.text();
+        return svg;
+      }
+    } catch (error) {
+      console.warn(`Failed to load icon ${iconName}:`, error);
+    }
+    return null;
+  }
+
+  // Load and replace icon placeholders
+  async function loadIcons() {
+    const iconElements = document.querySelectorAll('[data-icon]');
+    
+    for (const element of iconElements) {
+      // Skip if already loaded
+      if (element.querySelector('svg')) continue;
+      
+      const iconName = element.getAttribute('data-icon');
+      const svg = await loadIcon(iconName);
+      
+      if (svg) {
+        element.innerHTML = svg;
+      }
+    }
+  }
+
+  // Load icons when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadIcons);
+  } else {
+    loadIcons();
+  }
+</script> 

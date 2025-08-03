@@ -1,0 +1,26 @@
+---
+export interface Props {
+  title: string;
+  class?: string;
+}
+
+const { title, class: className = '' } = Astro.props;
+---
+
+<section class={`section ${className}`}>
+  <h2 class="section-title">{title}</h2>
+  <slot />
+</section>
+
+<style>
+  .section {
+    margin-bottom: var(--theme-spacing-2xl);
+  }
+  
+  .section-title {
+    color: var(--theme-color-primary);
+    border-bottom: var(--theme-border-width-thick) solid var(--theme-color-border);
+    padding-bottom: var(--theme-spacing-sm);
+    margin-bottom: var(--theme-spacing-xl);
+  }
+</style> 

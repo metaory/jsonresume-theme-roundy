@@ -1,0 +1,19 @@
+{
+  "name": "jsonresume-theme-roundy",
+  "type": "module",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^4.0.0",
+    "open-props": "^1.7.16"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.5.3"
+  }
+}

@@ -1,0 +1,12 @@
+---
+import SkillItem from './shared/SkillItem.astro';
+
+export interface Props {
+  items: any[];
+  meta: any;
+}
+
+const { items, meta } = Astro.props;
+---
+
+<SkillItem items={items} meta={meta} /> 

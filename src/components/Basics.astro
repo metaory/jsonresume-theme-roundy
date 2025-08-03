@@ -1,0 +1,143 @@
+---
+export interface Props {
+  basics: any;
+  meta: any;
+}
+
+const { basics, meta } = Astro.props;
+const { name, label, image, email, phone, url, summary, location, profiles } = basics || {};
+
+const contactItems = [
+  { label: 'Email', value: email, href: email ? `mailto:${email}` : null },
+  { label: 'Phone', value: phone, href: phone ? `tel:${phone}` : null },
+  { label: 'Website', value: url, href: url },
+  { 
+    label: 'Location', 
+    value: location ? [
+      location.address,
+      location.city,
+      location.region,
+      location.postalCode
+    ].filter(Boolean).join(', ') : null
+  }
+].filter(item => item.value);
+---
+
+<div class="basics">
+  <header class="header">
+    {image && <img src={image} alt={name} class="avatar" />}
+    <div class="header-content">
+      <h1>{name}</h1>
+      {label && <p class="label">{label}</p>}
+    </div>
+  </header>
+
+  <div class="contact">
+    {contactItems.map(item => (
+      <div class="contact-item">
+        <span class="contact-label">{item.label}:</span>
+        {item.href ? <a href={item.href}>{item.value}</a> : <span>{item.value}</span>}
+      </div>
+    ))}
+  </div>
+
+  {profiles?.length && (
+    <div class="profiles">
+      <h3>Profiles</h3>
+      <div class="profile-list">
+        {profiles.map((profile: any) => (
+          <a href={profile.url} target="_blank" rel="noopener" class="profile-link">
+            {profile.network}: {profile.username}
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
+
+  {summary && (
+    <div class="summary">
+      <h3>Summary</h3>
+      <div set:html={summary} />
+    </div>
+  )}
+</div>
+
+<style>
+  .basics {
+    margin-bottom: var(--theme-spacing-2xl);
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    gap: var(--theme-spacing-lg);
+    margin-bottom: var(--theme-spacing-xl);
+  }
+  
+  .avatar {
+    width: var(--theme-spacing-3xl);
+    height: var(--theme-spacing-3xl);
+    border-radius: var(--theme-border-radius-full);
+    object-fit: cover;
+  }
+  
+  .header-content h1 {
+    margin: 0;
+    color: var(--theme-color-primary);
+  }
+  
+  .label {
+    margin: var(--theme-spacing-xs) 0 0 0;
+    font-size: var(--theme-font-size-lg);
+    color: var(--theme-text-secondary);
+  }
+  
+  .contact {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(var(--theme-container-max-width), 1fr));
+    gap: var(--theme-spacing-sm);
+    margin-bottom: var(--theme-spacing-lg);
+  }
+  
+  .contact-item {
+    display: flex;
+    gap: var(--theme-spacing-xs);
+  }
+  
+  .contact-label {
+    font-weight: var(--theme-font-weight-semibold);
+    color: var(--theme-text-secondary);
+  }
+  
+  .profiles {
+    margin-bottom: var(--theme-spacing-lg);
+  }
+  
+  .profile-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--theme-spacing-sm);
+  }
+  
+  .profile-link {
+    padding: var(--theme-spacing-xs) var(--theme-spacing-sm);
+    background: var(--theme-surface-secondary);
+    border-radius: var(--theme-border-radius-md);
+    font-size: var(--theme-font-size-sm);
+  }
+  
+  .summary {
+    margin-bottom: var(--theme-spacing-lg);
+  }
+  
+  @media (max-width: var(--theme-breakpoint-md)) {
+    .header {
+      flex-direction: column;
+      text-align: center;
+    }
+    
+    .contact {
+      grid-template-columns: 1fr;
+    }
+  }
+</style> 

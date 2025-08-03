@@ -1,0 +1,71 @@
+---
+import Icon from './shared/Icon.astro';
+---
+
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+  <Icon name="ph:sun-bold" class="sun-icon" size="var(--theme-font-size-lg)" />
+  <Icon name="ph:moon-bold" class="moon-icon" size="var(--theme-font-size-lg)" />
+</button>
+
+<style>
+  .theme-toggle {
+    position: fixed;
+    top: var(--theme-spacing-lg);
+    right: var(--theme-spacing-lg);
+    z-index: var(--theme-z-important);
+    background: var(--theme-surface-secondary);
+    border: var(--theme-border-width-thick) solid var(--theme-link);
+    border-radius: var(--theme-border-radius-full);
+    width: var(--theme-spacing-2xl);
+    height: var(--theme-spacing-2xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--theme-transition-normal) var(--theme-easing);
+    box-shadow: var(--theme-shadow-md);
+  }
+
+  .theme-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: var(--theme-shadow-lg);
+  }
+
+  .theme-toggle .icon {
+    color: var(--theme-link);
+    transition: all var(--theme-transition-normal) var(--theme-easing);
+  }
+
+  .sun-icon {
+    display: block;
+  }
+
+  .moon-icon {
+    display: none;
+  }
+
+  [data-theme="dark"] .sun-icon {
+    display: none;
+  }
+
+  [data-theme="dark"] .moon-icon {
+    display: block;
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('theme-toggle');
+  const html = document.documentElement;
+  
+  // Get saved theme or default to light
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  html.setAttribute('data-theme', savedTheme);
+  
+  toggle?.addEventListener('click', () => {
+    const currentTheme = html.getAttribute('data-theme') || 'light';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    html.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+  });
+</script> 

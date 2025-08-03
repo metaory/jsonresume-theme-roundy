@@ -1,0 +1,160 @@
+---
+import { formatDate } from '../../lib/utils.js';
+import Tag from './Tag.astro';
+import DateRange from './DateRange.astro';
+
+export interface Props {
+  items: any[];
+  meta: any;
+}
+
+const { items, meta } = Astro.props;
+
+const getItemData = (item: any) => ({
+  title: item.name || item.organization || item.institution,
+  subtitle: item.position || (item.studyType && `${item.studyType} in ${item.area}`),
+  location: item.location || '',
+  url: item.url,
+  summary: item.summary,
+  highlights: item.highlights,
+  courses: item.courses,
+  keywords: item.keywords
+});
+---
+
+{items.map((item) => {
+  const data = getItemData(item);
+  return (
+    <div class="item">
+      <div class="item-header">
+        <div class="item-title">
+          <h3>{data.title}</h3>
+          {data.subtitle && <p class="item-subtitle">{data.subtitle}</p>}
+        </div>
+        
+        <div class="item-meta">
+          {data.location && <span class="item-location">{data.location}</span>}
+          <DateRange start={item.startDate} end={item.endDate} />
+        </div>
+      </div>
+      
+      {data.url && (
+        <a href={data.url} target="_blank" rel="noopener" class="item-url">
+          {data.url}
+        </a>
+      )}
+      
+      {data.summary && <p class="item-summary">{data.summary}</p>}
+      
+      {data.highlights?.length && (
+        <ul class="item-highlights">
+          {data.highlights.map((highlight: string) => <li>{highlight}</li>)}
+        </ul>
+      )}
+      
+      {data.courses?.length && (
+        <div class="item-courses">
+          <strong>Courses:</strong>
+          <div class="course-list">
+            {data.courses.map((course: string) => <Tag text={course} />)}
+          </div>
+        </div>
+      )}
+      
+      {data.keywords?.length && (
+        <div class="item-keywords">
+          {data.keywords.map((keyword: string) => <Tag text={keyword} />)}
+        </div>
+      )}
+    </div>
+  );
+})}
+
+<style>
+  .item {
+    margin-bottom: var(--theme-spacing-xl);
+    padding-bottom: var(--theme-spacing-lg);
+    border-bottom: var(--theme-border-width) solid var(--theme-surface-tertiary);
+  }
+  
+  .item:last-child {
+    border-bottom: none;
+  }
+  
+  .item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--theme-spacing-sm);
+  }
+  
+  .item-title h3 {
+    margin: 0;
+    color: var(--theme-text-primary);
+  }
+  
+  .item-subtitle {
+    margin: var(--theme-spacing-xs) 0 0 0;
+    font-weight: var(--theme-font-weight-medium);
+    color: var(--theme-text-secondary);
+  }
+  
+  .item-meta {
+    text-align: right;
+    font-size: var(--theme-font-size-sm);
+    color: var(--theme-text-secondary);
+  }
+  
+  .item-location {
+    display: block;
+    margin-bottom: var(--theme-spacing-xs);
+  }
+  
+  .item-url {
+    color: var(--theme-link);
+    text-decoration: none;
+    font-size: var(--theme-font-size-sm);
+  }
+  
+  .item-url:hover {
+    text-decoration: underline;
+  }
+  
+  .item-summary {
+    margin: var(--theme-spacing-sm) 0;
+    line-height: var(--theme-line-height);
+  }
+  
+  .item-highlights {
+    margin: var(--theme-spacing-sm) 0;
+    padding-left: var(--theme-spacing-lg);
+  }
+  
+  .item-highlights li {
+    margin-bottom: var(--theme-spacing-xs);
+  }
+  
+  .item-courses {
+    margin: var(--theme-spacing-sm) 0;
+  }
+  
+  .course-list {
+    margin-top: var(--theme-spacing-xs);
+  }
+  
+  .item-keywords {
+    margin-top: var(--theme-spacing-sm);
+  }
+  
+  @media (max-width: var(--theme-breakpoint-md)) {
+    .item-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .item-meta {
+      text-align: left;
+      margin-top: var(--theme-spacing-xs);
+    }
+  }
+</style> 

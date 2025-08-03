@@ -1,0 +1,97 @@
+---
+import { formatDate } from '../../lib/utils.js';
+
+export interface Props {
+  items: any[];
+  meta: any;
+}
+
+const { items, meta } = Astro.props;
+
+const getItemData = (item: any) => ({
+  title: item.title || item.name,
+  subtitle: item.awarder || item.issuer || item.publisher,
+  date: item.releaseDate || item.date,
+  url: item.url,
+  summary: item.summary,
+  urlText: item.title ? 'Award' : item.issuer ? 'Certificate' : 'Publication'
+});
+---
+
+<div class="achievements-grid">
+  {items.map((item: any) => {
+    const data = getItemData(item);
+    return (
+      <div class="achievement-item">
+        <div class="achievement-header">
+          <h3>{data.title}</h3>
+          {data.date && <span class="achievement-date">{formatDate(data.date)}</span>}
+        </div>
+        
+        {data.subtitle && <p class="achievement-subtitle">{data.subtitle}</p>}
+        
+        {data.url && (
+          <a href={data.url} target="_blank" rel="noopener" class="achievement-url">
+            View {data.urlText}
+          </a>
+        )}
+        
+        {data.summary && <p class="achievement-summary">{data.summary}</p>}
+      </div>
+    );
+  })}
+</div>
+
+<style>
+  .achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+  }
+  
+  .achievement-item {
+    padding: var(--spacing-lg);
+    background: var(--background-2);
+    border-radius: var(--border-radius-lg);
+  }
+  
+  .achievement-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .achievement-header h3 {
+    margin: 0;
+    color: var(--primary-1);
+  }
+  
+  .achievement-date {
+    font-size: var(--font-size-sm);
+    color: var(--secondary-1);
+  }
+  
+  .achievement-subtitle {
+    margin: var(--spacing-xs) 0 var(--spacing-sm) 0;
+    font-weight: 500;
+    color: var(--secondary-1);
+  }
+  
+  .achievement-url {
+    display: inline-block;
+    margin-bottom: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+    color: var(--link-1);
+    text-decoration: none;
+  }
+  
+  .achievement-url:hover {
+    text-decoration: underline;
+  }
+  
+  .achievement-summary {
+    margin: 0;
+    line-height: 1.6;
+  }
+</style> 

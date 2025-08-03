@@ -1,0 +1,74 @@
+---
+import Tag from './Tag.astro';
+
+export interface Props {
+  items: any[];
+  meta: any;
+}
+
+const { items, meta } = Astro.props;
+
+const getSkillData = (skill: any) => ({
+  name: skill.language || skill.name,
+  level: skill.level || skill.fluency,
+  keywords: skill.keywords
+});
+---
+
+<div class="skills-grid">
+  {items.map((skill: any) => {
+    const data = getSkillData(skill);
+    return (
+      <div class="skill-item">
+        <div class="skill-header">
+          <h3>{data.name}</h3>
+          {data.level && <span class="skill-level">{data.level}</span>}
+        </div>
+        
+        {data.keywords?.length && (
+          <div class="skill-keywords">
+            {data.keywords.map((keyword: string) => <Tag text={keyword} />)}
+          </div>
+        )}
+      </div>
+    );
+  })}
+</div>
+
+<style>
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+  }
+  
+  .skill-item {
+    padding: var(--spacing-md);
+    background: var(--background-2);
+    border-radius: var(--border-radius-lg);
+  }
+  
+  .skill-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .skill-header h3 {
+    margin: 0;
+    color: var(--primary-1);
+  }
+  
+  .skill-level {
+    font-size: var(--font-size-sm);
+    color: var(--secondary-1);
+    font-weight: 500;
+  }
+  
+  .skill-keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+  }
+</style> 

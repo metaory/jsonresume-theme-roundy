@@ -1,0 +1,182 @@
+/* Open Props - loaded at build time for static generation */
+@import "https://unpkg.com/open-props@1.7.16/open-props.min.css";
+
+/* Our internal theme variables - using Open Props values */
+:root {
+  /* Colors */
+  --theme-text-primary: var(--gray-12);
+  --theme-text-secondary: var(--gray-11);
+  --theme-text-muted: var(--gray-10);
+  --theme-surface-primary: var(--gray-0);
+  --theme-surface-secondary: var(--gray-1);
+  --theme-surface-tertiary: var(--gray-2);
+  --theme-surface-border: var(--gray-3);
+  --theme-link: var(--blue-9);
+  --theme-link-hover: var(--blue-10);
+  
+  /* Color theme - will be set by applyColorTheme */
+  
+  /* Typography */
+  --theme-font-family: var(--font-sans);
+  --theme-font-size-xs: var(--font-size-0);
+  --theme-font-size-sm: var(--font-size-1);
+  --theme-font-size-base: var(--font-size-2);
+  --theme-font-size-lg: var(--font-size-4);
+  --theme-font-size-xl: var(--font-size-6);
+  --theme-font-size-2xl: var(--font-size-8);
+  --theme-font-weight-medium: var(--font-weight-5);
+  --theme-font-weight-semibold: var(--font-weight-6);
+  --theme-line-height: var(--font-lineheight-3);
+  
+  /* Spacing */
+  --theme-spacing-xs: var(--size-1);
+  --theme-spacing-sm: var(--size-2);
+  --theme-spacing-md: var(--size-3);
+  --theme-spacing-lg: var(--size-4);
+  --theme-spacing-xl: var(--size-6);
+  --theme-spacing-2xl: var(--size-8);
+  --theme-spacing-3xl: var(--size-10);
+  
+  /* Layout */
+  --theme-container-max-width: var(--size-content-3);
+  --theme-border-radius-sm: var(--radius-1);
+  --theme-border-radius-md: var(--radius-2);
+  --theme-border-radius-lg: var(--radius-3);
+  --theme-border-radius-full: var(--radius-round);
+  --theme-border-width: var(--border-size-1);
+  --theme-border-width-thick: var(--border-size-2);
+  
+  /* Transitions */
+  --theme-transition-fast: var(--duration-2);
+  --theme-transition-normal: var(--duration-3);
+  --theme-easing: var(--ease-3);
+  
+  /* Shadows */
+  --theme-shadow-sm: var(--shadow-1);
+  --theme-shadow-md: var(--shadow-2);
+  --theme-shadow-lg: var(--shadow-3);
+  
+  /* Z-index */
+  --theme-z-dropdown: var(--layer-1);
+  --theme-z-sticky: var(--layer-2);
+  --theme-z-fixed: var(--layer-3);
+  --theme-z-modal: var(--layer-4);
+  --theme-z-popover: var(--layer-5);
+  --theme-z-important: var(--layer-important);
+  
+  /* Breakpoints */
+  --theme-breakpoint-sm: var(--size-sm);
+  --theme-breakpoint-md: var(--size-md);
+  --theme-breakpoint-lg: var(--size-lg);
+  --theme-breakpoint-xl: var(--size-xl);
+}
+
+/* Base styles using our theme variables */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--theme-font-family);
+  font-size: var(--theme-font-size-base);
+  line-height: var(--theme-line-height);
+  color: var(--theme-text-primary);
+  background: var(--theme-surface-primary);
+  margin: 0;
+  padding: 0;
+  transition: background-color var(--theme-transition-normal), color var(--theme-transition-normal);
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 var(--theme-spacing-md) 0;
+  font-weight: var(--theme-font-weight-semibold);
+  color: var(--theme-text-primary);
+  transition: color var(--theme-transition-normal);
+}
+
+h1 { font-size: var(--theme-font-size-2xl); }
+h2 { font-size: var(--theme-font-size-xl); }
+h3 { font-size: var(--theme-font-size-lg); }
+
+/* Links */
+a {
+  color: var(--theme-link);
+  text-decoration: none;
+  transition: color var(--theme-transition-fast);
+}
+
+a:hover {
+  color: var(--theme-link-hover);
+}
+
+/* Utility classes */
+.keyword {
+  display: inline-block;
+  background: var(--theme-surface-secondary);
+  color: var(--theme-text-secondary);
+  padding: var(--theme-spacing-xs) var(--theme-spacing-sm);
+  border-radius: var(--theme-border-radius-md);
+  font-size: var(--theme-font-size-xs);
+  margin: var(--theme-spacing-xs);
+  transition: background-color var(--theme-transition-normal), color var(--theme-transition-normal);
+}
+
+.section {
+  margin-bottom: var(--theme-spacing-2xl);
+}
+
+.item {
+  margin-bottom: var(--theme-spacing-lg);
+  padding: var(--theme-spacing-lg);
+  background: var(--theme-surface-secondary);
+  border-radius: var(--theme-border-radius-lg);
+  border: var(--theme-border-width) solid var(--theme-surface-tertiary);
+  transition: background-color var(--theme-transition-normal), border-color var(--theme-transition-normal);
+}
+
+/* Resume container */
+.resume {
+  max-width: var(--theme-container-max-width);
+  margin: 0 auto;
+  padding: var(--theme-spacing-xl);
+  background: var(--theme-surface-primary);
+}
+
+/* Responsive */
+@media (max-width: var(--theme-breakpoint-md)) {
+  .resume {
+    padding: var(--theme-spacing-lg);
+  }
+  
+  body {
+    font-size: var(--theme-font-size-sm);
+  }
+}
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --theme-text-primary: var(--gray-1);
+  --theme-text-secondary: var(--gray-2);
+  --theme-text-muted: var(--gray-3);
+  --theme-surface-primary: var(--gray-9);
+  --theme-surface-secondary: var(--gray-8);
+  --theme-surface-tertiary: var(--gray-7);
+  --theme-surface-border: var(--gray-6);
+  --theme-link: var(--blue-4);
+  --theme-link-hover: var(--blue-3);
+  
+  /* Dark theme color adjustments */
+  --theme-color-primary: var(--theme-color-primary-dark, var(--theme-color-primary));
+  --theme-color-secondary: var(--theme-color-secondary-dark, var(--theme-color-secondary));
+  --theme-color-accent: var(--theme-color-accent-dark, var(--theme-color-accent));
+  --theme-color-muted: var(--theme-color-muted-dark, var(--theme-color-muted));
+  --theme-color-border: var(--theme-color-border-dark, var(--theme-color-border));
+} 

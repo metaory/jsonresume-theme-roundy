@@ -1,0 +1,220 @@
+{
+  "basics": {
+    "name": "John Doe",
+    "image": "/src/assets/avatar-m.png",
+    "logo": "/src/assets/logo.svg",
+    "email": "john@gmail.com",
+    "phone": "(912) 555-4321",
+    "url": "https://github.com/metaory",
+    "label": "Cyngsbez Ratvarre · Yrnq  Fbyhgvba Nepuvgrpg · QriBcf Shyy-Fgnpx · NJF · Yhn   Abqr · Yvahk · aIvz",
+    "summary": "<ul style='margin-bottom: 0px;'> <li> Yberz vcfhz bqbe nzrg, pbafrpgrghre nqvcvfpvat ryvg </li> <li> Ornare ac vehicula diam fermentum interdum finibus tincidunt </li> <li> Pbafrpgrghe rtrg ryvg frarpghf avou cbeggvgbe hean</li> <li> Arghf frz irarangvf srhtvng np phenovghe cryyragrfdhr gbedhrag rg</li> <li> Volutpat ultrices sed, mi curabitur magna sit libero</li> <li> Mauris maecenas nisi nulla; vehicula auctor magnis</li> <li> Gravida mauris commodo taciti gravida netus</li> <li> Elementum nec curae ultrices nec himenaeos nibh</li> <li> Fames magna gravida parturient tincidunt suspendisse ipsum congue nam</li> <li> Ultrices curabitur justo lacus felis nam a consequat</li> <li> Proin penatibus lacinia adipiscing; scelerisque id per mauris</li> <li> Inevhf zbagrf qhvf ryrzraghz npphzfna ahyynz znkvzhf fvg</li> <li> Nostra placerat eu fringilla dapibus amet magna </li> </ul>",
+    "location": {
+      "address": "2712 Broadway St",
+      "postalCode": "CA 94115",
+      "city": "San Francisco",
+      "countryCode": "US",
+      "region": "California"
+    },
+    "profiles": [
+      {
+        "network": "Twitter",
+        "username": "john",
+        "url": "https://twitter.com/john"
+      },
+      {
+        "network": "GitHub",
+        "username": "zrgnbel",
+        "url": "https://github.com/zrgnbel"
+      },
+      {
+        "network": "LinkedIn",
+        "username": "cbh-lna",
+        "url": "https://linkedin.com/in/cbh-lna"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "Pbzcnal",
+      "position": "Cerfvqrag",
+      "url": "https://pbzcnal.com",
+      "startDate": "2014-01-01",
+      "endDate": "2024-09-01",
+      "summary": "Magna iaculis augue potenti consectetur nam imperdiet, Eu elit vitae vitae vivamus at aliquet sociosqu",
+      "keywords": [
+        "AWS",
+        "CI/CD",
+        "CloudFormation",
+        "Docker",
+        "Git",
+        "NodeJs",
+        "OIDC",
+        "React",
+        "Serverless",
+        "Svelte",
+        "Performance",
+        "Terraform"
+      ],
+      "highlights": [
+        "Lorem ipsum odor amet",
+        "consectetuer adipiscing elit",
+        "Sollicitudin sit libero venenatis nascetur",
+        "dignissim lacinia ac euismod",
+        "Venenatis curabitur pulvinar sociosqu",
+        "Metus mattis parturient"
+      ]
+    }
+  ],
+  "volunteer": [
+    {
+      "organization": "Nunc est",
+      "position": "Suscipit Massa",
+      "url": "https://organization.com/",
+      "startDate": "2012-01-01",
+      "endDate": "2013-01-01",
+      "summary": "Convallis eget fermentum dis. Molestie suspendisse ad id tortor morbi nostra blandit. Consectetur suspendisse porta dictum semper",
+      "highlights": [
+        "Njneqrq Ibyhagrre bs gur Zbagu",
+        "Znkvzhf ravz fntvggvf frq chehf inevhf",
+        "Evfhf rssvpvghe hean cebva zbagrf avfv yhpghf",
+        "Niry aba ynpvavn nzrg ehgehz"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Condimentum Ligula",
+      "url": "https://institution.com/",
+      "area": "Accumsan Sagittis",
+      "studyType": "Viverra ",
+      "startDate": "2011-01-01",
+      "endDate": "2013-01-01",
+      "score": "4.0",
+      "courses": ["X91101 - Onfvp FDY", "OBF71Z - Platea Risus", "AUGU3E - Nibh Purus"]
+    }
+  ],
+  "awards": [
+    {
+      "title": "Aenean Porta",
+      "date": "2014-11-01",
+      "awarder": "Senectus",
+      "summary": "Gurer vf ab fcbba. Vcfhz bqbe nzrg, Pbafrpgrghre nqvcvfpvat ryvg."
+    }
+  ],
+  "certificates": [
+    {
+      "name": "Phasellus",
+      "date": "2021-11-07",
+      "issuer": "pbafrpgrghre nqvcvfpvat ryvg",
+      "url": "https://pregvsvpngr.com"
+    }
+  ],
+  "publications": [
+    {
+      "name": "Adipiscing Elit",
+      "publisher": "github",
+      "releaseDate": "2014-10-01",
+      "url": "https://publication.com",
+      "summary": "Yberz vcfhz bqbe nzrg, pbafrpgrghre nqvcvfpvat ryvg. Unovgnag cneghevrag snpvyvfv ryvg fbpvbfdh ibyhgcng."
+    }
+  ],
+  "skills": [
+    {
+      "name": "Cenpgvprf",
+      "level": "Advanced",
+      "keywords": ["Ntvyr", "QEL", "XVFF"]
+    },
+    {
+      "name": "Cnenqvtzf",
+      "level": "Advanced",
+      "keywords": ["OQQ", "QQQ", "BBC", "SC", "EC", "GQQ"]
+    },
+    {
+      "name": "QriBcf",
+      "level": "Master",
+      "keywords": ["PV/PQ", "PSA", "GS"]
+    },
+    {
+      "name": "Pybhq",
+      "level": "Intermediate",
+      "keywords": ["NJF", "TPC", "Irepry"]
+    },
+    {
+      "name": "Gbbypunva",
+      "level": "Beginner",
+      "keywords": ["NepuYvahk", "Arbivz", "Gzhk", "NjrfbzrJZ", "Qbpxre", "OMS"]
+    }
+  ],
+  "languages": [
+    { "language": "Lua", "fluency": "Master" },
+    { "language": "Bash", "fluency": "Master" },
+    { "language": "JavaScript", "fluency": "Master" },
+    { "language": "Go", "fluency": "Advanced" },
+    { "language": "Elixir", "fluency": "Intermediate" },
+    { "language": "Haskell", "fluency": "Beginner" },
+    { "language": "Python", "fluency": "Beginner" },
+    { "language": "Rust", "fluency": "Beginner" },
+    { "language": "Zig", "fluency": "Beginner" }
+  ],
+  "interests": [
+    {
+      "name": "Terminals",
+      "keywords": ["Alacritty", "Wezterm"]
+    },
+    {
+      "name": "Window Managers",
+      "keywords": ["AwesomeWM", "Hyprland"]
+    },
+    {
+      "name": "Text Editors",
+      "keywords": ["Neovim", "Helix"]
+    }
+  ],
+  "references": [
+    {
+      "name": "Jane Doe",
+      "reference": "Yberz vcfhz bqbe nzrg, pbafrpgrghre nqvcvfpvat ryvg. Ghecvf ahap pbaqvzraghz nyvdhnz ihychgngr vnphyvf yvoreb ahap hg."
+    }
+  ],
+  "projects": [
+    {
+      "name": "znexhc.wfba",
+      "url": "https://github.com/zrgnbel/znexhc.wfba",
+      "description": "QBZ gerr ercerfragngvba va pbzcnpg WFBA -- Qensg Fcrp, Yvoenel naq PYV",
+      "roles": ["Author"],
+      "startDate": "2024-09-12",
+      "endDate": "2024-11-24",
+      "keywords": ["cli", "html", "library", "markup", "transpiler", "npm"]
+    },
+    {
+      "name": "cpnyy.wf",
+      "url": "https://github.com/zrgnbel/cpnyy.wf",
+      "description": "Zvavzny Erfhyg/Zbanq yvxr ghcyrf sbe WF ── mreb-qrcraqrapl",
+      "roles": ["Author"],
+      "startDate": "2024-04-18",
+      "endDate": "2024-06-27",
+      "keywords": ["JavaScript", "library", "Lua", "npm"]
+    }
+  ],
+  "meta": {
+    "themeOptions": {
+      "color": "violet",
+      "sectionTitles": {
+        "contacts": "contacts",
+        "summary": "summary",
+        "skills": "skills",
+        "languages": "languages",
+        "interests": "interests",
+        "works": "work experience",
+        "projects": "projects",
+        "certificates": "certificates",
+        "volunteers": "volunteers",
+        "educations": "education",
+        "references": "references"
+      },
+      "lastModified": "2024-09-01T00:00:00.000Z",
+      "canonical": "https://github.com/metaory/jsonresume-theme-legacy",
+      "version": "2.0.0"
+    }
+  }
+}
