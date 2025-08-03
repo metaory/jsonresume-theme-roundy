@@ -1,45 +1,36 @@
 ---
 import Icon from './shared/Icon.astro';
+import { renderComponent, renderConditional, renderArray } from '../lib/render.js';
 
 const { items, meta } = Astro.props;
-
-// Get interest categories from meta config or use defaults
-const interestConfig = meta?.themeOptions?.componentConfig?.interests?.categories || {
-  'Terminals': { icon: 'ph:terminal', color: '#10b981' },
-  'Window Managers': { icon: 'ph:monitor', color: '#3b82f6' },
-  'Text Editors': { icon: 'ph:file-text', color: '#f59e0b' },
-  'default': { icon: 'ph:heart', color: '#ef4444' }
-};
+const { data: interests } = renderComponent('interests', items, meta);
 ---
 
 <div class="interests">
   <div class="interests-flow">
-    {items.map(interest => {
-      const config = interestConfig[interest.name] || interestConfig.default;
-      return (
-        <div class="interest-category">
-          <div class="category-header">
-            <Icon 
-              name={config.icon} 
-              size="1.2em" 
-              style={`color: ${config.color};`}
-            />
-            <h4 class="category-name">{interest.name}</h4>
-          </div>
-          
-          {interest.keywords && (
-            <div class="category-items">
-              {interest.keywords.map(keyword => (
-                <div class="interest-item">
-                  <Icon name="ph:dot" size="0.8em" style={`color: ${config.color};`} />
-                  <span class="item-name">{keyword}</span>
-                </div>
-              ))}
-            </div>
-          )}
+    {renderArray(interests, interest => (
+      <div class="interest-category">
+        <div class="category-header">
+          <Icon 
+            name={interest.config.icon} 
+            size="1.2em" 
+            style={`color: ${interest.config.color};`}
+          />
+          <h4 class="category-name">{interest.name}</h4>
         </div>
-      );
-    })}
+        
+        {renderConditional(interest.keywords, (
+          <div class="category-items">
+            {renderArray(interest.keywords, keyword => (
+              <div class="interest-item">
+                <Icon name="ph:dot" size="0.8em" style={`color: ${interest.config.color};`} />
+                <span class="item-name">{keyword}</span>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    ))}
   </div>
 </div>
 

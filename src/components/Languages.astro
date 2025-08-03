@@ -1,58 +1,49 @@
 ---
 import Icon from './shared/Icon.astro';
+import { renderComponent, renderArray } from '../lib/render.js';
 
 const { items, meta } = Astro.props;
-
-// Get fluency levels from meta config or use defaults
-const fluencyLevels = meta?.themeOptions?.componentConfig?.languages?.levels || {
-  'Master': { dots: 5, color: '#10b981', label: 'Native' },
-  'Advanced': { dots: 4, color: '#3b82f6', label: 'Fluent' },
-  'Intermediate': { dots: 3, color: '#f59e0b', label: 'Conversational' },
-  'Beginner': { dots: 2, color: '#ef4444', label: 'Basic' }
-};
+const { data: languages, config } = renderComponent('languages', items, meta);
 ---
 
 <div class="languages">
   <div class="languages-grid">
-    {items.map(lang => {
-      const level = fluencyLevels[lang.fluency] || fluencyLevels['Beginner'];
-      return (
-        <div class="language-item">
-          <div class="language-info">
-            <h4 class="language-name">{lang.language}</h4>
-            <div class="fluency-indicator">
-              <div class="fluency-dots">
-                {Array.from({ length: 5 }, (_, i) => (
-                  <div 
-                    class={`fluency-dot ${i < level.dots ? 'filled' : ''}`}
-                    style={i < level.dots ? `background: ${level.color};` : ''}
-                  ></div>
-                ))}
-              </div>
-              <span class="fluency-label" style={`color: ${level.color};`}>
-                {level.label}
-              </span>
+    {renderArray(languages, lang => (
+      <div class="language-item">
+        <div class="language-info">
+          <h4 class="language-name">{lang.language}</h4>
+          <div class="fluency-indicator">
+            <div class="fluency-dots">
+              {Array.from({ length: 5 }, (_, i) => (
+                <div 
+                  class={`fluency-dot ${i < lang.config.dots ? 'filled' : ''}`}
+                  style={i < lang.config.dots ? `background: ${lang.config.color};` : ''}
+                ></div>
+              ))}
             </div>
+            <span class="fluency-label" style={`color: ${lang.config.color};`}>
+              {lang.config.label}
+            </span>
           </div>
         </div>
-      );
-    })}
+      </div>
+    ))}
   </div>
   
   <div class="fluency-legend">
     <span class="legend-title">Fluency Levels:</span>
     <div class="legend-items">
-      {Object.entries(fluencyLevels).map(([level, config]) => (
+      {renderArray(Object.entries(config.levels), ([level, levelConfig]) => (
         <div class="legend-item">
           <div class="fluency-dots">
             {Array.from({ length: 5 }, (_, i) => (
               <div 
-                class={`fluency-dot ${i < config.dots ? 'filled' : ''}`}
-                style={i < config.dots ? `background: ${config.color};` : ''}
+                class={`fluency-dot ${i < levelConfig.dots ? 'filled' : ''}`}
+                style={i < levelConfig.dots ? `background: ${levelConfig.color};` : ''}
               ></div>
             ))}
           </div>
-          <span class="legend-label">{config.label}</span>
+          <span class="legend-label">{levelConfig.label}</span>
         </div>
       ))}
     </div>

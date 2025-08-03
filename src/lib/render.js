@@ -1,139 +1,122 @@
-// Default field mapping - template-specific, not user configurable
+// Field mapping for automatic tag selection
 const fieldMap = {
-  'name|title': ['h3', { class: 'title' }],
-  'position|role': ['p', { class: 'position' }],
-  'description|summary': ['p', { class: 'description' }],
-  'url|link': ['a', { class: 'link', href: true }],
-  'email': ['a', { class: 'contact', href: 'mailto:' }],
-  'phone': ['a', { class: 'contact', href: 'tel:' }],
-  'date|startDate|endDate': ['time', { class: 'date' }],
-  'location|address': ['span', { class: 'location' }],
-  'highlights|achievements': ['ul', { class: 'list', isList: true }],
-  'keywords|skills|tags': ['div', { class: 'tags', isTags: true }],
-  'profiles': ['div', { class: 'profiles', isProfiles: true }],
-  'label': ['p', { class: 'label' }],
-  'image': ['img', { class: 'avatar', isImage: true }],
-  'logo': ['img', { class: 'logo', isImage: true }],
-  'organization|institution|company': ['p', { class: 'organization' }],
-  'area|studyType': ['p', { class: 'area' }],
-  'score': ['span', { class: 'score' }],
-  'awarder|issuer|publisher': ['p', { class: 'issuer' }],
-  'network': ['span', { class: 'network' }],
-  'username': ['span', { class: 'username' }],
-  'level|fluency': ['span', { class: 'level' }],
-  'courses': ['ul', { class: 'courses', isList: true }],
-  'roles': ['ul', { class: 'roles', isList: true }]
+  'name|title': 'h3',
+  'position|role': 'p',
+  'description|summary': 'p',
+  'url|link': 'a',
+  'email': 'a',
+  'phone': 'a',
+  'date|startDate|endDate': 'time',
+  'location|address': 'span',
+  'organization|institution|company': 'p',
+  'area|studyType': 'p',
+  'score': 'span',
+  'level|fluency': 'span',
+  'language': 'h4'
 };
 
-// Default layouts - template-specific, not user configurable
-const layouts = {
-  work: {
-    container: 'item',
-    sections: [
-      { class: 'item-header', fields: ['name', 'position', 'company'] },
-      { class: 'item-meta', special: 'dateRange' },
-      { class: 'item-content', fields: ['summary', 'highlights', 'keywords'] }
-    ]
-  },
-  volunteer: {
-    container: 'item',
-    sections: [
-      { class: 'item-header', fields: ['organization', 'position'] },
-      { class: 'item-meta', special: 'dateRange' },
-      { class: 'item-content', fields: ['summary', 'highlights'] }
-    ]
-  },
-  education: {
-    container: 'item',
-    sections: [
-      { class: 'item-header', fields: ['institution', 'area', 'studyType'] },
-      { class: 'item-meta', special: 'dateRange' },
-      { class: 'item-content', fields: ['score', 'courses'] }
-    ]
-  },
-  projects: {
-    container: 'project-item',
-    sections: [
-      { class: 'project-header', fields: ['name', 'url'] },
-      { class: 'project-meta', special: 'dateRange' },
-      { class: 'project-content', fields: ['description', 'highlights', 'keywords', 'roles'] }
-    ]
-  },
-  skills: {
-    container: 'skill-item',
-    sections: [
-      { class: 'skill-content', fields: ['name', 'level', 'keywords'] }
-    ]
-  }
-};
-
-// Single-pass field processor
-export const processField = (key, value) => {
+// 🚀 HTML STRING BASED APPROACH
+// Direct field rendering - no truthy checks needed
+export const renderField = (tag, value, attrs = {}) => {
   if (!value) return null;
-  
-  const field = Object.entries(fieldMap).find(([pattern]) => 
+
+  const attrsStr = Object.entries(attrs)
+    .map(([key, val]) => `${key}="${val}"`)
+    .join(' ');
+
+  return `<${tag}${attrsStr ? ' ' + attrsStr : ''}>${value}</${tag}>`;
+};
+
+// Pre-filter data to remove falsy values upfront
+export const cleanData = (data) =>
+  Object.fromEntries(Object.entries(data).filter(([_, val]) => !!val));
+
+// Get appropriate tag for field
+export const getFieldTag = (key) => {
+  const entry = Object.entries(fieldMap).find(([pattern]) =>
     new RegExp(pattern).test(key)
-  )?.[1] || ['p', {}];
-  
-  const [tag, attrs] = field;
-  
-  return { 
-    key, 
-    value, 
-    tag, 
-    class: attrs.class, 
-    href: attrs.href, 
-    isList: attrs.isList, 
-    isTags: attrs.isTags,
-    isProfiles: attrs.isProfiles,
-    isImage: attrs.isImage,
-    setHtml: attrs.setHtml
-  };
+  );
+  return entry ? entry[1] : 'p';
 };
 
-// Unified renderer for any data structure
-export const renderData = (data, layout = null) => {
-  if (!data) return [];
-  
-  // Handle arrays (sections like work, education, etc.)
-  if (Array.isArray(data)) {
-    return data.map(item => renderData(item, layout));
+// Render field with automatic tag selection
+export const renderAutoField = (key, value, attrs = {}) =>
+  renderField(getFieldTag(key), value, { class: key, ...attrs });
+
+// Render entire object using field mapping
+export const renderObject = (obj, customTags = {}) =>
+  Object.entries(cleanData(obj)).map(([key, value]) =>
+    renderField(customTags[key] || getFieldTag(key), value, { class: key })
+  );
+
+// Conditional rendering helper
+export const renderConditional = (condition, content) =>
+  condition ? content : null;
+
+// Array rendering with automatic filtering
+export const renderArray = (array, renderFn) =>
+  Array.isArray(array) ? array.map(renderFn) : [];
+
+// Component configs for special sections
+const componentConfigs = {
+  skills: {
+    levels: {
+      'Master': { width: '100%', color: '#10b981' },
+      'Advanced': { width: '85%', color: '#3b82f6' },
+      'Intermediate': { width: '65%', color: '#f59e0b' },
+      'Beginner': { width: '40%', color: '#ef4444' }
+    }
+  },
+  languages: {
+    levels: {
+      'Master': { dots: 5, color: '#10b981', label: 'Native' },
+      'Advanced': { dots: 4, color: '#3b82f6', label: 'Fluent' },
+      'Intermediate': { dots: 3, color: '#f59e0b', label: 'Conversational' },
+      'Beginner': { dots: 2, color: '#ef4444', label: 'Basic' }
+    }
+  },
+  interests: {
+    categories: {
+      'Terminals': { icon: 'ph:terminal', color: '#10b981' },
+      'Window Managers': { icon: 'ph:monitor', color: '#3b82f6' },
+      'Text Editors': { icon: 'ph:file-text', color: '#f59e0b' },
+      'default': { icon: 'ph:heart', color: '#ef4444' }
+    }
   }
-  
-  // Handle objects (single items or basics)
-  const fields = Object.entries(data)
-    .map(([key, value]) => processField(key, value))
-    .filter(Boolean);
-  
-  // If no layout specified, return all fields
-  if (!layout) return fields;
-  
-  // Apply layout filtering
-  return layout.sections.map(section => ({
-    class: section.class,
-    fields: section.fields ? fields.filter(f => section.fields.includes(f.key)) : fields,
-    dateRange: section.special === 'dateRange' ? { start: data.startDate, end: data.endDate } : null
-  }));
 };
 
-// Get layouts
-export const getLayouts = () => layouts;
+// Unified component renderer
+export const renderComponent = (type, data, meta = null) => {
+  const config = componentConfigs[type];
+  if (!config) return { data: renderArray(data, cleanData) };
 
-// Special contact items processor with configurable labels
-export const processContactItems = (contactData, meta = null) => {
-  const contactLabels = meta?.themeOptions?.contactLabels || {
-    email: 'Email',
-    phone: 'Phone',
-    website: 'Website',
-    location: 'Location'
+  const userConfig = meta?.themeOptions?.componentConfig?.[type];
+  const finalConfig = userConfig ? { ...config, ...userConfig } : config;
+
+  return {
+    config: finalConfig,
+    data: renderArray(data, item => ({
+      ...item,
+      config: finalConfig[type === 'skills' ? 'levels' : type === 'languages' ? 'levels' : 'categories'][
+        item[type === 'skills' ? 'level' : type === 'languages' ? 'fluency' : 'name']
+      ] || finalConfig[type === 'skills' ? 'levels' : type === 'languages' ? 'levels' : 'categories']['default'] ||
+         finalConfig[type === 'skills' ? 'levels' : type === 'languages' ? 'levels' : 'categories']['Beginner']
+    }))
   };
-  
-  const items = [
-    { label: contactLabels.email, value: contactData.email, href: contactData.email ? `mailto:${contactData.email}` : null },
-    { label: contactLabels.phone, value: contactData.phone, href: contactData.phone ? `tel:${contactData.phone}` : null },
-    { label: contactLabels.website, value: contactData.url, href: contactData.url },
-    { 
-      label: contactLabels.location, 
+};
+
+// Contact items processor
+export const processContactItems = (contactData, meta = null) => {
+  const labels = meta?.themeOptions?.contactLabels || {
+    email: 'Email', phone: 'Phone', website: 'Website', location: 'Location'
+  };
+
+  return [
+    { label: labels.email, value: contactData.email, href: contactData.email ? `mailto:${contactData.email}` : null },
+    { label: labels.phone, value: contactData.phone, href: contactData.phone ? `tel:${contactData.phone}` : null },
+    { label: labels.website, value: contactData.url, href: contactData.url },
+    {
+      label: labels.location,
       value: contactData.location ? [
         contactData.location.address,
         contactData.location.city,
@@ -142,8 +125,6 @@ export const processContactItems = (contactData, meta = null) => {
       ].filter(Boolean).join(', ') : null
     }
   ].filter(item => item.value);
-  
-  return items;
 };
 
- 
+

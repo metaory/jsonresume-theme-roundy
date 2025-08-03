@@ -1,43 +1,34 @@
 ---
 import Icon from './shared/Icon.astro';
+import { renderComponent, renderConditional, renderArray } from '../lib/render.js';
 
 const { items, meta } = Astro.props;
-
-// Get skill levels from meta config or use defaults
-const skillLevels = meta?.themeOptions?.componentConfig?.skills?.levels || {
-  'Master': { width: '100%', color: '#10b981' },
-  'Advanced': { width: '85%', color: '#3b82f6' },
-  'Intermediate': { width: '65%', color: '#f59e0b' },
-  'Beginner': { width: '40%', color: '#ef4444' }
-};
+const { data: skills } = renderComponent('skills', items, meta);
 ---
 
 <div class="skills">
-  {items.map(skill => {
-    const level = skillLevels[skill.level] || skillLevels['Beginner'];
-    return (
-      <div class="skill-category">
-        <div class="skill-header">
-          <Icon name="ph:star" size="1.2em" class="skill-icon" />
-          <h4 class="skill-name">{skill.name}</h4>
-          <span class="skill-level" style={`color: ${level.color};`}>{skill.level}</span>
-        </div>
-        
-        {skill.keywords && (
-          <div class="skill-progress">
-            <div class="progress-bar">
-              <div class="progress-fill" style={`width: ${level.width}; background: ${level.color};`}></div>
-            </div>
-            <div class="skill-keywords">
-              {skill.keywords.map(keyword => (
-                <span class="skill-tag">{keyword}</span>
-              ))}
-            </div>
-          </div>
-        )}
+  {renderArray(skills, skill => (
+    <div class="skill-category">
+      <div class="skill-header">
+        <Icon name="ph:star" size="1.2em" class="skill-icon" />
+        <h4 class="skill-name">{skill.name}</h4>
+        <span class="skill-level" style={`color: ${skill.config.color};`}>{skill.level}</span>
       </div>
-    );
-  })}
+      
+      {renderConditional(skill.keywords, (
+        <div class="skill-progress">
+          <div class="progress-bar">
+            <div class="progress-fill" style={`width: ${skill.config.width}; background: ${skill.config.color};`}></div>
+          </div>
+          <div class="skill-keywords">
+            {renderArray(skill.keywords, keyword => (
+              <span class="skill-tag">{keyword}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  ))}
 </div>
 
 <style>

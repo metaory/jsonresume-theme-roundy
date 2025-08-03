@@ -1,0 +1,214 @@
+---
+import Icon from './shared/Icon.astro';
+
+export interface Props {
+  items: any[];
+  meta: any;
+  sectionName: string;
+}
+
+const { items, meta, sectionName } = Astro.props;
+
+// Field mapping for different section types
+const fieldMaps = {
+  work: {
+    title: 'name',
+    subtitle: 'position',
+    url: 'url',
+    date: ['startDate', 'endDate'],
+    description: 'summary',
+    tags: 'keywords',
+    highlights: 'highlights'
+  },
+  volunteer: {
+    title: 'organization',
+    subtitle: 'position',
+    url: 'url',
+    date: ['startDate', 'endDate'],
+    description: 'summary',
+    highlights: 'highlights'
+  },
+  education: {
+    title: 'institution',
+    subtitle: 'area',
+    url: 'url',
+    date: ['startDate', 'endDate'],
+    description: 'studyType',
+    score: 'score',
+    tags: 'courses'
+  },
+  awards: {
+    title: 'title',
+    subtitle: 'awarder',
+    date: 'date',
+    description: 'summary'
+  },
+  certificates: {
+    title: 'name',
+    subtitle: 'issuer',
+    date: 'date',
+    url: 'url'
+  },
+  publications: {
+    title: 'name',
+    subtitle: 'publisher',
+    date: 'releaseDate',
+    url: 'url',
+    description: 'summary'
+  },
+  references: {
+    title: 'name',
+    description: 'reference'
+  },
+  projects: {
+    title: 'name',
+    subtitle: 'roles',
+    url: 'url',
+    date: ['startDate', 'endDate'],
+    description: 'description',
+    tags: 'keywords'
+  }
+};
+
+const fieldMap = fieldMaps[sectionName] || {};
+---
+
+<div class="generic-section">
+  {items.map(item => (
+    <div class="item">
+      <div class="item-header">
+        {item[fieldMap.title] && (
+          <h4 class="item-title">
+            {item[fieldMap.url] ? (
+              <a href={item[fieldMap.url]} target="_blank" rel="noopener">
+                {item[fieldMap.title]}
+              </a>
+            ) : (
+              item[fieldMap.title]
+            )}
+          </h4>
+        )}
+        
+        {item[fieldMap.subtitle] && (
+          <p class="item-subtitle">{item[fieldMap.subtitle]}</p>
+        )}
+        
+        {fieldMap.date && Array.isArray(fieldMap.date) ? (
+          <time class="item-date">
+            {item[fieldMap.date[0]]} – {item[fieldMap.date[1]] || 'Present'}
+          </time>
+        ) : fieldMap.date && item[fieldMap.date] ? (
+          <time class="item-date">{item[fieldMap.date]}</time>
+        ) : null}
+      </div>
+      
+      {item[fieldMap.description] && (
+        <p class="item-description">{item[fieldMap.description]}</p>
+      )}
+      
+      {item[fieldMap.score] && (
+        <p class="item-score">Score: {item[fieldMap.score]}</p>
+      )}
+      
+      {item[fieldMap.highlights] && (
+        <ul class="item-highlights">
+          {item[fieldMap.highlights].map(highlight => (
+            <li>{highlight}</li>
+          ))}
+        </ul>
+      )}
+      
+      {item[fieldMap.tags] && (
+        <div class="item-tags">
+          {item[fieldMap.tags].map(tag => (
+            <span class="tag">{tag}</span>
+          ))}
+        </div>
+      )}
+    </div>
+  ))}
+</div>
+
+<style>
+  .generic-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--theme-spacing-xl);
+  }
+  
+  .item {
+    background: var(--theme-surface-secondary);
+    border-radius: var(--theme-border-radius-lg);
+    padding: var(--theme-spacing-lg);
+    border: var(--theme-border-width-thin) solid var(--theme-border-color);
+  }
+  
+  .item-header {
+    margin-bottom: var(--theme-spacing-md);
+  }
+  
+  .item-title {
+    margin: 0 0 var(--theme-spacing-xs) 0;
+    font-size: var(--theme-font-size-lg);
+    font-weight: var(--theme-font-weight-semibold);
+    color: var(--theme-text-primary);
+  }
+  
+  .item-title a {
+    color: var(--theme-color-primary);
+    text-decoration: none;
+  }
+  
+  .item-title a:hover {
+    text-decoration: underline;
+  }
+  
+  .item-subtitle {
+    margin: 0 0 var(--theme-spacing-xs) 0;
+    font-size: var(--theme-font-size-md);
+    color: var(--theme-text-secondary);
+  }
+  
+  .item-date {
+    font-size: var(--theme-font-size-sm);
+    color: var(--theme-text-secondary);
+  }
+  
+  .item-description {
+    margin: var(--theme-spacing-md) 0;
+    line-height: 1.6;
+    color: var(--theme-text-primary);
+  }
+  
+  .item-score {
+    margin: var(--theme-spacing-sm) 0;
+    font-weight: var(--theme-font-weight-semibold);
+    color: var(--theme-color-primary);
+  }
+  
+  .item-highlights {
+    margin: var(--theme-spacing-md) 0;
+    padding-left: var(--theme-spacing-lg);
+  }
+  
+  .item-highlights li {
+    margin-bottom: var(--theme-spacing-xs);
+    line-height: 1.6;
+  }
+  
+  .item-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--theme-spacing-xs);
+    margin-top: var(--theme-spacing-md);
+  }
+  
+  .tag {
+    background: var(--theme-surface-primary);
+    color: var(--theme-text-secondary);
+    padding: var(--theme-spacing-xs) var(--theme-spacing-sm);
+    border-radius: var(--theme-border-radius-md);
+    font-size: var(--theme-font-size-sm);
+    border: var(--theme-border-width-thin) solid var(--theme-border-color);
+  }
+</style> 

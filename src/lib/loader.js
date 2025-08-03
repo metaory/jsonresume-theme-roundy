@@ -1,8 +1,8 @@
 import { getSectionTitleWithTheme } from './theme.js';
-import MagicSection from '../components/MagicSection.astro';
 import Skills from '../components/Skills.astro';
 import Languages from '../components/Languages.astro';
 import Interests from '../components/Interests.astro';
+import Generic from '../components/Generic.astro';
 
 // Component mapping for special sections
 const componentMap = {
@@ -11,24 +11,20 @@ const componentMap = {
   interests: Interests
 };
 
-// Load sections using the unified MagicSection component
+// Load sections - only load sections with data
 export const loadSections = async (resumeData) => {
   const { meta, basics, ...sections } = resumeData;
-  const loadedSections = [];
   
-  for (const [sectionName, data] of Object.entries(sections)) {
-    if (data?.length > 0) {
-      const title = getSectionTitleWithTheme(sectionName, meta);
-      const Component = componentMap[sectionName] || MagicSection;
-      
-      loadedSections.push({ 
-        sectionName, 
-        Component, 
-        props: { items: data, meta, sectionName }, 
-        title 
-      });
-    }
-  }
-  
-  return loadedSections;
+  return Object.entries(sections)
+    .filter(([_, data]) => data?.length > 0)
+    .map(([sectionName, data]) => ({
+      sectionName,
+      Component: componentMap[sectionName] || Generic,
+      props: { 
+        items: data, 
+        meta, 
+        sectionName: componentMap[sectionName] ? undefined : sectionName 
+      },
+      title: getSectionTitleWithTheme(sectionName, meta)
+    }));
 }; 

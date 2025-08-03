@@ -10,18 +10,10 @@ import * as resumeData from '../data/resume.json'
 const { basics, meta } = resumeData
 const sections = await loadSections(resumeData)
 
-// Get theme configuration
-const themeConfig = getThemeConfig(meta)
-const colorThemeVars = applyColorTheme(themeConfig.color)
-
-// Generate CSS string for color theme variables
-const colorThemeCSS = colorThemeVars 
-  ? Object.entries(colorThemeVars)
-      .map(([key, value]) => `${key}: ${value};`)
-      .join('\n          ')
-  : ''
-
-
+// Generate CSS for color theme variables
+const colorThemeCSS = Object.entries(applyColorTheme(getThemeConfig(meta).color))
+  .map(([key, value]) => `${key}: ${value};`)
+  .join('\n          ')
 ---
 
 <html lang="en">
@@ -34,20 +26,17 @@ const colorThemeCSS = colorThemeVars
       @import '../styles/global.css';
       @import '../styles/fonts.css';
       
-      /* Prevent layout shift for Iconify icons */
       iconify-icon {
         display: inline-block;
         width: 1em;
         height: 1em;
       }
     </style>
-    {colorThemeCSS && (
-      <style is:global set:html={`
-        :root {
-          ${colorThemeCSS}
-        }
-      `} />
-    )}
+    <style is:global set:html={`
+      :root {
+        ${colorThemeCSS}
+      }
+    `} />
   </head>
   <body>
     <script>

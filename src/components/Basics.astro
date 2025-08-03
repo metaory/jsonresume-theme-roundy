@@ -1,5 +1,5 @@
 ---
-import { renderData, processContactItems } from '../lib/render.js';
+import { renderField, renderConditional, renderAutoField, processContactItems } from '../lib/render.js';
 import Icon from './shared/Icon.astro';
 
 export interface Props {
@@ -8,22 +8,15 @@ export interface Props {
 }
 
 const { basics, meta } = Astro.props;
-
-// Single-pass processing
-const headerFields = renderData({ name: basics.name, label: basics.label });
 const contactItems = processContactItems(basics, meta);
-const profileFields = basics.profiles ? renderData({ profiles: basics.profiles }) : null;
-const summaryFields = basics.summary ? renderData({ summary: basics.summary }) : null;
 ---
 
 <div class="basics">
   <header class="header">
     {basics.image && <img src={basics.image} alt={basics.name} class="avatar" />}
     <div class="header-content">
-      {headerFields.map((field) => {
-        const TagName = field.tag;
-        return <TagName class={field.class || ''}>{field.value}</TagName>;
-      })}
+      {basics.name && <h1 class="name">{basics.name}</h1>}
+      {basics.label && <p class="label">{basics.label}</p>}
     </div>
   </header>
 
@@ -37,38 +30,28 @@ const summaryFields = basics.summary ? renderData({ summary: basics.summary }) :
     ))}
   </div>
 
-  {profileFields && (
+  {renderConditional(basics.profiles, (
     <div class="profiles">
       <h3>Profiles</h3>
-      {profileFields.map((field) => {
-        if (field.isProfiles) {
-          return (
-            <div class={field.class || ''}>
-              {field.value.map(profile => (
-                <a href={profile.url} target="_blank" rel="noopener" class="profile-link">
-                  {profile.network}: {profile.username}
-                </a>
-              ))}
-            </div>
-          );
-        }
-        return null;
-      })}
+      <div class="profile-links">
+        {basics.profiles.map(profile => (
+          <a href={profile.url} target="_blank" rel="noopener" class="profile-link">
+            {profile.network}: {profile.username}
+          </a>
+        ))}
+      </div>
     </div>
-  )}
+  ))}
 
-  {summaryFields && (
+  {renderConditional(basics.summary, (
     <div class="summary">
       <h3>Summary</h3>
-      {summaryFields.map((field) => {
-        if (field.key === 'summary' && field.value.includes('<')) {
-          return <div class={field.class || ''} set:html={field.value} />;
-        }
-        const TagName = field.tag;
-        return <TagName class={field.class || ''}>{field.value}</TagName>;
-      })}
+      {basics.summary.includes('<') ? 
+        <div class="summary-content" set:html={basics.summary} /> :
+        <p class="summary-content">{basics.summary}</p>
+      }
     </div>
-  )}
+  ))}
 </div>
 
 <style>

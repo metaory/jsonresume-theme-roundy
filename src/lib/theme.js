@@ -6,77 +6,66 @@ const OPEN_PROPS_COLORS = [
 ];
 
 // Default theme configuration
-const DEFAULT_THEME = {
-  color: 'indigo'
-};
-
-// Default color theme variables
-const DEFAULT_COLOR_THEME = {
-  '--theme-color-primary': 'var(--indigo-7)',
-  '--theme-color-secondary': 'var(--indigo-6)',
-  '--theme-color-accent': 'var(--indigo-8)',
-  '--theme-color-muted': 'var(--indigo-4)',
-  '--theme-color-border': 'var(--indigo-5)',
-  '--theme-surface-primary': 'var(--indigo-0)',
-  '--theme-surface-secondary': 'var(--indigo-0)',
-  '--theme-surface-tertiary': 'var(--indigo-1)',
-  '--theme-surface-border': 'var(--indigo-2)',
-  '--theme-text-primary': 'var(--indigo-12)',
-  '--theme-text-secondary': 'var(--indigo-11)',
-  '--theme-text-muted': 'var(--indigo-10)',
-  '--theme-link': 'var(--indigo-9)',
-  '--theme-link-hover': 'var(--indigo-10)',
-};
+const DEFAULT_THEME = { color: 'indigo' };
 
 // Get theme configuration from resume meta
 export const getThemeConfig = (meta) => {
-  if (!meta?.themeOptions) return DEFAULT_THEME;
-
-  const color = meta.themeOptions.color?.toLowerCase();
-  return {
-    color: OPEN_PROPS_COLORS.includes(color) ? color : DEFAULT_THEME.color
-  };
+  const color = meta?.themeOptions?.color?.toLowerCase();
+  return { color: OPEN_PROPS_COLORS.includes(color) ? color : DEFAULT_THEME.color };
 };
 
 // Get section title with theme customization
 export const getSectionTitleWithTheme = (sectionName, meta) => {
-  const themeConfig = getThemeConfig(meta);
   const customTitles = meta?.themeOptions?.sectionTitles;
   return customTitles?.[sectionName] || sectionName.charAt(0).toUpperCase() + sectionName.slice(1);
 };
 
-// Apply color theme to CSS variables (for static generation)
+// Apply color theme to CSS variables
 export const applyColorTheme = (color) => {
   const normalizedColor = color?.toLowerCase();
   if (!OPEN_PROPS_COLORS.includes(normalizedColor)) {
-    return DEFAULT_COLOR_THEME;
+    return {
+      '--theme-color-primary': 'var(--indigo-7)',
+      '--theme-color-secondary': 'var(--indigo-6)',
+      '--theme-color-accent': 'var(--indigo-8)',
+      '--theme-color-muted': 'var(--indigo-4)',
+      '--theme-color-border': 'var(--indigo-5)',
+      '--theme-surface-primary': 'var(--indigo-0)',
+      '--theme-surface-secondary': 'var(--indigo-0)',
+      '--theme-surface-tertiary': 'var(--indigo-1)',
+      '--theme-surface-border': 'var(--indigo-2)',
+      '--theme-text-primary': 'var(--indigo-12)',
+      '--theme-text-secondary': 'var(--indigo-11)',
+      '--theme-text-muted': 'var(--indigo-10)',
+      '--theme-link': 'var(--indigo-9)',
+      '--theme-link-hover': 'var(--indigo-10)'
+    };
   }
 
-  // Enhanced theme with HSL colors for better manipulation
   return {
-    // Primary theme colors - vibrant for accents
+    // Primary theme colors
     '--theme-color-primary': `var(--${normalizedColor}-7)`,
     '--theme-color-secondary': `var(--${normalizedColor}-6)`,
     '--theme-color-accent': `var(--${normalizedColor}-8)`,
     '--theme-color-muted': `var(--${normalizedColor}-4)`,
     '--theme-color-border': `var(--${normalizedColor}-5)`,
 
-    // Surfaces - using HSL with very light theme color tints (60-80% alpha)
+    // Surfaces with HSL for transparency
     '--theme-surface-primary': `hsl(var(--${normalizedColor}-1-hsl) / 0.82)`,
     '--theme-surface-secondary': `hsl(var(--${normalizedColor}-2-hsl) / 0.84)`,
     '--theme-surface-tertiary': `hsl(var(--${normalizedColor}-3-hsl) / 0.86)`,
     '--theme-surface-border': `hsl(var(--${normalizedColor}-4-hsl) / 0.88)`,
 
-    // Text colors - using theme color scale for better contrast
+    // Text colors
     '--theme-text-primary': `var(--${normalizedColor}-12)`,
     '--theme-text-secondary': `var(--${normalizedColor}-11)`,
     '--theme-text-muted': `var(--${normalizedColor}-10)`,
 
-    // Links - vibrant
+    // Links
     '--theme-link': `var(--${normalizedColor}-9)`,
     '--theme-link-hover': `var(--${normalizedColor}-10)`,
 
-    // Dark theme variants - using HSL for better control
+    // Dark theme variants
     '--theme-color-primary-dark': `var(--${normalizedColor}-5)`,
     '--theme-color-secondary-dark': `var(--${normalizedColor}-6)`,
     '--theme-color-accent-dark': `var(--${normalizedColor}-4)`,
@@ -90,6 +79,6 @@ export const applyColorTheme = (color) => {
     '--theme-text-secondary-dark': `var(--${normalizedColor}-2)`,
     '--theme-text-muted-dark': `var(--${normalizedColor}-3)`,
     '--theme-link-dark': `var(--${normalizedColor}-4)`,
-    '--theme-link-hover-dark': `var(--${normalizedColor}-3)`,
+    '--theme-link-hover-dark': `var(--${normalizedColor}-3)`
   };
 };
