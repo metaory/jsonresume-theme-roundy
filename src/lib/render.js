@@ -1,22 +1,4 @@
-// Field mapping for automatic tag selection
-const fieldMap = {
-  'name|title': 'h3',
-  'position|role': 'p',
-  'description|summary': 'p',
-  'url|link': 'a',
-  'email': 'a',
-  'phone': 'a',
-  'date|startDate|endDate': 'time',
-  'location|address': 'span',
-  'organization|institution|company': 'p',
-  'area|studyType': 'p',
-  'score': 'span',
-  'level|fluency': 'span',
-  'language': 'h4'
-};
-
-// 🚀 HTML STRING BASED APPROACH
-// Direct field rendering - no truthy checks needed
+// Simple field rendering
 export const renderField = (tag, value, attrs = {}) => {
   if (!value) return null;
 
@@ -27,12 +9,28 @@ export const renderField = (tag, value, attrs = {}) => {
   return `<${tag}${attrsStr ? ' ' + attrsStr : ''}>${value}</${tag}>`;
 };
 
-// Pre-filter data to remove falsy values upfront
+// Clean data by removing falsy values
 export const cleanData = (data) =>
   Object.fromEntries(Object.entries(data).filter(([_, val]) => !!val));
 
 // Get appropriate tag for field
 export const getFieldTag = (key) => {
+  const fieldMap = {
+    'name|title': 'h3',
+    'position|role': 'p',
+    'description|summary': 'p',
+    'url|link': 'a',
+    'email': 'a',
+    'phone': 'a',
+    'date|startDate|endDate': 'time',
+    'location|address': 'span',
+    'organization|institution|company': 'p',
+    'area|studyType': 'p',
+    'score': 'span',
+    'level|fluency': 'span',
+    'language': 'h4'
+  };
+
   const entry = Object.entries(fieldMap).find(([pattern]) =>
     new RegExp(pattern).test(key)
   );
@@ -49,15 +47,15 @@ export const renderObject = (obj, customTags = {}) =>
     renderField(customTags[key] || getFieldTag(key), value, { class: key })
   );
 
-// Conditional rendering helper
+// Simple conditional rendering
 export const renderConditional = (condition, content) =>
   condition ? content : null;
 
-// Array rendering with automatic filtering
+// Array rendering with filtering
 export const renderArray = (array, renderFn) =>
   Array.isArray(array) ? array.map(renderFn) : [];
 
-// Component configs for special sections
+// Component configs
 const componentConfigs = {
   skills: {
     levels: {
@@ -85,7 +83,7 @@ const componentConfigs = {
   }
 };
 
-// Unified component renderer
+// Component renderer
 export const renderComponent = (type, data, meta = null) => {
   const config = componentConfigs[type];
   if (!config) return { data: renderArray(data, cleanData) };

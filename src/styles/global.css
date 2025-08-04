@@ -4,8 +4,7 @@
 
 /* Our internal theme variables - using Open Props values */
 :root {
-  /* Color theme - will be set by applyColorTheme */
-
+  /* Color theme - will be set by client script */
   /* RGB values for alpha transparency (light theme defaults) */
   --theme-surface-primary-rgb: 255, 255, 255;
   --theme-surface-secondary-rgb: 255, 255, 255;

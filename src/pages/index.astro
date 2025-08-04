@@ -1,6 +1,5 @@
 ---
 import { loadSections } from '../lib/loader.js'
-import { getThemeConfig, applyColorTheme } from '../lib/theme.js'
 import Basics from '../components/Basics.astro'
 import Section from '../components/shared/Section.astro'
 import ThemeToggle from '../components/ThemeToggle.astro'
@@ -11,13 +10,7 @@ import * as resumeData from '../data/resume.json'
 const { basics, meta } = resumeData
 const sections = await loadSections(resumeData)
 
-// Get theme config - will be overridden by client-side script if localStorage exists
-const themeConfig = getThemeConfig(meta)
-
-// Generate CSS for color theme variables
-const colorThemeCSS = Object.entries(applyColorTheme(themeConfig.color))
-  .map(([key, value]) => `${key}: ${value};`)
-  .join('\n          ')
+// Theme will be applied by client script to prevent FOUC
 ---
 
 <html lang="en">
@@ -27,21 +20,24 @@ const colorThemeCSS = Object.entries(applyColorTheme(themeConfig.color))
     <title>{basics?.name || 'Resume'}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     
-    <!-- Prevent FOUC by hiding content until theme is applied -->
     <script>
-      // Immediately check localStorage and apply theme before any rendering
-      (function() {
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        const savedColor = localStorage.getItem('selectedThemeColor') || 'indigo';
+      // Apply saved theme immediately to prevent FOUC
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      const savedColor = localStorage.getItem('selectedThemeColor') || 'indigo';
+      
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      document.documentElement.style.backgroundColor = savedTheme === 'dark' ? 'black' : 'white';
+      
+      // Apply saved color theme immediately
+      import('../lib/theme.js').then(({ applyColorTheme, applyDarkModeTheme }) => {
+        const themeVars = savedTheme === 'dark' 
+          ? applyDarkModeTheme(savedColor) 
+          : applyColorTheme(savedColor);
         
-        document.documentElement.setAttribute('data-theme', savedTheme);
-        
-        // Set HTML background based on saved theme
-        document.documentElement.style.backgroundColor = savedTheme === 'dark' ? 'black' : 'white';
-        
-        // Show content after theme is applied
-        document.documentElement.style.visibility = 'visible';
-      })();
+        Object.entries(themeVars).forEach(([key, value]) => {
+          document.documentElement.style.setProperty(key, value);
+        });
+      });
     </script>
     
     <style is:global>
@@ -53,45 +49,17 @@ const colorThemeCSS = Object.entries(applyColorTheme(themeConfig.color))
         width: 1em;
         height: 1em;
       }
-      
-      /* Hide content until theme is applied */
-      html {
-        visibility: hidden;
-      }
     </style>
-    <style is:global set:html={`
-      :root {
-        ${colorThemeCSS}
-      }
-    `} />
+    
+    <!-- Theme variables will be set by client script -->
   </head>
+  
   <body>
     <script>
       import "iconify-icon";
     </script>
     
-    <script>
-      // Apply proper theme after page loads using theme functions
-      (async function() {
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        const savedColor = localStorage.getItem('selectedThemeColor') || 'indigo';
-        
-        const { applyColorTheme, applyDarkModeTheme } = await import('../lib/theme.js');
-        
-        // Apply appropriate theme based on saved theme mode
-        const themeVars = savedTheme === 'dark' 
-          ? applyDarkModeTheme(savedColor) 
-          : applyColorTheme(savedColor);
-        
-        // Apply CSS variables to root
-        Object.entries(themeVars).forEach(([key, value]) => {
-          document.documentElement.style.setProperty(key, value);
-        });
-      })();
-    </script>
-    
     <ThemeToggle />
-    
     {import.meta.env.DEV && <ThemePicker />}
     
     <main class="resume">

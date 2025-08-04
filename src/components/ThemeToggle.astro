@@ -1,10 +1,10 @@
 ---
-// Nope
+// Theme toggle component
 ---
 
-<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-    <iconify-icon class="light-icon" width="68"  icon="line-md:sunny-filled-loop-to-moon-filled-alt-loop-transition"></iconify-icon>
-    <iconify-icon class="dark-icon"  width="68"  icon="line-md:moon-filled-alt-to-sunny-filled-loop-transition"></iconify-icon>
+<button class="theme-toggle" aria-label="Toggle theme">
+    <iconify-icon class="light-icon" icon="line-md:sunny-filled-loop-to-moon-filled-alt-loop-transition"></iconify-icon>
+    <iconify-icon class="dark-icon" icon="line-md:moon-filled-alt-to-sunny-filled-loop-transition"></iconify-icon>
 </button>
 
 <style>
@@ -14,7 +14,6 @@
     right: var(--theme-spacing-lg);
     z-index: var(--theme-z-important);
     background: var(--theme-surface-primary);
-    backdrop-filter: blur(8px);
     border-radius: var(--theme-border-radius-full);
     border: none;
     width: var(--theme-spacing-2xl);
@@ -22,26 +21,22 @@
     cursor: pointer;
     transition: all var(--theme-transition-normal) var(--theme-easing);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    mix-blend-mode: multiply;
-    color: blue;
-    box-sizing: content-box;
     padding: 8px;
   }
 
   .theme-toggle:hover {
     transform: scale(1.1);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-    border-color: rgba(var(--theme-link-rgb, 59, 130, 246), 0.8);
   }
 
   .theme-toggle iconify-icon {
-    width: min-content;
-    height: min-content;
-    pointer-events: none;
+    width: 24px;
+    height: 24px;
     position: absolute;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
     transition: opacity var(--theme-transition-normal) var(--theme-easing);
-    mix-blend-mode: multiply;
   }
 
   .light-icon {
@@ -61,56 +56,33 @@
   }
 
   [data-theme="dark"] .theme-toggle {
-    background: rgba(var(--theme-surface-secondary-rgb, 30, 30, 30), 0.8);
-    border-color: rgba(var(--theme-link-rgb, 147, 197, 253), 0.6);
-    mix-blend-mode: screen;
-  }
-
-  [data-theme="dark"] .theme-toggle:hover {
-    border-color: rgba(var(--theme-link-rgb, 147, 197, 253), 0.8);
-  }
-
-  [data-theme="dark"] .theme-toggle iconify-icon {
-    mix-blend-mode: screen;
+    background: var(--theme-surface-secondary);
   }
 </style>
 
 <script>
-  const toggle = document.getElementById('theme-toggle');
+  import { applyColorTheme, applyDarkModeTheme } from '../lib/theme.js';
+
+  const toggle = document.querySelector('.theme-toggle');
   const html = document.documentElement;
 
-  // Function to apply dark mode theme variants
-  const applyDarkModeTheme = async (isDark) => {
+  const applyTheme = (isDark) => {
     const currentColor = localStorage.getItem('selectedThemeColor') || 'indigo';
-    const { applyColorTheme, applyDarkModeTheme } = await import('../lib/theme.js');
+    const themeVars = isDark ? applyDarkModeTheme(currentColor) : applyColorTheme(currentColor);
 
-    if (isDark) {
-      // Apply dark mode variants
-      const darkThemeVars = applyDarkModeTheme(currentColor);
-      Object.entries(darkThemeVars).forEach(([key, value]) => {
-        html.style.setProperty(key, value);
-      });
-      // Set HTML background for dark mode
-      html.style.backgroundColor = 'black';
-    } else {
-      // Apply light mode variants
-      const lightThemeVars = applyColorTheme(currentColor);
-      Object.entries(lightThemeVars).forEach(([key, value]) => {
-        html.style.setProperty(key, value);
-      });
-      // Set HTML background for light mode
-      html.style.backgroundColor = 'white';
-    }
+    Object.entries(themeVars).forEach(([key, value]) => {
+      html.style.setProperty(key, value);
+    });
+
+    html.style.backgroundColor = isDark ? 'black' : 'white';
   };
 
-  toggle?.addEventListener('click', async () => {
+  toggle?.addEventListener('click', () => {
     const currentTheme = html.getAttribute('data-theme') || 'light';
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
     html.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
-
-    // Apply appropriate theme variants
-    await applyDarkModeTheme(newTheme === 'dark');
+    applyTheme(newTheme === 'dark');
   });
 </script>

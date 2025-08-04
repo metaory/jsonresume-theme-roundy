@@ -1,30 +1,22 @@
 ---
 import { OPEN_PROPS_COLORS } from '../lib/theme.js'
-
-const colors = OPEN_PROPS_COLORS
 ---
 
-<div class="theme-picker" id="theme-picker">
-  <div class="picker-tab">
-    <iconify-icon icon="ph:palette" class="tab-icon"></iconify-icon>
-  </div>
-  <div class="picker-content">
-    <div class="picker-header">
-      <h3>Theme Colors</h3>
-    </div>
-    <div class="color-grid">
-      {colors.map(color => (
-        <button
-          class="color-btn"
-          data-color={color}
-          style={`--color: var(--${color}-7); --color-hover: var(--${color}-8);`}
-          title={color}
-        >
-          <div class="color-circle"></div>
-          <span class="color-name">{color}</span>
-        </button>
-      ))}
-    </div>
+<div class="theme-picker">
+  <button class="picker-tab" aria-label="Theme picker">
+    <iconify-icon icon="solar:pallete-2-bold-duotone"></iconify-icon>
+  </button>
+  <div class="picker-panel">
+    {OPEN_PROPS_COLORS.map(color => (
+      <button
+        class="color-btn"
+        data-color={color}
+        style={`--color: var(--${color}-7)`}
+        title={color}
+      >
+        <div class="color-circle"></div>
+      </button>
+    ))}
   </div>
 </div>
 
@@ -34,18 +26,11 @@ const colors = OPEN_PROPS_COLORS
     top: 50%;
     right: -200px;
     transform: translateY(-50%);
-    background: rgba(var(--theme-surface-primary-rgb, 255, 255, 255), 0.08);
-    border-radius: 12px 0 0 12px;
-    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
     z-index: var(--theme-z-modal);
-    backdrop-filter: blur(4px) saturate(180%);
-    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    width: 280px;
-    display: flex;
+    transition: right 0.2s ease;
   }
 
-  .theme-picker:hover,
-  .theme-picker.show {
+  .theme-picker:hover {
     right: 0;
   }
 
@@ -55,49 +40,28 @@ const colors = OPEN_PROPS_COLORS
     top: 50%;
     transform: translateY(-50%);
     width: 40px;
-    height: 60px;
-    background: rgba(var(--theme-surface-primary-rgb, 255, 255, 255), 0.2);
-    border-right: none;
-    border-radius: 8px 0 0 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 40px;
+    background: var(--theme-surface-primary);
+    border: none;
+    border-radius: 50%;
     cursor: pointer;
-    box-shadow: -2px 0 12px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(12px) saturate(180%);
-    -webkit-backdrop-filter: blur(12px) saturate(180%);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: grid;
+    place-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
-  .picker-tab:hover {
-    background: rgba(var(--theme-surface-primary-rgb, 255, 255, 255), 0.15);
-    transform: translateY(-50%) scale(1.05);
-  }
-
-  .tab-icon {
+  .picker-tab iconify-icon {
     width: 20px;
     height: 20px;
     color: var(--theme-text-secondary);
-    transition: color 0.2s ease;
   }
 
-  .picker-content {
-    padding: 16px;
-    width: 100%;
-  }
-
-  .picker-header {
-    margin-bottom: 12px;
-  }
-
-  .picker-header h3 {
-    margin: 0;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--theme-text-primary);
-  }
-
-  .color-grid {
+  .picker-panel {
+    width: 200px;
+    background: var(--theme-surface-primary);
+    border-radius: 12px 0 0 12px;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+    padding: 12px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 8px;
@@ -109,57 +73,31 @@ const colors = OPEN_PROPS_COLORS
     cursor: pointer;
     padding: 8px;
     border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    display: grid;
+    place-items: center;
+    transition: all 0.2s ease;
   }
 
   .color-btn:hover {
-    background: rgba(var(--theme-surface-secondary-rgb, 0, 0, 0), 0.05);
-    transform: translateY(-2px);
+    background: var(--theme-surface-secondary);
+    transform: scale(1.1);
   }
 
   .color-btn.active {
-    background: rgba(var(--theme-color-primary), 0.1);
-    border: 2px solid var(--theme-color-primary);
+    background: var(--theme-color-primary);
   }
 
   .color-circle {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     background: var(--color);
-    border: 2px solid rgba(var(--theme-surface-border-rgb, 0, 0, 0), 0.1);
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid var(--theme-surface-border);
   }
 
-  .color-btn:hover .color-circle {
-    background: var(--color-hover);
-    transform: scale(1.15);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  }
-
-  .color-name {
-    font-size: 10px;
-    color: var(--theme-text-secondary);
-    text-transform: capitalize;
-    font-weight: 500;
-  }
-
-  [data-theme="dark"] .theme-picker {
-    background: rgba(var(--theme-surface-primary-rgb, 30, 30, 30), 0.1);
-    border-color: rgba(var(--theme-surface-border-rgb, 255, 255, 255), 0.1);
-  }
-
-  [data-theme="dark"] .picker-tab {
-    background: rgba(var(--theme-surface-primary-rgb, 30, 30, 30), 0.1);
-    border-color: rgba(var(--theme-surface-border-rgb, 255, 255, 255), 0.1);
-  }
-
-  [data-theme="dark"] .picker-tab:hover {
-    background: rgba(var(--theme-surface-primary-rgb, 30, 30, 30), 0.2);
+  [data-theme="dark"] .picker-tab,
+  [data-theme="dark"] .picker-panel {
+    background: var(--theme-surface-secondary);
   }
 
   @media print {
@@ -170,76 +108,40 @@ const colors = OPEN_PROPS_COLORS
 </style>
 
 <script>
-  let hideTimeout;
+  import { applyColorTheme, applyDarkModeTheme } from '../lib/theme.js';
 
-  // Apply theme immediately without page reload
-  const applyThemeImmediately = async (color) => {
-    const { applyColorTheme, applyDarkModeTheme } = await import('../lib/theme.js');
+  const applyTheme = (color) => {
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-
-    // Apply appropriate theme based on current mode
     const themeVars = isDark ? applyDarkModeTheme(color) : applyColorTheme(color);
 
-    // Apply CSS variables to root
-    const root = document.documentElement;
     Object.entries(themeVars).forEach(([key, value]) => {
-      root.style.setProperty(key, value);
+      document.documentElement.style.setProperty(key, value);
     });
 
-    // Set HTML background based on current theme mode
-    root.style.backgroundColor = isDark ? 'black' : 'white';
-
-    // Store in localStorage
+    document.documentElement.style.backgroundColor = isDark ? 'black' : 'white';
     localStorage.setItem('selectedThemeColor', color);
 
-    // Update active state
-    document.querySelectorAll('.color-btn').forEach(btn => {
-      btn.classList.remove('active');
-    });
+    document.querySelectorAll('.color-btn').forEach(btn => btn.classList.remove('active'));
     document.querySelector(`[data-color="${color}"]`)?.classList.add('active');
   };
 
-  // Add click handlers to color buttons
-  document.addEventListener('DOMContentLoaded', () => {
-    const colorBtns = document.querySelectorAll('.color-btn');
-
-    // Set initial active state
+  // Initialize when DOM is ready
+  const init = () => {
     const currentColor = localStorage.getItem('selectedThemeColor') || 'indigo';
     document.querySelector(`[data-color="${currentColor}"]`)?.classList.add('active');
 
-    colorBtns.forEach(btn => {
-      btn.addEventListener('click', async (event) => {
+    document.querySelectorAll('.color-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
         const color = btn.getAttribute('data-color');
-
-        if (!color) return;
-
-        // Apply theme immediately
-        await applyThemeImmediately(color);
+        if (color) applyTheme(color);
       });
     });
-  });
+  };
 
-  // Auto-hide functionality with delay
-  const picker = document.getElementById('theme-picker');
-
-  picker?.addEventListener('mouseenter', () => {
-    clearTimeout(hideTimeout);
-    picker.classList.add('show');
-  });
-
-  picker?.addEventListener('mouseleave', () => {
-    hideTimeout = setTimeout(() => {
-      picker.classList.remove('show');
-    }, 28_000)
-  });
-
-  // Hide picker on escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      const picker = document.getElementById('theme-picker');
-      if (picker) {
-        picker.classList.remove('show');
-      }
-    }
-  });
+  // Run immediately if DOM is ready, otherwise wait
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 </script>
