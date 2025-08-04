@@ -3,8 +3,10 @@
 ---
 
 <button class="theme-toggle" aria-label="Toggle theme">
-    <iconify-icon class="light-icon" icon="line-md:sunny-filled-loop-to-moon-filled-alt-loop-transition"></iconify-icon>
-    <iconify-icon class="dark-icon" icon="line-md:moon-filled-alt-to-sunny-filled-loop-transition"></iconify-icon>
+    <div class="icon-container">
+        <iconify-icon width="32" height="32" class="light-icon" icon="line-md:sunny-filled-loop-to-moon-filled-alt-loop-transition"></iconify-icon>
+        <iconify-icon width="32" height="32" class="dark-icon" icon="line-md:moon-filled-alt-to-sunny-filled-loop-transition"></iconify-icon>
+    </div>
 </button>
 
 <style>
@@ -21,7 +23,10 @@
     cursor: pointer;
     transition: all var(--theme-transition-normal) var(--theme-easing);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 8px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .theme-toggle:hover {
@@ -29,30 +34,28 @@
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   }
 
+  .icon-container {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .theme-toggle iconify-icon {
-    width: 24px;
-    height: 24px;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
     transition: opacity var(--theme-transition-normal) var(--theme-easing);
   }
 
   .light-icon {
-    opacity: 1;
+    color: #f59e0b;
   }
 
   .dark-icon {
-    opacity: 0;
-  }
-
-  [data-theme="dark"] .light-icon {
-    opacity: 0;
-  }
-
-  [data-theme="dark"] .dark-icon {
-    opacity: 1;
+    color: #3b82f6;
   }
 
   [data-theme="dark"] .theme-toggle {
@@ -61,20 +64,30 @@
 </style>
 
 <script>
-  import { applyColorTheme, applyDarkModeTheme } from '../lib/theme.js';
-
   const toggle = document.querySelector('.theme-toggle');
   const html = document.documentElement;
+  const lightIcon = document.querySelector('.light-icon') as HTMLElement;
+  const darkIcon = document.querySelector('.dark-icon') as HTMLElement;
 
-  const applyTheme = (isDark) => {
-    const currentColor = localStorage.getItem('selectedThemeColor') || 'indigo';
-    const themeVars = isDark ? applyDarkModeTheme(currentColor) : applyColorTheme(currentColor);
+  const showIcon = (isDark: boolean) => {
+    if (lightIcon && darkIcon) {
+      if (isDark) {
+        lightIcon.style.opacity = '0';
+        darkIcon.style.opacity = '1';
+      } else {
+        lightIcon.style.opacity = '1';
+        darkIcon.style.opacity = '0';
+      }
+    }
+  };
 
-    Object.entries(themeVars).forEach(([key, value]) => {
-      html.style.setProperty(key, value);
-    });
+  const initializeTheme = () => {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    const savedColor = localStorage.getItem('selectedThemeColor') || 'indigo';
 
-    html.style.backgroundColor = isDark ? 'black' : 'white';
+    html.setAttribute('data-theme', savedTheme);
+    html.style.backgroundColor = savedTheme === 'dark' ? 'black' : 'white';
+    showIcon(savedTheme === 'dark');
   };
 
   toggle?.addEventListener('click', () => {
@@ -82,7 +95,11 @@
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
     html.setAttribute('data-theme', newTheme);
+    html.style.backgroundColor = newTheme === 'dark' ? 'black' : 'white';
     localStorage.setItem('theme', newTheme);
-    applyTheme(newTheme === 'dark');
+    showIcon(newTheme === 'dark');
   });
+
+  // Initialize theme on load
+  initializeTheme();
 </script>
