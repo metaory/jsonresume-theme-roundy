@@ -1,12 +1,10 @@
 ---
-// No props needed for this component
+// Nope
 ---
 
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-  <div class="icon-container">
-    <iconify-icon class="light-icon" icon="ph:sun-bold"></iconify-icon>
-    <iconify-icon class="dark-icon" icon="ph:moon-bold"></iconify-icon>
-  </div>
+    <iconify-icon class="light-icon" width="68"  icon="line-md:sunny-filled-loop-to-moon-filled-alt-loop-transition"></iconify-icon>
+    <iconify-icon class="dark-icon"  width="68"  icon="line-md:moon-filled-alt-to-sunny-filled-loop-transition"></iconify-icon>
 </button>
 
 <style>
@@ -28,18 +26,13 @@
     transition: all var(--theme-transition-normal) var(--theme-easing);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     mix-blend-mode: multiply;
+    color: blue;
   }
 
   .theme-toggle:hover {
     transform: scale(1.1);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     border-color: rgba(var(--theme-link-rgb, 59, 130, 246), 0.8);
-  }
-
-  .icon-container {
-    position: relative;
-    width: 1.5em;
-    height: 1.5em;
   }
 
   .theme-toggle iconify-icon {
@@ -87,12 +80,12 @@
 <script>
   const toggle = document.getElementById('theme-toggle');
   const html = document.documentElement;
-  
+
   // Function to apply dark mode theme variants
   const applyDarkModeTheme = async (isDark) => {
     const currentColor = localStorage.getItem('selectedThemeColor') || 'indigo';
     const { applyColorTheme, applyDarkModeTheme } = await import('../lib/theme.js');
-    
+
     if (isDark) {
       // Apply dark mode variants
       const darkThemeVars = applyDarkModeTheme(currentColor);
@@ -107,15 +100,15 @@
       });
     }
   };
-  
+
   toggle?.addEventListener('click', async () => {
     const currentTheme = html.getAttribute('data-theme') || 'light';
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
+
     html.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
-    
+
     // Apply appropriate theme variants
     await applyDarkModeTheme(newTheme === 'dark');
   });
-</script> 
+</script>
