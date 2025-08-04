@@ -13,20 +13,19 @@
     top: var(--theme-spacing-lg);
     right: var(--theme-spacing-lg);
     z-index: var(--theme-z-important);
-    background: rgba(var(--theme-surface-secondary-rgb, 255, 255, 255), 0.8);
+    background: var(--theme-surface-primary);
     backdrop-filter: blur(8px);
-    border: var(--theme-border-width-thick) solid rgba(var(--theme-link-rgb, 59, 130, 246), 0.6);
     border-radius: var(--theme-border-radius-full);
+    border: none;
     width: var(--theme-spacing-2xl);
     height: var(--theme-spacing-2xl);
-    display: flex;
-    align-items: center;
-    justify-content: center;
     cursor: pointer;
     transition: all var(--theme-transition-normal) var(--theme-easing);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     mix-blend-mode: multiply;
     color: blue;
+    box-sizing: content-box;
+    padding: 8px;
   }
 
   .theme-toggle:hover {
@@ -36,12 +35,11 @@
   }
 
   .theme-toggle iconify-icon {
-    width: 1.5em;
-    height: 1.5em;
+    width: min-content;
+    height: min-content;
     pointer-events: none;
     position: absolute;
-    top: 0;
-    left: 0;
+    transform: translate(-50%, -50%);
     transition: opacity var(--theme-transition-normal) var(--theme-easing);
     mix-blend-mode: multiply;
   }
@@ -92,12 +90,16 @@
       Object.entries(darkThemeVars).forEach(([key, value]) => {
         html.style.setProperty(key, value);
       });
+      // Set HTML background for dark mode
+      html.style.backgroundColor = 'black';
     } else {
       // Apply light mode variants
       const lightThemeVars = applyColorTheme(currentColor);
       Object.entries(lightThemeVars).forEach(([key, value]) => {
         html.style.setProperty(key, value);
       });
+      // Set HTML background for light mode
+      html.style.backgroundColor = 'white';
     }
   };
 

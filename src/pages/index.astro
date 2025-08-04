@@ -36,27 +36,8 @@ const colorThemeCSS = Object.entries(applyColorTheme(themeConfig.color))
         
         document.documentElement.setAttribute('data-theme', savedTheme);
         
-        // Apply saved color theme immediately
-        const themeVars = {
-          '--theme-color-primary': `hsl(var(--${savedColor}-7-hsl) / 0.7)`,
-          '--theme-color-secondary': `hsl(var(--${savedColor}-6-hsl) / 0.6)`,
-          '--theme-color-accent': `hsl(var(--${savedColor}-8-hsl) / 0.8)`,
-          '--theme-color-muted': `hsl(var(--${savedColor}-4-hsl) / 0.4)`,
-          '--theme-color-border': `hsl(var(--${savedColor}-5-hsl) / 0.3)`,
-          '--theme-surface-primary': `hsl(var(--${savedColor}-1-hsl) / 0.6)`,
-          '--theme-surface-secondary': `hsl(var(--${savedColor}-2-hsl) / 0.4)`,
-          '--theme-surface-tertiary': `hsl(var(--${savedColor}-3-hsl) / 0.3)`,
-          '--theme-surface-border': `hsl(var(--${savedColor}-4-hsl) / 0.2)`,
-          '--theme-text-primary': `hsl(var(--${savedColor}-12-hsl) / 0.9)`,
-          '--theme-text-secondary': `hsl(var(--${savedColor}-11-hsl) / 0.7)`,
-          '--theme-text-muted': `hsl(var(--${savedColor}-10-hsl) / 0.5)`,
-          '--theme-link': `hsl(var(--${savedColor}-9-hsl) / 0.8)`,
-          '--theme-link-hover': `hsl(var(--${savedColor}-10-hsl) / 0.9)`
-        };
-        
-        Object.entries(themeVars).forEach(([key, value]) => {
-          document.documentElement.style.setProperty(key, value);
-        });
+        // Set HTML background based on saved theme
+        document.documentElement.style.backgroundColor = savedTheme === 'dark' ? 'black' : 'white';
         
         // Show content after theme is applied
         document.documentElement.style.visibility = 'visible';
@@ -87,6 +68,26 @@ const colorThemeCSS = Object.entries(applyColorTheme(themeConfig.color))
   <body>
     <script>
       import "iconify-icon";
+    </script>
+    
+    <script>
+      // Apply proper theme after page loads using theme functions
+      (async function() {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        const savedColor = localStorage.getItem('selectedThemeColor') || 'indigo';
+        
+        const { applyColorTheme, applyDarkModeTheme } = await import('../lib/theme.js');
+        
+        // Apply appropriate theme based on saved theme mode
+        const themeVars = savedTheme === 'dark' 
+          ? applyDarkModeTheme(savedColor) 
+          : applyColorTheme(savedColor);
+        
+        // Apply CSS variables to root
+        Object.entries(themeVars).forEach(([key, value]) => {
+          document.documentElement.style.setProperty(key, value);
+        });
+      })();
     </script>
     
     <ThemeToggle />
