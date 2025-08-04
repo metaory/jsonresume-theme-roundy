@@ -19,52 +19,54 @@ const sections = await loadSections(resumeData)
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{basics?.name || 'Resume'}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    
+
     <script>
       // Apply saved theme immediately to prevent FOUC
       const savedTheme = localStorage.getItem('theme') || 'light';
       const savedColor = localStorage.getItem('selectedThemeColor') || 'indigo';
-      
+
       document.documentElement.setAttribute('data-theme', savedTheme);
       document.documentElement.style.backgroundColor = savedTheme === 'dark' ? 'black' : 'white';
-      
+
       // Apply saved color theme immediately
       import('../lib/theme.js').then(({ applyColorTheme, applyDarkModeTheme }) => {
-        const themeVars = savedTheme === 'dark' 
-          ? applyDarkModeTheme(savedColor) 
+        const themeVars = savedTheme === 'dark'
+          ? applyDarkModeTheme(savedColor)
           : applyColorTheme(savedColor);
-        
+
         Object.entries(themeVars).forEach(([key, value]) => {
           document.documentElement.style.setProperty(key, value);
         });
       });
     </script>
-    
+
     <style is:global>
       @import '../styles/global.css';
       @import '../styles/fonts.css';
-      
+
       iconify-icon {
         display: inline-block;
         width: 1em;
         height: 1em;
       }
     </style>
-    
+
     <!-- Theme variables will be set by client script -->
   </head>
-  
+
   <body>
     <script>
       import "iconify-icon";
     </script>
-    
+
+
+
     <ThemeToggle />
     {import.meta.env.DEV && <ThemePicker />}
-    
+
     <main class="resume">
       <Basics basics={basics} meta={meta} />
-      
+
       {sections.map(({ Component, props, title }) => (
         <Section title={title}>
           <Component {...props} />

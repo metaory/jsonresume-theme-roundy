@@ -4,7 +4,7 @@ import { OPEN_PROPS_COLORS } from '../lib/theme.js'
 
 <div class="theme-picker">
   <button class="picker-tab" aria-label="Theme picker">
-    <iconify-icon icon="solar:pallete-2-bold-duotone"></iconify-icon>
+    <iconify-icon width="48" height="48" icon="solar:pallete-2-bold-duotone"></iconify-icon>
   </button>
   <div class="picker-panel">
     {OPEN_PROPS_COLORS.map(color => (
@@ -27,40 +27,38 @@ import { OPEN_PROPS_COLORS } from '../lib/theme.js'
     right: -200px;
     transform: translateY(-50%);
     z-index: var(--theme-z-modal);
-    transition: right 0.2s ease;
+    transition: right 0.4s ease-in-out;
   }
 
   .theme-picker:hover {
-    right: 0;
+    right: -4px;
   }
 
   .picker-tab {
     position: absolute;
-    left: -40px;
+    left: -60px;
     top: 50%;
+    width: max-content;
+    height: 100%;
     transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
     background: var(--theme-surface-primary);
     border: none;
-    border-radius: 50%;
+    border-radius: 6em 0 0 6em;
     cursor: pointer;
     display: grid;
     place-items: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
   .picker-tab iconify-icon {
-    width: 20px;
-    height: 20px;
-    color: var(--theme-text-secondary);
+    height: 48px;
+    width: 48px;
+    color: var(--theme-color-primary);
   }
 
   .picker-panel {
     width: 200px;
     background: var(--theme-surface-primary);
-    border-radius: 12px 0 0 12px;
-    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 0;
     padding: 12px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -71,20 +69,22 @@ import { OPEN_PROPS_COLORS } from '../lib/theme.js'
     background: none;
     border: none;
     cursor: pointer;
-    padding: 8px;
-    border-radius: 8px;
+    padding: 10px;
+    border-radius: 12px;
     display: grid;
     place-items: center;
     transition: all 0.2s ease;
   }
 
   .color-btn:hover {
-    background: var(--theme-surface-secondary);
-    transform: scale(1.1);
+    background: var(--theme-surface-tertiary);
+    transform: scale(1.2);
+    box-shadow: inset 0 0 12px var(--color), 0 0 14px var(--color);
   }
 
   .color-btn.active {
     background: var(--theme-color-primary);
+    box-shadow: 0 0 14px var(--color);
   }
 
   .color-circle {
@@ -93,11 +93,6 @@ import { OPEN_PROPS_COLORS } from '../lib/theme.js'
     border-radius: 50%;
     background: var(--color);
     border: 2px solid var(--theme-surface-border);
-  }
-
-  [data-theme="dark"] .picker-tab,
-  [data-theme="dark"] .picker-panel {
-    background: var(--theme-surface-secondary);
   }
 
   @media print {
