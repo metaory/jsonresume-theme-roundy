@@ -1,0 +1,146 @@
+---
+import ContactTag from '../shared/ContactTag.astro'
+
+const { basics } = Astro.props
+---
+
+<header class="basics">
+  <div class="name-title">
+    <h1 class="name">{basics.name}</h1>
+    <p class="label">{basics.label}</p>
+  </div>
+
+  <div class="contact-info">
+    <ContactTag 
+      text={basics.email}
+      icon="mdi:email"
+      href={`mailto:${basics.email}`}
+      variant="outline"
+    />
+    
+    <ContactTag 
+      text={basics.phone}
+      icon="mdi:phone"
+      href={`tel:${basics.phone}`}
+      variant="outline"
+    />
+    
+    <ContactTag 
+      text={basics.url}
+      icon="mdi:web"
+      href={basics.url}
+      variant="outline"
+    />
+  </div>
+
+  <div class="location">
+    <ContactTag 
+      text={[
+        basics.location?.address,
+        basics.location?.city,
+        basics.location?.region,
+        basics.location?.postalCode
+      ].filter(Boolean).join(', ')}
+      icon="mdi:map-marker"
+      variant="ghost"
+    />
+  </div>
+
+  <div class="profiles">
+    {(basics.profiles || []).map(profile => (
+      <ContactTag 
+        text={profile.username}
+        icon={`mdi:${profile.network?.toLowerCase()}`}
+        href={profile.url}
+        variant="primary"
+        size="md"
+      />
+    ))}
+  </div>
+
+  <div class="summary" set:html={basics.summary} />
+</header>
+
+<style>
+  .basics {
+    text-align: center;
+    margin-bottom: var(--theme-spacing-2xl);
+  }
+
+  .name-title {
+    margin-bottom: var(--theme-spacing-lg);
+  }
+
+  .name {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--theme-text-primary);
+    margin: 0 0 var(--theme-spacing-sm) 0;
+  }
+
+  .label {
+    font-size: 1.25rem;
+    color: var(--theme-text-secondary);
+    margin: 0;
+    font-weight: 500;
+  }
+
+  .contact-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(max-content, 1fr));
+    justify-content: center;
+    gap: var(--theme-spacing-md);
+    margin-bottom: var(--theme-spacing-md);
+    align-items: start;
+  }
+
+  .location {
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--theme-spacing-md);
+  }
+
+  .profiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(max-content, 1fr));
+    justify-content: center;
+    gap: var(--theme-spacing-md);
+    margin-bottom: var(--theme-spacing-lg);
+    align-items: start;
+  }
+
+  .summary {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+    color: var(--theme-text-secondary);
+    line-height: 1.6;
+  }
+
+  .summary ul {
+    margin: 0;
+    padding-left: var(--theme-spacing-lg);
+  }
+
+  .summary li {
+    margin-bottom: var(--theme-spacing-xs);
+  }
+
+  @media (max-width: 768px) {
+    .name {
+      font-size: 2rem;
+    }
+
+    .contact-info {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      gap: var(--theme-spacing-sm);
+    }
+
+    .profiles {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      gap: var(--theme-spacing-sm);
+    }
+  }
+</style> 

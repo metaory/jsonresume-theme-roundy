@@ -1,0 +1,19 @@
+---
+const { class: className = '' } = Astro.props
+---
+
+<ul class={`list ${className}`}>
+  <slot />
+</ul>
+
+<style>
+  .list {
+    margin: var(--theme-spacing-sm) 0;
+    padding-left: var(--theme-spacing-lg);
+  }
+
+  .list li {
+    color: var(--theme-text-secondary);
+    margin-bottom: var(--theme-spacing-xs);
+  }
+</style> 

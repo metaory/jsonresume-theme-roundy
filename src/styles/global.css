@@ -35,9 +35,9 @@
 
   /* Layout */
   --theme-container-max-width: var(--size-content-3);
-  --theme-border-radius-sm: var(--radius-1);
-  --theme-border-radius-md: var(--radius-2);
-  --theme-border-radius-lg: var(--radius-3);
+  --theme-border-radius-sm: 8px;
+  --theme-border-radius-md: 12px;
+  --theme-border-radius-lg: 1rem;
   --theme-border-radius-full: var(--radius-round);
   --theme-border-width: var(--border-size-1);
   --theme-border-width-thin: var(--border-size-1);
@@ -78,6 +78,7 @@
 html {
   background: white;
   transition: background-color var(--theme-transition-normal);
+  overflow-x: hidden;
 }
 
 body {
@@ -88,6 +89,11 @@ body {
   margin: 0;
   padding: 0;
   transition: color var(--theme-transition-normal);
+  overflow-x: hidden;
+}
+
+main {
+  overflow-x: hidden;
 }
 
 /* Typography */
@@ -111,24 +117,6 @@ a {
 
 a:hover {
   color: var(--theme-link-hover);
-}
-
-/* Resume container */
-.resume {
-  max-width: var(--theme-container-max-width);
-  margin: 0 auto;
-  padding: var(--theme-spacing-xl);
-}
-
-/* Responsive */
-@media (max-width: var(--theme-breakpoint-md)) {
-  .resume {
-    padding: var(--theme-spacing-lg);
-  }
-
-  body {
-    font-size: var(--theme-font-size-sm);
-  }
 }
 
 /* Dark theme support */

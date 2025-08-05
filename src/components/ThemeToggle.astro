@@ -4,8 +4,8 @@
 
 <button class="theme-toggle" aria-label="Toggle theme">
     <div class="icon-container">
-        <iconify-icon width="32" height="32" class="light-icon" icon="line-md:sunny-filled-loop-to-moon-filled-alt-loop-transition"></iconify-icon>
-        <iconify-icon width="32" height="32" class="dark-icon" icon="line-md:moon-filled-alt-to-sunny-filled-loop-transition"></iconify-icon>
+        <iconify-icon width="48" height="48" class="light-icon" icon="line-md:sunny-filled-loop-to-moon-filled-alt-loop-transition"></iconify-icon>
+        <iconify-icon width="48" height="48" class="dark-icon" icon="line-md:moon-filled-alt-to-sunny-filled-loop-transition"></iconify-icon>
     </div>
 </button>
 
@@ -16,8 +16,9 @@
     right: var(--theme-spacing-lg);
     z-index: var(--theme-z-important);
     background: var(--theme-surface-primary);
-    border-radius: var(--theme-border-radius-full);
+    border-radius: var(--theme-border-radius-lg);
     border: none;
+    backdrop-filter: blur(4px);
     width: var(--theme-spacing-2xl);
     height: var(--theme-spacing-2xl);
     cursor: pointer;
@@ -36,8 +37,8 @@
 
   .icon-container {
     position: relative;
-    width: 32px;
-    height: 32px;
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -51,11 +52,11 @@
   }
 
   .light-icon {
-    color: #f59e0b;
+    color: var(--theme-color-accent);
   }
 
   .dark-icon {
-    color: #3b82f6;
+    color: var(--theme-color-primary);
   }
 
   [data-theme="dark"] .theme-toggle {
@@ -74,11 +75,11 @@
   const showIcon = (isDark) => {
     if (lightIcon && darkIcon) {
       if (isDark) {
-        lightIcon.style.opacity = '0';
-        darkIcon.style.opacity = '1';
+        (lightIcon as HTMLElement).style.opacity = '0';
+        (darkIcon as HTMLElement).style.opacity = '1';
       } else {
-        lightIcon.style.opacity = '1';
-        darkIcon.style.opacity = '0';
+        (lightIcon as HTMLElement).style.opacity = '1';
+        (darkIcon as HTMLElement).style.opacity = '0';
       }
     }
   };

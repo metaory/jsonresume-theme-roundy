@@ -1,0 +1,115 @@
+---
+import Section from '../shared/Section.astro'
+import Item from '../shared/Item.astro'
+import Title from '../shared/Title.astro'
+import { getLevelColor } from '../../lib/colors.js'
+
+const { languages, meta, resumeData } = Astro.props
+
+const getFluencyConfig = (fluency) => {
+  const normalized = fluency?.toLowerCase()
+  
+  const patterns = [
+    { keywords: ['master', 'native'], dots: 5, level: 'Master' },
+    { keywords: ['advanced', 'fluent'], dots: 4, level: 'Advanced' },
+    { keywords: ['intermediate', 'conversational'], dots: 3, level: 'Intermediate' },
+    { keywords: ['beginner', 'basic'], dots: 2, level: 'Beginner' }
+  ]
+  
+  const match = patterns.find(p => p.keywords.some(k => normalized?.includes(k)))
+  const config = match || { dots: 3, level: 'Intermediate' }
+  
+  return { dots: config.dots, color: getLevelColor(config.level), label: fluency }
+}
+---
+
+<Section title={meta?.themeOptions?.sectionTitles?.languages || "Languages"} meta={meta} resumeData={resumeData}>
+  <div class="languages-grid">
+    {languages.map(lang => {
+      const config = getFluencyConfig(lang.fluency)
+      return (
+        <Item>
+          <div class="language-header">
+            <Title>{lang.language}</Title>
+            <div class="fluency-indicator">
+              <div class="dots">
+                {Array.from({ length: 5 }, (_, i) => (
+                  <div 
+                    class={`dot ${i < config.dots ? 'filled' : ''}`}
+                    style={`background-color: ${i < config.dots ? config.color : 'var(--theme-surface-tertiary)'}`}
+                  ></div>
+                ))}
+              </div>
+              <span class="fluency-label" style={`color: ${config.color}`}>{config.label}</span>
+            </div>
+          </div>
+        </Item>
+      )
+    })}
+  </div>
+</Section>
+
+<style>
+  .languages-grid {
+    display: grid;
+    gap: var(--theme-spacing-lg);
+    margin-bottom: 0;
+    padding: var(--theme-spacing-md) 0;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    align-items: start;
+  }
+
+  .language-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: var(--theme-spacing-md);
+    margin-bottom: var(--theme-spacing-sm);
+  }
+
+  .language-header .title {
+    margin: 0;
+    font-size: 1.1rem;
+  }
+
+  .fluency-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--theme-spacing-xs);
+    max-width: 200px;
+  }
+
+  .dots {
+    display: grid;
+    grid-template-columns: repeat(5, 8px);
+    gap: 4px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    transition: background-color var(--theme-transition-normal);
+  }
+
+  .fluency-label {
+    font-size: var(--theme-font-size-sm);
+    font-weight: var(--theme-font-weight-semibold);
+    text-align: right;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  @media (max-width: var(--theme-breakpoint-lg)) {
+    .languages-grid {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+  }
+
+  @media (max-width: var(--theme-breakpoint-md)) {
+    .languages-grid {
+      grid-template-columns: 1fr;
+      gap: var(--theme-spacing-md);
+    }
+  }
+</style> 

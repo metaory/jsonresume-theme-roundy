@@ -1,0 +1,24 @@
+---
+const { class: className = '' } = Astro.props
+---
+
+<h3 class={`title ${className}`}>
+  <slot />
+</h3>
+
+<style>
+  .title {
+    color: var(--theme-text-primary);
+    margin: 0 0 var(--theme-spacing-sm) 0;
+    font-size: 1.25rem;
+  }
+
+  /* Compact titles for grid items */
+  .skills-grid .title,
+  .interests-grid .title,
+  .languages-grid .title,
+  .projects-grid .title {
+    font-size: 1.1rem;
+    margin: 0 0 var(--theme-spacing-xs) 0;
+  }
+</style> 

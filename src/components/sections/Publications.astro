@@ -1,0 +1,22 @@
+---
+import Section from '../shared/Section.astro'
+import Item from '../shared/Item.astro'
+import Title from '../shared/Title.astro'
+import Subtitle from '../shared/Subtitle.astro'
+import Dates from '../shared/Dates.astro'
+import Description from '../shared/Description.astro'
+
+const { publications, meta, resumeData } = Astro.props
+---
+
+<Section title={meta?.themeOptions?.sectionTitles?.publications || "Publications"} meta={meta} resumeData={resumeData}>
+  {publications.map(pub => (
+    <Item>
+      <Title>{pub.name}</Title>
+      <Subtitle>{pub.publisher}</Subtitle>
+      <Dates>{pub.releaseDate}</Dates>
+      <a href={pub.url} target="_blank" rel="noopener">{pub.url}</a>
+      <Description>{pub.summary}</Description>
+    </Item>
+  ))}
+</Section> 

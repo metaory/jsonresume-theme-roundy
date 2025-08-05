@@ -1,0 +1,129 @@
+---
+import Basics from '../components/sections/Basics.astro'
+import ThemeToggle from '../components/ThemeToggle.astro'
+import ThemePicker from '../components/ThemePicker.astro'
+import ResumeNav from '../components/ResumeNav.astro'
+import Divider from '../components/shared/Divider.astro'
+import { readdirSync } from 'fs'
+import { join } from 'path'
+
+// Generate static paths for all resume files
+export function getStaticPaths() {
+  const dataDir = join(process.cwd(), 'src/data')
+  const availableResumes = readdirSync(dataDir)
+    .filter(file => file.endsWith('.json'))
+    .map(file => file.replace('.json', ''))
+
+  return availableResumes.map(resume => ({
+    params: { resume },
+    props: { resume }
+  }))
+}
+
+// Get resume name from path param
+const { resume } = Astro.params
+
+// Dynamically detect all JSON files in data directory
+const dataDir = join(process.cwd(), 'src/data')
+const availableResumes = readdirSync(dataDir)
+  .filter(file => file.endsWith('.json'))
+  .map(file => file.replace('.json', ''))
+
+// Validate resume exists, fallback to first available
+const validResume = resume && availableResumes.includes(resume) 
+  ? resume 
+  : availableResumes[0]
+
+// Dynamic import based on resume file
+let resumeData
+try {
+  resumeData = await import(`../data/${validResume}.json`)
+} catch {
+  // Fallback to first available resume if import fails
+  resumeData = await import(`../data/${availableResumes[0]}.json`)
+}
+
+// Auto-import all section components using import.meta.glob (excluding Basics)
+const sectionModules = import.meta.glob('../components/sections/*.astro')
+
+// Create component mapping from imported components
+const components = {}
+for (const [filePath, module] of Object.entries(sectionModules)) {
+  // Extract component name from file path (e.g., "Work" from "Work.astro")
+  const fileName = filePath.split('/').pop()?.replace('.astro', '')
+
+  if (fileName && fileName !== 'Basics') {
+    // Convert to lowercase for mapping (e.g., "Work" -> "work")
+    const key = fileName.toLowerCase()
+    components[key] = module
+  }
+}
+
+const { basics, meta, ...sections } = resumeData
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{basics?.name || 'Resume'}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <style is:global>
+      @import '../styles/global.css';
+      @import '../styles/fonts.css';
+
+      iconify-icon {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <script>
+      import "iconify-icon";
+    </script>
+
+    <ThemeToggle />
+    {import.meta.env.DEV && <ThemePicker />}
+    <ResumeNav currentResume={validResume} availableResumes={availableResumes} />
+
+    <main class="resume">
+      <Basics basics={basics} meta={meta} />
+
+      <Divider variant="default" />
+      <Divider variant="subtle" />
+      <Divider variant="accent" />
+      <Divider variant="gradient" />
+
+      {Object.entries(sections).map(async ([key, data]) => {
+        const module = components[key]
+
+        if (module && data) {
+          const Component = (await module()).default
+          const props = { [key]: data, meta, resumeData }
+          return <Component {...props} />
+        }
+        return null
+      })}
+    </main>
+  </body>
+</html>
+
+<style>
+  .resume {
+    max-width: var(--theme-container-max-width);
+    margin: 0 auto;
+    padding: var(--theme-spacing-xl);
+    background: var(--theme-surface-primary);
+    overflow-x: hidden;
+  }
+
+  @media (max-width: 768px) {
+    .resume {
+      padding: var(--theme-spacing-lg);
+    }
+  }
+</style> 

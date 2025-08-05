@@ -1,0 +1,712 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+  "HACK": ["presale"],
+  "basics": {
+    "email": "metaory@gmail.com",
+    "image": "/.dev/me.png",
+    "logo": "/.dev/logo.png",
+    "label": "Principal // Platform SWE <br> Solution Architect # AWS <br> ::JS·SH·Lua·JQ::",
+    "url": "https://github.com/metaory",
+    "location": {
+      "city": "Kuala Lumpur",
+      "region": "Dutamas",
+      "countryCode": "Malaysia",
+      "residency": "Expat"
+    },
+    "name": "Pou Yan",
+    "phone": "+60 173135 062",
+    "profiles": [
+      {
+        "network": "GitHub",
+        "username": "metaory",
+        "url": "https://github.com/metaory"
+      },
+      {
+        "network": "LinkedIn",
+        "username": "pou-yan",
+        "url": "https://linkedin.com/in/pou-yan"
+      },
+      {
+        "network": "Cal",
+        "username": "schedule",
+        "url": "https://cal.com/pou-yan/intro"
+      }
+    ],
+    "summary": "<ul style='margin-bottom: 0px'> <li>16+ years building full-stack, platform, and infrastructure systems</li> <li>Deep expertise in JavaScript runtimes, Linux internals, and browser engines</li> <li>Spec-first, zero-dependency, framework-agnostic, minimal code, web standards</li> <li>Driven by automation, composability, and reducing complexity</li> <li>Modern, declarative code in Lua, JavaScript, Go, and Bash</li> <li>Functional programming, proxy patterns, and thin abstractions</li> <li>Builder of editors, window managers, multiplexers, and automation tools</li> <li>Lives in Tmux, Neovim, and AwesomeWM on bare-metal Arch Linux</li> </ul>"
+  },
+  "interests": [
+    {
+      "name": "Unix Workflow",
+      "keywords": ["Automation", "Pipelines", "Workflow", "CLIs", "TUIs"]
+    },
+    {
+      "name": "Web Standards",
+      "keywords": ["W3C", "WASM", "ECMA-262", "Web Components", "Extensions API"]
+    },
+    {
+      "name": "Build & Extend",
+      "keywords": ["Fix", "Patch", "Fork", "Extend", "Create"]
+    }
+  ],
+  "skills": [
+    {
+      "name": "Paradigms",
+      "level": "Master",
+      "keywords": ["Functional", "Declarative", "OOP", "TDD", "DDD", "BDD"]
+    },
+    {
+      "name": "Patterns",
+      "level": "Master",
+      "keywords": ["Proxy", "Mediator", "Observer", "Saga", "CQRS", "Event Sourcing"]
+    },
+    {
+      "name": "Infrastructure",
+      "level": "Advanced",
+      "keywords": ["CI/CD", "DevOps", "DevSecOps", "Docker", "GitOps", "SRE", "Terraform"]
+    }
+  ],
+  "languages": [
+    { "language": "Lua", "fluency": "Master" },
+    { "language": "Bash", "fluency": "Master" },
+    { "language": "JavaScript", "fluency": "Master" },
+    { "language": "Go", "fluency": "Advanced" },
+    { "language": "Elixir", "fluency": "Intermediate" },
+    { "language": "Haskell", "fluency": "Beginner" },
+    { "language": "Python", "fluency": "Beginner" },
+    { "language": "Rust", "fluency": "Beginner" },
+    { "language": "Zig", "fluency": "Beginner" }
+  ],
+  "work": [
+    {
+      "name": "OPEN-SOURCE (non-profit)",
+      "location": "REMOTE",
+      "position": "Open Source Developer (non-profit)",
+      "summary": "On hiatus, dedicating my time contributing back to opensource community and causes I believe in. Contributions are ublic domain under my GitHub account. Open source is source code that is made freely available for possible modification and redistribution",
+      "url": "https://opensource.org",
+      "startDate": "2024-08",
+      "endDate": "current",
+      "keywords": ["OPENSOURCE"],
+      "highlights": [
+        "Contributed to over Four opensource projects with major PRs (Pull Request)",
+        "Started over Five new opensource projects of my own"
+      ]
+    },
+    {
+      "name": "Pickles",
+      "location": "Australia · HYBRID",
+      "position": "Principal Software Engineer",
+      "summary": "Pickles is Australia's leading asset remarketing platform, delivering high-volume auction and logistics solutions for vehicles, machinery, and surplus assets.",
+      "url": "https://pickles.com.au",
+      "startDate": "2024-09",
+      "endDate": "2025-01",
+      "keywords": [
+        "Remote",
+        "Platform Engineering",
+        "Principal Engineer",
+        "Site Reliability",
+        "Chaos Engineering",
+        "Performance Testing",
+        "Grafana K6",
+        "Observability",
+        "NodeJS",
+        "Go",
+        "AWS",
+        "Terraform",
+        "CI/CD",
+        "DevOps",
+        "GitHub Actions",
+        "Microservices",
+        "Containers",
+        "Monitoring",
+        "Incident Response",
+        "Service Level Objectives",
+        "Infrastructure as Code"
+      ],
+      "highlights": [
+        "Planned and strategized a wide-scale Chaos Engineering exercise to assess resilience of critical services under failure conditions",
+        "Developed and executed performance testing scenarios using Grafana K6, establishing baseline metrics and thresholds",
+        "Improved observability by refining dashboards and SLOs for latency-critical paths",
+        "Collaborated with platform and SRE teams to define incident response playbooks and failure injection strategies",
+        "Contributed to high-level architectural discussions for microservices modernization and DevOps maturity"
+      ]
+    },
+    {
+      "name": "Zolo",
+      "location": "Singapore · REMOTE",
+      "position": "Head of Engineering",
+      "summary": "ZOLO is an AI-powered assistant that helps suppliers intelligently convert order details from messaging channels like WhatsApp to their back office systems.",
+      "url": "https://zolomart.co",
+      "startDate": "2023-12",
+      "endDate": "2024-08",
+      "keywords": [
+        "AI",
+        "AWS",
+        "Architecture",
+        "backup",
+        "Bash",
+        "CI/CD",
+        "CloudFormation",
+        "DevOps",
+        "DevSecOps",
+        "Docker",
+        "gitOps",
+        "issueOps",
+        "NodeJS",
+        "queues",
+        "serverless",
+        "performance",
+        "Terraform"
+      ],
+      "highlights": [
+        "Creating CI CD automation pipelines",
+        "Designing engineering strategies",
+        "Designing scalable fault tolerant cloud solution",
+        "Developing Integrations, Webhooks and APIs",
+        "Ensuring code quality standards with code-reviews",
+        "Ensuring product development success",
+        "Establishing guidelines and best practices",
+        "Leading the development team and collaborating with Product and Stakeholders",
+        "Managing department budget and spendings",
+        "Building a team to take over the initial mvp done by freelancers",
+        "Setting up Application Performance and Error Monitoring"
+      ]
+    },
+    {
+      "name": "Respond.io",
+      "location": "Kuala Lumpur, Malaysia · ON-SITE",
+      "position": "Senior DevOps Engineer",
+      "summary": "Respond.io is a commerce conversational platform that helps enterprise businesses extend their marketing and sales initiatives. Over 10,000 companies from 86 countries.",
+      "url": "https://respond.io",
+      "startDate": "2022-08",
+      "endDate": "2023-07",
+      "keywords": [
+        "AI",
+        "AWS",
+        "Architecture",
+        "backup",
+        "Bash",
+        "CI/CD",
+        "CloudFormation",
+        "DevOps",
+        "DevSecOps",
+        "Docker",
+        "gitOps",
+        "issueOps",
+        "messaging",
+        "NodeJS",
+        "queues",
+        "Build Pipelines",
+        "serverless",
+        "performance",
+        "Templating",
+        "Terraform",
+        "vulnerability"
+      ],
+      "highlights": [
+        "Involve in design, implementation and management of Respond.io services.",
+        "Automating various internal workflow",
+        "Design upcoming features architecture and implement prototypes",
+        "Improve Quality of Life and Developer experience",
+        "Build internal developer toolings",
+        "Write IaC templates and automate provisioning of any infrastructure",
+        "Profile and analyse bottlenecks"
+      ]
+    },
+    {
+      "name": "HelloGold",
+      "description": "Awesome",
+      "summary": "HelloGold is a start-up that creates simple and accessible gold products for everyone.",
+      "location": "Kuala Lumpur, Malaysia · REMOTE",
+      "url": "https://hellogold.com",
+      "position": "Senior Architect & Fullstack Engineer",
+      "startDate": "2021-05",
+      "endDate": "2023-01",
+      "keywords": [
+        "AWS",
+        "Architecture",
+        "Bash",
+        "Build Pipelines",
+        "CI/CD",
+        "CloudFormation",
+        "DevOps",
+        "DevSecOps",
+        "Docker",
+        "Fintech",
+        "Heroku",
+        "Linux",
+        "NodeJS",
+        "OIDC",
+        "React",
+        "Svelte",
+        "Terraform",
+        "backup",
+        "integrations",
+        "payment gateways",
+        "performance",
+        "serverless"
+      ],
+      "highlights": [
+        "Begin migrating from legacy Heroku to AWS Well Architecture",
+        "Built a Serverless Webhook Solution",
+        "Built a Serverless dynamic proxy layer with rich JSON config with features like req/res mapping/transforming along with JSONPath. On top of existing legacy APIs in order to package internal APIs for third-party integration consumption. open-sourced, named proxy-api-transformer",
+        "Code-review, guide and lead tech-team",
+        "Bug fixes and upcoming feature implementations",
+        "Migrate from legacy in-house Auth framework to AWS Cognito"
+      ]
+    },
+    {
+      "name": "Pulsifi",
+      "description": "Awesome",
+      "summary": "Pulsifi's People Data Platform significantly improves quality and efficiency in Talent Acquisition and Management with Predictive AI.",
+      "url": "https://pulsifi.me",
+      "location": "Kuala Lumpur, Malaysia · ON-SITE",
+      "position": "Solution Architect",
+      "startDate": "2020-01",
+      "endDate": "2021-04",
+      "keywords": [
+        "AI",
+        "AWS",
+        "Architecture",
+        "Build Pipelines",
+        "CI/CD",
+        "CloudFormation",
+        "data-masking",
+        "DevOps",
+        "DevSecOps",
+        "Docker",
+        "ETL pipelines",
+        "NodeJS",
+        "Pandas",
+        "performance",
+        "queues",
+        "serverless",
+        "Terraform"
+      ],
+      "highlights": [
+        "Actively involve in design, implementation and management of Pulsifi services.",
+        "Code-review, guide and lead tech-team.",
+        "Infrastructure(AWS) management, monitoring, automation, DRP"
+      ]
+    },
+    {
+      "name": "Pulsifi",
+      "description": "Awesome",
+      "location": "Kuala Lumpur, Malaysia · ON-SITE",
+      "url": "https://pulsifi.me",
+      "position": "Senior DevOps & Fullstack engineer",
+      "startDate": "2019-04",
+      "endDate": "2020-01",
+      "keywords": [
+        "AI",
+        "AWS",
+        "Angular",
+        "CI/CD",
+        "CloudFormation",
+        "DevOps",
+        "Docker",
+        "NLP",
+        "NodeJS",
+        "Build Pipelines",
+        "serverless"
+      ],
+      "highlights": [
+        "CI/CD Pipeline re-write",
+        "Code-review, guide and lead tech-team.",
+        "Containerization of legacy EC2 services",
+        "Bug fixes and upcoming feature implementations",
+        "Infrastructure(AWS) management, monitoring, automation"
+      ]
+    },
+    {
+      "name": "CatchThatBus",
+      "summary": "Online aggregator for intercity buses",
+      "location": "Kuala Lumpur, Malaysia · ON-SITE",
+      "url": "https://m.catchthatbus.com",
+      "position": "System Analyst",
+      "startDate": "2017-04",
+      "endDate": "2019-03",
+      "keywords": [
+        "AWS",
+        "Architecture",
+        "Build Pipelines",
+        "CI/CD",
+        "Cordova",
+        "DevOps",
+        "Docker",
+        "Fintech",
+        "Linux",
+        "NodeJS",
+        "backup",
+        "data-mining",
+        "integrations",
+        "patching",
+        "payment gateways",
+        "SSR",
+        "Vue"
+      ],
+      "highlights": [
+        "Lead services SDLC, standards and build, tests, deploy, release pipelines.",
+        "Solo development of Central Ticketing System & PIDS running on Raspberry pi",
+        "POS Thermal Printer driver in Electron.js",
+        "Build an autonomous, provider agnostic web scraping solution with AWS Step Functions",
+        "Bug fixes and upcoming feature implementations",
+        "Re-design Infrastructure; Containerization of legacy stack, EB to ECS & Lambda",
+        "Re-write of public web for mobile, PWA SSR m.* , with ports to AppStore, PlayStore, and Boost integration."
+      ]
+    },
+    {
+      "name": "CatchThatBus",
+      "location": "Kuala Lumpur, Malaysia · ON-SITE",
+      "url": "https://catchthatbus.com",
+      "position": "Senior Fullstack Engineer",
+      "startDate": "2015-04",
+      "endDate": "2017-04",
+      "keywords": [
+        "AWS",
+        "Docker",
+        "Fintech",
+        "Linux",
+        "NodeJS",
+        "dynamodb",
+        "electron.js",
+        "express.js",
+        "performance",
+        "rds",
+        "redis",
+        "websocket"
+      ],
+      "highlights": [
+        "Built CTB first Node development team",
+        "Re-writing legacy stack in Node",
+        "Vanilla Headless CMS in Node, providing content and data for various web / native apps.",
+        "Build several internal dashboards for CRM and Inventory"
+      ]
+    },
+    {
+      "name": "Tractive sdn bhd",
+      "description": "Awesome",
+      "summary": "Builds web and mobile apps and offers digital signage solutions.",
+      "location": "Kuala Lumpur, Malaysia · ON-SITE",
+      "url": "https://tractive.com.my",
+      "position": "Senior Cloud Engineer",
+      "startDate": "2013",
+      "endDate": "2015",
+      "keywords": [
+        "ARM",
+        "Architecture",
+        "Backbone.js",
+        "DevOps",
+        "IOT",
+        "Linux",
+        "NodeJS",
+        "digitalOcean",
+        "mongodb",
+        "mqtt",
+        "websocket"
+      ],
+      "highlights": [
+        "One man delivery of high tolerant distributed digital signage content delivery and management"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "nyaa-cli",
+      "url": "https://github.com/metaory/nyaa-cli",
+      "description": "Bash CLI for automated anime torrent downloads with stateful episode tracking, quality filters, and uploader selection",
+      "roles": ["Bash"],
+      "startDate": "2025-06-04",
+      "endDate": "2025-06-06",
+      "keywords": ["Anime", "Automation", "CLI", "Nyaa", "Torrent"]
+    },
+    {
+      "name": "theschain",
+      "url": "https://github.com/metaory/theschain",
+      "description": "Interactive CLI thesaurus with continuous chain lookups",
+      "roles": ["Bash"],
+      "startDate": "2025-05-15",
+      "endDate": "2025-05-16",
+      "keywords": ["CLI", "Thesaurus", "Offline", "Interactive", "Fuzzy"]
+    },
+    {
+      "name": "github-repo-cards",
+      "url": "https://github.com/metaory/github-repo-cards",
+      "description": "GitHub Action and CLI for generating beautiful static PNG/SVG cards with dark/light themes, perfect for dashboards and READMEs",
+      "roles": ["Bash"],
+      "startDate": "2025-05-14",
+      "endDate": "2025-05-28",
+      "keywords": ["Api", "Automation", "Generator", "GitHub", "Markdown", "Stats", "SVG"]
+    },
+    {
+      "name": "glitcher-app",
+      "url": "https://github.com/metaory/glitcher-app",
+      "description": "Web-based glitch generator with real-time preview for SVG, WebM, GIF, PNG, and MP4 formats with customizable effects",
+      "roles": ["JavaScript"],
+      "startDate": "2025-04-20",
+      "endDate": "2025-05-13",
+      "keywords": ["App", "Generator", "GIF", "Glitch", "SVG", "WebM"]
+    },
+    {
+      "name": "gradient-gl",
+      "url": "https://github.com/metaory/gradient-gl",
+      "description": "Tiny WebGL library for Deterministic seed-driven Procedural Gradient Animations",
+      "roles": ["JavaScript"],
+      "startDate": "2025-03-28",
+      "endDate": "2025-06-03",
+      "keywords": [
+        "Animation",
+        "Deterministic",
+        "Gradient",
+        "Library",
+        "NPM",
+        "Seed",
+        "Shaders",
+        "WebGL"
+      ]
+    },
+    {
+      "name": "shadertoy2webgl",
+      "url": "https://github.com/metaory/shadertoy2webgl",
+      "description": "CLI and library to convert ShaderToy shaders to standalone WebGL2 applications with uniform handling and zero dependencies",
+      "roles": ["JavaScript"],
+      "startDate": "2025-03-24",
+      "endDate": "2025-03-26",
+      "keywords": ["CLI", "GLSL", "Library", "NPM", "Shaders", "Shadertoy", "Transformer", "WebGL"]
+    },
+    {
+      "name": "noseyparker-compact",
+      "url": "https://github.com/metaory/noseyparker-compact",
+      "description": "CLI tool to transform verbose noseyparker JSON reports into concise JSON or CSV summaries for security analysis",
+      "roles": ["JavaScript"],
+      "startDate": "2025-03-09",
+      "endDate": "2025-03-11",
+      "keywords": ["CLI", "DevSecOps", "NPM", "Scanning", "Secrets", "Security"]
+    },
+    {
+      "name": "glslmine",
+      "url": "https://github.com/metaory/glslmine",
+      "description": "Modern GLSL shader gallery with auto-fetch from GLSL Sandbox and Shadertoy, featuring smart filters and minimal interface",
+      "roles": ["JavaScript"],
+      "startDate": "2025-01-25",
+      "endDate": "2025-06-09",
+      "keywords": ["App", "Aggregator", "Gallery", "GLSL", "Shaders", "WebGL"]
+    },
+    {
+      "name": "glitcher-cli",
+      "url": "https://github.com/metaory/glitcher-cli",
+      "description": "Bash CLI to generate animated pseudo-random glitch SVG effects from ASCII characters with randomized parameters",
+      "roles": ["Bash"],
+      "startDate": "2024-10-20",
+      "endDate": "2025-05-09",
+      "keywords": ["CLI", "Generator", "Glitch", "SVG"]
+    },
+    {
+      "name": "junk-activity-scanner",
+      "url": "https://github.com/metaory/junk-activity-scanner",
+      "description": "Automated GitHub repository scanner that evaluates and reports bot-generated junk repositories using multi-language evaluators",
+      "roles": ["JavaScript"],
+      "startDate": "2024-09-27",
+      "endDate": "2025-02-23",
+      "keywords": ["Automation", "DevSecOps", "Github Actions", "Security"]
+    },
+    {
+      "name": "jsonresume-theme-legacy",
+      "url": "https://github.com/metaory/jsonresume-theme-legacy",
+      "description": "Modern Vite-based JSONResume theme with Iconify integration, customizable colors, and PDF export capabilities",
+      "roles": ["Handlebars"],
+      "startDate": "2024-09-09",
+      "endDate": "2025-06-10",
+      "keywords": ["Automation", "Generator", "JSONResume", "NPM"]
+    },
+    {
+      "name": "markup.json",
+      "url": "https://github.com/metaory/markup.json",
+      "description": "A minimal markup DSL and AST for JSON - Transforms into HTML, SVG or XML-like output via CLI or JS library",
+      "roles": ["JavaScript"],
+      "startDate": "2024-08-12",
+      "endDate": "2025-05-09",
+      "keywords": [
+        "AST",
+        "CLI",
+        "Compiler",
+        "Composition",
+        "DOM",
+        "DSL",
+        "HTML-AST",
+        "HTML",
+        "NPM",
+        "Parser",
+        "Transformer",
+        "Transpiler"
+      ]
+    },
+    {
+      "name": "pcall.js",
+      "url": "https://github.com/metaory/pcall.js",
+      "description": "Minimal Result/Monad library inspired by Lua pcall, Elixir Result, and Rust Result with lifecycle hooks and zero dependencies",
+      "roles": ["JavaScript"],
+      "startDate": "2024-04-18",
+      "endDate": "2025-04-01",
+      "keywords": [
+        "Async",
+        "Library",
+        "Lua",
+        "Mediator",
+        "Middleware",
+        "NPM",
+        "Promise",
+        "Safecall"
+      ]
+    },
+    {
+      "name": "confsubst",
+      "url": "https://github.com/metaory/confsubst",
+      "description": "POSIX-compliant templating CLI with modeline syntax, environment variable substitution, and pre/post hooks for configuration management",
+      "roles": ["Bash"],
+      "startDate": "2024-01-02",
+      "endDate": "2025-02-20",
+      "keywords": ["Automation", "CLI", "Templating"]
+    },
+    {
+      "name": "github-readme-topics-action",
+      "url": "https://github.com/metaory/github-readme-topics-action",
+      "description": "GitHub Action to automatically update profile README with categorized repositories by topics, sorted by stars and update time",
+      "roles": ["JavaScript"],
+      "startDate": "2023-08-04",
+      "endDate": "2025-01-06",
+      "keywords": ["Automation", "Github Actions", "Library", "Markdown", "Profile"]
+    },
+    {
+      "name": "mxflow-cli",
+      "url": "https://github.com/metaory/mxflow-cli",
+      "description": "Interactive CLI task runner with YAML config, shell completion, confirmation prompts, and project-based workflow management",
+      "roles": ["JavaScript"],
+      "startDate": "2022-09-24",
+      "endDate": "2024-12-25",
+      "keywords": [
+        "Automation",
+        "Build-tool",
+        "CI/CD",
+        "CLI",
+        "DevOps",
+        "Makefile",
+        "NPM",
+        "Pipeline",
+        "Task Runner",
+        "Workflow"
+      ]
+    },
+    {
+      "name": "meta-vanilla-web-component",
+      "url": "https://github.com/metaory/meta-vanilla-web-component",
+      "description": "Proof-of-concept micro framework built on Web Components with zero dependencies, demonstrating modern vanilla JS patterns",
+      "roles": ["HTML"],
+      "startDate": "2022-06-14",
+      "endDate": "2024-12-09",
+      "keywords": ["Challenge", "Micro Framework", "POC", "Vanilla", "WebComponent"]
+    },
+    {
+      "name": "proxy-api-transformer",
+      "url": "https://github.com/metaory/proxy-api-transformer",
+      "description": "Serverless AWS API Gateway proxy function for transforming, combining, and wrapping existing APIs with JSONPath support",
+      "roles": ["JavaScript"],
+      "startDate": "2021-12-04",
+      "endDate": "2023-08-04",
+      "keywords": [
+        "API",
+        "API-Proxy",
+        "API-Transformer",
+        "AWS",
+        "JSONPath",
+        "Lambda",
+        "Library",
+        "NPM",
+        "Proxy"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Limkokwing University Cyberjaya",
+      "area": "MY",
+      "studyType": "B.S. SWE",
+      "url": "https://limkokwing.net",
+      "startDate": "2011-09",
+      "endDate": "discontinued"
+    },
+    {
+      "institution": "Azad University",
+      "studyType": "B.CS.",
+      "area": "IR",
+      "startDate": "2009",
+      "endDate": "2011"
+    },
+    {
+      "institution": "Dehkhoda University",
+      "studyType": "B.Sc. IT",
+      "area": "IR",
+      "startDate": "2005",
+      "endDate": "2007"
+    }
+  ],
+  "publications": [
+    {
+      "name": "junk-activity-scanner",
+      "publisher": "metaory",
+      "releaseDate": "2024-10-02",
+      "url": "https://gist.github.com/metaory/89652931a467d04c0847342f0b83c718",
+      "summary": "Day-271 TEA Protocol Slayer Origin Story <br> <strong>Project junk-activity-scanner is born</strong> <br> <a href=\"https://github.com/metaory/junk-activity-scanner\">https://github.com/metaory/junk-activity-scanner</a>"
+    },
+    {
+      "name": "nilbase",
+      "publisher": "metaory",
+      "releaseDate": "2025-01-23",
+      "url": "https://gist.github.com/metaory/2fb9348705b681db2329bb4156dfdae9",
+      "summary": "A zero-infrastructure SaaS platform. Build privacy-focused distributed applications. With zero infrastructure to manage"
+    },
+    {
+      "name": "Impono",
+      "publisher": "metaory",
+      "releaseDate": "2025-05-08",
+      "url": "https://gist.github.com/metaory/ff00bec7ad72238ee4df06937a357688",
+      "summary": "Autonomous Behavioral Modules -- Not components. Not utilities. Not libraries. Just behavior"
+    }
+  ],
+  "meta": {
+    "lastModified": "2024-09-01T00:00:00.000Z",
+    "canonical": "https://github.com/metaory/jsonresume-theme-legacy",
+    "version": "0.1.0",
+    "themeOptions": {
+			"color": "cyan",
+      "iconMap": {
+        "opensource": "mdi:heart-pulse",
+        "automation": "mdi:robot",
+        "cli": "mdi:terminal",
+        "bash": "mdi:bash",
+        "javascript": "mdi:language-javascript",
+        "nodejs": "mdi:nodejs",
+        "aws": "mdi:aws",
+        "docker": "mdi:docker",
+        "terraform": "mdi:terraform",
+        "devops": "mdi:devops",
+        "ci/cd": "mdi:rocket-launch",
+        "git": "mdi:git",
+        "github": "mdi:github",
+        "linux": "mdi:linux",
+        "react": "mdi:react",
+        "vue": "mdi:vuejs",
+        "python": "mdi:language-python",
+        "go": "mdi:language-go",
+        "rust": "mdi:language-rust",
+        "lua": "mdi:language-lua",
+        "elixir": "mdi:language-elixir",
+        "haskell": "mdi:language-haskell",
+        "zig": "mdi:language-zig"
+      },
+      "sectionTitles": {
+        "projects": "open source projects"
+      }
+    }
+  }
+}
+

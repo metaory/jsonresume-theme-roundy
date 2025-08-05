@@ -1,0 +1,20 @@
+---
+import Section from '../shared/Section.astro'
+import Item from '../shared/Item.astro'
+import Title from '../shared/Title.astro'
+import Subtitle from '../shared/Subtitle.astro'
+import Dates from '../shared/Dates.astro'
+
+const { certificates, meta, resumeData } = Astro.props
+---
+
+<Section title={meta?.themeOptions?.sectionTitles?.certificates || "Certificates"} meta={meta} resumeData={resumeData}>
+  {certificates.map(cert => (
+    <Item>
+      <Title>{cert.name}</Title>
+      <Subtitle>{cert.issuer}</Subtitle>
+      <Dates>{cert.date}</Dates>
+      <a href={cert.url} target="_blank" rel="noopener">{cert.url}</a>
+    </Item>
+  ))}
+</Section> 

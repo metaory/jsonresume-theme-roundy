@@ -1,0 +1,55 @@
+---
+import Tag from './Tag.astro'
+import { getIconForKeyword } from '../../lib/icons.js'
+
+const { 
+  keywords = [], 
+  variant = 'default',
+  size = 'sm',
+  class: className = '',
+  meta,
+  resumeData
+} = Astro.props
+---
+
+<div class={`keywords ${className}`}>
+  {keywords.map(keyword => (
+    <Tag 
+      text={keyword} 
+      icon={getIconForKeyword(keyword, meta, resumeData)}
+      variant={variant}
+      size={size}
+    />
+  ))}
+</div>
+
+<style>
+  .keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--theme-spacing-xs);
+    margin-top: var(--theme-spacing-sm);
+    align-items: flex-start;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  /* Compact keywords for grid items */
+  .skills-grid .keywords,
+  .interests-grid .keywords,
+  .projects-grid .keywords {
+    margin-top: var(--theme-spacing-xs);
+  }
+
+  /* Remove default margins from tags in keywords containers */
+  .keywords .tag {
+    margin: 0;
+  }
+
+  /* Compact tags for grid items */
+  .skills-grid .keywords .tag,
+  .interests-grid .keywords .tag,
+  .projects-grid .keywords .tag {
+    font-size: var(--theme-font-size-xs);
+  }
+</style> 

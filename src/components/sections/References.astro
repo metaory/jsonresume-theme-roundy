@@ -1,0 +1,17 @@
+---
+import Section from '../shared/Section.astro'
+import Item from '../shared/Item.astro'
+import Title from '../shared/Title.astro'
+import Description from '../shared/Description.astro'
+
+const { references, meta, resumeData } = Astro.props
+---
+
+<Section title={meta?.themeOptions?.sectionTitles?.references || "References"} meta={meta} resumeData={resumeData}>
+  {references.map(ref => (
+    <Item>
+      <Title>{ref.name}</Title>
+      <Description>{ref.reference}</Description>
+    </Item>
+  ))}
+</Section> 

@@ -1,13 +1,15 @@
 {
   "name": "jsonresume-theme-roundy",
   "type": "module",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "pdf:resume": "chromium --headless --disable-gpu --no-sandbox --disable-dev-shm-usage --no-pdf-header-footer --print-to-pdf=resume.pdf http://localhost:4321/resume",
+    "pdf:private": "chromium --headless --disable-gpu --no-sandbox --disable-dev-shm-usage --no-pdf-header-footer --print-to-pdf=private.pdf http://localhost:4321/private"
   },
   "dependencies": {
     "astro": "^5.12.8",

@@ -1,0 +1,21 @@
+---
+const { class: className = '' } = Astro.props
+---
+
+<p class={`dates ${className}`}>
+  <slot />
+</p>
+
+<style>
+  .dates {
+    color: var(--theme-text-secondary);
+    font-size: 0.9rem;
+    margin: var(--theme-spacing-sm) 0;
+  }
+
+  /* Compact dates for grid items */
+  .projects-grid .dates {
+    margin: var(--theme-spacing-xs) 0;
+    font-size: var(--theme-font-size-xs);
+  }
+</style> 
