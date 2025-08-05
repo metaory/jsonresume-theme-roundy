@@ -1,23 +1,22 @@
 ---
-import { OPEN_PROPS_COLORS } from '../lib/theme.js'
+import { OPEN_PROPS_COLORS } from "../lib/theme.js";
 ---
 
 <div class="theme-picker">
   <button class="picker-tab" aria-label="Theme picker">
     <iconify-icon width="48" height="48" icon="solar:pallete-2-bold-duotone"></iconify-icon>
+    <div class="logo-blob"></div>
   </button>
-  <div class="picker-panel">
-    {OPEN_PROPS_COLORS.map(color => (
-      <button
-        class="color-btn"
-        data-color={color}
-        style={`--color: var(--${color}-7)`}
-        title={color}
-      >
-        <div class="color-circle"></div>
-      </button>
-    ))}
-  </div>
+  {OPEN_PROPS_COLORS.map(color => (
+    <button
+      class="color-btn"
+      data-color={color}
+      style={`--color: var(--${color}-7)`}
+      title={color}
+    >
+      <div class="color-circle"></div>
+    </button>
+  ))}
 </div>
 
 <style>
@@ -28,6 +27,30 @@ import { OPEN_PROPS_COLORS } from '../lib/theme.js'
     transform: translateY(-50%);
     z-index: var(--theme-z-modal);
     transition: right 0.4s ease-in-out;
+    width: min-content;
+    border-radius: 0;
+    padding: 12px;
+    display: grid;
+    backdrop-filter: blur(4px);
+    grid-template-columns: 1fr repeat(4,1fr);
+    gap: 10px;
+    justify-items: center;
+  }
+
+  .theme-picker::before {
+    content: '';
+    filter: blur(3em);
+    z-index: -2;
+    background: radial-gradient(
+      circle at center,
+      var(--theme-color-primary) 10%,
+      var(--theme-color-secondary) 50%,
+      transparent 70%
+    );
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: 0; left: 0;
   }
 
   .theme-picker:hover {
@@ -35,35 +58,55 @@ import { OPEN_PROPS_COLORS } from '../lib/theme.js'
   }
 
   .picker-tab {
-    position: absolute;
-    left: -60px;
-    top: 50%;
-    width: max-content;
-    height: 100%;
-    transform: translateY(-50%);
-    background: var(--theme-surface-primary);
+    grid-row: span 5;
+    grid-column: 1;
+    background: none;
     border: none;
-    border-radius: 6em 0 0 6em;
     cursor: pointer;
+    color: var(--theme-color-primary);
+    padding: 10px;
+    border-radius: 12px;
     display: grid;
     place-items: center;
+    transition: all 2s ease;
   }
 
-  .picker-tab iconify-icon {
+  iconify-icon {
     height: 48px;
     width: 48px;
     color: var(--theme-color-primary);
+    animation: pulse 2s ease-in-out infinite;
+    z-index:1;
+    mix-blend-mode: plus-lighter;
   }
 
-  .picker-panel {
-    width: 200px;
-    background: var(--theme-surface-primary);
-    border-radius: 0;
-    padding: 12px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
+  .logo-blob {
+    position: absolute;
+    width: clamp(35px, 10vw, 50px);
+    height: clamp(35px, 10vw, 50px);
+    background: conic-gradient(from 0deg, #009494, #b1323b, #ba482e, #69314b, #0135a8, #009494);
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: pulse 1s linear infinite, blobRotate 3s linear infinite;
+    filter: blur(8px);
   }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 0.7;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+  }
+
+
+  @keyframes blobRotate {
+    to { transform: rotate(360deg); }
+  }
+
 
   .color-btn {
     background: none;
@@ -87,12 +130,16 @@ import { OPEN_PROPS_COLORS } from '../lib/theme.js'
     box-shadow: 0 0 14px var(--color);
   }
 
+  .color-btn:nth-last-child(3) {
+    grid-column: span 2;
+    justify-self: center;
+  }
+
   .color-circle {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
     background: var(--color);
-    border: 2px solid var(--theme-surface-border);
   }
 
   @media print {
@@ -120,23 +167,13 @@ import { OPEN_PROPS_COLORS } from '../lib/theme.js'
     document.querySelector(`[data-color="${color}"]`)?.classList.add('active');
   };
 
-  // Initialize when DOM is ready
-  const init = () => {
-    const currentColor = localStorage.getItem('selectedThemeColor') || 'indigo';
-    document.querySelector(`[data-color="${currentColor}"]`)?.classList.add('active');
+  const currentColor = localStorage.getItem('selectedThemeColor') || 'indigo';
+  document.querySelector(`[data-color="${currentColor}"]`)?.classList.add('active');
 
-    document.querySelectorAll('.color-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const color = btn.getAttribute('data-color');
-        if (color) applyTheme(color);
-      });
+  document.querySelectorAll('.color-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const color = btn.getAttribute('data-color');
+      if (color) applyTheme(color);
     });
-  };
-
-  // Run immediately if DOM is ready, otherwise wait
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  });
 </script>

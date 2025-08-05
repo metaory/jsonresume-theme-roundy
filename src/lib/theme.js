@@ -1,27 +1,14 @@
-// Available Open Props color themes
-export const OPEN_PROPS_COLORS = [
-	'gray',
-	'stone',
-	'red',
-	'pink',
-	'purple',
-	'violet',
-	'indigo',
-	'blue',
-	'cyan',
-	'teal',
-	'green',
-	'lime',
-	'yellow',
-	'orange',
-	'choco',
-	'brown',
-	'sand',
-	'camo',
-	'jungle',
-]
+import COLORS from 'open-props/src/colors'
 
+export const OPEN_PROPS_COLORS = [
+	...Object.keys(COLORS).reduce(
+		(acc, cur) => acc.add(cur.split('--')[1].split('-')[0]),
+		new Set(),
+	),
+]
+// export const OPEN_PROPS_COLORS = [...OP_COLORS, OP_COLORS[Math.random() * OP_COLORS.length | 0]]
 // Default theme configuration
+console.log('::', { OPEN_PROPS_COLORS })
 const DEFAULT_THEME = { color: 'indigo' }
 
 // Default theme values (single source of truth)
@@ -60,9 +47,9 @@ export const getSectionTitleWithTheme = (sectionName, meta) => {
 }
 
 // Generate theme variables for a color
-const generateThemeVars = (color) => {
+const generateThemeVars = color => {
 	const normalizedColor = color?.toLowerCase()
-	
+
 	if (!OPEN_PROPS_COLORS.includes(normalizedColor)) {
 		return DEFAULT_THEME_VALUES
 	}
@@ -90,8 +77,8 @@ export const applyColorTheme = color => generateThemeVars(color)
 
 // Apply dark mode theme variants
 export const applyDarkModeTheme = color => {
-	const normalizedColor = OPEN_PROPS_COLORS.includes(color?.toLowerCase()) 
-		? color.toLowerCase() 
+	const normalizedColor = OPEN_PROPS_COLORS.includes(color?.toLowerCase())
+		? color.toLowerCase()
 		: 'indigo'
 
 	return {

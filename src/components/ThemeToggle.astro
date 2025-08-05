@@ -64,12 +64,14 @@
 </style>
 
 <script>
+  import { applyColorTheme, applyDarkModeTheme } from '../lib/theme.js';
+
   const toggle = document.querySelector('.theme-toggle');
   const html = document.documentElement;
-  const lightIcon = document.querySelector('.light-icon') as HTMLElement;
-  const darkIcon = document.querySelector('.dark-icon') as HTMLElement;
+  const lightIcon = document.querySelector('.light-icon');
+  const darkIcon = document.querySelector('.dark-icon');
 
-  const showIcon = (isDark: boolean) => {
+  const showIcon = (isDark) => {
     if (lightIcon && darkIcon) {
       if (isDark) {
         lightIcon.style.opacity = '0';
@@ -81,6 +83,15 @@
     }
   };
 
+  const applyTheme = (color) => {
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    const themeVars = isDark ? applyDarkModeTheme(color) : applyColorTheme(color);
+
+    Object.entries(themeVars).forEach(([key, value]) => {
+      html.style.setProperty(key, value);
+    });
+  };
+
   const initializeTheme = () => {
     const savedTheme = localStorage.getItem('theme') || 'light';
     const savedColor = localStorage.getItem('selectedThemeColor') || 'indigo';
@@ -88,16 +99,19 @@
     html.setAttribute('data-theme', savedTheme);
     html.style.backgroundColor = savedTheme === 'dark' ? 'black' : 'white';
     showIcon(savedTheme === 'dark');
+    applyTheme(savedColor);
   };
 
   toggle?.addEventListener('click', () => {
     const currentTheme = html.getAttribute('data-theme') || 'light';
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    const currentColor = localStorage.getItem('selectedThemeColor') || 'indigo';
 
     html.setAttribute('data-theme', newTheme);
     html.style.backgroundColor = newTheme === 'dark' ? 'black' : 'white';
     localStorage.setItem('theme', newTheme);
     showIcon(newTheme === 'dark');
+    applyTheme(currentColor);
   });
 
   // Initialize theme on load
