@@ -18,8 +18,11 @@ const sectionIcon = getIconForSection(title, meta, resumeData)
 <style>
   .section {
     margin-bottom: var(--theme-spacing-3xl);
-    padding: var(--theme-spacing-xl) 0;
+    padding: var(--theme-spacing-xl);
     position: relative;
+    background: var(--theme-surface-secondary);
+    border-radius: var(--theme-border-radius-lg);
+    box-shadow: var(--theme-shadow-sm);
   }
 
   .section:last-child {
@@ -57,14 +60,6 @@ const sectionIcon = getIconForSection(title, meta, resumeData)
     height: 3px;
     background: var(--theme-color-primary);
     border-radius: var(--theme-border-radius-full);
-  }
-
-  /* Add subtle background pattern to sections */
-  .section:nth-child(even) {
-    background: linear-gradient(135deg, transparent 0%, var(--theme-surface-tertiary) 100%);
-    margin: 0 calc(-1 * var(--theme-spacing-xl));
-    padding: var(--theme-spacing-xl);
-    border-radius: var(--theme-border-radius-lg);
   }
 
   /* Better spacing for section content */

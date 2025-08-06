@@ -248,6 +248,60 @@ src/
 
 </details>
 
+## 📄 PDF Generation
+
+Generate PDF versions of your resume with different themes:
+
+### Quick PDF Generation
+
+```bash
+# Generate PDFs with current theme (from localStorage)
+npm run pdf:resume
+npm run pdf:private
+
+# Generate PDFs with specific themes
+npm run pdf:resume-light    # Light theme
+npm run pdf:resume-dark     # Dark theme
+npm run pdf:private-light   # Private resume, light theme
+npm run pdf:private-dark    # Private resume, dark theme
+
+# Generate all PDFs at once
+npm run pdf:all             # All PDFs (resume + private, light + dark)
+npm run pdf:resume-all      # Resume PDFs only (light + dark)
+npm run pdf:private-all     # Private PDFs only (light + dark)
+```
+
+### PDF Generation Process
+
+1. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+
+2. **Generate PDFs in a new terminal:**
+   ```bash
+   npm run pdf:resume-light
+   ```
+
+3. **PDFs are saved in the project root:**
+   - `resume-light.pdf` - Resume with light theme
+   - `resume-dark.pdf` - Resume with dark theme
+   - `private-light.pdf` - Private resume with light theme
+   - `private-dark.pdf` - Private resume with dark theme
+
+### Print Optimization
+
+The theme includes comprehensive print styles:
+- **Hidden Elements**: Theme toggle, theme picker, and navigation are hidden
+- **Optimized Colors**: Links are underlined and colors are print-friendly
+- **No Animations**: Transitions and hover effects are disabled
+- **Page Breaks**: Proper page break handling for clean PDFs
+
+### Requirements
+
+- **Chromium**: Required for PDF generation (installed via package manager)
+- **Development Server**: Must be running on `http://localhost:4321`
+
 ## 📄 License
 
 MIT License - see [LICENSE](LICENSE) for details.

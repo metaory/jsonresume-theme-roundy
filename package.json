@@ -1,7 +1,7 @@
 {
   "name": "jsonresume-theme-roundy",
   "type": "module",
-  "version": "0.4.0",
+  "version": "0.4.2",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -9,7 +9,14 @@
     "preview": "astro preview",
     "astro": "astro",
     "pdf:resume": "chromium --headless --disable-gpu --no-sandbox --disable-dev-shm-usage --no-pdf-header-footer --print-to-pdf=resume.pdf http://localhost:4321/resume",
-    "pdf:private": "chromium --headless --disable-gpu --no-sandbox --disable-dev-shm-usage --no-pdf-header-footer --print-to-pdf=private.pdf http://localhost:4321/private"
+    "pdf:private": "chromium --headless --disable-gpu --no-sandbox --disable-dev-shm-usage --no-pdf-header-footer --print-to-pdf=private.pdf http://localhost:4321/private",
+    "pdf:resume-light": "chromium --headless --disable-gpu --no-sandbox --disable-dev-shm-usage --no-pdf-header-footer --print-to-pdf=resume-light.pdf http://localhost:4321/resume?theme=light",
+    "pdf:resume-dark": "chromium --headless --disable-gpu --no-sandbox --disable-dev-shm-usage --no-pdf-header-footer --print-to-pdf=resume-dark.pdf http://localhost:4321/resume?theme=dark",
+    "pdf:private-light": "chromium --headless --disable-gpu --no-sandbox --disable-dev-shm-usage --no-pdf-header-footer --print-to-pdf=private-light.pdf http://localhost:4321/private?theme=light",
+    "pdf:private-dark": "chromium --headless --disable-gpu --no-sandbox --disable-dev-shm-usage --no-pdf-header-footer --print-to-pdf=private-dark.pdf http://localhost:4321/private?theme=dark",
+    "pdf:all": "npm run pdf:resume-light && npm run pdf:resume-dark && npm run pdf:private-light && npm run pdf:private-dark",
+    "pdf:resume-all": "npm run pdf:resume-light && npm run pdf:resume-dark",
+    "pdf:private-all": "npm run pdf:private-light && npm run pdf:private-dark"
   },
   "dependencies": {
     "astro": "^5.12.8",

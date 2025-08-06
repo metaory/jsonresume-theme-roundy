@@ -50,7 +50,9 @@
   --theme-easing: var(--ease-3);
 
   /* Shadows */
-  --theme-shadow-sm: var(--shadow-1);
+  /* --theme-shadow-sm: var(--shadow-1); */
+  --theme-shadow-sm: inset 0 0 20px var(--theme-color-muted),
+                           0 0 30px var(--theme-color-muted);
   --theme-shadow-md: var(--shadow-2);
   --theme-shadow-lg: var(--shadow-3);
 
@@ -156,4 +158,38 @@ a:hover {
   --theme-surface-secondary-rgb: 30, 30, 30;
   --theme-surface-border-rgb: 255, 255, 255;
   --theme-link-rgb: 147, 197, 253;
+}
+
+/* Print styles */
+@media print {
+  /* Disable all hover effects in print */
+  *:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    background: none !important;
+    color: inherit !important;
+  }
+
+  /* Ensure proper page breaks */
+  .resume {
+    page-break-inside: avoid;
+  }
+
+  /* Optimize colors for print */
+  body {
+    color: black !important;
+    background: white !important;
+  }
+
+  /* Ensure links are visible in print */
+  a {
+    color: black !important;
+    text-decoration: underline !important;
+  }
+
+  /* Remove transitions and animations */
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
 }
