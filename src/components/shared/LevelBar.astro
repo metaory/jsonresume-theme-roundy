@@ -1,6 +1,4 @@
 ---
-import { getLevelColor } from '../../lib/colors.js'
-
 const { level, class: className = '' } = Astro.props;
 
 const getWidth = (level) => {
@@ -17,16 +15,38 @@ const getWidth = (level) => {
   return match?.width || '50%'
 }
 
-const color = getLevelColor(level)
+const getLevelClass = (level) => {
+  const normalized = level?.toLowerCase()
+  
+  if (normalized?.includes('beginner') || normalized?.includes('basic')) {
+    return 'level-beginner'
+  }
+  if (normalized?.includes('intermediate') || normalized?.includes('conversational')) {
+    return 'level-intermediate'
+  }
+  if (normalized?.includes('advanced') || normalized?.includes('fluent')) {
+    return 'level-advanced'
+  }
+  if (normalized?.includes('master') || normalized?.includes('native')) {
+    return 'level-master'
+  }
+  if (normalized?.includes('expert')) {
+    return 'level-expert'
+  }
+  
+  return 'level-intermediate'
+}
+
 const width = getWidth(level)
+const levelClass = getLevelClass(level)
 ---
 
-<div class={`level-bar ${className}`}>
+<div class={`level-bar ${levelClass} ${className}`}>
   <div class="bar-container">
-    <div class="bar-fill" style={`width: ${width}; background: linear-gradient(90deg, ${color}, ${color}dd)`}></div>
-    <div class="bar-glow" style={`width: ${width}; background: ${color}40`}></div>
+    <div class="bar-fill" style={`width: ${width}`}></div>
+    <div class="bar-glow" style={`width: ${width}`}></div>
   </div>
-  <span class="level-text" style={`color: ${color}`}>{level}</span>
+  <span class="level-text">{level}</span>
 </div>
 
 <style>
@@ -70,5 +90,56 @@ const width = getWidth(level)
     min-width: 80px;
     text-align: right;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Level-specific colors using theme variables */
+  .level-beginner .bar-fill {
+    background: linear-gradient(90deg, var(--theme-color-primary), var(--theme-color-primary)dd);
+  }
+  .level-beginner .bar-glow {
+    background: var(--theme-color-primary)40;
+  }
+  .level-beginner .level-text {
+    color: var(--theme-color-primary);
+  }
+
+  .level-intermediate .bar-fill {
+    background: linear-gradient(90deg, var(--theme-color-secondary), var(--theme-color-secondary)dd);
+  }
+  .level-intermediate .bar-glow {
+    background: var(--theme-color-secondary)40;
+  }
+  .level-intermediate .level-text {
+    color: var(--theme-color-secondary);
+  }
+
+  .level-advanced .bar-fill {
+    background: linear-gradient(90deg, var(--theme-color-accent), var(--theme-color-accent)dd);
+  }
+  .level-advanced .bar-glow {
+    background: var(--theme-color-accent)40;
+  }
+  .level-advanced .level-text {
+    color: var(--theme-color-accent);
+  }
+
+  .level-master .bar-fill {
+    background: linear-gradient(90deg, var(--theme-color-primary), var(--theme-color-primary)dd);
+  }
+  .level-master .bar-glow {
+    background: var(--theme-color-primary)40;
+  }
+  .level-master .level-text {
+    color: var(--theme-color-primary);
+  }
+
+  .level-expert .bar-fill {
+    background: linear-gradient(90deg, var(--theme-color-secondary), var(--theme-color-secondary)dd);
+  }
+  .level-expert .bar-glow {
+    background: var(--theme-color-secondary)40;
+  }
+  .level-expert .level-text {
+    color: var(--theme-color-secondary);
   }
 </style>

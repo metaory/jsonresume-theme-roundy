@@ -1,6 +1,6 @@
 ---
 import Divider from './Divider.astro'
-import { getIconForSection } from '../../lib/icons.js'
+import { getIconForSection } from '@lib/icons.js'
 
 const { title, class: className = '', showDivider = true, dividerVariant = 'subtle', meta, resumeData } = Astro.props;
 const sectionIcon = getIconForSection(title, meta, resumeData)
@@ -35,6 +35,7 @@ const sectionIcon = getIconForSection(title, meta, resumeData)
   }
 
   .section-title {
+    font-family: var(--font-main-header);
     color: var(--theme-color-primary);
     font-size: var(--theme-font-size-xl);
     font-weight: var(--theme-font-weight-semibold);

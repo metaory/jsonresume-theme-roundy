@@ -1,16 +1,16 @@
 ---
-const { 
-  text, 
-  icon, 
-  href, 
+const {
+  text,
+  icon,
+  href,
   variant = 'default',
   size = 'md',
-  class: className = '' 
+  class: className = ''
 } = Astro.props;
 
 const variants = {
   default: 'tag-default',
-  primary: 'tag-primary', 
+  primary: 'tag-primary',
   secondary: 'tag-secondary',
   outline: 'tag-outline',
   ghost: 'tag-ghost',
@@ -27,7 +27,7 @@ const TagElement = href ? 'a' : 'span';
 const tagProps = href ? { href, target: '_blank', rel: 'noopener' } : {};
 ---
 
-<TagElement 
+<TagElement
   class={`tag ${variants[variant]} ${sizes[size]} ${className}`}
   {...tagProps}
 >
@@ -41,6 +41,7 @@ const tagProps = href ? { href, target: '_blank', rel: 'noopener' } : {};
     align-items: center;
     gap: var(--theme-spacing-xs);
     border-radius: var(--theme-border-radius-md);
+    font-family: var(--font-links);
     font-weight: var(--theme-font-weight-medium);
     text-decoration: none;
     transition: all var(--theme-transition-fast) var(--theme-easing);
@@ -51,6 +52,7 @@ const tagProps = href ? { href, target: '_blank', rel: 'noopener' } : {};
 
   .tag-icon {
     font-size: 0.9em;
+    color: var(--theme-color-accent);
   }
 
   .tag-text {
@@ -60,7 +62,7 @@ const tagProps = href ? { href, target: '_blank', rel: 'noopener' } : {};
   /* Tag Variants */
   .tag-default {
     background: var(--theme-surface-secondary);
-    color: var(--theme-text-secondary);
+    color: var(--theme-text-tertiary);
   }
 
   .tag-primary {
@@ -80,7 +82,7 @@ const tagProps = href ? { href, target: '_blank', rel: 'noopener' } : {};
 
   .tag-ghost {
     background: transparent;
-    color: var(--theme-text-secondary);
+    color: var(--theme-text-tertiary);
   }
 
   .tag-link {
@@ -135,4 +137,4 @@ const tagProps = href ? { href, target: '_blank', rel: 'noopener' } : {};
     color: var(--theme-link-hover);
     box-shadow: 0 4px 16px var(--theme-link), 0 2px 8px var(--theme-surface-tertiary);
   }
-</style> 
+</style>

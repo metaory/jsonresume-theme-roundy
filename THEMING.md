@@ -10,7 +10,7 @@ Add theme configuration to your `resume.json`:
 {
   "meta": {
     "themeOptions": {
-      "color": "indigo"
+      "color": "Indigo"
     }
   }
 }
@@ -20,25 +20,25 @@ Add theme configuration to your `resume.json`:
 
 Open Props provides 19 expertly crafted color themes:
 
+- **Blue** - Professional, reliable
+- **Brown** - Earthy, grounded
+- **Camo** - Military, rugged
+- **Choco** - Rich, warm
+- **Cyan** - Fresh, modern
 - **Gray** - Neutral, professional
-- **Stone** - Warm neutral
-- **Red** - Bold, attention-grabbing
+- **Green** - Growth, success
+- **Indigo** - Trustworthy, stable
+- **Jungle** - Wild, adventurous
+- **Lime** - Energetic, fresh
+- **Orange** - Friendly, approachable
 - **Pink** - Modern, vibrant
 - **Purple** - Creative, innovative
-- **Violet** - Elegant, sophisticated
-- **Indigo** - Trustworthy, stable
-- **Blue** - Professional, reliable
-- **Cyan** - Fresh, modern
-- **Teal** - Balanced, calm
-- **Green** - Growth, success
-- **Lime** - Energetic, fresh
-- **Yellow** - Optimistic, bright
-- **Orange** - Friendly, approachable
-- **Choco** - Rich, warm
-- **Brown** - Earthy, grounded
+- **Red** - Bold, attention-grabbing
 - **Sand** - Natural, organic
-- **Camo** - Military, rugged
-- **Jungle** - Wild, adventurous
+- **Stone** - Warm neutral
+- **Teal** - Balanced, calm
+- **Violet** - Elegant, sophisticated
+- **Yellow** - Optimistic, bright
 
 ## Configuration Options
 

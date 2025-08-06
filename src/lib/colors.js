@@ -1,9 +1,9 @@
-export const levelColors = {
-  'Beginner': '#ef4444',
-  'Intermediate': '#f59e0b', 
-  'Advanced': '#10b981',
-  'Master': '#3b82f6',
-  'Expert': '#8b5cf6'
+const levelColors = {
+  'Beginner': 'var(--theme-color-primary)',
+  'Intermediate': 'var(--theme-color-secondary)', 
+  'Advanced': 'var(--theme-color-accent)',
+  'Master': 'var(--theme-color-primary)',
+  'Expert': 'var(--theme-color-secondary)'
 }
 
 export const getLevelColor = (level) => {

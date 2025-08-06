@@ -1,5 +1,5 @@
 ---
-import ContactTag from '../shared/ContactTag.astro'
+import ContactTag from '@shared/ContactTag.astro'
 
 const { basics } = Astro.props
 ---
@@ -11,21 +11,21 @@ const { basics } = Astro.props
   </div>
 
   <div class="contact-info">
-    <ContactTag 
+    <ContactTag
       text={basics.email}
       icon="mdi:email"
       href={`mailto:${basics.email}`}
       variant="outline"
     />
-    
-    <ContactTag 
+
+    <ContactTag
       text={basics.phone}
       icon="mdi:phone"
       href={`tel:${basics.phone}`}
       variant="outline"
     />
-    
-    <ContactTag 
+
+    <ContactTag
       text={basics.url}
       icon="mdi:web"
       href={basics.url}
@@ -34,7 +34,7 @@ const { basics } = Astro.props
   </div>
 
   <div class="location">
-    <ContactTag 
+    <ContactTag
       text={[
         basics.location?.address,
         basics.location?.city,
@@ -48,7 +48,7 @@ const { basics } = Astro.props
 
   <div class="profiles">
     {(basics.profiles || []).map(profile => (
-      <ContactTag 
+      <ContactTag
         text={profile.username}
         icon={`mdi:${profile.network?.toLowerCase()}`}
         href={profile.url}
@@ -72,6 +72,7 @@ const { basics } = Astro.props
   }
 
   .name {
+    font-family: var(--font-top-header);
     font-size: 2.5rem;
     font-weight: 700;
     color: var(--theme-text-primary);
@@ -79,6 +80,7 @@ const { basics } = Astro.props
   }
 
   .label {
+    font-family: var(--font-sub-header);
     font-size: 1.25rem;
     color: var(--theme-text-secondary);
     margin: 0;
@@ -143,4 +145,4 @@ const { basics } = Astro.props
       gap: var(--theme-spacing-sm);
     }
   }
-</style> 
+</style>

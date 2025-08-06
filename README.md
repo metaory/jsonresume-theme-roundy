@@ -3,7 +3,6 @@
 ## RC 4
 
 <div align="center">
-  <img src="src/assets/icons/logo.svg" alt="Roundy Theme Logo" width="120" height="120">
   <h1>Roundy Theme</h1>
   <p>A modern, functional, and composable JSON Resume theme built with Astro</p>
   
@@ -66,7 +65,7 @@ This theme uses [Open Props](https://open-props.style/) for modern, consistent t
 
 ### Available Color Themes
 
-Choose from 19 expertly crafted color themes: `gray`, `stone`, `red`, `pink`, `purple`, `violet`, `indigo`, `blue`, `cyan`, `teal`, `green`, `lime`, `yellow`, `orange`, `choco`, `brown`, `sand`, `camo`, `jungle`.
+Choose from 19 expertly crafted color themes: `blue`, `brown`, `camo`, `choco`, `cyan`, `gray`, `green`, `indigo`, `jungle`, `lime`, `orange`, `pink`, `purple`, `red`, `sand`, `stone`, `teal`, `violet`, `yellow`.
 
 **Performance Optimized**: Only loads the specific color theme (~1.3kB), not the entire Open Props library.
 
@@ -165,7 +164,7 @@ src/
 │   ├── ThemeToggle.astro # Dark/light mode toggle
 │   └── shared/         # Reusable components
 │       ├── Section.astro # Section wrapper
-│       ├── Icon.astro  # Icon component
+│       ├── # Shared components
 │       ├── Tag.astro   # Tag/keyword component
 │       └── ...         # Other shared components
 ├── lib/                # Utilities and theme logic

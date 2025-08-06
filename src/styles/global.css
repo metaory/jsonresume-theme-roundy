@@ -12,7 +12,7 @@
   --theme-link-rgb: 59, 130, 246;
 
   /* Typography */
-  --theme-font-family: var(--font-sans);
+  --theme-font-family: var(--font-description);
   --theme-font-size-xs: var(--font-size-0);
   --theme-font-size-sm: var(--font-size-1);
   --theme-font-size-base: var(--font-size-2);
@@ -51,8 +51,8 @@
 
   /* Shadows */
   /* --theme-shadow-sm: var(--shadow-1); */
-  --theme-shadow-sm: inset 0 0 20px var(--theme-color-muted),
-                           0 0 30px var(--theme-color-muted);
+  --theme-shadow-sm: inset 0 0 10px var(--theme-surface-secondary),
+                           0 0 10px var(--theme-surface-tertiary);
   --theme-shadow-md: var(--shadow-2);
   --theme-shadow-lg: var(--shadow-3);
 
@@ -138,11 +138,12 @@ a:hover {
 
   --theme-text-primary: var(--theme-text-primary-dark, hsl(var(--gray-1-hsl) / 0.9));
   --theme-text-secondary: var(--theme-text-secondary-dark, hsl(var(--gray-2-hsl) / 0.7));
-  --theme-text-muted: var(--theme-text-muted-dark, hsl(var(--gray-3-hsl) / 0.5));
-  --theme-surface-primary: var(--theme-surface-primary-dark, hsl(var(--gray-9-hsl) / 0.1));
-  --theme-surface-secondary: var(--theme-surface-secondary-dark, hsl(var(--gray-8-hsl) / 0.05));
-  --theme-surface-tertiary: var(--theme-surface-tertiary-dark, hsl(var(--gray-7-hsl) / 0.08));
-  --theme-surface-border: var(--theme-surface-border-dark, hsl(var(--gray-6-hsl) / 0.12));
+  --theme-text-tertiary: var(--theme-text-tertiary-dark, hsl(var(--gray-3-hsl) / 0.5));
+  --theme-text-muted: var(--theme-text-muted-dark, hsl(var(--gray-4-hsl) / 0.4));
+  --theme-surface-primary: var(--theme-surface-primary-dark, hsl(var(--gray-10-hsl) / 0.3));
+  --theme-surface-secondary: var(--theme-surface-secondary-dark, hsl(var(--gray-8-hsl) / 0.25));
+  --theme-surface-tertiary: var(--theme-surface-tertiary-dark, hsl(var(--gray-6-hsl) / 0.2));
+  --theme-surface-border: var(--theme-surface-border-dark, hsl(var(--gray-4-hsl) / 0.35));
   --theme-link: var(--theme-link-dark, hsl(var(--blue-4-hsl) / 0.8));
   --theme-link-hover: var(--theme-link-hover-dark, hsl(var(--blue-3-hsl) / 0.9));
 

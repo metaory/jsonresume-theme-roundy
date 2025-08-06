@@ -1,11 +1,18 @@
 ---
-import Basics from '../components/sections/Basics.astro'
-import ThemeToggle from '../components/ThemeToggle.astro'
-import ThemePicker from '../components/ThemePicker.astro'
-import ResumeNav from '../components/ResumeNav.astro'
-import Divider from '../components/shared/Divider.astro'
+import Basics from '@sections/Basics.astro'
+import ThemeToggle from '@components/ThemeToggle.astro'
+import ThemePicker from '@components/ThemePicker.astro'
+import ResumeNav from '@components/ResumeNav.astro'
+import Divider from '@shared/Divider.astro'
 import { readdirSync } from 'fs'
 import { join } from 'path'
+
+// Fontsource imports - these automatically add @font-face rules
+import '@fontsource/bungee-shade'
+import '@fontsource/bungee'
+import '@fontsource/baloo-2'
+import '@fontsource/rubik'
+import '@fontsource/fredoka'
 
 // Generate static paths for all resume files
 export function getStaticPaths() {
@@ -44,7 +51,7 @@ try {
 }
 
 // Auto-import all section components using import.meta.glob (excluding Basics)
-const sectionModules = import.meta.glob('../components/sections/*.astro')
+const sectionModules = import.meta.glob('../components/sections/!(Basics).astro', { eager: true })
 
 // Create component mapping from imported components
 const components = {}
@@ -55,7 +62,7 @@ for (const [filePath, module] of Object.entries(sectionModules)) {
   if (fileName && fileName !== 'Basics') {
     // Convert to lowercase for mapping (e.g., "Work" -> "work")
     const key = fileName.toLowerCase()
-    components[key] = module
+    components[key] = (module as any).default
   }
 }
 
@@ -79,13 +86,13 @@ const { basics, meta, ...sections } = resumeData
         height: 1em;
       }
     </style>
-  </head>
-
-  <body>
+    
     <script>
       import "iconify-icon";
     </script>
+  </head>
 
+  <body>
     <ThemeToggle />
     {import.meta.env.DEV && <ThemePicker />}
     <ResumeNav currentResume={validResume} availableResumes={availableResumes} />
@@ -98,11 +105,10 @@ const { basics, meta, ...sections } = resumeData
       <Divider variant="accent" />
       <Divider variant="gradient" />
 
-      {Object.entries(sections).map(async ([key, data]) => {
-        const module = components[key]
+      {Object.entries(sections).map(([key, data]) => {
+        const Component = components[key]
 
-        if (module && data) {
-          const Component = (await module()).default
+        if (Component && data) {
           const props = { [key]: data, meta, resumeData }
           return <Component {...props} />
         }

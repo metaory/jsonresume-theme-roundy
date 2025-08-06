@@ -71,63 +71,32 @@
 </style>
 
 <script>
-  import { applyColorTheme, applyDarkModeTheme } from '../lib/theme.js';
+  import { themeManager } from '../lib/theme.js';
 
   const toggle = document.querySelector('.theme-toggle');
-  const html = document.documentElement;
-  const lightIcon = document.querySelector('.light-icon');
-  const darkIcon = document.querySelector('.dark-icon');
+  const lightIcon = document.querySelector('.light-icon') as HTMLElement;
+  const darkIcon = document.querySelector('.dark-icon') as HTMLElement;
 
   const showIcon = (isDark) => {
     if (lightIcon && darkIcon) {
-      if (isDark) {
-        (lightIcon as HTMLElement).style.opacity = '0';
-        (darkIcon as HTMLElement).style.opacity = '1';
-      } else {
-        (lightIcon as HTMLElement).style.opacity = '1';
-        (darkIcon as HTMLElement).style.opacity = '0';
-      }
+      lightIcon.style.opacity = isDark ? '0' : '1';
+      darkIcon.style.opacity = isDark ? '1' : '0';
     }
   };
 
-  const applyTheme = (color) => {
-    const isDark = html.getAttribute('data-theme') === 'dark';
-    const themeVars = isDark ? applyDarkModeTheme(color) : applyColorTheme(color);
-
-    Object.entries(themeVars).forEach(([key, value]) => {
-      html.style.setProperty(key, value);
-    });
-  };
-
-  const initializeTheme = () => {
-    // Check for theme parameter in URL (for PDF generation)
-    const urlParams = new URLSearchParams(window.location.search);
-    const urlTheme = urlParams.get('theme');
-    
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    const savedColor = localStorage.getItem('selectedThemeColor') || 'indigo';
-
-    // Use URL theme if present (for PDF generation), otherwise use saved theme
-    const themeToApply = urlTheme || savedTheme;
-    
-    html.setAttribute('data-theme', themeToApply);
-    html.style.backgroundColor = themeToApply === 'dark' ? 'black' : 'white';
-    showIcon(themeToApply === 'dark');
-    applyTheme(savedColor);
+  const updateIcon = () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    showIcon(isDark);
   };
 
   toggle?.addEventListener('click', () => {
-    const currentTheme = html.getAttribute('data-theme') || 'light';
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    const currentColor = localStorage.getItem('selectedThemeColor') || 'indigo';
-
-    html.setAttribute('data-theme', newTheme);
-    html.style.backgroundColor = newTheme === 'dark' ? 'black' : 'white';
-    localStorage.setItem('theme', newTheme);
+    const newTheme = themeManager.toggleTheme();
     showIcon(newTheme === 'dark');
-    applyTheme(currentColor);
   });
 
-  // Initialize theme on load
-  initializeTheme();
+  // Update icon on theme change
+  updateIcon();
+  
+  // Listen for theme changes from other components
+  window.addEventListener('themechange', updateIcon);
 </script>
