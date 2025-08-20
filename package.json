@@ -24,7 +24,7 @@
     "@fontsource/bungee-shade": "^5.2.6",
     "@fontsource/fredoka": "^5.2.8",
     "@fontsource/rubik": "^5.2.6",
-    "astro": "^5.12.8",
+    "astro": "^5.13.1",
     "iconify-icon": "^3.0.0",
     "open-props": "^1.7.16"
   },
