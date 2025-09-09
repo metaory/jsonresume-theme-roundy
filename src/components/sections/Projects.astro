@@ -1,0 +1,88 @@
+---
+import Section from '@shared/Section.astro'
+import Item from '@shared/Item.astro'
+import Title from '@shared/Title.astro'
+import Dates from '@shared/Dates.astro'
+import Description from '@shared/Description.astro'
+import Keywords from '@shared/Keywords.astro'
+import LevelBar from '@shared/LevelBar.astro'
+
+const { projects, meta, resumeData } = Astro.props
+---
+
+<Section title={meta?.themeOptions?.sectionTitles?.projects || "Projects"} meta={meta} resumeData={resumeData}>
+  <div class="projects-grid">
+    {projects.map(project => (
+      <Item>
+        <div class="project-header">
+          <Title>{project.name}</Title>
+          {project.complexity && <LevelBar level={project.complexity} />}
+        </div>
+        <a href={project.url} target="_blank" rel="noopener">{project.url}</a>
+        <Description>{project.description}</Description>
+        <Dates>{project.startDate} - {project.endDate || 'Present'}</Dates>
+        <Keywords 
+          keywords={project.keywords || []} 
+          variant="secondary"
+          size="sm"
+          meta={meta}
+          resumeData={resumeData}
+        />
+      </Item>
+    ))}
+  </div>
+</Section>
+
+<style>
+  .projects-grid {
+    display: grid;
+    gap: var(--theme-spacing-lg);
+    margin-bottom: 0;
+    padding: var(--theme-spacing-md) 0;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    align-items: start;
+  }
+
+  .project-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: var(--theme-spacing-md);
+    margin-bottom: var(--theme-spacing-sm);
+  }
+
+  .project-title-section {
+    /* No specific styling needed - grid handles layout */
+  }
+
+  .project-header .level-bar {
+    margin: 0;
+    max-width: 200px;
+  }
+
+  .projects-grid a {
+    display: block;
+    margin: var(--theme-spacing-xs) 0;
+    font-size: var(--theme-font-size-xs);
+    word-break: break-all;
+  }
+
+  .projects-grid .description {
+    margin: var(--theme-spacing-xs) 0;
+    line-height: 1.5;
+    font-size: var(--theme-font-size-sm);
+  }
+
+  @media (max-width: var(--theme-breakpoint-lg)) {
+    .projects-grid {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+  }
+
+  @media (max-width: var(--theme-breakpoint-md)) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+      gap: var(--theme-spacing-md);
+    }
+  }
+</style> 

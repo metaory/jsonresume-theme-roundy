@@ -1,0 +1,21 @@
+---
+import Section from '@shared/Section.astro'
+import Item from '@shared/Item.astro'
+import Title from '@shared/Title.astro'
+import Subtitle from '@shared/Subtitle.astro'
+import Dates from '@shared/Dates.astro'
+import Description from '@shared/Description.astro'
+
+const { awards, meta, resumeData } = Astro.props
+---
+
+<Section title={meta?.themeOptions?.sectionTitles?.awards || "Awards"} meta={meta} resumeData={resumeData}>
+  {awards.map(award => (
+    <Item>
+      <Title>{award.title}</Title>
+      <Subtitle>{award.awarder}</Subtitle>
+      <Dates>{award.date}</Dates>
+      <Description>{award.summary}</Description>
+    </Item>
+  ))}
+</Section> 

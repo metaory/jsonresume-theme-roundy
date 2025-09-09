@@ -1,0 +1,471 @@
+{
+	"basics": {
+		"name": "John Doe",
+		"email": "john@gmail.com",
+		"phone": "(912) 555-4321",
+		"url": "https://github.com/metaory",
+		"label": "Cyngsbez Ratvarre · Yrnq  Fbyhgvba Nepuvgrpg · QriBcf Shyy-Fgnpx · NJF · Yhn   Abqr · Yvahk · aIvz",
+		"summary": "<ul style='margin-bottom: 0px;'> <li> Yberz vcfhz bqbe nzrg, pbafrpgrghre nqvcvfpvat ryvg </li> <li> Ornare ac vehicula diam fermentum interdum finibus tincidunt </li> <li> Pbafrpgrghe rtrg ryvg frarpghf avou cbeggvgbe hean</li> <li> Arghf frz irarangvf srhtvng np phenovghe cryyragrfdhr gbedhrag rg</li> <li> Volutpat ultrices sed, mi curabitur magna sit libero</li> <li> Mauris maecenas nisi nulla; vehicula auctor magnis</li> <li> Gravida mauris commodo taciti gravida netus</li> <li> Elementum nec curae ultrices nec himenaeos nibh</li> <li> Fames magna gravida parturient tincidunt suspendisse ipsum congue nam</li> <li> Ultrices curabitur justo lacus felis nam a consequat</li> <li> Proin penatibus lacinia adipiscing; scelerisque id per mauris</li> <li> Inevhf zbagrf qhvf ryrzraghz npphzfna ahyynz znkvzhf fvg</li> <li> Nostra placerat eu fringilla dapibus amet magna </li> </ul>",
+		"location": {
+			"address": "2712 Broadway St",
+			"postalCode": "CA 94115",
+			"city": "San Francisco",
+			"countryCode": "US",
+			"region": "California"
+		},
+		"profiles": [
+			{
+				"network": "Twitter",
+				"username": "john",
+				"url": "https://twitter.com/john"
+			},
+			{
+				"network": "GitHub",
+				"username": "zrgnbel",
+				"url": "https://github.com/zrgnbel"
+			},
+			{
+				"network": "LinkedIn",
+				"username": "cbh-lna",
+				"url": "https://linkedin.com/in/cbh-lna"
+			}
+		]
+	},
+	"work": [
+		{
+			"name": "Pbzcnal",
+			"position": "Cerfvqrag",
+			"url": "https://pbzcnal.com",
+			"startDate": "2014-01-01",
+			"endDate": "2024-09-01",
+			"summary": "Magna iaculis augue potenti consectetur nam imperdiet, Eu elit vitae vitae vivamus at aliquet sociosqu",
+			"keywords": [
+				"AWS",
+				"CI/CD",
+				"CloudFormation",
+				"Docker",
+				"Git",
+				"NodeJs",
+				"OIDC",
+				"React",
+				"Serverless",
+				"Svelte",
+				"Performance",
+				"Terraform"
+			],
+			"highlights": [
+				"Lorem ipsum odor amet",
+				"consectetuer adipiscing elit",
+				"Sollicitudin sit libero venenatis nascetur",
+				"dignissim lacinia ac euismod",
+				"Venenatis curabitur pulvinar sociosqu",
+				"Metus mattis parturient"
+			]
+		}
+	],
+	"volunteer": [
+		{
+			"organization": "Nunc est",
+			"position": "Suscipit Massa",
+			"url": "https://organization.com/",
+			"startDate": "2012-01-01",
+			"endDate": "2013-01-01",
+			"summary": "Convallis eget fermentum dis. Molestie suspendisse ad id tortor morbi nostra blandit. Consectetur suspendisse porta dictum semper",
+			"highlights": [
+				"Njneqrq Ibyhagrre bs gur Zbagu",
+				"Znkvzhf ravz fntvggvf frq chehf inevhf",
+				"Evfhf rssvpvghe hean cebva zbagrf avfv yhpghf",
+				"Niry aba ynpvavn nzrg ehgehz"
+			]
+		}
+	],
+	"education": [
+		{
+			"institution": "Condimentum Ligula",
+			"url": "https://institution.com/",
+			"area": "Accumsan Sagittis",
+			"studyType": "Viverra ",
+			"startDate": "2011-01-01",
+			"endDate": "2013-01-01",
+			"score": "4.0",
+			"courses": [
+				"X91101 - Onfvp FDY",
+				"OBF71Z - Platea Risus",
+				"AUGU3E - Nibh Purus"
+			]
+		}
+	],
+	"awards": [
+		{
+			"title": "Aenean Porta",
+			"date": "2014-11-01",
+			"awarder": "Senectus",
+			"summary": "Gurer vf ab fcbba. Vcfhz bqbe nzrg, Pbafrpgrghre nqvcvfpvat ryvg."
+		}
+	],
+	"certificates": [
+		{
+			"name": "Phasellus",
+			"date": "2021-11-07",
+			"issuer": "pbafrpgrghre nqvcvfpvat ryvg",
+			"url": "https://pregvsvpngr.com"
+		}
+	],
+	"publications": [
+		{
+			"name": "Adipiscing Elit",
+			"publisher": "github",
+			"releaseDate": "2014-10-01",
+			"url": "https://publication.com",
+			"summary": "Yberz vcfhz bqbe nzrg, pbafrpgrghre nqvcvfpvat ryvg. Unovgnag cneghevrag snpvyvfv ryvg fbpvbfdh ibyhgcng."
+		}
+	],
+	"skills": [
+		{
+			"name": "Cenpgvprf",
+			"level": "Advanced",
+			"keywords": ["Ntvyr", "QEL", "XVFF"]
+		},
+		{
+			"name": "Cnenqvtzf",
+			"level": "Advanced",
+			"keywords": ["OQQ", "QQQ", "BBC", "SC", "EC", "GQQ"]
+		},
+		{
+			"name": "QriBcf",
+			"level": "Master",
+			"keywords": ["PV/PQ", "PSA", "GS"]
+		},
+		{
+			"name": "Pybhq",
+			"level": "Intermediate",
+			"keywords": ["NJF", "TPC", "Irepry"]
+		},
+		{
+			"name": "Gbbypunva",
+			"level": "Beginner",
+			"keywords": ["NepuYvahk", "Arbivz", "Gzhk", "NjrfbzrJZ", "Qbpxre", "OMS"]
+		}
+	],
+	"languages": [
+		{ "language": "Lua", "fluency": "Master" },
+		{ "language": "Bash", "fluency": "Master" },
+		{ "language": "JavaScript", "fluency": "Master" },
+		{ "language": "Go", "fluency": "Advanced" },
+		{ "language": "Elixir", "fluency": "Intermediate" },
+		{ "language": "Haskell", "fluency": "Beginner" },
+		{ "language": "Python", "fluency": "Beginner" },
+		{ "language": "Rust", "fluency": "Beginner" },
+		{ "language": "Zig", "fluency": "Beginner" }
+	],
+	"interests": [
+		{
+			"name": "Terminals",
+			"keywords": ["Alacritty", "Wezterm"]
+		},
+		{
+			"name": "Window Managers",
+			"keywords": ["AwesomeWM", "Hyprland"]
+		},
+		{
+			"name": "Text Editors",
+			"keywords": ["Neovim", "Helix"]
+		}
+	],
+	"references": [
+		{
+			"name": "Jane Doe",
+			"reference": "Yberz vcfhz bqbe nzrg, pbafrpgrghre nqvcvfpvat ryvg. Ghecvf ahap pbaqvzraghz nyvdhnz ihychgngr vnphyvf yvoreb ahap hg."
+		}
+	],
+	"projects": [
+		{
+			"name": "znexhc.wfba",
+			"url": "https://github.com/zrgnbel/znexhc.wfba",
+			"description": "QBZ gerr ercerfragngvba va pbzcnpg WFBA -- Qensg Fcrp, Yvoenel naq PYV",
+			"roles": ["Author"],
+			"startDate": "2024-09-12",
+			"endDate": "2024-11-24",
+			"keywords": ["cli", "html", "library", "markup", "transpiler", "npm"]
+		},
+		{
+			"name": "cpnyy.wf",
+			"url": "https://github.com/zrgnbel/cpnyy.wf",
+			"description": "Zvavzny Erfhyg/Zbanq yvxr ghcyrf sbe WF ── mreb-qrcraqrapl",
+			"roles": ["Author"],
+			"startDate": "2024-04-18",
+			"endDate": "2024-06-27",
+			"keywords": ["JavaScript", "library", "Lua", "npm"]
+		}
+	],
+	"meta": {
+		"themeOptions": {
+			"color": "red",
+			"sectionTitles": {
+				"contacts": "contacts",
+				"summary": "summary",
+				"skills": "skills",
+				"languages": "languages",
+				"interests": "interests",
+				"works": "work experience",
+				"projects": "projects",
+				"certificates": "certificates",
+				"volunteers": "volunteers",
+				"educations": "education",
+				"references": "references"
+			},
+			"componentConfig": {
+				"skills": {
+					"levels": {
+						"Master": { "width": "100%", "color": "#10b981" },
+						"Advanced": { "width": "85%", "color": "#3b82f6" },
+						"Intermediate": { "width": "65%", "color": "#f59e0b" },
+						"Beginner": { "width": "40%", "color": "#ef4444" }
+					}
+				},
+				"languages": {
+					"levels": {
+						"Master": { "dots": 5, "color": "#10b981", "label": "Native" },
+						"Advanced": { "dots": 4, "color": "#3b82f6", "label": "Fluent" },
+						"Intermediate": {
+							"dots": 3,
+							"color": "#f59e0b",
+							"label": "Conversational"
+						},
+						"Beginner": { "dots": 2, "color": "#ef4444", "label": "Basic" }
+					}
+				},
+				"interests": {
+					"categories": {
+						"Terminals": { "icon": "ph:terminal", "color": "#10b981" },
+						"Window Managers": { "icon": "ph:monitor", "color": "#3b82f6" },
+						"Text Editors": { "icon": "ph:file-text", "color": "#f59e0b" },
+						"default": { "icon": "ph:heart", "color": "#ef4444" }
+					}
+				}
+			},
+			"contactLabels": {
+				"email": "Email",
+				"phone": "Phone",
+				"website": "Website",
+				"location": "Location"
+			},
+			"lastModified": "2024-09-01T00:00:00.000Z",
+			"canonical": "https://github.com/metaory/jsonresume-theme-legacy",
+			"version": "2.0.0"
+		},
+		"icons": {
+			"aggregator": "majesticons:filter",
+			"ai": "mingcute:brain-fill",
+			"alacritty": "simple-icons:alacritty",
+			"alarms": "solar:siren-rounded-bold",
+			"angular": "tabler:brand-angular-filled",
+			"animation": "solar:clapperboard-play-bold",
+			"anime": "streamline-flex:japanese-alphabet-solid",
+			"api": "mynaui:api-solid",
+			"api-proxy": "streamline-flex:3d-coordinate-axis-solid",
+			"api-transformer": "solar:washing-machine-minimalistic-bold",
+			"app": "mage:double-diamond-fill",
+			"architecture": "streamline:page-setting-remix",
+			"arm": "simple-icons:arm",
+			"article": "solar:documents-bold-duotone",
+			"ast": "clarity:dna-solid",
+			"async": "gravity-ui:traffic-light",
+			"automation": "streamline-plump:charging-solid",
+			"award": "solar:medal-ribbons-star-bold-duotone",
+			"awesomewm": "tabler:layout-board-split",
+			"aws": "tabler:brand-aws",
+			"backbone.js": "tabler:brand-backbone",
+			"backup": "streamline-flex:hard-drive-1-remix",
+			"bash": "simple-icons:gnubash",
+			"brain": "streamline:brain-solid",
+			"build-pipelines": "streamline:hierarchy-13-remix",
+			"build-tool": "icomoon-free:make-group",
+			"cal": "solar:calendar-add-bold-duotone",
+			"certificate": "solar:diploma-bold-duotone",
+			"challenge": "basil:flask-alt-solid",
+			"chaos-engineering": "pepicons-pop:comet",
+			"ci/cd": "solar:rocket-bold-duotone",
+			"cli": "gravity-ui:terminal",
+			"cloudformation": "gravity-ui:square-article",
+			"code": "solar:code-square-linear",
+			"colorscheme": "mingcute:palette-line",
+			"compiler": "fluent:cube-12-filled",
+			"composability": "mdi:puzzle",
+			"composition": "mdi:puzzle",
+			"config": "majesticons:settings-cog",
+			"contacts": "hugeicons:passport",
+			"containers": "solar:box-linear",
+			"copy": "gravity-ui:copy",
+			"cordova": "simple-icons:apachecordova",
+			"data-masking": "solar:password-minimalistic-input-bold-duotone",
+			"data-mining": "mingcute:pickax-fill",
+			"db": "streamline-plump:database-remix",
+			"deterministic": "streamline:pi-symbol-circle-solid",
+			"devops": "mingcute:cloud-snow-fill",
+			"devsecops": "mage:shield-check",
+			"dictionary": "gravity-ui:book",
+			"digitalocean": "simple-icons:digitalocean",
+			"dna": "solar:dna-bold-duotone",
+			"docker": "gravity-ui:logo-docker",
+			"dom": "fluent:code-block-20-filled",
+			"dsl": "streamline:zodiac-8-solid",
+			"dynamodb": "uil:database",
+			"education": "solar:medal-star-circle-bold-duotone",
+			"electron.js": "eos-icons:atom-electron",
+			"elixir": "nonicons:elixir-16",
+			"emoji": "mingcute:emoji-line",
+			"etl-pipelines": "carbon:data-unreal",
+			"express.js": "tabler:square-rounded-letter-x-filled",
+			"ffmpeg": "file-icons:ffmpeg",
+			"filter": "mingcute:filter-line",
+			"fintech": "solar:banknote-2-bold-duotone",
+			"font": "material-symbols:font-download-rounded",
+			"fuzzy": "mingcute:aquarius-line",
+			"gallery": "solar:wallpaper-bold",
+			"game": "solar:gamepad-bold",
+			"generator": "streamline-flex:star-circle-solid",
+			"gif": "streamline:gif-format-solid",
+			"github-actions": "streamline-plump:3d-coordinate-axis-remix",
+			"githubactions": "streamline-plump:3d-coordinate-axis-remix",
+			"github": "line-md:github-twotone",
+			"gitops": "ri:git-pr-draft-fill",
+			"git": "tabler:brand-git",
+			"glitch": "mingcute:background-fill",
+			"glsl": "pajamas:push-rules",
+			"glyph": "material-symbols:glyphs-rounded",
+			"go": "tabler:brand-golang",
+			"gradient": "carbon:gradient",
+			"grafana-k6": "simple-icons:k6",
+			"handlebars": "streamline:moustache-solid",
+			"haskell": "simple-icons:haskell",
+			"heart": "iconamoon:heart-duotone",
+			"helix": "clarity:helix-line",
+			"heroku": "devicon-plain:heroku",
+			"html-ast": "ph:tree-view-fill",
+			"html": "streamline-plump:html-five-solid",
+			"hyprland": "simple-icons:hyprland",
+			"image": "basil:image-solid",
+			"incident-response": "streamline:sos-help-emergency-sign-solid",
+			"infrastructure-as-code": "solar:folder-path-connect-linear",
+			"integrations": "mingcute:hexagons-fill",
+			"interactive": "fluent:cursor-click-24-filled",
+			"interest": "solar:gameboy-bold-duotone",
+			"iot": "fluent:iot-16-filled",
+			"issueops": "solar:bug-bold",
+			"javascript": "fluent:javascript-20-filled",
+			"jsonpath": "si:json-fill",
+			"jsonresume": "si:json-alt-3-fill",
+			"json": "tabler:json",
+			"kubernetes": "bxl:kubernetes",
+			"lambda": "tabler:file-lambda-filled",
+			"language": "solar:planet-2-bold-duotone",
+			"launcher": "heroicons:rocket-launch",
+			"library": "gravity-ui:folder",
+			"linkedin": "ph:linkedin-logo-duotone",
+			"link": "ph:link-duotone",
+			"linux": "mingcute:linux-fill",
+			"location": "solar:map-point-bold-duotone",
+			"lua": "mdi:language-lua",
+			"magic": "solar:magic-stick-3-linear",
+			"mail": "solar:letter-bold-duotone",
+			"makefile": "mage:double-diamond-fill",
+			"markdown": "tabler:markdown",
+			"markup": "gravity-ui:code",
+			"mediator": "icon-park-solid:blockchain",
+			"messaging": "majesticons:chat-text",
+			"micro-framework": "fluent:protocol-handler-16-filled",
+			"microservices": "carbon:microservices-1",
+			"middleware": "iconamoon:3d-fill",
+			"mongodb": "tabler:brand-mongodb",
+			"monitoring": "solar:danger-triangle-linear",
+			"mqtt": "mdi:mq",
+			"na": "gravity-ui:circle-exclamation-fill",
+			"neovim": "simple-icons:neovim",
+			"nlp": "flowbite:language-outline",
+			"nodejs": "tabler:brand-nodejs",
+			"npm": "teenyicons:npm-solid",
+			"nyaa": "tabler:ghost",
+			"observability": "solar:telescope-bold",
+			"offline": "octicon:cloud-offline-16",
+			"oidc": "gravity-ui:fingerprint",
+			"opensource": "solar:heart-pulse-2-bold-duotone",
+			"pandas": "icon-park-solid:panda",
+			"parser": "mage:double-square-fill",
+			"patching": "fluent:patch-24-filled",
+			"payment-gateways": "streamline:payment-10-solid",
+			"performance": "fluent:gauge-20-filled",
+			"performance-testing": "majesticons:pulse",
+			"phone": "solar:smartphone-2-bold-duotone",
+			"pipeline": "fluent:flowchart-32-filled",
+			"platform-engineering": "tabler:assembly-filled",
+			"poc": "mingcute:bulb-line",
+			"principal-engineer": "tabler:badges-filled",
+			"profile": "solar:user-id-linear",
+			"promise": "fa6-solid:handshake-simple",
+			"proxy": "eos-icons:proxy",
+			"python": "gravity-ui:logo-python",
+			"queues": "iconoir:keyframes-solid",
+			"random": "gravity-ui:dice-2",
+			"rds": "streamline-plump:database-remix",
+			"react": "mingcute:react-line",
+			"redis": "fontisto:redis",
+			"reference": "solar:chat-square-like-bold-duotone",
+			"remote": "solar:remote-controller-bold",
+			"residency": "icon-park-twotone:death-star",
+			"rust": "tabler:brand-rust",
+			"safecall": "streamline:dangerous-zone-sign-solid",
+			"scanner": "streamline:scanner-solid",
+			"scanning": "solar:scanner-linear",
+			"scripting": "mynaui:code-diamond-solid",
+			"search": "mingcute:search-3-line",
+			"secrets": "ph:password-bold",
+			"security": "mingcute:safe-shield-2-fill",
+			"seed": "gravity-ui:shapes-3",
+			"serverless": "tabler:file-lambda-filled",
+			"service-level-agreements": "solar:shield-star-bold-duotone",
+			"service-level-objectives": "streamline:target-solid",
+			"shaders": "pajamas:subgroup",
+			"shadertoy": "gravity-ui:snowflake",
+			"site-reliability": "streamline:laptop-charging-solid",
+			"skills": "solar:layers-bold-duotone",
+			"skull": "streamline:skull-1-solid",
+			"slack": "ri:slack-line",
+			"ssh": "mdi:ssh",
+			"ssr": "solar:server-square-bold",
+			"stats": "tabler:chart-line",
+			"summary": "solar:airbuds-case-charge-bold-duotone",
+			"svelte": "simple-icons:svelte",
+			"svg": "mdi:svg",
+			"task": "mage:clipboard-2-fill",
+			"task-runner": "fluent:flow-sparkle-20-filled",
+			"templating": "tabler:template-filled",
+			"terminal": "heroicons-solid:terminal",
+			"terraform": "tabler:brand-terraform",
+			"thesaurus": "mingcute:translate-2-fill",
+			"tmux": "fluent:layout-row-two-split-bottom-24-regular",
+			"torrent": "mingcute:magnet-fill",
+			"transformer": "tabler:transform-filled",
+			"transpiler": "mage:star-square-fill",
+			"tui": "gravity-ui:terminal",
+			"twitter": "hugeicons:new-twitter-rectangle",
+			"unicode": "basil:university-outline",
+			"vanilla": "flowbite:icecream-solid",
+			"volunteer": "solar:hand-heart-bold-duotone",
+			"vue": "mingcute:vue-fill",
+			"vulnerability": "majesticons:skull-line",
+			"w3c": "el:w3c",
+			"wasm": "simple-icons:webassembly",
+			"watch": "solar:eye-linear",
+			"webcomponent": "ion:logo-web-component",
+			"webgl": "icon-park-solid:cones",
+			"webm": "mage:video-fill",
+			"websocket": "solar:socket-bold",
+			"wezterm": "simple-icons:wezterm",
+			"wm": "fluent:panel-left-header-16-regular",
+			"workflow": "streamline-plump:arrow-roadmap-solid",
+			"work": "solar:city-bold-duotone",
+			"zig": "simple-icons:zig"
+		}
+	}
+}

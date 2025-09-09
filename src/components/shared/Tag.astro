@@ -1,0 +1,140 @@
+---
+const {
+  text,
+  icon,
+  href,
+  variant = 'default',
+  size = 'md',
+  class: className = ''
+} = Astro.props;
+
+const variants = {
+  default: 'tag-default',
+  primary: 'tag-primary',
+  secondary: 'tag-secondary',
+  outline: 'tag-outline',
+  ghost: 'tag-ghost',
+  link: 'tag-link'
+};
+
+const sizes = {
+  sm: 'tag-sm',
+  md: 'tag-md',
+  lg: 'tag-lg'
+};
+
+const TagElement = href ? 'a' : 'span';
+const tagProps = href ? { href, target: '_blank', rel: 'noopener' } : {};
+---
+
+<TagElement
+  class={`tag ${variants[variant]} ${sizes[size]} ${className}`}
+  {...tagProps}
+>
+  {icon && <iconify-icon icon={icon} class="tag-icon" />}
+  <span class="tag-text">{text}</span>
+</TagElement>
+
+<style>
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--theme-spacing-xs);
+    border-radius: var(--theme-border-radius-md);
+    font-family: var(--font-links);
+    font-weight: var(--theme-font-weight-medium);
+    text-decoration: none;
+    transition: all var(--theme-transition-fast) var(--theme-easing);
+    cursor: pointer;
+    width: fit-content;
+    justify-self: start;
+  }
+
+  .tag-icon {
+    font-size: 0.9em;
+    color: var(--theme-color-accent);
+  }
+
+  .tag-text {
+    line-height: 1;
+  }
+
+  /* Tag Variants */
+  .tag-default {
+    background: var(--theme-surface-secondary);
+    color: var(--theme-text-tertiary);
+  }
+
+  .tag-primary {
+    background: var(--theme-color-primary);
+    color: white;
+  }
+
+  .tag-secondary {
+    background: var(--theme-color-secondary);
+    color: white;
+  }
+
+  .tag-outline {
+    background: transparent;
+    color: var(--theme-text-primary);
+  }
+
+  .tag-ghost {
+    background: transparent;
+    color: var(--theme-text-tertiary);
+  }
+
+  .tag-link {
+    background: transparent;
+    color: var(--theme-link);
+    text-decoration: underline;
+  }
+
+  /* Tag Sizes */
+  .tag-sm {
+    padding: var(--theme-spacing-xs);
+    font-size: var(--theme-font-size-xs);
+    border-radius: var(--theme-border-radius-sm);
+  }
+
+  .tag-md {
+    padding: var(--theme-spacing-xs) var(--theme-spacing-sm);
+    font-size: var(--theme-font-size-sm);
+    border-radius: var(--theme-border-radius-md);
+  }
+
+  .tag-lg {
+    padding: var(--theme-spacing-sm) var(--theme-spacing-md);
+    font-size: var(--theme-font-size-base);
+    border-radius: var(--theme-border-radius-lg);
+  }
+
+  /* Tag Hover States */
+  .tag:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px var(--theme-color-primary), 0 2px 8px var(--theme-surface-tertiary);
+  }
+
+  .tag-default:hover {
+    background: var(--theme-surface-tertiary);
+    box-shadow: 0 4px 16px var(--theme-color-primary), 0 2px 8px var(--theme-surface-tertiary);
+  }
+
+  .tag-outline:hover {
+    background: var(--theme-color-primary);
+    color: white;
+    box-shadow: 0 6px 20px var(--theme-color-primary), 0 3px 12px var(--theme-surface-tertiary);
+  }
+
+  .tag-ghost:hover {
+    background: var(--theme-surface-secondary);
+    color: var(--theme-text-primary);
+    box-shadow: 0 4px 16px var(--theme-surface-secondary), 0 2px 8px var(--theme-color-primary);
+  }
+
+  .tag-link:hover {
+    color: var(--theme-link-hover);
+    box-shadow: 0 4px 16px var(--theme-link), 0 2px 8px var(--theme-surface-tertiary);
+  }
+</style>

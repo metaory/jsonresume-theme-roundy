@@ -1,0 +1,83 @@
+---
+import Section from '@shared/Section.astro'
+import Item from '@shared/Item.astro'
+import Title from '@shared/Title.astro'
+import Subtitle from '@shared/Subtitle.astro'
+import Dates from '@shared/Dates.astro'
+import List from '@shared/List.astro'
+import LevelBar from '@shared/LevelBar.astro'
+
+const { education, meta, resumeData } = Astro.props
+
+function getGPALevel(score) {
+  const gpa = parseFloat(score);
+  if (gpa >= 3.8) return 'Master';
+  if (gpa >= 3.5) return 'Advanced';
+  if (gpa >= 3.0) return 'Intermediate';
+  return 'Beginner';
+}
+---
+
+<Section title={meta?.themeOptions?.sectionTitles?.education || "Education"} meta={meta} resumeData={resumeData}>
+  {education.map(edu => (
+    <Item>
+      <div class="education-header">
+        <div class="education-title-section">
+          <Title>{edu.institution}</Title>
+          <Subtitle>{edu.studyType} in {edu.area}</Subtitle>
+        </div>
+        {edu.score && (
+          <div class="gpa-section">
+            <span class="gpa-label">GPA</span>
+            <LevelBar level={getGPALevel(edu.score)} />
+          </div>
+        )}
+      </div>
+      <a href={edu.url} target="_blank" rel="noopener">{edu.url}</a>
+      <Dates>{edu.startDate} - {edu.endDate || 'Present'}</Dates>
+      <div class="courses">
+        <h4>Courses:</h4>
+        <List>
+          {(edu.courses || []).map(course => <li>{course}</li>)}
+        </List>
+      </div>
+    </Item>
+  ))}
+</Section>
+
+<style>
+  .education-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: var(--theme-spacing-md);
+    margin-bottom: var(--theme-spacing-sm);
+  }
+
+  .education-title-section {
+    /* No specific styling needed - grid handles layout */
+  }
+
+  .gpa-section {
+    display: flex;
+    align-items: center;
+    gap: var(--theme-spacing-sm);
+  }
+
+  .gpa-label {
+    font-size: var(--theme-font-size-sm);
+    color: var(--theme-text-secondary);
+    font-weight: var(--theme-font-weight-medium);
+    min-width: 30px;
+  }
+
+  .courses h4 {
+    color: var(--theme-text-primary);
+    margin: var(--theme-spacing-sm) 0 var(--theme-spacing-xs) 0;
+  }
+
+  .education-header .level-bar {
+    margin: 0;
+    max-width: 200px;
+  }
+</style> 

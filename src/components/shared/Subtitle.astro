@@ -1,0 +1,17 @@
+---
+const { class: className = '' } = Astro.props
+---
+
+<p class={`subtitle ${className}`}>
+  <slot />
+</p>
+
+<style>
+  .subtitle {
+    font-family: var(--font-sub-header);
+    color: var(--theme-text-secondary);
+    font-size: var(--theme-font-size-sm);
+    font-weight: var(--theme-font-weight-semibold);
+    margin: 0 0 var(--theme-spacing-sm) 0;
+  }
+</style> 

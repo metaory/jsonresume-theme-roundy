@@ -1,0 +1,177 @@
+---
+import { OPEN_PROPS_COLORS } from "@lib/theme.js";
+---
+
+<div class="theme-picker">
+  <button class="picker-tab" aria-label="Theme picker">
+    <iconify-icon width="48" height="48" icon="solar:pallete-2-bold-duotone"></iconify-icon>
+    <div class="logo-blob"></div>
+  </button>
+  {OPEN_PROPS_COLORS.map((color) => (
+    <button
+      class="color-btn"
+      data-color={color}
+      title={`${color} theme`}
+      style={`--color: var(--${color}-7)`}
+    >
+      <div class="color-circle"></div>
+    </button>
+  ))}
+</div>
+
+<style>
+  .theme-picker {
+    position: fixed;
+    top: 50%;
+    right: -200px;
+    transform: translateY(-50%);
+    z-index: var(--theme-z-modal);
+    transition: right 0.5s cubic-bezier(0.3, 1.5, 0.6, 1);
+    width: min-content;
+    border-radius: 0;
+    padding: 12px;
+    display: grid;
+    backdrop-filter: blur(4px);
+    grid-template-columns: 1fr repeat(4,1fr);
+    gap: 10px;
+    justify-items: center;
+  }
+
+  .theme-picker::before {
+    content: '';
+    filter: blur(2em);
+    z-index: -1;
+    background: radial-gradient(
+      circle at center,
+      var(--theme-color-muted) 30%,
+      transparent 70%
+    );
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0; left: 20px;
+  }
+
+  .theme-picker:hover {
+    right: -4px;
+  }
+
+  .picker-tab {
+    grid-row: span 5;
+    grid-column: 1;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--theme-color-primary);
+    padding: 10px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    transition: all 2s ease;
+  }
+
+  iconify-icon {
+    height: 48px;
+    width: 48px;
+    color: white;
+    animation: pulse 2s ease-in-out infinite;
+    z-index:1;
+    mix-blend-mode: overlay;
+  }
+
+  .logo-blob {
+    position: absolute;
+    width: clamp(35px, 10vw, 50px);
+    height: clamp(35px, 10vw, 50px);
+    background: conic-gradient(from 0deg, #009494, #b1323b, #ba482e, #69314b, #0135a8, #009494);
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: blobRotate 4s linear infinite;
+    filter: blur(8px);
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 0.7;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+  }
+
+
+  @keyframes blobRotate {
+    to { transform: rotate(360deg); }
+  }
+
+
+  .color-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    transition: all 0.2s ease;
+  }
+
+  .color-btn:hover {
+    background: var(--theme-surface-tertiary);
+    transform: scale(1.1);
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1), 0 0 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .color-btn.active {
+    background: var(--theme-color-muted);
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .color-btn:nth-last-child(3) {
+    grid-column: span 2;
+    justify-self: center;
+  }
+
+  .color-circle {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--color);
+  }
+
+
+  @media print {
+    .theme-picker {
+      display: none !important;
+    }
+  }
+</style>
+
+<script>
+  import { themeManager } from '../lib/theme.js';
+
+  const applyTheme = (color) => {
+    themeManager.setColor(color);
+
+    // Update active state
+    document.querySelectorAll('.color-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`[data-color="${color}"]`)?.classList.add('active');
+
+    // Dispatch theme change event
+    window.dispatchEvent(new CustomEvent('themechange'));
+  };
+
+  // Set initial active state
+  const currentColor = localStorage.getItem('selectedThemeColor') || 'indigo';
+  document.querySelector(`[data-color="${currentColor}"]`)?.classList.add('active');
+
+  // Add click handlers
+  document.querySelectorAll('.color-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const color = btn.getAttribute('data-color');
+      if (color) applyTheme(color);
+    });
+  });
+</script>

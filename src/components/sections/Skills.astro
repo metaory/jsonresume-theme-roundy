@@ -1,0 +1,80 @@
+---
+import Section from '@shared/Section.astro'
+import Item from '@shared/Item.astro'
+import Title from '@shared/Title.astro'
+import Keywords from '@shared/Keywords.astro'
+import LevelBar from '@shared/LevelBar.astro'
+
+const { skills, meta, resumeData } = Astro.props
+---
+
+<Section title={meta?.themeOptions?.sectionTitles?.skills || "Skills"} meta={meta} resumeData={resumeData}>
+  <div class="skills-grid">
+    {skills.map(skill => (
+      <Item>
+        <div class="skill-header">
+          <Title>{skill.name}</Title>
+          <LevelBar level={skill.level} />
+        </div>
+        <Keywords 
+          keywords={skill.keywords || []} 
+          variant="default"
+          size="sm"
+          meta={meta}
+          resumeData={resumeData}
+        />
+      </Item>
+    ))}
+  </div>
+</Section>
+
+<style>
+  .skills-grid {
+    display: grid;
+    gap: var(--theme-spacing-lg);
+    margin-bottom: 0;
+    padding: var(--theme-spacing-md) 0;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    align-items: start;
+  }
+
+  .skill-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: var(--theme-spacing-md);
+    margin-bottom: var(--theme-spacing-sm);
+  }
+
+  .skill-header .title {
+    margin: 0;
+    font-size: 1.1rem;
+  }
+
+  .skill-header .level-bar {
+    margin: 0;
+    max-width: 200px;
+  }
+
+  .skills-grid .keywords {
+    margin-top: var(--theme-spacing-xs);
+  }
+
+  .skills-grid .keywords .tag {
+    font-size: var(--theme-font-size-xs);
+    margin: 0;
+  }
+
+  @media (max-width: var(--theme-breakpoint-lg)) {
+    .skills-grid {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+  }
+
+  @media (max-width: var(--theme-breakpoint-md)) {
+    .skills-grid {
+      grid-template-columns: 1fr;
+      gap: var(--theme-spacing-md);
+    }
+  }
+</style> 

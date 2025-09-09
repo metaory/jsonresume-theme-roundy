@@ -1,0 +1,33 @@
+---
+const { class: className = '' } = Astro.props
+---
+
+<div class={`item ${className}`}>
+  <slot />
+</div>
+
+<style>
+  .item {
+    background: var(--theme-surface-tertiary);
+    border-radius: var(--theme-border-radius-lg);
+    padding: var(--theme-spacing-lg);
+    transition: all var(--theme-transition-fast) var(--theme-easing);
+    height: fit-content;
+    box-shadow: var(--theme-shadow-sm);
+    position: relative;
+    margin-bottom: var(--theme-spacing-xl);
+  }
+
+
+  .section > .item:last-child {
+    margin-bottom: 0;
+  }
+
+  .item:hover {
+    outline: solid 10px var(--theme-color-muted);
+    /* background: var(--theme-surface-tertiary); */
+    /* box-shadow: 0 8px 32px var(--theme-color-primary), */
+    /*             0 4px 16px var(--theme-surface-tertiary); */
+  }
+
+</style>

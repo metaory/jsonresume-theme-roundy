@@ -1,0 +1,82 @@
+---
+import Divider from './Divider.astro'
+import { getIconForSection } from '@lib/icons.js'
+
+const { title, class: className = '', showDivider = true, dividerVariant = 'subtle', meta, resumeData } = Astro.props;
+const sectionIcon = getIconForSection(title, meta, resumeData)
+---
+
+<section class={`section ${className}`}>
+  <h2 class="section-title">
+    <iconify-icon icon={sectionIcon} class="section-icon"></iconify-icon>
+    {title}
+  </h2>
+  <slot />
+  {showDivider && <Divider variant={dividerVariant} />}
+</section>
+
+<style>
+  .section {
+    margin-bottom: var(--theme-spacing-3xl);
+    padding: var(--theme-spacing-xl);
+    position: relative;
+    background: var(--theme-surface-secondary);
+    border-radius: var(--theme-border-radius-lg);
+    box-shadow: var(--theme-shadow-sm);
+  }
+
+  .section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  .section:last-child .divider {
+    display: none;
+  }
+
+  .section-title {
+    font-family: var(--font-main-header);
+    color: var(--theme-color-primary);
+    font-size: var(--theme-font-size-xl);
+    font-weight: var(--theme-font-weight-semibold);
+    margin-bottom: var(--theme-spacing-xl);
+    position: relative;
+    padding-bottom: var(--theme-spacing-md);
+    display: flex;
+    align-items: center;
+    gap: var(--theme-spacing-sm);
+  }
+
+  .section-icon {
+    font-size: 1.2em;
+    color: var(--theme-color-accent);
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: var(--theme-color-primary);
+    border-radius: var(--theme-border-radius-full);
+  }
+
+  /* Better spacing for section content */
+  .section > *:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: var(--theme-breakpoint-md)) {
+    .section {
+      padding: var(--theme-spacing-lg) 0;
+      margin-bottom: var(--theme-spacing-2xl);
+    }
+
+    .section:nth-child(even) {
+      margin: 0 calc(-1 * var(--theme-spacing-lg));
+      padding: var(--theme-spacing-lg);
+    }
+  }
+</style> 

@@ -1,0 +1,97 @@
+---
+import Section from '@shared/Section.astro'
+import Item from '@shared/Item.astro'
+import Title from '@shared/Title.astro'
+import Keywords from '@shared/Keywords.astro'
+import LevelBar from '@shared/LevelBar.astro'
+import { getIconForKeyword } from '@lib/icons.js'
+
+const { interests, meta, resumeData } = Astro.props
+---
+
+<Section title={meta?.themeOptions?.sectionTitles?.interests || "Interests"} meta={meta} resumeData={resumeData}>
+  <div class="interests-grid">
+    {interests.map(interest => {
+      const interestIcon = getIconForKeyword(interest.name, meta, resumeData)
+      return (
+        <Item>
+          <div class="interest-header">
+            <div class="interest-title">
+              <iconify-icon icon={interestIcon} class="interest-icon"></iconify-icon>
+              <Title>{interest.name}</Title>
+            </div>
+            {interest.level && <LevelBar level={interest.level} />}
+          </div>
+          <Keywords 
+            keywords={interest.keywords || []} 
+            variant="outline"
+            size="sm"
+            meta={meta}
+            resumeData={resumeData}
+          />
+        </Item>
+      )
+    })}
+  </div>
+</Section>
+
+<style>
+  .interests-grid {
+    display: grid;
+    gap: var(--theme-spacing-lg);
+    margin-bottom: 0;
+    padding: var(--theme-spacing-md) 0;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    align-items: start;
+  }
+
+  .interest-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: var(--theme-spacing-md);
+    margin-bottom: var(--theme-spacing-sm);
+  }
+
+  .interest-title {
+    display: flex;
+    align-items: center;
+    gap: var(--theme-spacing-sm);
+  }
+
+  .interest-icon {
+    font-size: 1.2rem;
+  }
+
+  .interest-header .title {
+    margin: 0;
+    font-size: 1.1rem;
+  }
+
+  .interest-header .level-bar {
+    margin: 0;
+    max-width: 200px;
+  }
+
+  .interests-grid .keywords {
+    margin-top: var(--theme-spacing-xs);
+  }
+
+  .interests-grid .keywords .tag {
+    font-size: var(--theme-font-size-xs);
+    margin: 0;
+  }
+
+  @media (max-width: var(--theme-breakpoint-lg)) {
+    .interests-grid {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+  }
+
+  @media (max-width: var(--theme-breakpoint-md)) {
+    .interests-grid {
+      grid-template-columns: 1fr;
+      gap: var(--theme-spacing-md);
+    }
+  }
+</style> 

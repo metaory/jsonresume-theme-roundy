@@ -1,0 +1,59 @@
+---
+import Section from '@shared/Section.astro'
+import Item from '@shared/Item.astro'
+import Title from '@shared/Title.astro'
+import Subtitle from '@shared/Subtitle.astro'
+import Dates from '@shared/Dates.astro'
+import Description from '@shared/Description.astro'
+import List from '@shared/List.astro'
+import Keywords from '@shared/Keywords.astro'
+import LevelBar from '@shared/LevelBar.astro'
+
+const { work, meta, resumeData } = Astro.props
+---
+
+<Section title={meta?.themeOptions?.sectionTitles?.work || "Work Experience"} meta={meta} resumeData={resumeData}>
+  {work.map(job => (
+    <Item>
+      <div class="work-header">
+        <div class="work-title-section">
+          <Title>{job.name}</Title>
+          <Subtitle>{job.position}</Subtitle>
+        </div>
+        {job.seniority && <LevelBar level={job.seniority} />}
+      </div>
+      <a href={job.url} target="_blank" rel="noopener">{job.url}</a>
+      <Dates>{job.startDate} - {job.endDate || 'Present'}</Dates>
+      <Description>{job.summary}</Description>
+      <List>
+        {(job.highlights || []).map(highlight => <li>{highlight}</li>)}
+      </List>
+      <Keywords
+        keywords={job.keywords || []}
+        variant="primary"
+        size="sm"
+        meta={meta}
+        resumeData={resumeData}
+      />
+    </Item>
+  ))}
+</Section>
+
+<style>
+  .work-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: var(--theme-spacing-md);
+    margin-bottom: var(--theme-spacing-sm);
+  }
+
+  .work-title-section {
+    /* No specific styling needed - grid handles layout */
+  }
+
+  .work-header .level-bar {
+    margin: 0;
+    max-width: 200px;
+  }
+</style>

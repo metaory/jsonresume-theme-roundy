@@ -1,0 +1,16 @@
+---
+const { class: className = '' } = Astro.props
+---
+
+<p class={`description ${className}`}>
+  <slot />
+</p>
+
+<style>
+  .description {
+    font-family: var(--font-description);
+    color: var(--theme-text-secondary);
+    line-height: 1.6;
+    margin: var(--theme-spacing-sm) 0;
+  }
+</style> 

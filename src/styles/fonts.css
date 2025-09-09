@@ -1,0 +1,26 @@
+/* Custom font family definitions */
+:root {
+  /* Top header - name */
+  --font-top-header: 'Bungee', cursive;
+  
+  /* Main headers */
+  --font-main-header: 'Bungee Shade', cursive;
+  
+  /* Sub headers */
+  --font-sub-header: 'Baloo 2', cursive;
+  
+  /* Links */
+  --font-links: 'Fredoka', sans-serif;
+  
+  /* Dates */
+  --font-dates: 'Rubik', sans-serif;
+  
+  /* Description */
+  --font-description: 'Rubik', sans-serif;
+  
+  /* Keywords and tags */
+  --font-tags: 'Fredoka', sans-serif;
+  
+  /* Fallback font stack */
+  --font-fallback: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+} 
