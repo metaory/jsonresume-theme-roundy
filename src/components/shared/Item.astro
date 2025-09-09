@@ -15,13 +15,12 @@ const { class: className = '' } = Astro.props
     height: fit-content;
     box-shadow: var(--theme-shadow-sm);
     position: relative;
-    margin-bottom: var(--theme-spacing-xl);
+    display: grid;
+    gap: var(--theme-spacing-sm);
   }
 
 
-  .section > .item:last-child {
-    margin-bottom: 0;
-  }
+  /* Grid spacing handled by parent section */
 
   .item:hover {
     outline: solid 10px var(--theme-color-muted);

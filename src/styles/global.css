@@ -5,6 +5,13 @@
 /* Our internal theme variables - using Open Props values */
 :root {
   /* Color theme - will be set by client script */
+  --sat: 0.2;
+  
+  /* Theme background colors */
+  --theme-bg-light: #FFEEFF;
+  --theme-bg-dark: #302836;
+  --theme-bg-dark-fallback: #221122;
+  
   /* RGB values for alpha transparency (light theme defaults) */
   --theme-surface-primary-rgb: 255, 255, 255;
   --theme-surface-secondary-rgb: 255, 255, 255;
@@ -35,9 +42,9 @@
 
   /* Layout */
   --theme-container-max-width: var(--size-content-3);
-  --theme-border-radius-sm: 8px;
-  --theme-border-radius-md: 12px;
-  --theme-border-radius-lg: 1rem;
+  --theme-border-radius-sm: var(--radius-2);
+  --theme-border-radius-md: var(--radius-3);
+  --theme-border-radius-lg: var(--radius-4);
   --theme-border-radius-full: var(--radius-round);
   --theme-border-width: var(--border-size-1);
   --theme-border-width-thin: var(--border-size-1);
@@ -50,9 +57,7 @@
   --theme-easing: var(--ease-3);
 
   /* Shadows */
-  /* --theme-shadow-sm: var(--shadow-1); */
-  --theme-shadow-sm: inset 0 0 10px var(--theme-surface-secondary),
-                           0 0 10px var(--theme-surface-tertiary);
+  --theme-shadow-sm: var(--shadow-1);
   --theme-shadow-md: var(--shadow-2);
   --theme-shadow-lg: var(--shadow-3);
 
@@ -63,6 +68,20 @@
   --theme-z-modal: var(--layer-4);
   --theme-z-popover: var(--layer-5);
   --theme-z-important: var(--layer-important);
+
+  /* Icon sizes */
+  --theme-icon-size: 48px;
+  --theme-icon-size-sm: 18px;
+  --theme-icon-size-lg: 24px;
+
+  /* Component specific sizes */
+  --theme-level-bar-height: 12px;
+  --theme-level-bar-text-min-width: 80px;
+  --theme-picker-offset: -200px;
+  --theme-picker-hover-offset: -4px;
+  --theme-picker-padding: 12px;
+  --theme-picker-gap: 10px;
+  --theme-picker-sat-min-width: 200px;
 
   /* Breakpoints */
   --theme-breakpoint-sm: var(--size-sm);
@@ -78,7 +97,7 @@
 
 /* HTML background - solid foundation for low-alpha theme colors */
 html {
-  background: white;
+  background: var(--theme-bg-primary, white);
   transition: background-color var(--theme-transition-normal);
   overflow-x: hidden;
 }
@@ -133,7 +152,7 @@ a:hover {
 
   /* HTML background for dark mode */
   html {
-    background: #221122 !important;
+    background: var(--theme-bg-primary-dark, var(--theme-bg-dark-fallback)) !important;
   }
 
   --theme-text-primary: var(--theme-text-primary-dark, hsl(var(--gray-1-hsl) / 0.9));
@@ -179,7 +198,7 @@ a:hover {
   /* Optimize colors for print */
   body {
     color: black !important;
-    background: #FFEEFF !important;
+    background: var(--theme-bg-light) !important;
   }
 
   /* Ensure links are visible in print */

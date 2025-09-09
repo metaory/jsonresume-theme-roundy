@@ -1,5 +1,5 @@
 ---
-import { OPEN_PROPS_COLORS } from "@lib/theme.js";
+// OPEN_PROPS_COLORS will be available from global scope
 ---
 
 <div class="theme-picker">
@@ -7,33 +7,35 @@ import { OPEN_PROPS_COLORS } from "@lib/theme.js";
     <iconify-icon width="48" height="48" icon="solar:pallete-2-bold-duotone"></iconify-icon>
     <div class="logo-blob"></div>
   </button>
-  {OPEN_PROPS_COLORS.map((color) => (
+  {['gray', 'stone', 'red', 'pink', 'purple', 'violet', 'indigo', 'blue', 'cyan', 'teal', 'green', 'lime', 'yellow', 'orange', 'choco', 'brown', 'sand', 'camo', 'jungle'].map((color) => (
     <button
       class="color-btn"
       data-color={color}
       title={`${color} theme`}
-      style={`--color: var(--${color}-7)`}
-    >
-      <div class="color-circle"></div>
-    </button>
+      style={`background: var(--${color}-7); border-radius: 50%; width: var(--theme-icon-size-sm); height: var(--theme-icon-size-sm);`}
+    ></button>
   ))}
+  <span class="sat-label">saturation</span>
+  <span id="satv" class="sat-value"></span>
+  <input id="sat" class="sat-range" type="range" min="0" max="100" step="1" />
 </div>
 
 <style>
   .theme-picker {
     position: fixed;
     top: 50%;
-    right: -200px;
+    right: var(--theme-picker-offset);
     transform: translateY(-50%);
     z-index: var(--theme-z-modal);
     transition: right 0.5s cubic-bezier(0.3, 1.5, 0.6, 1);
     width: min-content;
     border-radius: 0;
-    padding: 12px;
+    padding: var(--theme-picker-padding);
     display: grid;
     backdrop-filter: blur(4px);
     grid-template-columns: 1fr repeat(4,1fr);
-    gap: 10px;
+    grid-template-rows: repeat(5, 1fr) auto auto 1fr;
+    gap: var(--theme-picker-gap);
     justify-items: center;
   }
 
@@ -53,7 +55,7 @@ import { OPEN_PROPS_COLORS } from "@lib/theme.js";
   }
 
   .theme-picker:hover {
-    right: -4px;
+    right: var(--theme-picker-hover-offset);
   }
 
   .picker-tab {
@@ -71,8 +73,8 @@ import { OPEN_PROPS_COLORS } from "@lib/theme.js";
   }
 
   iconify-icon {
-    height: 48px;
-    width: 48px;
+    height: var(--theme-icon-size);
+    width: var(--theme-icon-size);
     color: white;
     animation: pulse 2s ease-in-out infinite;
     z-index:1;
@@ -134,11 +136,79 @@ import { OPEN_PROPS_COLORS } from "@lib/theme.js";
     justify-self: center;
   }
 
-  .color-circle {
+
+  .sat-label {
+    grid-column: 2 / 5;
+    grid-row: 6;
+    font-family: var(--font-family-fredoka);
+    font-size: var(--theme-font-size-sm);
+    color: var(--theme-text-secondary);
+    text-transform: lowercase;
+    justify-self: start;
+  }
+
+  .sat-value {
+    grid-column: 5;
+    grid-row: 6;
+    font-family: var(--font-family-fredoka);
+    font-size: var(--theme-font-size-sm);
+    color: var(--theme-text-primary);
+    font-weight: var(--theme-font-weight-medium);
+    min-width: 3ch;
+    text-align: right;
+    justify-self: end;
+  }
+
+  .sat-range {
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: 12px;
+    background: var(--theme-surface-tertiary);
+    outline: none;
+    cursor: pointer;
+    transition: background var(--theme-transition-fast);
+    grid-column: 2 / 6;
+    grid-row: 7;
+  }
+
+  .sat-range:hover {
+    background: var(--theme-surface-secondary);
+  }
+
+  .sat-range::-webkit-slider-thumb {
+    appearance: none;
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    background: var(--color);
+    background: var(--theme-color-primary);
+    border: 2px solid var(--theme-surface-primary);
+    cursor: pointer;
+    transition: all var(--theme-transition-fast);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .sat-range::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .sat-range::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--theme-color-primary);
+    border: 2px solid var(--theme-surface-primary);
+    cursor: pointer;
+    transition: all var(--theme-transition-fast);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .sat-range::-moz-range-track {
+    height: 8px;
+    border-radius: 12px;
+    background: var(--theme-surface-tertiary);
+    border: none;
   }
 
 
@@ -150,28 +220,46 @@ import { OPEN_PROPS_COLORS } from "@lib/theme.js";
 </style>
 
 <script>
-  import { themeManager } from '../lib/theme.js';
+  const applyTheme = (color: string) => {
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    const currentSat = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sat') || '0.2');
+    
+    (window as any).setTheme(currentTheme, color, currentSat);
 
-  const applyTheme = (color) => {
-    themeManager.setColor(color);
-
-    // Update active state
     document.querySelectorAll('.color-btn').forEach(btn => btn.classList.remove('active'));
     document.querySelector(`[data-color="${color}"]`)?.classList.add('active');
-
-    // Dispatch theme change event
     window.dispatchEvent(new CustomEvent('themechange'));
   };
 
-  // Set initial active state
-  const currentColor = localStorage.getItem('selectedThemeColor') || 'indigo';
+  const currentColor = (window as any).getCurrentColor();
   document.querySelector(`[data-color="${currentColor}"]`)?.classList.add('active');
 
-  // Add click handlers
   document.querySelectorAll('.color-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const color = btn.getAttribute('data-color');
       if (color) applyTheme(color);
     });
   });
+
+  const satEl = document.getElementById('sat');
+  const satVal = document.getElementById('satv');
+  const initSat = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sat') || '0.2');
+  let debounceTimer: number | undefined;
+  
+  if (satEl && satVal) {
+    const pct = Math.round(initSat * 100);
+    (satEl as HTMLInputElement).value = String(pct);
+    satVal.textContent = String(pct);
+    
+    satEl.addEventListener('input', (e) => {
+      const v = Number((e.target as HTMLInputElement).value);
+      satVal.textContent = String(v);
+      
+      clearTimeout(debounceTimer);
+      debounceTimer = window.setTimeout(() => {
+        (window as any).setSaturation(v / 100);
+        window.dispatchEvent(new CustomEvent('themechange'));
+      }, 16);
+    });
+  }
 </script>

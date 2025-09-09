@@ -3,10 +3,8 @@
 ---
 
 <button class="theme-toggle" aria-label="Toggle theme">
-    <div class="icon-container">
-        <iconify-icon width="48" height="48" class="light-icon" icon="line-md:sunny-filled-loop-to-moon-filled-alt-loop-transition"></iconify-icon>
-        <iconify-icon width="48" height="48" class="dark-icon" icon="line-md:moon-filled-alt-to-sunny-filled-loop-transition"></iconify-icon>
-    </div>
+    <iconify-icon width="48" height="48" class="light-icon" icon="line-md:sunny-filled-loop-to-moon-filled-alt-loop-transition"></iconify-icon>
+    <iconify-icon width="48" height="48" class="dark-icon" icon="line-md:moon-filled-alt-to-sunny-filled-loop-transition"></iconify-icon>
 </button>
 
 <style>
@@ -35,19 +33,13 @@
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   }
 
-  .icon-container {
-    position: relative;
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
   .theme-toggle iconify-icon {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 50%;
+    left: 50%;
+    width: 48px;
+    height: 48px;
+    transform: translate(-50%, -50%);
     transition: opacity var(--theme-transition-normal) var(--theme-easing);
   }
 
@@ -71,16 +63,14 @@
 </style>
 
 <script>
-  import { themeManager } from '../lib/theme.js';
-
   const toggle = document.querySelector('.theme-toggle');
-  const lightIcon = document.querySelector('.light-icon') as HTMLElement;
-  const darkIcon = document.querySelector('.dark-icon') as HTMLElement;
+  const lightIcon = document.querySelector('.light-icon');
+  const darkIcon = document.querySelector('.dark-icon');
 
-  const showIcon = (isDark) => {
+  const showIcon = (isDark: boolean) => {
     if (lightIcon && darkIcon) {
-      lightIcon.style.opacity = isDark ? '0' : '1';
-      darkIcon.style.opacity = isDark ? '1' : '0';
+      (lightIcon as HTMLElement).style.opacity = isDark ? '0' : '1';
+      (darkIcon as HTMLElement).style.opacity = isDark ? '1' : '0';
     }
   };
 
@@ -90,13 +80,10 @@
   };
 
   toggle?.addEventListener('click', () => {
-    const newTheme = themeManager.toggleTheme();
+    const newTheme = (window as any).toggleTheme();
     showIcon(newTheme === 'dark');
   });
 
-  // Update icon on theme change
   updateIcon();
-  
-  // Listen for theme changes from other components
   window.addEventListener('themechange', updateIcon);
 </script>

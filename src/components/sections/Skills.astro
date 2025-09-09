@@ -11,11 +11,9 @@ const { skills, meta, resumeData } = Astro.props
 <Section title={meta?.themeOptions?.sectionTitles?.skills || "Skills"} meta={meta} resumeData={resumeData}>
   <div class="skills-grid">
     {skills.map(skill => (
-      <Item>
-        <div class="skill-header">
-          <Title>{skill.name}</Title>
-          <LevelBar level={skill.level} />
-        </div>
+      <Item class="skill-item">
+        <Title>{skill.name}</Title>
+        <LevelBar level={skill.level} />
         <Keywords 
           keywords={skill.keywords || []} 
           variant="default"
@@ -38,22 +36,27 @@ const { skills, meta, resumeData } = Astro.props
     align-items: start;
   }
 
-  .skill-header {
+  .skill-item {
     display: grid;
     grid-template-columns: 1fr auto;
+    gap: var(--theme-spacing-sm);
     align-items: start;
-    gap: var(--theme-spacing-md);
-    margin-bottom: var(--theme-spacing-sm);
   }
 
-  .skill-header .title {
+  .skill-item .title {
     margin: 0;
     font-size: 1.1rem;
   }
 
-  .skill-header .level-bar {
+  .skill-item .level-bar {
+    grid-column: 2;
+    grid-row: 1;
     margin: 0;
     max-width: 200px;
+  }
+
+  .skill-item .keywords {
+    grid-column: 1;
   }
 
   .skills-grid .keywords {

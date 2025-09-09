@@ -14,14 +14,10 @@ const { work, meta, resumeData } = Astro.props
 
 <Section title={meta?.themeOptions?.sectionTitles?.work || "Work Experience"} meta={meta} resumeData={resumeData}>
   {work.map(job => (
-    <Item>
-      <div class="work-header">
-        <div class="work-title-section">
-          <Title>{job.name}</Title>
-          <Subtitle>{job.position}</Subtitle>
-        </div>
-        {job.seniority && <LevelBar level={job.seniority} />}
-      </div>
+    <Item class="work-item">
+      <Title>{job.name}</Title>
+      <Subtitle>{job.position}</Subtitle>
+      {job.seniority && <LevelBar level={job.seniority} />}
       <a href={job.url} target="_blank" rel="noopener">{job.url}</a>
       <Dates>{job.startDate} - {job.endDate || 'Present'}</Dates>
       <Description>{job.summary}</Description>
@@ -40,20 +36,31 @@ const { work, meta, resumeData } = Astro.props
 </Section>
 
 <style>
-  .work-header {
+  .work-item {
     display: grid;
     grid-template-columns: 1fr auto;
+    gap: var(--theme-spacing-sm);
     align-items: start;
-    gap: var(--theme-spacing-md);
-    margin-bottom: var(--theme-spacing-sm);
   }
 
-  .work-title-section {
-    /* No specific styling needed - grid handles layout */
+  .work-item .title,
+  .work-item .subtitle {
+    margin: 0;
   }
 
-  .work-header .level-bar {
+  .work-item .level-bar {
+    grid-column: 2;
+    grid-row: 1 / 3;
     margin: 0;
     max-width: 200px;
+    align-self: start;
+  }
+
+  .work-item a,
+  .work-item .dates,
+  .work-item .description,
+  .work-item .list,
+  .work-item .keywords {
+    grid-column: 1;
   }
 </style>

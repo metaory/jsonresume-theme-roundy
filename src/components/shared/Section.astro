@@ -23,6 +23,8 @@ const sectionIcon = getIconForSection(title, meta, resumeData)
     background: var(--theme-surface-secondary);
     border-radius: var(--theme-border-radius-lg);
     box-shadow: var(--theme-shadow-sm);
+    display: grid;
+    gap: var(--theme-spacing-lg);
   }
 
   .section:last-child {
@@ -39,12 +41,12 @@ const sectionIcon = getIconForSection(title, meta, resumeData)
     color: var(--theme-color-primary);
     font-size: var(--theme-font-size-xl);
     font-weight: var(--theme-font-weight-semibold);
-    margin-bottom: var(--theme-spacing-xl);
     position: relative;
     padding-bottom: var(--theme-spacing-md);
     display: flex;
     align-items: center;
     gap: var(--theme-spacing-sm);
+    margin: 0;
   }
 
   .section-icon {
@@ -63,10 +65,7 @@ const sectionIcon = getIconForSection(title, meta, resumeData)
     border-radius: var(--theme-border-radius-full);
   }
 
-  /* Better spacing for section content */
-  .section > *:last-child {
-    margin-bottom: 0;
-  }
+  /* Grid handles spacing automatically */
 
   @media (max-width: var(--theme-breakpoint-md)) {
     .section {

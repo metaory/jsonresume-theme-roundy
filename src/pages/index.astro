@@ -1,14 +1,8 @@
 ---
-import { readdirSync } from 'fs'
-import { join } from 'path'
-
-// Dynamically detect all JSON files in data directory
-const dataDir = join(process.cwd(), 'src/data')
-const availableResumes = readdirSync(dataDir)
-  .filter(file => file.endsWith('.json'))
-  .map(file => file.replace('.json', ''))
+import { getAvailableResumes } from '@lib/resume.js'
 
 // Redirect to default resume (first available)
+const availableResumes = getAvailableResumes()
 const defaultResume = availableResumes[0] || 'resume'
 return Astro.redirect(`/${defaultResume}`)
 ---

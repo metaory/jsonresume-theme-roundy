@@ -1,81 +1,39 @@
 ---
+import { getLevelWidth, getLevelClass } from '@lib/levels.js'
+
 const { level, class: className = '' } = Astro.props;
 
-const getWidth = (level) => {
-  const normalized = level?.toLowerCase()
-  
-  const patterns = [
-    { keywords: ['beginner', 'basic'], width: '25%' },
-    { keywords: ['intermediate', 'conversational'], width: '50%' },
-    { keywords: ['advanced', 'fluent'], width: '75%' },
-    { keywords: ['master', 'native', 'expert'], width: '100%' }
-  ]
-  
-  const match = patterns.find(p => p.keywords.some(k => normalized?.includes(k)))
-  return match?.width || '50%'
-}
-
-const getLevelClass = (level) => {
-  const normalized = level?.toLowerCase()
-  
-  if (normalized?.includes('beginner') || normalized?.includes('basic')) {
-    return 'level-beginner'
-  }
-  if (normalized?.includes('intermediate') || normalized?.includes('conversational')) {
-    return 'level-intermediate'
-  }
-  if (normalized?.includes('advanced') || normalized?.includes('fluent')) {
-    return 'level-advanced'
-  }
-  if (normalized?.includes('master') || normalized?.includes('native')) {
-    return 'level-master'
-  }
-  if (normalized?.includes('expert')) {
-    return 'level-expert'
-  }
-  
-  return 'level-intermediate'
-}
-
-const width = getWidth(level)
+const width = getLevelWidth(level)
 const levelClass = getLevelClass(level)
 ---
 
 <div class={`level-bar ${levelClass} ${className}`}>
-  <div class="bar-container">
-    <div class="bar-fill" style={`width: ${width}`}></div>
-    <div class="bar-glow" style={`width: ${width}`}></div>
-  </div>
+  <div class="bar-fill" style={`width: ${width}`}></div>
+  <div class="bar-glow" style={`width: ${width}`}></div>
   <span class="level-text">{level}</span>
 </div>
 
 <style>
   .level-bar {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto;
     align-items: center;
     gap: var(--theme-spacing-sm);
     margin-top: var(--theme-spacing-xs);
-  }
-
-  .bar-container {
-    flex: 1;
-    height: 12px;
-    border-radius: var(--theme-border-radius-full);
-    overflow: hidden;
     position: relative;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
   }
 
   .bar-fill {
-    height: 100%;
+    height: var(--theme-level-bar-height);
     border-radius: var(--theme-border-radius-full);
     transition: width var(--theme-transition-normal) var(--theme-easing);
     position: relative;
     z-index: 2;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
   }
 
   .bar-glow {
-    height: 100%;
+    height: var(--theme-level-bar-height);
     border-radius: var(--theme-border-radius-full);
     position: absolute;
     top: 0;
@@ -87,7 +45,7 @@ const levelClass = getLevelClass(level)
   .level-text {
     font-size: var(--theme-font-size-sm);
     font-weight: var(--theme-font-weight-semibold);
-    min-width: 80px;
+    min-width: var(--theme-level-bar-text-min-width);
     text-align: right;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   }

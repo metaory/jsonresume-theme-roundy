@@ -20,64 +20,65 @@ function getGPALevel(score) {
 
 <Section title={meta?.themeOptions?.sectionTitles?.education || "Education"} meta={meta} resumeData={resumeData}>
   {education.map(edu => (
-    <Item>
-      <div class="education-header">
-        <div class="education-title-section">
-          <Title>{edu.institution}</Title>
-          <Subtitle>{edu.studyType} in {edu.area}</Subtitle>
-        </div>
-        {edu.score && (
-          <div class="gpa-section">
-            <span class="gpa-label">GPA</span>
-            <LevelBar level={getGPALevel(edu.score)} />
-          </div>
-        )}
-      </div>
+    <Item class="education-item">
+      <Title>{edu.institution}</Title>
+      <Subtitle>{edu.studyType} in {edu.area}</Subtitle>
+      {edu.score && (
+        <>
+          <span class="gpa-label">GPA</span>
+          <LevelBar level={getGPALevel(edu.score)} />
+        </>
+      )}
       <a href={edu.url} target="_blank" rel="noopener">{edu.url}</a>
       <Dates>{edu.startDate} - {edu.endDate || 'Present'}</Dates>
-      <div class="courses">
-        <h4>Courses:</h4>
-        <List>
-          {(edu.courses || []).map(course => <li>{course}</li>)}
-        </List>
-      </div>
+      <h4 class="courses-title">Courses:</h4>
+      <List class="courses-list">
+        {(edu.courses || []).map(course => <li>{course}</li>)}
+      </List>
     </Item>
   ))}
 </Section>
 
 <style>
-  .education-header {
+  .education-item {
     display: grid;
     grid-template-columns: 1fr auto;
-    align-items: start;
-    gap: var(--theme-spacing-md);
-    margin-bottom: var(--theme-spacing-sm);
-  }
-
-  .education-title-section {
-    /* No specific styling needed - grid handles layout */
-  }
-
-  .gpa-section {
-    display: flex;
-    align-items: center;
     gap: var(--theme-spacing-sm);
+    align-items: start;
   }
 
-  .gpa-label {
+  .education-item .title,
+  .education-item .subtitle {
+    margin: 0;
+  }
+
+  .education-item .gpa-label {
+    grid-column: 2;
+    grid-row: 1;
     font-size: var(--theme-font-size-sm);
     color: var(--theme-text-secondary);
     font-weight: var(--theme-font-weight-medium);
     min-width: 30px;
+    justify-self: end;
   }
 
-  .courses h4 {
-    color: var(--theme-text-primary);
-    margin: var(--theme-spacing-sm) 0 var(--theme-spacing-xs) 0;
-  }
-
-  .education-header .level-bar {
+  .education-item .level-bar {
+    grid-column: 2;
+    grid-row: 2;
     margin: 0;
     max-width: 200px;
+    align-self: start;
+  }
+
+  .education-item a,
+  .education-item .dates,
+  .education-item .courses-title,
+  .education-item .courses-list {
+    grid-column: 1;
+  }
+
+  .education-item .courses-title {
+    color: var(--theme-text-primary);
+    margin: var(--theme-spacing-sm) 0 var(--theme-spacing-xs) 0;
   }
 </style> 

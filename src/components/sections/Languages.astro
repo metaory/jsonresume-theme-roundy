@@ -2,23 +2,25 @@
 import Section from '../shared/Section.astro'
 import Item from '../shared/Item.astro'
 import Title from '../shared/Title.astro'
+import { getLevelMapping } from '@lib/levels.js'
 
 const { languages, meta, resumeData } = Astro.props
 
 const getFluencyConfig = (fluency) => {
-  const normalized = fluency?.toLowerCase()
+  const mapping = getLevelMapping(fluency)
+  const dotsMap = {
+    'beginner': 2,
+    'intermediate': 3, 
+    'advanced': 4,
+    'master': 5,
+    'expert': 5
+  }
   
-  const patterns = [
-    { keywords: ['master', 'native'], dots: 5, level: 'master' },
-    { keywords: ['advanced', 'fluent'], dots: 4, level: 'advanced' },
-    { keywords: ['intermediate', 'conversational'], dots: 3, level: 'intermediate' },
-    { keywords: ['beginner', 'basic'], dots: 2, level: 'beginner' }
-  ]
-  
-  const match = patterns.find(p => p.keywords.some(k => normalized?.includes(k)))
-  const config = match || { dots: 3, level: 'intermediate' }
-  
-  return { dots: config.dots, level: config.level, label: fluency }
+  return { 
+    dots: dotsMap[mapping.class.replace('level-', '')] || 3, 
+    level: mapping.class.replace('level-', ''),
+    label: fluency 
+  }
 }
 ---
 

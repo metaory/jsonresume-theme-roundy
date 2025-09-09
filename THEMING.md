@@ -45,6 +45,21 @@ Open Props provides 19 expertly crafted color themes:
 ### `color` (string)
 The color theme to use. Default: `"indigo"`
 
+### `saturation` (number 0..1)
+Global saturation scale applied via CSS relative color. Default: `1`.
+Example:
+```json
+{
+  "meta": {
+    "themeOptions": {
+      "color": "indigo",
+      "saturation": 0.75
+    }
+  }
+}
+```
+This scales the S channel for all theme tokens while preserving Open Props hue/lightness/alpha.
+
 ## Performance Optimized
 
 This theme only loads the specific color theme you choose, not the entire Open Props library. This results in:
