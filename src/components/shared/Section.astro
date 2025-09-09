@@ -2,8 +2,8 @@
 import Divider from './Divider.astro'
 import { getIconForSection } from '@lib/icons.js'
 
-const { title, class: className = '', showDivider = true, dividerVariant = 'subtle', meta, resumeData } = Astro.props;
-const sectionIcon = getIconForSection(title, meta, resumeData)
+const { title, class: className = '', showDivider = true, dividerVariant = 'subtle', meta } = Astro.props;
+const sectionIcon = getIconForSection(title, meta)
 ---
 
 <section class={`section ${className}`}>

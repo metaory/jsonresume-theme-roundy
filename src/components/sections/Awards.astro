@@ -6,10 +6,10 @@ import Subtitle from '@shared/Subtitle.astro'
 import Dates from '@shared/Dates.astro'
 import Description from '@shared/Description.astro'
 
-const { awards, meta, resumeData } = Astro.props
+const { awards, meta } = Astro.props
 ---
 
-<Section title={meta?.themeOptions?.sectionTitles?.awards || "Awards"} meta={meta} resumeData={resumeData}>
+<Section title={meta?.themeOptions?.sectionTitles?.awards || "Awards"} meta={meta}>
   {awards.map(award => (
     <Item>
       <Title>{award.title}</Title>

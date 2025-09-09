@@ -645,13 +645,27 @@
     "canonical": "https://github.com/xorg/jsonresume-theme-legacy",
     "version": "0.1.0",
     "themeOptions": {
-      "theme-hue": 240,
-      "theme-sat": 50,
-      "sections": {
-        "projects": "Open Source",
-        "overview": false
+      "theme": "dark",
+      "color": "blue",
+      "saturation": 0.6,
+      "sectionTitles": {
+        "projects": "Open Source Projects",
+        "work": "Professional Experience",
+        "skills": "Technical Expertise",
+        "interests": "Areas of Interest"
       },
-      "iconMap": {}
+      "icons": {
+        "lua": "tabler:brand-lua-filled",
+        "bash": "tabler:terminal-filled",
+        "javascript": "tabler:brand-javascript-filled",
+        "go": "tabler:brand-golang-filled",
+        "aws": "tabler:brand-aws-filled",
+        "docker": "tabler:brand-docker-filled",
+        "terraform": "tabler:brand-terraform-filled",
+        "ci/cd": "tabler:brand-github-filled",
+        "devops": "tabler:server-filled",
+        "performance": "tabler:gauge-filled"
+      }
     }
   }
 }

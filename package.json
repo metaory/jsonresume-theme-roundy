@@ -8,6 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "check": "astro check",
     "pdf:resume": "chromium --headless --disable-gpu --no-sandbox --disable-dev-shm-usage --no-pdf-header-footer --print-to-pdf=resume.pdf http://localhost:4321/resume",
     "pdf:private": "chromium --headless --disable-gpu --no-sandbox --disable-dev-shm-usage --no-pdf-header-footer --print-to-pdf=private.pdf http://localhost:4321/private",
     "pdf:resume-light": "chromium --headless --disable-gpu --no-sandbox --disable-dev-shm-usage --no-pdf-header-footer --print-to-pdf=resume-light.pdf http://localhost:4321/resume?theme=light",
@@ -29,6 +30,8 @@
     "open-props": "^1.7.16"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.2.3"
+    "@astrojs/check": "^0.9.4",
+    "@biomejs/biome": "^2.2.3",
+    "typescript": "^5.9.2"
   }
 }

@@ -4,7 +4,7 @@ import Item from '../shared/Item.astro'
 import Title from '../shared/Title.astro'
 import { getLevelMapping } from '@lib/levels.js'
 
-const { languages, meta, resumeData } = Astro.props
+const { languages, meta } = Astro.props
 
 const getFluencyConfig = (fluency) => {
   const mapping = getLevelMapping(fluency)
@@ -24,7 +24,7 @@ const getFluencyConfig = (fluency) => {
 }
 ---
 
-<Section title={meta?.themeOptions?.sectionTitles?.languages || "Languages"} meta={meta} resumeData={resumeData}>
+<Section title={meta?.themeOptions?.sectionTitles?.languages || "Languages"} meta={meta}>
   <div class="languages-grid">
     {languages.map(lang => {
       const config = getFluencyConfig(lang.fluency)

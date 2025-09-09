@@ -9,10 +9,10 @@ import List from '@shared/List.astro'
 import Keywords from '@shared/Keywords.astro'
 import LevelBar from '@shared/LevelBar.astro'
 
-const { work, meta, resumeData } = Astro.props
+const { work, meta } = Astro.props
 ---
 
-<Section title={meta?.themeOptions?.sectionTitles?.work || "Work Experience"} meta={meta} resumeData={resumeData}>
+<Section title={meta?.themeOptions?.sectionTitles?.work || "Work Experience"} meta={meta}>
   {work.map(job => (
     <Item class="work-item">
       <Title>{job.name}</Title>
@@ -29,7 +29,6 @@ const { work, meta, resumeData } = Astro.props
         variant="primary"
         size="sm"
         meta={meta}
-        resumeData={resumeData}
       />
     </Item>
   ))}

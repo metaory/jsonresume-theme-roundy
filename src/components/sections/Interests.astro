@@ -6,13 +6,13 @@ import Keywords from '@shared/Keywords.astro'
 import LevelBar from '@shared/LevelBar.astro'
 import { getIconForKeyword } from '@lib/icons.js'
 
-const { interests, meta, resumeData } = Astro.props
+const { interests, meta } = Astro.props
 ---
 
-<Section title={meta?.themeOptions?.sectionTitles?.interests || "Interests"} meta={meta} resumeData={resumeData}>
+<Section title={meta?.themeOptions?.sectionTitles?.interests || "Interests"} meta={meta}>
   <div class="interests-grid">
     {interests.map(interest => {
-      const interestIcon = getIconForKeyword(interest.name, meta, resumeData)
+      const interestIcon = getIconForKeyword(interest.name, meta)
       return (
         <Item>
           <div class="interest-header">
@@ -27,7 +27,6 @@ const { interests, meta, resumeData } = Astro.props
             variant="outline"
             size="sm"
             meta={meta}
-            resumeData={resumeData}
           />
         </Item>
       )

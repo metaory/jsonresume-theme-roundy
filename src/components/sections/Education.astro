@@ -7,7 +7,7 @@ import Dates from '@shared/Dates.astro'
 import List from '@shared/List.astro'
 import LevelBar from '@shared/LevelBar.astro'
 
-const { education, meta, resumeData } = Astro.props
+const { education, meta } = Astro.props
 
 function getGPALevel(score) {
   const gpa = parseFloat(score);
@@ -18,7 +18,7 @@ function getGPALevel(score) {
 }
 ---
 
-<Section title={meta?.themeOptions?.sectionTitles?.education || "Education"} meta={meta} resumeData={resumeData}>
+<Section title={meta?.themeOptions?.sectionTitles?.education || "Education"} meta={meta}>
   {education.map(edu => (
     <Item class="education-item">
       <Title>{edu.institution}</Title>

@@ -7,10 +7,10 @@ import Dates from '@shared/Dates.astro'
 import Description from '@shared/Description.astro'
 import List from '@shared/List.astro'
 
-const { volunteer, meta, resumeData } = Astro.props
+const { volunteer, meta } = Astro.props
 ---
 
-<Section title={meta?.themeOptions?.sectionTitles?.volunteer || "Volunteer"} meta={meta} resumeData={resumeData}>
+<Section title={meta?.themeOptions?.sectionTitles?.volunteer || "Volunteer"} meta={meta}>
   {volunteer.map(vol => (
     <Item>
       <Title>{vol.organization}</Title>

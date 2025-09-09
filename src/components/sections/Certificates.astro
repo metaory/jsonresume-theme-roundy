@@ -5,10 +5,10 @@ import Title from '@shared/Title.astro'
 import Subtitle from '@shared/Subtitle.astro'
 import Dates from '@shared/Dates.astro'
 
-const { certificates, meta, resumeData } = Astro.props
+const { certificates, meta } = Astro.props
 ---
 
-<Section title={meta?.themeOptions?.sectionTitles?.certificates || "Certificates"} meta={meta} resumeData={resumeData}>
+<Section title={meta?.themeOptions?.sectionTitles?.certificates || "Certificates"} meta={meta}>
   {certificates.map(cert => (
     <Item>
       <Title>{cert.name}</Title>

@@ -4,10 +4,10 @@ import Item from '@shared/Item.astro'
 import Title from '@shared/Title.astro'
 import Description from '@shared/Description.astro'
 
-const { references, meta, resumeData } = Astro.props
+const { references, meta } = Astro.props
 ---
 
-<Section title={meta?.themeOptions?.sectionTitles?.references || "References"} meta={meta} resumeData={resumeData}>
+<Section title={meta?.themeOptions?.sectionTitles?.references || "References"} meta={meta}>
   {references.map(ref => (
     <Item>
       <Title>{ref.name}</Title>

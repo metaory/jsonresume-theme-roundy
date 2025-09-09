@@ -5,10 +5,10 @@ import Title from '@shared/Title.astro'
 import Keywords from '@shared/Keywords.astro'
 import LevelBar from '@shared/LevelBar.astro'
 
-const { skills, meta, resumeData } = Astro.props
+const { skills, meta } = Astro.props
 ---
 
-<Section title={meta?.themeOptions?.sectionTitles?.skills || "Skills"} meta={meta} resumeData={resumeData}>
+<Section title={meta?.themeOptions?.sectionTitles?.skills || "Skills"} meta={meta}>
   <div class="skills-grid">
     {skills.map(skill => (
       <Item class="skill-item">
@@ -19,7 +19,6 @@ const { skills, meta, resumeData } = Astro.props
           variant="default"
           size="sm"
           meta={meta}
-          resumeData={resumeData}
         />
       </Item>
     ))}

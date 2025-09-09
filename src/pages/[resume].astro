@@ -123,6 +123,7 @@ const { basics, meta, ...sections } = resumeData
         const isDark = theme === 'dark'
         
         html.setAttribute('data-theme', theme)
+        html.setAttribute('data-theme-color', color)
         html.style.backgroundColor = isDark ? 'var(--theme-bg-dark)' : 'var(--theme-bg-light)'
         html.style.setProperty('--sat', String(saturation))
         html.style.setProperty('--theme-bg-primary', isDark ? 'var(--theme-bg-dark)' : 'var(--theme-bg-light)')
@@ -137,6 +138,11 @@ const { basics, meta, ...sections } = resumeData
       }
 
       const getCurrentColor = () => {
+        // First try to get from data attribute (most reliable)
+        const dataColor = document.documentElement.getAttribute('data-theme-color')
+        if (dataColor) return dataColor
+        
+        // Fallback: try to detect from CSS variable
         const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--theme-color-primary')
         for (const color of OPEN_PROPS_COLORS) {
           if (primaryColor.includes(color)) return color
