@@ -1,7 +1,7 @@
 ---
-import ResumeLayout from '@layouts/ResumeLayout.astro'
 import Basics from '@sections/Basics.astro'
 import Divider from '@shared/Divider.astro'
+import Layout from '@layouts/Layout.astro'
 import { getAvailableResumes, getResumeData } from '@lib/resume.js'
 
 // Fontsource imports - these automatically add @font-face rules
@@ -32,15 +32,15 @@ const resumeData = await getResumeData(validResume)
 const sectionModules = import.meta.glob('../components/sections/!(Basics).astro', { eager: true })
 
 // Create component mapping from imported components
-const components = {}
+const components: Record<string, any> = {}
 for (const [filePath, module] of Object.entries(sectionModules)) {
   // Extract component name from file path (e.g., "Work" from "Work.astro")
   const fileName = filePath.split('/').pop()?.replace('.astro', '')
 
   if (fileName && fileName !== 'Basics') {
-    // Convert to lowercase for mapping (e.g., "Work" -> "work")
     const key = fileName.toLowerCase()
-    components[key] = (module as any).default
+    const mod = module as any
+    components[key] = mod.default || mod
   }
 }
 
@@ -51,7 +51,7 @@ const initialSat = meta?.themeOptions?.sat ?? themeDefaults.sat
 const initialDark = typeof meta?.themeOptions?.dark === 'boolean' ? meta.themeOptions.dark : undefined
 ---
 
-<ResumeLayout 
+<Layout 
   title={basics?.name || 'Resume'}
   description="Professional Resume"
   initialHue={initialHue}
@@ -76,4 +76,4 @@ const initialDark = typeof meta?.themeOptions?.dark === 'boolean' ? meta.themeOp
     }
     return null
   })}
-</ResumeLayout> 
+</Layout> 

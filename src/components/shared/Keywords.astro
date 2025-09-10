@@ -1,5 +1,5 @@
 ---
-import Tag from './Tag.astro'
+import Tag from '@shared/Tag.astro'
 import { getIconForKeyword } from '@lib/icons.js'
 
 const { 
@@ -12,7 +12,7 @@ const {
 ---
 
 <div class={`keywords ${className}`}>
-  {keywords.map(keyword => (
+  {keywords.map((keyword: string) => (
     <Tag 
       text={keyword} 
       icon={getIconForKeyword(keyword, meta)}

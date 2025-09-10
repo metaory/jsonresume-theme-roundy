@@ -1,14 +1,15 @@
 ---
-import Section from '../shared/Section.astro'
-import Item from '../shared/Item.astro'
-import Title from '../shared/Title.astro'
+import Section from '@shared/Section.astro'
+import Item from '@shared/Item.astro'
+import Title from '@shared/Title.astro'
 import { getLevelMapping } from '@lib/levels.js'
 
 const { languages, meta } = Astro.props
 
-const getFluencyConfig = (fluency) => {
+/** @param {string} fluency */
+const getFluencyConfig = (fluency: string) => {
   const mapping = getLevelMapping(fluency)
-  const dotsMap = {
+  const dotsMap: Record<string, number> = {
     'beginner': 2,
     'intermediate': 3, 
     'advanced': 4,
@@ -26,7 +27,7 @@ const getFluencyConfig = (fluency) => {
 
 <Section title={meta?.themeOptions?.sectionTitles?.languages || "Languages"} meta={meta}>
   <div class="languages-grid">
-    {languages.map(lang => {
+    {languages.map((lang: { language: string, fluency: string }) => {
       const config = getFluencyConfig(lang.fluency)
       return (
         <Item>

@@ -1,6 +1,5 @@
 ---
 // Theme picker with hue and saturation sliders
-import pickerClientUrl from './picker.client.js?url'
 ---
 
 <div class="theme-picker">
@@ -24,8 +23,36 @@ import pickerClientUrl from './picker.client.js?url'
   </div>
 </div>
 
+<script>
+import { readHue, readSat, theme } from '@lib/theme.js'
 
-<script type="module" src={pickerClientUrl}></script>
+const hueEl = document.getElementById('hue')
+const satEl = document.getElementById('sat')
+const hueVal = document.getElementById('hue-value')
+const satVal = document.getElementById('sat-value')
+
+if (hueEl instanceof HTMLInputElement && satEl instanceof HTMLInputElement && hueVal && satVal) {
+  const initHue = readHue()
+  const initSat = readSat()
+  hueEl.value = String(initHue)
+  satEl.value = String(initSat)
+  hueVal.textContent = `${initHue}°`
+  satVal.textContent = `${initSat}%`
+
+  const onChange = () => {
+    const h = Number(hueEl.value)
+    const s = Number(satEl.value)
+    hueVal.textContent = `${h}°`
+    satVal.textContent = `${s}%`
+    document.documentElement.setAttribute('data-theme-manual', 'true')
+    theme.hue = h
+    theme.sat = s
+  }
+
+  hueEl.addEventListener('input', onChange)
+  satEl.addEventListener('input', onChange)
+}
+</script>
 
 <style>
   .theme-picker {

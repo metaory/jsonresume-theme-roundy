@@ -79,6 +79,9 @@ main {
   overflow-x: hidden;
 }
 
+.resume{max-width:800px;margin:0 auto;padding:var(--space-xl);overflow-x:hidden}
+@media (max-width:768px){.resume{padding:var(--space-lg)}}
+
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
   margin: 0 0 var(--space-md) 0;

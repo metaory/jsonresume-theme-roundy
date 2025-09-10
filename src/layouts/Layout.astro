@@ -2,20 +2,8 @@
 import ThemeToggle from '@components/ThemeToggle.astro';
 import ThemePicker from '@components/ThemePicker.astro';
 import ResumeNav from '@components/ResumeNav.astro';
-import iconifyUrl from 'iconify-icon?url';
-import initThemeUrl from '@lib/init-theme.js?url';
 
-export interface Props {
-  title?: string;
-  description?: string;
-  initialHue?: number;
-  initialSat?: number;
-  initialDark?: boolean;
-  currentResume?: string;
-  availableResumes?: string[];
-}
-
-const { 
+const {
   title = 'Resume',
   description = 'Professional Resume',
   initialHue = 240,
@@ -35,16 +23,16 @@ const {
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <script type="module" src={iconifyUrl}></script>
-
     <style is:global>
-      @import '../styles/global.css';
-      @import '../styles/fonts.css';
+      @import '@styles/global.css';
+      @import '@styles/fonts.css';
     </style>
 
-    <style>.resume{max-width:800px;margin:0 auto;padding:var(--space-xl);overflow-x:hidden}@media (max-width:768px){.resume{padding:var(--space-lg)}}</style>
-
-    <script type="module" src={initThemeUrl}></script>
+    <script>
+      import { initTheme } from '@lib/theme.js'
+      import 'iconify-icon';
+      initTheme()
+    </script>
   </head>
 
   <body>

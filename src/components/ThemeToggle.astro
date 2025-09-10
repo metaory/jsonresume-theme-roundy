@@ -1,6 +1,5 @@
 ---
 // Theme toggle component
-import toggleClientUrl from './toggle.client.js?url'
 ---
 
 <button class="theme-toggle" aria-label="Toggle theme">
@@ -8,7 +7,17 @@ import toggleClientUrl from './toggle.client.js?url'
     <iconify-icon width="48" height="48" class="dark-icon" icon="line-md:moon-filled-alt-to-sunny-filled-loop-transition"></iconify-icon>
 </button>
 
-<script type="module" src={toggleClientUrl}></script>
+<script>
+import { toggleThemeMode } from '@lib/theme.js'
+
+const toggle = document.querySelector('.theme-toggle')
+if (toggle) {
+  toggle.addEventListener('click', () => {
+    toggleThemeMode()
+    document.documentElement.setAttribute('data-theme-manual', 'true')
+  })
+}
+</script>
 
 <style>
   .theme-toggle {
