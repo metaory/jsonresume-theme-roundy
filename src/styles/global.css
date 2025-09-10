@@ -102,11 +102,14 @@ a:hover {
   color: var(--link-hover);
 }
 
-/* Color scheme hint only; actual colors set via JS */
-@media (prefers-color-scheme: dark) {
-  :root { color-scheme: dark; }
+/* iconify-icon base */
+iconify-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
 }
 
+/* Color scheme controlled only by data-theme attribute */
 [data-theme="dark"] { color-scheme: dark; }
 [data-theme="light"] { color-scheme: light; }
 

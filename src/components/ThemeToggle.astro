@@ -1,11 +1,14 @@
 ---
 // Theme toggle component
+import toggleClientUrl from './toggle.client.js?url'
 ---
 
 <button class="theme-toggle" aria-label="Toggle theme">
     <iconify-icon width="48" height="48" class="light-icon" icon="line-md:sunny-filled-loop-to-moon-filled-alt-loop-transition"></iconify-icon>
     <iconify-icon width="48" height="48" class="dark-icon" icon="line-md:moon-filled-alt-to-sunny-filled-loop-transition"></iconify-icon>
 </button>
+
+<script type="module" src={toggleClientUrl}></script>
 
 <style>
   .theme-toggle {
@@ -27,8 +30,6 @@
     align-items: center;
     justify-content: center;
   }
-
-  /* keep hover minimal for dev only */
   .theme-toggle:hover { box-shadow: var(--shadow-lg); }
 
   .theme-toggle iconify-icon {
@@ -41,49 +42,12 @@
     transition: opacity var(--transition);
   }
 
-  .light-icon {
-    color: var(--accent);
-  }
-
-  .dark-icon {
-    color: var(--primary);
-  }
-
-  /* CSS-driven icon swap based on theme */
+  .light-icon { color: var(--accent); }
+  .dark-icon { color: var(--primary); }
   .light-icon { opacity: 1; }
   .dark-icon { opacity: 0; }
   [data-theme="dark"] .light-icon { opacity: 0; }
   [data-theme="dark"] .dark-icon { opacity: 1; }
 
-  @media print {
-    .theme-toggle {
-      display: none !important;
-    }
-  }
+  @media print { .theme-toggle { display: none !important; } }
 </style>
-
-<script>
-  const toggle = document.querySelector('.theme-toggle');
-  import { toggleThemeMode, reapplyForCurrentMode, theme } from "@lib/theme.js";
-
-  toggle?.addEventListener('click', () => {
-    const mode = toggleThemeMode();
-    theme.dark = mode === 'dark';
-    document.documentElement.setAttribute('data-theme-manual', 'true');
-  });
-
-  // Respect pre-set theme (from config or query) and then init icon
-  const preset = document.documentElement.getAttribute('data-theme');
-  if (!preset) {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
-  }
-
-  // Listen for system theme changes
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-    if (!document.documentElement.hasAttribute('data-theme-manual')) {
-      document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-      reapplyForCurrentMode();
-    }
-  });
-</script>

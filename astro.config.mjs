@@ -10,6 +10,7 @@ export default defineConfig({
         '@components': '/src/components',
         '@shared': '/src/components/shared',
         '@sections': '/src/components/sections',
+        '@layouts': '/src/layouts',
         '@lib': '/src/lib',
         '@styles': '/src/styles',
         '@data': '/src/data'

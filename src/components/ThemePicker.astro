@@ -1,5 +1,6 @@
 ---
 // Theme picker with hue and saturation sliders
+import pickerClientUrl from './picker.client.js?url'
 ---
 
 <div class="theme-picker">
@@ -23,6 +24,9 @@
   </div>
 </div>
 
+
+<script type="module" src={pickerClientUrl}></script>
+
 <style>
   .theme-picker {
     position: fixed;
@@ -43,9 +47,7 @@
     box-shadow: var(--shadow-lg);
   }
 
-  .theme-picker:hover {
-    right: -4px;
-  }
+  .theme-picker:hover { right: -4px; }
 
   .picker-tab {
     background: none;
@@ -61,7 +63,7 @@
     position: relative;
   }
 
-  iconify-icon {
+  .theme-picker iconify-icon {
     height: 48px;
     width: 48px;
     color: white;
@@ -81,47 +83,13 @@
     filter: blur(8px);
   }
 
-  @keyframes pulse {
-    0%, 100% {
-      opacity: 0.7;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 1;
-      transform: scale(1.2);
-    }
-  }
+  @keyframes pulse { 0%, 100% { opacity: 0.7; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
+  @keyframes blobRotate { to { transform: rotate(360deg); } }
 
-  @keyframes blobRotate {
-    to { transform: rotate(360deg); }
-  }
-
-  .controls {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-lg);
-  }
-
-  .control-group {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
-  }
-
-  .control-label {
-    font-size: var(--text-sm);
-    color: var(--text-muted);
-    text-transform: lowercase;
-    font-weight: 500;
-  }
-
-  .control-value {
-    font-size: var(--text-sm);
-    color: var(--text);
-    font-weight: 600;
-    text-align: right;
-  }
-
+  .controls { display: flex; flex-direction: column; gap: var(--space-lg); }
+  .control-group { display: flex; flex-direction: column; gap: var(--space-sm); }
+  .control-label { font-size: var(--text-sm); color: var(--text-muted); text-transform: lowercase; font-weight: 500; }
+  .control-value { font-size: var(--text-sm); color: var(--text); font-weight: 600; text-align: right; }
 
   .hue-slider, .sat-slider {
     appearance: none;
@@ -134,23 +102,18 @@
   }
 
   .hue-slider {
-    background: linear-gradient(to right, 
-      hsl(0, 100%, 50%), 
-      hsl(60, 100%, 50%), 
-      hsl(120, 100%, 50%), 
-      hsl(180, 100%, 50%), 
-      hsl(240, 100%, 50%), 
-      hsl(300, 100%, 50%), 
+    background: linear-gradient(to right,
+      hsl(0, 100%, 50%),
+      hsl(60, 100%, 50%),
+      hsl(120, 100%, 50%),
+      hsl(180, 100%, 50%),
+      hsl(240, 100%, 50%),
+      hsl(300, 100%, 50%),
       hsl(360, 100%, 50%)
     );
   }
 
-  .sat-slider {
-    background: linear-gradient(to right, 
-      hsl(var(--hue), 0%, 50%), 
-      hsl(var(--hue), 100%, 50%)
-    );
-  }
+  .sat-slider { background: linear-gradient(to right, hsl(var(--hue), 0%, 50%), hsl(var(--hue), 100%, 50%)); }
 
   .hue-slider::-webkit-slider-thumb,
   .sat-slider::-webkit-slider-thumb {
@@ -166,10 +129,7 @@
   }
 
   .hue-slider::-webkit-slider-thumb:hover,
-  .sat-slider::-webkit-slider-thumb:hover {
-    transform: scale(1.1);
-    box-shadow: var(--shadow-lg);
-  }
+  .sat-slider::-webkit-slider-thumb:hover { transform: scale(1.1); box-shadow: var(--shadow-lg); }
 
   .hue-slider::-moz-range-thumb,
   .sat-slider::-moz-range-thumb {
@@ -184,85 +144,17 @@
   }
 
   .hue-slider::-moz-range-track,
-  .sat-slider::-moz-range-track {
-    height: 8px;
-    border-radius: var(--radius);
-    border: none;
-  }
-
+  .sat-slider::-moz-range-track { height: 8px; border-radius: var(--radius); border: none; }
 
   @media (max-width: 768px) {
-    .theme-picker {
-      right: -200px;
-      transform: translateY(-50%) scale(0.9);
-      width: 240px;
-      padding: var(--space-md);
-    }
-    
-    .theme-picker:hover {
-      right: -4px;
-      transform: translateY(-50%) scale(1);
-    }
+    .theme-picker { right: -200px; transform: translateY(-50%) scale(0.9); width: 240px; padding: var(--space-md); }
+    .theme-picker:hover { right: -4px; transform: translateY(-50%) scale(1); }
   }
 
   @media (max-width: 480px) {
-    .theme-picker {
-      right: -180px;
-      transform: translateY(-50%) scale(0.8);
-      width: 200px;
-    }
-    
-    .theme-picker:hover {
-      right: -4px;
-      transform: translateY(-50%) scale(0.9);
-    }
+    .theme-picker { right: -180px; transform: translateY(-50%) scale(0.8); width: 200px; }
+    .theme-picker:hover { right: -4px; transform: translateY(-50%) scale(0.9); }
   }
 
-  @media print {
-    .theme-picker {
-      display: none !important;
-    }
-  }
+  @media print { .theme-picker { display: none !important; } }
 </style>
-
-<script>
-  import { applyThemeAuto, readHue, readSat, theme } from "@lib/theme.js";
-
-  const initSliders = () => {
-    const hueEl = document.getElementById('hue');
-    const satEl = document.getElementById('sat');
-    const hueVal = document.getElementById('hue-value');
-    const satVal = document.getElementById('sat-value');
-
-    if (hueEl instanceof HTMLInputElement && satEl instanceof HTMLInputElement && hueVal && satVal) {
-      let raf = 0;
-
-      const onChange = () => {
-        cancelAnimationFrame(raf);
-        raf = requestAnimationFrame(() => {
-          document.documentElement.setAttribute('data-theme-manual', 'true');
-          const h = Number(hueEl.value);
-          const s = Number(satEl.value);
-          hueVal.textContent = `${h}°`;
-          satVal.textContent = `${s}%`;
-          theme.hue = h;
-          theme.sat = s;
-        });
-      };
-
-      hueEl.addEventListener('input', onChange);
-      satEl.addEventListener('input', onChange);
-
-      // Sync initial from CSS in case values were set via config
-      const initHue = readHue();
-      const initSat = readSat();
-      hueEl.value = String(initHue);
-      satEl.value = String(initSat);
-      hueVal.textContent = `${initHue}°`;
-      satVal.textContent = `${initSat}%`;
-      // gradient uses CSS var(--hue) so no JS update needed
-    }
-  };
-
-  initSliders();
-</script>

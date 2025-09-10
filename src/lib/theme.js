@@ -74,30 +74,21 @@ export const applyTheme = (h, s, isDark, root = document.documentElement) => {
   for (const [k, v] of Object.entries(vars)) root.style.setProperty(k, v)
 }
 
-export const applyThemeAuto = (h, s, root = document.documentElement) => {
-  const isDark = root.getAttribute('data-theme') === 'dark'
-  applyTheme(h, s, isDark, root)
-}
-
 export const setThemeAttr = (isDark, root = document.documentElement) => {
   root.setAttribute('data-theme', isDark ? 'dark' : 'light')
 }
 
-export const detectMode = (darkOpt) => {
-  const params = new URLSearchParams(location.search)
-  const q = params.get('theme')
-  if (q === 'dark' || q === 'light') return q === 'dark'
+export const detectMode = (darkOpt, root = document.documentElement) => {
   if (typeof darkOpt === 'boolean') return darkOpt
-  const attr = document.documentElement.getAttribute('data-theme')
-  if (attr) return attr === 'dark'
-  if (window.matchMedia) return window.matchMedia('(prefers-color-scheme: dark)').matches
-  return false
+  return (root.getAttribute('data-theme') || '').toLowerCase() === 'dark'
 }
 
-export const initTheme = (h, s, darkOpt) => {
-  const isDark = detectMode(darkOpt)
-  setThemeAttr(isDark)
-  applyTheme(h, s, isDark)
+export const initTheme = (h, s, darkOpt, root = document.documentElement) => {
+  const hue = typeof h === 'number' ? clamp(Math.round(h), 0, 360) : readHue(root)
+  const sat = typeof s === 'number' ? clamp(Math.round(s), 0, 100) : readSat(root)
+  const isDark = detectMode(darkOpt, root)
+  setThemeAttr(isDark, root)
+  applyTheme(hue, sat, isDark, root)
 }
 
 export const toggleThemeMode = () => {
@@ -106,13 +97,6 @@ export const toggleThemeMode = () => {
   theme.dark = nextIsDark
   return nextIsDark ? 'dark' : 'light'
 }
-
-export const reapplyForCurrentMode = () => {
-  const root = document.documentElement
-  applyThemeAuto(readHue(root), readSat(root), root)
-}
-
-// No longer needed; the saturation slider uses CSS var(--hue) directly
 
 const rootElement = document.documentElement
 const isDarkAttr = (root = rootElement) => root.getAttribute('data-theme') === 'dark'
@@ -144,4 +128,7 @@ export const theme = new Proxy(initialState, {
     }
   }
 })
+
+ 
+
 

@@ -1,8 +1,6 @@
 ---
+import ResumeLayout from '@layouts/ResumeLayout.astro'
 import Basics from '@sections/Basics.astro'
-import ThemeToggle from '@components/ThemeToggle.astro'
-import ThemePicker from '@components/ThemePicker.astro'
-import ResumeNav from '@components/ResumeNav.astro'
 import Divider from '@shared/Divider.astro'
 import { getAvailableResumes, getResumeData } from '@lib/resume.js'
 
@@ -53,70 +51,29 @@ const initialSat = meta?.themeOptions?.sat ?? themeDefaults.sat
 const initialDark = typeof meta?.themeOptions?.dark === 'boolean' ? meta.themeOptions.dark : undefined
 ---
 
-<html lang="en" data-theme={initialDark === true ? 'dark' : initialDark === false ? 'light' : undefined} style={`--hue: ${initialHue}; --sat: ${initialSat};`}>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{basics?.name || 'Resume'}</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<ResumeLayout 
+  title={basics?.name || 'Resume'}
+  description="Professional Resume"
+  initialHue={initialHue}
+  initialSat={initialSat}
+  initialDark={initialDark}
+  currentResume={validResume}
+  availableResumes={availableResumes}
+>
+  <Basics basics={basics} meta={meta} />
 
-    <style is:global>
-      @import '../styles/global.css';
-      @import '../styles/fonts.css';
+  <Divider variant="default" />
+  <Divider variant="subtle" />
+  <Divider variant="accent" />
+  <Divider variant="gradient" />
 
-      iconify-icon {
-        display: inline-block;
-        width: 1em;
-        height: 1em;
-      }
-    </style>
-    
-    <script>
-      import "iconify-icon";
-    </script>
-    <script is:inline define:vars={{hue: initialHue, sat: initialSat, dark: initialDark}}>
-      import { initTheme } from "@lib/theme.js";
-      initTheme(hue, sat, dark);
-    </script>
-  </head>
+  {Object.entries(sections).map(([key, data]) => {
+    const Component = components[key]
 
-  <body>
-    <ThemeToggle />
-    {import.meta.env.DEV && <ThemePicker />}
-    <ResumeNav currentResume={validResume} availableResumes={availableResumes} />
-
-    <main class="resume">
-      <Basics basics={basics} meta={meta} />
-
-      <Divider variant="default" />
-      <Divider variant="subtle" />
-      <Divider variant="accent" />
-      <Divider variant="gradient" />
-
-      {Object.entries(sections).map(([key, data]) => {
-        const Component = components[key]
-
-        if (Component && data) {
-          const props = { [key]: data, meta, resumeData }
-          return <Component {...props} />
-        }
-        return null
-      })}
-    </main>
-  </body>
-</html>
-
-<style>
-  .resume {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: var(--space-xl);
-    overflow-x: hidden;
-  }
-
-  @media (max-width: 768px) {
-    .resume {
-      padding: var(--space-lg);
+    if (Component && data) {
+      const props = { [key]: data, meta, resumeData }
+      return <Component {...props} />
     }
-  }
-</style> 
+    return null
+  })}
+</ResumeLayout> 
