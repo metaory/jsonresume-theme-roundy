@@ -99,7 +99,7 @@ a {
 }
 
 a:hover {
-  color: var(--accent);
+  color: var(--link-hover);
 }
 
 /* Color scheme hint only; actual colors set via JS */

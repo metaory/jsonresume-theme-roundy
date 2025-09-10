@@ -226,7 +226,7 @@
 </style>
 
 <script>
-  import { applyThemeAuto, updateSatGradient, readHue, readSat } from "@lib/theme.js";
+  import { applyThemeAuto, readHue, readSat, theme } from "@lib/theme.js";
 
   const initSliders = () => {
     const hueEl = document.getElementById('hue');
@@ -245,8 +245,8 @@
           const s = Number(satEl.value);
           hueVal.textContent = `${h}°`;
           satVal.textContent = `${s}%`;
-          applyThemeAuto(h, s);
-          updateSatGradient(satEl, h);
+          theme.hue = h;
+          theme.sat = s;
         });
       };
 
@@ -260,7 +260,7 @@
       satEl.value = String(initSat);
       hueVal.textContent = `${initHue}°`;
       satVal.textContent = `${initSat}%`;
-      updateSatGradient(satEl, initHue);
+      // gradient uses CSS var(--hue) so no JS update needed
     }
   };
 

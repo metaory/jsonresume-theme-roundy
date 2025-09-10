@@ -1,15 +1,13 @@
 ---
 const { currentResume = 'resume.json', availableResumes = [] } = Astro.props
 
-// Generate resume files array from available resumes
 const resumeFiles = availableResumes.map(name => ({
-	name: name.charAt(0).toUpperCase() + name.slice(1), // Capitalize first letter
-	file: `${name}.json`,
+	name: name.charAt(0).toUpperCase() + name.slice(1),
 }))
 ---
 
 <nav class="resume-nav">
-  {resumeFiles.map(({ name, file }) => (
+  {resumeFiles.map(({ name }) => (
     <a
       href={`/${name.toLowerCase()}`}
       class={`nav-link ${currentResume === name.toLowerCase() ? 'active' : ''}`}
@@ -41,7 +39,7 @@ const resumeFiles = availableResumes.map(name => ({
     color: var(--text-muted);
     font-size: var(--text-sm);
     font-weight: 500;
-    transition: all var(--transition) var(--transition);
+    transition: all var(--transition);
     box-shadow: 0 0 0 1px transparent;
   }
 

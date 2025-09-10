@@ -40,10 +40,9 @@ export const computeColors = (h, s, isDark) => {
   const satText = Math.round(clamp(s * 0.1, 5, 20))
   const text = isDark ? `hsl(${h} 5% 95%)` : `hsl(${h} ${satText}% 15%)`
   const textMuted = isDark ? `hsl(${h} 8% 80%)` : `hsl(${h} ${Math.round(clamp(s * 0.1, 6, 20))}% 35%)`
+  const sInc = Math.min(100, s + 10)
   const link = isDark ? `hsl(${h} ${s}% 70%)` : `hsl(${h} ${s}% 50%)`
-  const linkHover = isDark
-    ? `hsl(${h} ${Math.min(100, s + 10)}% 75%)`
-    : `hsl(${h} ${Math.min(100, s + 10)}% 45%)`
+  const linkHover = isDark ? `hsl(${h} ${sInc}% 75%)` : `hsl(${h} ${sInc}% 45%)`
 
   return {
     primary, secondary, accent,
@@ -52,21 +51,27 @@ export const computeColors = (h, s, isDark) => {
   }
 }
 
+let lastApplied = { h: undefined, s: undefined, dark: undefined }
 export const applyTheme = (h, s, isDark, root = document.documentElement) => {
+  if (lastApplied.h === h && lastApplied.s === s && lastApplied.dark === isDark) return
+  lastApplied = { h, s, dark: isDark }
   const c = computeColors(h, s, isDark)
-  root.style.setProperty('--hue', String(h))
-  root.style.setProperty('--sat', String(s))
-  root.style.setProperty('--hue-secondary', String(c.secondaryHue))
-  root.style.setProperty('--hue-accent', String(c.accentHue))
-  root.style.setProperty('--primary', c.primary)
-  root.style.setProperty('--secondary', c.secondary)
-  root.style.setProperty('--accent', c.accent)
-  root.style.setProperty('--bg', c.bg)
-  root.style.setProperty('--surface', c.surface)
-  root.style.setProperty('--text', c.text)
-  root.style.setProperty('--text-muted', c.textMuted)
-  root.style.setProperty('--link', c.link)
-  root.style.setProperty('--link-hover', c.linkHover)
+  const vars = {
+    '--hue': String(h),
+    '--sat': String(s),
+    '--hue-secondary': String(c.secondaryHue),
+    '--hue-accent': String(c.accentHue),
+    '--primary': c.primary,
+    '--secondary': c.secondary,
+    '--accent': c.accent,
+    '--bg': c.bg,
+    '--surface': c.surface,
+    '--text': c.text,
+    '--text-muted': c.textMuted,
+    '--link': c.link,
+    '--link-hover': c.linkHover
+  }
+  for (const [k, v] of Object.entries(vars)) root.style.setProperty(k, v)
 }
 
 export const applyThemeAuto = (h, s, root = document.documentElement) => {
@@ -85,6 +90,7 @@ export const detectMode = (darkOpt) => {
   if (typeof darkOpt === 'boolean') return darkOpt
   const attr = document.documentElement.getAttribute('data-theme')
   if (attr) return attr === 'dark'
+  if (window.matchMedia) return window.matchMedia('(prefers-color-scheme: dark)').matches
   return false
 }
 
@@ -97,8 +103,7 @@ export const initTheme = (h, s, darkOpt) => {
 export const toggleThemeMode = () => {
   const root = document.documentElement
   const nextIsDark = root.getAttribute('data-theme') !== 'dark'
-  setThemeAttr(nextIsDark, root)
-  applyThemeAuto(readHue(root), readSat(root), root)
+  theme.dark = nextIsDark
   return nextIsDark ? 'dark' : 'light'
 }
 
@@ -107,9 +112,36 @@ export const reapplyForCurrentMode = () => {
   applyThemeAuto(readHue(root), readSat(root), root)
 }
 
-export const updateSatGradient = (inputEl, h) => {
-  if (inputEl) {
-    inputEl.style.background = `linear-gradient(to right, hsl(${h}, 0%, 50%), hsl(${h}, 100%, 50%))`
+// No longer needed; the saturation slider uses CSS var(--hue) directly
+
+const rootElement = document.documentElement
+const isDarkAttr = (root = rootElement) => root.getAttribute('data-theme') === 'dark'
+const initialState = { hue: readHue(rootElement), sat: readSat(rootElement), dark: isDarkAttr(rootElement) }
+export const theme = new Proxy(initialState, {
+  set(target, prop, value) {
+    switch (prop) {
+      case 'hue': {
+        const h = clamp(Math.round(value), 0, 360)
+        target.hue = h
+        applyTheme(h, target.sat, target.dark, rootElement)
+        return true
+      }
+      case 'sat': {
+        const s = clamp(Math.round(value), 0, 100)
+        target.sat = s
+        applyTheme(target.hue, s, target.dark, rootElement)
+        return true
+      }
+      case 'dark': {
+        const isDark = Boolean(value)
+        setThemeAttr(isDark, rootElement)
+        target.dark = isDark
+        applyTheme(target.hue, target.sat, isDark, rootElement)
+        return true
+      }
+      default:
+        return false
+    }
   }
-}
+})
 
