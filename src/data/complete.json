@@ -645,9 +645,9 @@
     "canonical": "https://github.com/xorg/jsonresume-theme-legacy",
     "version": "0.1.0",
     "themeOptions": {
-      "theme": "dark",
-      "color": "blue",
-      "saturation": 0.6,
+      "hue": 240,
+      "sat": 60,
+      "dark": false,
       "sectionTitles": {
         "projects": "Open Source Projects",
         "work": "Professional Experience",

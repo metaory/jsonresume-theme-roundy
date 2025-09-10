@@ -39,12 +39,12 @@ const tagProps = href ? { href, target: '_blank', rel: 'noopener' } : {};
   .tag {
     display: inline-flex;
     align-items: center;
-    gap: var(--theme-spacing-xs);
-    border-radius: var(--theme-border-radius-md);
+    gap: var(--space-xs);
+    border-radius: var(--radius);
     font-family: var(--font-links);
-    font-weight: var(--theme-font-weight-medium);
+    font-weight: 500;
     text-decoration: none;
-    transition: all var(--theme-transition-fast) var(--theme-easing);
+    transition: all var(--transition) var(--transition);
     cursor: pointer;
     width: fit-content;
     justify-self: start;
@@ -52,7 +52,7 @@ const tagProps = href ? { href, target: '_blank', rel: 'noopener' } : {};
 
   .tag-icon {
     font-size: 0.9em;
-    color: var(--theme-color-accent);
+    color: var(--accent);
   }
 
   .tag-text {
@@ -61,80 +61,55 @@ const tagProps = href ? { href, target: '_blank', rel: 'noopener' } : {};
 
   /* Tag Variants */
   .tag-default {
-    background: var(--theme-surface-secondary);
-    color: var(--theme-text-tertiary);
+    background: var(--surface);
+    color: var(--text-muted);
   }
 
   .tag-primary {
-    background: var(--theme-color-primary);
+    background: var(--primary);
     color: white;
   }
 
   .tag-secondary {
-    background: var(--theme-color-secondary);
+    background: var(--secondary);
     color: white;
   }
 
   .tag-outline {
     background: transparent;
-    color: var(--theme-text-primary);
+    color: var(--text);
   }
 
   .tag-ghost {
     background: transparent;
-    color: var(--theme-text-tertiary);
+    color: var(--text-muted);
   }
 
   .tag-link {
     background: transparent;
-    color: var(--theme-link);
+    color: var(--link);
     text-decoration: underline;
   }
 
   /* Tag Sizes */
   .tag-sm {
-    padding: var(--theme-spacing-xs);
-    font-size: var(--theme-font-size-xs);
-    border-radius: var(--theme-border-radius-sm);
+    padding: var(--space-xs);
+    font-size: var(--text-xs);
+    border-radius: var(--radius);
   }
 
   .tag-md {
-    padding: var(--theme-spacing-xs) var(--theme-spacing-sm);
-    font-size: var(--theme-font-size-sm);
-    border-radius: var(--theme-border-radius-md);
+    padding: var(--space-xs) var(--space-sm);
+    font-size: var(--text-sm);
+    border-radius: var(--radius);
   }
 
   .tag-lg {
-    padding: var(--theme-spacing-sm) var(--theme-spacing-md);
-    font-size: var(--theme-font-size-base);
-    border-radius: var(--theme-border-radius-lg);
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--text-base);
+    border-radius: var(--radius-lg);
   }
 
   /* Tag Hover States */
-  .tag:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 16px var(--theme-color-primary), 0 2px 8px var(--theme-surface-tertiary);
-  }
-
-  .tag-default:hover {
-    background: var(--theme-surface-tertiary);
-    box-shadow: 0 4px 16px var(--theme-color-primary), 0 2px 8px var(--theme-surface-tertiary);
-  }
-
-  .tag-outline:hover {
-    background: var(--theme-color-primary);
-    color: white;
-    box-shadow: 0 6px 20px var(--theme-color-primary), 0 3px 12px var(--theme-surface-tertiary);
-  }
-
-  .tag-ghost:hover {
-    background: var(--theme-surface-secondary);
-    color: var(--theme-text-primary);
-    box-shadow: 0 4px 16px var(--theme-surface-secondary), 0 2px 8px var(--theme-color-primary);
-  }
-
-  .tag-link:hover {
-    color: var(--theme-link-hover);
-    box-shadow: 0 4px 16px var(--theme-link), 0 2px 8px var(--theme-surface-tertiary);
-  }
+  /* minimal hover for dev; PDF-first */
 </style>

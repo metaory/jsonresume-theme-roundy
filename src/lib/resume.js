@@ -15,8 +15,10 @@ export const getResumeData = async (resumeName) => {
     : availableResumes[0]
 
   try {
-    return await import(`../data/${validResume}.json`)
+    const mod = await import(`../data/${validResume}.json`)
+    return mod.default || mod
   } catch {
-    return await import(`../data/${availableResumes[0]}.json`)
+    const fallback = await import(`../data/${availableResumes[0]}.json`)
+    return fallback.default || fallback
   }
 }

@@ -1,5 +1,5 @@
 ---
-// OPEN_PROPS_COLORS will be available from global scope
+// Theme picker with hue and saturation sliders
 ---
 
 <div class="theme-picker">
@@ -7,85 +7,73 @@
     <iconify-icon width="48" height="48" icon="solar:pallete-2-bold-duotone"></iconify-icon>
     <div class="logo-blob"></div>
   </button>
-  {['gray', 'stone', 'red', 'pink', 'purple', 'violet', 'indigo', 'blue', 'cyan', 'teal', 'green', 'lime', 'yellow', 'orange', 'choco', 'brown', 'sand', 'camo', 'jungle', 'gray'].map((color) => (
-    <button
-      class="color-btn"
-      data-color={color}
-      title={`${color} theme`}
-      style={`background: var(--${color}-7); border-radius: 50%; width: var(--theme-icon-size-sm); height: var(--theme-icon-size-sm);`}
-    ></button>
-  ))}
-  <span class="sat-label">saturation</span>
-  <span id="satv" class="sat-value"></span>
-  <input id="sat" class="sat-range" type="range" min="0" max="100" step="1" />
+  
+  <div class="controls">
+    <div class="control-group">
+      <label for="hue" class="control-label">hue</label>
+      <span id="hue-value" class="control-value">240°</span>
+      <input id="hue" class="hue-slider" type="range" min="0" max="360" step="1" />
+    </div>
+    
+    <div class="control-group">
+      <label for="sat" class="control-label">saturation</label>
+      <span id="sat-value" class="control-value">60%</span>
+      <input id="sat" class="sat-slider" type="range" min="0" max="100" step="1" />
+    </div>
+  </div>
 </div>
 
 <style>
   .theme-picker {
     position: fixed;
     top: 50%;
-    right: var(--theme-picker-offset);
+    right: -200px;
     transform: translateY(-50%);
-    z-index: var(--theme-z-modal);
+    z-index: 1000;
     transition: right 0.5s cubic-bezier(0.3, 1.5, 0.6, 1);
-    width: min-content;
-    border-radius: var(--theme-border-radius-lg);
-    padding: var(--theme-picker-padding);
-    display: grid;
+    width: 280px;
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
     backdrop-filter: blur(4px);
-    grid-template-columns: auto repeat(4, 1fr);
-    grid-template-rows: repeat(5, 1fr) auto auto;
-    gap: var(--theme-picker-gap);
-    justify-items: center;
-    align-items: center;
-  }
-
-  .theme-picker::before {
-    content: '';
-    filter: blur(2em);
-    z-index: -1;
-    background: radial-gradient(
-      circle at center,
-      var(--theme-color-muted) 30%,
-      transparent 70%
-    );
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0; left: 20px;
+    background: var(--surface);
+    border: none;
+    box-shadow: var(--shadow-lg);
   }
 
   .theme-picker:hover {
-    right: var(--theme-picker-hover-offset);
+    right: -4px;
   }
 
   .picker-tab {
-    grid-row: span 5;
-    grid-column: 1;
     background: none;
     border: none;
     cursor: pointer;
-    color: var(--theme-color-primary);
-    padding: 10px;
-    border-radius: 12px;
-    display: grid;
-    place-items: center;
-    transition: all 2s ease;
+    color: var(--primary);
+    padding: var(--space-md);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition);
+    position: relative;
   }
 
   iconify-icon {
-    height: var(--theme-icon-size);
-    width: var(--theme-icon-size);
+    height: 48px;
+    width: 48px;
     color: white;
     animation: pulse 2s ease-in-out infinite;
-    z-index:1;
+    z-index: 1;
     mix-blend-mode: overlay;
   }
 
   .logo-blob {
     position: absolute;
-    width: clamp(35px, 10vw, 50px);
-    height: clamp(35px, 10vw, 50px);
+    width: 48px;
+    height: 48px;
     background: conic-gradient(from 0deg, #009494, #b1323b, #ba482e, #69314b, #0135a8, #009494);
     border-radius: 50%;
     opacity: 0.8;
@@ -104,168 +92,128 @@
     }
   }
 
-
   @keyframes blobRotate {
     to { transform: rotate(360deg); }
   }
 
-
-  .color-btn {
-    background: none;
-    border: 2px solid transparent;
-    cursor: pointer;
-    padding: 8px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    transition: all 0.3s ease;
-    position: relative;
+  .controls {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
   }
 
-  .color-btn:hover {
-    transform: scale(1.15);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  .control-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
   }
 
-  .color-btn.active {
-    border-color: var(--theme-color-primary);
-    box-shadow: 
-      0 0 0 2px var(--theme-color-primary),
-      0 0 20px var(--theme-color-primary),
-      0 4px 16px rgba(0, 0, 0, 0.2);
-    transform: scale(1.2);
-  }
-
-  .color-btn.active::before {
-    content: '';
-    position: absolute;
-    top: -4px;
-    left: -4px;
-    right: -4px;
-    bottom: -4px;
-    border-radius: 50%;
-    background: var(--theme-color-primary);
-    opacity: 0.1;
-    z-index: -1;
-  }
-
-  /* Custom rose color definition */
-  :root {
-    --rose-7: #f43f5e;
-  }
-
-  .sat-label {
-    grid-column: 2 / 4;
-    grid-row: 6;
-    font-family: var(--font-family-fredoka);
-    font-size: var(--theme-font-size-sm);
-    color: var(--theme-text-secondary);
+  .control-label {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
     text-transform: lowercase;
-    justify-self: start;
-    align-self: center;
+    font-weight: 500;
   }
 
-  .sat-value {
-    grid-column: 4 / 6;
-    grid-row: 6;
-    font-family: var(--font-family-fredoka);
-    font-size: var(--theme-font-size-sm);
-    color: var(--theme-text-primary);
-    font-weight: var(--theme-font-weight-medium);
-    min-width: 3ch;
+  .control-value {
+    font-size: var(--text-sm);
+    color: var(--text);
+    font-weight: 600;
     text-align: right;
-    justify-self: end;
-    align-self: center;
   }
 
-  .sat-range {
+
+  .hue-slider, .sat-slider {
     appearance: none;
     width: 100%;
     height: 8px;
-    border-radius: 12px;
-    background: var(--theme-surface-tertiary);
+    border-radius: var(--radius);
     outline: none;
     cursor: pointer;
-    transition: background var(--theme-transition-fast);
-    grid-column: 2 / 6;
-    grid-row: 7;
-    align-self: center;
+    transition: all var(--transition);
   }
 
-  .sat-range:hover {
-    background: var(--theme-surface-secondary);
+  .hue-slider {
+    background: linear-gradient(to right, 
+      hsl(0, 100%, 50%), 
+      hsl(60, 100%, 50%), 
+      hsl(120, 100%, 50%), 
+      hsl(180, 100%, 50%), 
+      hsl(240, 100%, 50%), 
+      hsl(300, 100%, 50%), 
+      hsl(360, 100%, 50%)
+    );
   }
 
-  .sat-range::-webkit-slider-thumb {
+  .sat-slider {
+    background: linear-gradient(to right, 
+      hsl(var(--hue), 0%, 50%), 
+      hsl(var(--hue), 100%, 50%)
+    );
+  }
+
+  .hue-slider::-webkit-slider-thumb,
+  .sat-slider::-webkit-slider-thumb {
     appearance: none;
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    background: var(--theme-color-primary);
-    border: 2px solid var(--theme-surface-primary);
+    background: white;
+    border: 3px solid var(--primary);
     cursor: pointer;
-    transition: all var(--theme-transition-fast);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all var(--transition);
+    box-shadow: var(--shadow);
   }
 
-  .sat-range::-webkit-slider-thumb:hover {
+  .hue-slider::-webkit-slider-thumb:hover,
+  .sat-slider::-webkit-slider-thumb:hover {
     transform: scale(1.1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--shadow-lg);
   }
 
-  .sat-range::-moz-range-thumb {
-    width: 18px;
-    height: 18px;
+  .hue-slider::-moz-range-thumb,
+  .sat-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    background: var(--theme-color-primary);
-    border: 2px solid var(--theme-surface-primary);
+    background: white;
+    border: 3px solid var(--primary);
     cursor: pointer;
-    transition: all var(--theme-transition-fast);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all var(--transition);
+    box-shadow: var(--shadow);
   }
 
-  .sat-range::-moz-range-track {
+  .hue-slider::-moz-range-track,
+  .sat-slider::-moz-range-track {
     height: 8px;
-    border-radius: 12px;
-    background: var(--theme-surface-tertiary);
+    border-radius: var(--radius);
     border: none;
   }
 
 
   @media (max-width: 768px) {
     .theme-picker {
-      right: var(--theme-picker-offset);
+      right: -200px;
       transform: translateY(-50%) scale(0.9);
-      gap: var(--theme-spacing-sm);
-      padding: var(--theme-spacing-sm);
+      width: 240px;
+      padding: var(--space-md);
     }
     
     .theme-picker:hover {
-      right: var(--theme-picker-hover-offset);
+      right: -4px;
       transform: translateY(-50%) scale(1);
-    }
-    
-    .color-btn {
-      padding: 6px;
-    }
-    
-    .color-btn:hover {
-      transform: scale(1.1);
-    }
-    
-    .color-btn.active {
-      transform: scale(1.15);
     }
   }
 
   @media (max-width: 480px) {
     .theme-picker {
-      right: calc(var(--theme-picker-offset) + 20px);
+      right: -180px;
       transform: translateY(-50%) scale(0.8);
+      width: 200px;
     }
     
     .theme-picker:hover {
-      right: calc(var(--theme-picker-hover-offset) + 20px);
+      right: -4px;
       transform: translateY(-50%) scale(0.9);
     }
   }
@@ -278,53 +226,43 @@
 </style>
 
 <script>
-  const applyTheme = (color: string) => {
-    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-    const currentSat = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sat') || '0.2');
-    
-    (window as any).setTheme(currentTheme, color, currentSat);
+  import { applyThemeAuto, updateSatGradient, readHue, readSat } from "@lib/theme.js";
 
-    document.querySelectorAll('.color-btn').forEach(btn => btn.classList.remove('active'));
-    document.querySelector(`[data-color="${color}"]`)?.classList.add('active');
-    window.dispatchEvent(new CustomEvent('themechange'));
+  const initSliders = () => {
+    const hueEl = document.getElementById('hue');
+    const satEl = document.getElementById('sat');
+    const hueVal = document.getElementById('hue-value');
+    const satVal = document.getElementById('sat-value');
+
+    if (hueEl instanceof HTMLInputElement && satEl instanceof HTMLInputElement && hueVal && satVal) {
+      let raf = 0;
+
+      const onChange = () => {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          document.documentElement.setAttribute('data-theme-manual', 'true');
+          const h = Number(hueEl.value);
+          const s = Number(satEl.value);
+          hueVal.textContent = `${h}°`;
+          satVal.textContent = `${s}%`;
+          applyThemeAuto(h, s);
+          updateSatGradient(satEl, h);
+        });
+      };
+
+      hueEl.addEventListener('input', onChange);
+      satEl.addEventListener('input', onChange);
+
+      // Sync initial from CSS in case values were set via config
+      const initHue = readHue();
+      const initSat = readSat();
+      hueEl.value = String(initHue);
+      satEl.value = String(initSat);
+      hueVal.textContent = `${initHue}°`;
+      satVal.textContent = `${initSat}%`;
+      updateSatGradient(satEl, initHue);
+    }
   };
 
-  // Set active theme on load and theme changes
-  const setActiveTheme = () => {
-    const currentColor = (window as any).getCurrentColor() || 'indigo';
-    document.querySelectorAll('.color-btn').forEach(btn => btn.classList.remove('active'));
-    document.querySelector(`[data-color="${currentColor}"]`)?.classList.add('active');
-  };
-
-  setActiveTheme();
-  window.addEventListener('themechange', setActiveTheme);
-
-  document.querySelectorAll('.color-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const color = btn.getAttribute('data-color');
-      if (color) applyTheme(color);
-    });
-  });
-
-  const satEl = document.getElementById('sat');
-  const satVal = document.getElementById('satv');
-  const initSat = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sat') || '0.2');
-  let debounceTimer: number | undefined;
-  
-  if (satEl && satVal) {
-    const pct = Math.round(initSat * 100);
-    (satEl as HTMLInputElement).value = String(pct);
-    satVal.textContent = String(pct);
-    
-    satEl.addEventListener('input', (e) => {
-      const v = Number((e.target as HTMLInputElement).value);
-      satVal.textContent = String(v);
-      
-      clearTimeout(debounceTimer);
-      debounceTimer = window.setTimeout(() => {
-        (window as any).setSaturation(v / 100);
-        window.dispatchEvent(new CustomEvent('themechange'));
-      }, 16);
-    });
-  }
+  initSliders();
 </script>

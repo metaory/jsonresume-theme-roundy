@@ -64,25 +64,25 @@ const { basics } = Astro.props
 <style>
   .basics {
     text-align: center;
-    margin-bottom: var(--theme-spacing-2xl);
+    margin-bottom: var(--space-2xl);
   }
 
   .name-title {
-    margin-bottom: var(--theme-spacing-lg);
+    margin-bottom: var(--space-lg);
   }
 
   .name {
     font-family: var(--font-top-header);
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--theme-text-primary);
-    margin: 0 0 var(--theme-spacing-sm) 0;
+    color: var(--text);
+    margin: 0 0 var(--space-sm) 0;
   }
 
   .label {
     font-family: var(--font-sub-header);
     font-size: 1.25rem;
-    color: var(--theme-text-secondary);
+    color: var(--text-muted);
     margin: 0;
     font-weight: 500;
   }
@@ -91,23 +91,23 @@ const { basics } = Astro.props
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(max-content, 1fr));
     justify-content: center;
-    gap: var(--theme-spacing-md);
-    margin-bottom: var(--theme-spacing-md);
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
     align-items: start;
   }
 
   .location {
     display: flex;
     justify-content: center;
-    margin-bottom: var(--theme-spacing-md);
+    margin-bottom: var(--space-md);
   }
 
   .profiles {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(max-content, 1fr));
     justify-content: center;
-    gap: var(--theme-spacing-md);
-    margin-bottom: var(--theme-spacing-lg);
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
     align-items: start;
   }
 
@@ -115,17 +115,17 @@ const { basics } = Astro.props
     max-width: 600px;
     margin: 0 auto;
     text-align: left;
-    color: var(--theme-text-secondary);
+    color: var(--text-muted);
     line-height: 1.6;
   }
 
   .summary ul {
     margin: 0;
-    padding-left: var(--theme-spacing-lg);
+    padding-left: var(--space-lg);
   }
 
   .summary li {
-    margin-bottom: var(--theme-spacing-xs);
+    margin-bottom: var(--space-xs);
   }
 
   @media (max-width: 768px) {
@@ -136,13 +136,13 @@ const { basics } = Astro.props
     .contact-info {
       grid-template-columns: 1fr;
       justify-items: center;
-      gap: var(--theme-spacing-sm);
+      gap: var(--space-sm);
     }
 
     .profiles {
       grid-template-columns: 1fr;
       justify-items: center;
-      gap: var(--theme-spacing-sm);
+      gap: var(--space-sm);
     }
   }
 </style>

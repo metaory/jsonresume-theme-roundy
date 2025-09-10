@@ -278,9 +278,9 @@
   ],
   "meta": {
     "themeOptions": {
-      "theme": "light",
-      "color": "red",
-      "saturation": 0.5,
+      "hue": 100,
+      "sat": 50,
+      "dark": false,
       "sectionTitles": {
         "contacts": "Contact Information",
         "summary": "Professional Summary",

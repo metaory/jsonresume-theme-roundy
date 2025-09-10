@@ -8,25 +8,21 @@ const { class: className = '' } = Astro.props
 
 <style>
   .item {
-    background: var(--theme-surface-tertiary);
-    border-radius: var(--theme-border-radius-lg);
-    padding: var(--theme-spacing-lg);
-    transition: all var(--theme-transition-fast) var(--theme-easing);
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    transition: all var(--transition) var(--transition);
     height: fit-content;
-    box-shadow: var(--theme-shadow-sm);
+    box-shadow: var(--shadow);
     position: relative;
     display: grid;
-    gap: var(--theme-spacing-sm);
+    gap: var(--space-sm);
+    backdrop-filter: blur(6px);
   }
 
 
   /* Grid spacing handled by parent section */
 
-  .item:hover {
-    outline: solid 10px var(--theme-color-muted);
-    /* background: var(--theme-surface-tertiary); */
-    /* box-shadow: 0 8px 32px var(--theme-color-primary), */
-    /*             0 4px 16px var(--theme-surface-tertiary); */
-  }
+  /* hover effects removed for PDF-first output */
 
 </style>

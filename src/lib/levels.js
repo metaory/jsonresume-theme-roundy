@@ -2,32 +2,27 @@ export const LEVEL_MAPPINGS = {
   beginner: {
     keywords: ['beginner', 'basic'],
     width: '25%',
-    class: 'level-beginner',
-    color: 'var(--theme-color-primary)'
+    class: 'level-beginner'
   },
   intermediate: {
     keywords: ['intermediate', 'conversational'],
     width: '50%',
-    class: 'level-intermediate', 
-    color: 'var(--theme-color-secondary)'
+    class: 'level-intermediate'
   },
   advanced: {
     keywords: ['advanced', 'fluent'],
     width: '75%',
-    class: 'level-advanced',
-    color: 'var(--theme-color-accent)'
+    class: 'level-advanced'
   },
   master: {
     keywords: ['master', 'native'],
     width: '100%',
-    class: 'level-master',
-    color: 'var(--theme-color-primary)'
+    class: 'level-master'
   },
   expert: {
     keywords: ['expert'],
     width: '100%',
-    class: 'level-expert',
-    color: 'var(--theme-color-secondary)'
+    class: 'level-expert'
   }
 }
 
@@ -45,5 +40,3 @@ export const getLevelMapping = (level) => {
 
 export const getLevelWidth = (level) => getLevelMapping(level).width
 export const getLevelClass = (level) => getLevelMapping(level).class
-
-// ok ohh

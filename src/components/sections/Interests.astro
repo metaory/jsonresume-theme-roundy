@@ -37,9 +37,9 @@ const { interests, meta } = Astro.props
 <style>
   .interests-grid {
     display: grid;
-    gap: var(--theme-spacing-lg);
+    gap: var(--space-lg);
     margin-bottom: 0;
-    padding: var(--theme-spacing-md) 0;
+    padding: var(--space-md) 0;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     align-items: start;
   }
@@ -48,14 +48,14 @@ const { interests, meta } = Astro.props
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: start;
-    gap: var(--theme-spacing-md);
-    margin-bottom: var(--theme-spacing-sm);
+    gap: var(--space-md);
+    margin-bottom: var(--space-sm);
   }
 
   .interest-title {
     display: flex;
     align-items: center;
-    gap: var(--theme-spacing-sm);
+    gap: var(--space-sm);
   }
 
   .interest-icon {
@@ -73,24 +73,24 @@ const { interests, meta } = Astro.props
   }
 
   .interests-grid .keywords {
-    margin-top: var(--theme-spacing-xs);
+    margin-top: var(--space-xs);
   }
 
   .interests-grid .keywords .tag {
-    font-size: var(--theme-font-size-xs);
+    font-size: var(--text-xs);
     margin: 0;
   }
 
-  @media (max-width: var(--theme-breakpoint-lg)) {
+  @media (max-width: var(1024px)) {
     .interests-grid {
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
   }
 
-  @media (max-width: var(--theme-breakpoint-md)) {
+  @media (max-width: var(768px)) {
     .interests-grid {
       grid-template-columns: 1fr;
-      gap: var(--theme-spacing-md);
+      gap: var(--space-md);
     }
   }
 </style> 

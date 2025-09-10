@@ -18,15 +18,15 @@ const levelClass = getLevelClass(level)
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: center;
-    gap: var(--theme-spacing-sm);
-    margin-top: var(--theme-spacing-xs);
+    gap: var(--space-sm);
+    margin-top: var(--space-xs);
     position: relative;
   }
 
   .bar-fill {
     height: var(--theme-level-bar-height);
-    border-radius: var(--theme-border-radius-full);
-    transition: width var(--theme-transition-normal) var(--theme-easing);
+    border-radius: var(--radius-full);
+    transition: width var(--transition) var(--transition);
     position: relative;
     z-index: 2;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -34,7 +34,7 @@ const levelClass = getLevelClass(level)
 
   .bar-glow {
     height: var(--theme-level-bar-height);
-    border-radius: var(--theme-border-radius-full);
+    border-radius: var(--radius-full);
     position: absolute;
     top: 0;
     left: 0;
@@ -43,8 +43,8 @@ const levelClass = getLevelClass(level)
   }
 
   .level-text {
-    font-size: var(--theme-font-size-sm);
-    font-weight: var(--theme-font-weight-semibold);
+    font-size: var(--text-sm);
+    font-weight: 600;
     min-width: var(--theme-level-bar-text-min-width);
     text-align: right;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -52,52 +52,52 @@ const levelClass = getLevelClass(level)
 
   /* Level-specific colors using theme variables */
   .level-beginner .bar-fill {
-    background: linear-gradient(90deg, var(--theme-color-primary), var(--theme-color-primary)dd);
+    background: linear-gradient(90deg, var(--primary), var(--primary)dd);
   }
   .level-beginner .bar-glow {
-    background: var(--theme-color-primary)40;
+    background: var(--primary)40;
   }
   .level-beginner .level-text {
-    color: var(--theme-color-primary);
+    color: var(--primary);
   }
 
   .level-intermediate .bar-fill {
-    background: linear-gradient(90deg, var(--theme-color-secondary), var(--theme-color-secondary)dd);
+    background: linear-gradient(90deg, var(--secondary), var(--secondary)dd);
   }
   .level-intermediate .bar-glow {
-    background: var(--theme-color-secondary)40;
+    background: var(--secondary)40;
   }
   .level-intermediate .level-text {
-    color: var(--theme-color-secondary);
+    color: var(--secondary);
   }
 
   .level-advanced .bar-fill {
-    background: linear-gradient(90deg, var(--theme-color-accent), var(--theme-color-accent)dd);
+    background: linear-gradient(90deg, var(--accent), var(--accent)dd);
   }
   .level-advanced .bar-glow {
-    background: var(--theme-color-accent)40;
+    background: var(--accent)40;
   }
   .level-advanced .level-text {
-    color: var(--theme-color-accent);
+    color: var(--accent);
   }
 
   .level-master .bar-fill {
-    background: linear-gradient(90deg, var(--theme-color-primary), var(--theme-color-primary)dd);
+    background: linear-gradient(90deg, var(--primary), var(--primary)dd);
   }
   .level-master .bar-glow {
-    background: var(--theme-color-primary)40;
+    background: var(--primary)40;
   }
   .level-master .level-text {
-    color: var(--theme-color-primary);
+    color: var(--primary);
   }
 
   .level-expert .bar-fill {
-    background: linear-gradient(90deg, var(--theme-color-secondary), var(--theme-color-secondary)dd);
+    background: linear-gradient(90deg, var(--secondary), var(--secondary)dd);
   }
   .level-expert .bar-glow {
-    background: var(--theme-color-secondary)40;
+    background: var(--secondary)40;
   }
   .level-expert .level-text {
-    color: var(--theme-color-secondary);
+    color: var(--secondary);
   }
 </style>

@@ -28,9 +28,9 @@ const { skills, meta } = Astro.props
 <style>
   .skills-grid {
     display: grid;
-    gap: var(--theme-spacing-lg);
+    gap: var(--space-lg);
     margin-bottom: 0;
-    padding: var(--theme-spacing-md) 0;
+    padding: var(--space-md) 0;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     align-items: start;
   }
@@ -38,7 +38,7 @@ const { skills, meta } = Astro.props
   .skill-item {
     display: grid;
     grid-template-columns: 1fr auto;
-    gap: var(--theme-spacing-sm);
+    gap: var(--space-sm);
     align-items: start;
   }
 
@@ -59,24 +59,24 @@ const { skills, meta } = Astro.props
   }
 
   .skills-grid .keywords {
-    margin-top: var(--theme-spacing-xs);
+    margin-top: var(--space-xs);
   }
 
   .skills-grid .keywords .tag {
-    font-size: var(--theme-font-size-xs);
+    font-size: var(--text-xs);
     margin: 0;
   }
 
-  @media (max-width: var(--theme-breakpoint-lg)) {
+  @media (max-width: var(1024px)) {
     .skills-grid {
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     }
   }
 
-  @media (max-width: var(--theme-breakpoint-md)) {
+  @media (max-width: var(768px)) {
     .skills-grid {
       grid-template-columns: 1fr;
-      gap: var(--theme-spacing-md);
+      gap: var(--space-md);
     }
   }
 </style> 

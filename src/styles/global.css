@@ -1,115 +1,77 @@
-/* Open Props - build-time imports */
-@import "open-props/open-props.min.css";
-@import "open-props/colors-hsl.min.css";
-
-/* Our internal theme variables - using Open Props values */
+/* Minimal theme system - only essential variables */
 :root {
-  /* Color theme - will be set by client script */
-  --sat: 0.2;
-  
-  /* Theme background colors */
-  --theme-bg-light: #FFEEFF;
-  --theme-bg-dark: #302836;
-  --theme-bg-dark-fallback: #221122;
-  
-  /* RGB values for alpha transparency (light theme defaults) */
-  --theme-surface-primary-rgb: 255, 255, 255;
-  --theme-surface-secondary-rgb: 255, 255, 255;
-  --theme-surface-border-rgb: 0, 0, 0;
-  --theme-link-rgb: 59, 130, 246;
+  /* Core hue & saturation (overridden from JS) */
+  --hue: 240;
+  --sat: 60;
 
-  /* Typography */
-  --theme-font-family: var(--font-description);
-  --theme-font-size-xs: var(--font-size-0);
-  --theme-font-size-sm: var(--font-size-1);
-  --theme-font-size-base: var(--font-size-2);
-  --theme-font-size-md: var(--font-size-3);
-  --theme-font-size-lg: var(--font-size-4);
-  --theme-font-size-xl: var(--font-size-6);
-  --theme-font-size-2xl: var(--font-size-8);
-  --theme-font-weight-medium: var(--font-weight-5);
-  --theme-font-weight-semibold: var(--font-weight-6);
-  --theme-line-height: var(--font-lineheight-3);
+  /* Derived hues (set in JS for smooth transitions) */
+  --hue-secondary: 60;
+  --hue-accent: 300;
 
-  /* Spacing */
-  --theme-spacing-xs: var(--size-1);
-  --theme-spacing-sm: var(--size-2);
-  --theme-spacing-md: var(--size-3);
-  --theme-spacing-lg: var(--size-4);
-  --theme-spacing-xl: var(--size-6);
-  --theme-spacing-2xl: var(--size-8);
-  --theme-spacing-3xl: var(--size-10);
+  /* Primary palette */
+  --primary: hsl(var(--hue) var(--sat) 50%);
+  --secondary: hsl(var(--hue-secondary) var(--sat) 50%);
+  --accent: hsl(var(--hue-accent) var(--sat) 60%);
 
-  /* Layout */
-  --theme-container-max-width: var(--size-content-3);
-  --theme-border-radius-sm: var(--radius-2);
-  --theme-border-radius-md: var(--radius-3);
-  --theme-border-radius-lg: var(--radius-4);
-  --theme-border-radius-full: var(--radius-round);
-  --theme-border-width: var(--border-size-1);
-  --theme-border-width-thin: var(--border-size-1);
-  --theme-border-width-thick: var(--border-size-2);
-  --theme-border-color: var(--theme-surface-tertiary);
+  /* Base surfaces (computed & overridden from JS for stronger hue response) */
+  --bg: hsl(var(--hue) 10% 94%);
+  --surface: hsl(var(--hue) 18% 96% / 0.85);
+  --text: hsl(var(--hue) 15% 15%);
+  --text-muted: hsl(var(--hue) 10% 35%);
+  --link: hsl(var(--hue) var(--sat) 50%);
+  --link-hover: hsl(var(--hue) calc(var(--sat) + 10%) 45%);
 
-  /* Transitions */
-  --theme-transition-fast: var(--duration-2);
-  --theme-transition-normal: var(--duration-3);
-  --theme-easing: var(--ease-3);
+  /* Minimal design tokens */
+  --font: 'Baloo 2', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 
-  /* Shadows */
-  --theme-shadow-sm: var(--shadow-1);
-  --theme-shadow-md: var(--shadow-2);
-  --theme-shadow-lg: var(--shadow-3);
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
 
-  /* Z-index */
-  --theme-z-dropdown: var(--layer-1);
-  --theme-z-sticky: var(--layer-2);
-  --theme-z-fixed: var(--layer-3);
-  --theme-z-modal: var(--layer-4);
-  --theme-z-popover: var(--layer-5);
-  --theme-z-important: var(--layer-important);
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 0.75rem;
+  --space-lg: 1rem;
+  --space-xl: 1.5rem;
+  --space-2xl: 2rem;
 
-  /* Icon sizes */
-  --theme-icon-size: 48px;
-  --theme-icon-size-sm: 18px;
-  --theme-icon-size-lg: 24px;
+  --radius: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-full: 9999px;
 
-  /* Component specific sizes */
-  --theme-level-bar-height: 12px;
+  --shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.18);
+
+  --transition: 0.2s ease;
+
+  /* Minor component vars (keep minimal) */
+  --theme-level-bar-height: 10px;
   --theme-level-bar-text-min-width: 80px;
-  --theme-picker-offset: -200px;
-  --theme-picker-hover-offset: -4px;
-  --theme-picker-padding: 12px;
-  --theme-picker-gap: 10px;
-  --theme-picker-sat-min-width: 200px;
-
-  /* Breakpoints */
-  --theme-breakpoint-sm: var(--size-sm);
-  --theme-breakpoint-md: var(--size-md);
-  --theme-breakpoint-lg: var(--size-lg);
-  --theme-breakpoint-xl: var(--size-xl);
 }
 
-/* Base styles using our theme variables */
+/* Base styles */
 * {
   box-sizing: border-box;
 }
 
-/* HTML background - solid foundation for low-alpha theme colors */
 html {
-  background: var(--theme-bg-primary, white);
-  transition: background-color var(--theme-transition-normal);
+  background: var(--bg);
+  transition: background-color var(--transition);
   overflow-x: hidden;
 }
 
 body {
-  font-family: var(--theme-font-family);
-  font-size: var(--theme-font-size-base);
-  line-height: var(--theme-line-height);
-  color: var(--theme-text-primary);
+  font-family: var(--font);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--text);
   margin: 0;
   padding: 0;
-  transition: color var(--theme-transition-normal);
+  transition: color var(--transition), background-color var(--transition);
   overflow-x: hidden;
 }
 
@@ -119,70 +81,38 @@ main {
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
-  margin: 0 0 var(--theme-spacing-md) 0;
-  font-weight: var(--theme-font-weight-semibold);
-  color: var(--theme-text-primary);
-  transition: color var(--theme-transition-normal);
+  margin: 0 0 var(--space-md) 0;
+  font-weight: 600;
+  color: var(--text);
+  transition: color var(--transition);
 }
 
-h1 { font-size: var(--theme-font-size-2xl); }
-h2 { font-size: var(--theme-font-size-xl); }
-h3 { font-size: var(--theme-font-size-lg); }
+h1 { font-size: var(--text-2xl); }
+h2 { font-size: var(--text-xl); }
+h3 { font-size: var(--text-lg); }
 
 /* Links */
 a {
-  color: var(--theme-link);
+  color: var(--link);
   text-decoration: none;
-  transition: color var(--theme-transition-fast);
+  transition: color var(--transition);
 }
 
 a:hover {
-  color: var(--theme-link-hover);
+  color: var(--accent);
 }
 
-/* Dark theme support */
+/* Color scheme hint only; actual colors set via JS */
 @media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-  }
+  :root { color-scheme: dark; }
 }
 
-[data-theme="dark"] {
-  color-scheme: dark;
+[data-theme="dark"] { color-scheme: dark; }
+[data-theme="light"] { color-scheme: light; }
 
-  /* HTML background for dark mode */
-  html {
-    background: var(--theme-bg-primary-dark, var(--theme-bg-dark-fallback)) !important;
-  }
-
-  --theme-text-primary: var(--theme-text-primary-dark, hsl(var(--gray-1-hsl) / 0.9));
-  --theme-text-secondary: var(--theme-text-secondary-dark, hsl(var(--gray-2-hsl) / 0.7));
-  --theme-text-tertiary: var(--theme-text-tertiary-dark, hsl(var(--gray-3-hsl) / 0.5));
-  --theme-text-muted: var(--theme-text-muted-dark, hsl(var(--gray-4-hsl) / 0.4));
-  --theme-surface-primary: var(--theme-surface-primary-dark, hsl(var(--gray-10-hsl) / 0.3));
-  --theme-surface-secondary: var(--theme-surface-secondary-dark, hsl(var(--gray-8-hsl) / 0.25));
-  --theme-surface-tertiary: var(--theme-surface-tertiary-dark, hsl(var(--gray-6-hsl) / 0.2));
-  --theme-surface-border: var(--theme-surface-border-dark, hsl(var(--gray-4-hsl) / 0.35));
-  --theme-link: var(--theme-link-dark, hsl(var(--blue-4-hsl) / 0.8));
-  --theme-link-hover: var(--theme-link-hover-dark, hsl(var(--blue-3-hsl) / 0.9));
-
-  /* Dark theme color adjustments */
-  --theme-color-primary: var(--theme-color-primary-dark, var(--theme-color-primary));
-  --theme-color-secondary: var(--theme-color-secondary-dark, var(--theme-color-secondary));
-  --theme-color-accent: var(--theme-color-accent-dark, var(--theme-color-accent));
-  --theme-color-muted: var(--theme-color-muted-dark, var(--theme-color-muted));
-  --theme-color-border: var(--theme-color-border-dark, var(--theme-color-border));
-
-  /* RGB values for alpha transparency */
-  --theme-surface-primary-rgb: 30, 30, 30;
-  --theme-surface-secondary-rgb: 30, 30, 30;
-  --theme-surface-border-rgb: 255, 255, 255;
-  --theme-link-rgb: 147, 197, 253;
-}
 
 /* Print styles */
 @media print {
-  /* Disable all hover effects in print */
   *:hover {
     transform: none !important;
     box-shadow: none !important;
@@ -190,24 +120,20 @@ a:hover {
     color: inherit !important;
   }
 
-  /* Ensure proper page breaks */
   .resume {
     page-break-inside: avoid;
   }
 
-  /* Optimize colors for print */
   body {
     color: black !important;
-    background: var(--theme-bg-light) !important;
+    background: white !important;
   }
 
-  /* Ensure links are visible in print */
   a {
     color: black !important;
     text-decoration: underline !important;
   }
 
-  /* Remove transitions and animations */
   * {
     transition: none !important;
     animation: none !important;

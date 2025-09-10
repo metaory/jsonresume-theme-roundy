@@ -47,9 +47,13 @@ for (const [filePath, module] of Object.entries(sectionModules)) {
 }
 
 const { basics, meta, ...sections } = resumeData
+const themeDefaults = { hue: 240, sat: 60 }
+const initialHue = meta?.themeOptions?.hue ?? themeDefaults.hue
+const initialSat = meta?.themeOptions?.sat ?? themeDefaults.sat
+const initialDark = typeof meta?.themeOptions?.dark === 'boolean' ? meta.themeOptions.dark : undefined
 ---
 
-<html lang="en">
+<html lang="en" data-theme={initialDark === true ? 'dark' : initialDark === false ? 'light' : undefined} style={`--hue: ${initialHue}; --sat: ${initialSat};`}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -70,103 +74,9 @@ const { basics, meta, ...sections } = resumeData
     <script>
       import "iconify-icon";
     </script>
-    <script is:inline define:vars={{theme: meta?.themeOptions?.theme || 'light', color: meta?.themeOptions?.color || 'indigo', saturation: meta?.themeOptions?.saturation || 0.2}}>
-      // Theme utilities
-      const OPEN_PROPS_COLORS = ['gray', 'stone', 'red', 'pink', 'purple', 'violet', 'indigo', 'blue', 'cyan', 'teal', 'green', 'lime', 'yellow', 'orange', 'choco', 'brown', 'sand', 'camo', 'jungle']
-      
-      const getSecondaryColor = (primary) => {
-        const harmonies = {
-          gray: 'blue', stone: 'teal', red: 'cyan', pink: 'green', purple: 'lime',
-          violet: 'orange', indigo: 'orange', blue: 'orange', cyan: 'red', teal: 'pink',
-          green: 'pink', lime: 'purple', yellow: 'violet', orange: 'blue', choco: 'cyan',
-          brown: 'cyan', sand: 'blue', camo: 'pink', jungle: 'pink'
-        }
-        return harmonies[primary] || 'orange'
-      }
-
-      const getAccentColor = (primary) => {
-        const harmonies = {
-          gray: 'cyan', stone: 'green', red: 'blue', pink: 'teal', purple: 'yellow',
-          violet: 'yellow', indigo: 'yellow', blue: 'red', cyan: 'pink', teal: 'red',
-          green: 'purple', lime: 'violet', yellow: 'purple', orange: 'cyan', choco: 'blue',
-          brown: 'teal', sand: 'violet', camo: 'purple', jungle: 'violet'
-        }
-        return harmonies[primary] || 'yellow'
-      }
-
-      const generateThemeVars = (color, isDark) => {
-        const secondary = getSecondaryColor(color)
-        const accent = getAccentColor(color)
-        
-        return {
-          '--theme-color-primary': `hsl(from hsl(var(--${color}-${isDark ? '4' : '7'}-hsl)) h calc(s * var(--sat)) l / 0.9)`,
-          '--theme-color-secondary': `hsl(from hsl(var(--${secondary}-${isDark ? '5' : '6'}-hsl)) h calc(s * var(--sat)) l / 0.7)`,
-          '--theme-color-accent': `hsl(from hsl(var(--${accent}-${isDark ? '3' : '9'}-hsl)) h calc(s * var(--sat)) l / 0.9)`,
-          '--theme-color-muted': `hsl(from hsl(var(--${color}-${isDark ? '6' : '4'}-hsl)) h calc(s * var(--sat)) l / 0.5)`,
-          '--theme-color-border': `hsl(from hsl(var(--${color}-${isDark ? '5' : '5'}-hsl)) h calc(s * var(--sat)) l / 0.4)`,
-          '--theme-surface-primary': `hsl(from hsl(var(--${color}-${isDark ? '12' : '0'}-hsl)) h calc(s * var(--sat)) l / ${isDark ? '0.2' : '0.9'})`,
-          '--theme-surface-secondary': `hsl(from hsl(var(--${color}-${isDark ? '11' : '1'}-hsl)) h calc(s * var(--sat)) l / ${isDark ? '0.15' : '0.6'})`,
-          '--theme-surface-tertiary': `hsl(from hsl(var(--${color}-${isDark ? '10' : '2'}-hsl)) h calc(s * var(--sat)) l / ${isDark ? '0.1' : '0.3'})`,
-          '--theme-surface-border': `hsl(from hsl(var(--${color}-${isDark ? '9' : '3'}-hsl)) h calc(s * var(--sat)) l / ${isDark ? '0.05' : '0.1'})`,
-          '--theme-text-primary': `hsl(from hsl(var(--${color}-${isDark ? '0' : '12'}-hsl)) h calc(s * var(--sat)) l / 0.9)`,
-          '--theme-text-secondary': `hsl(from hsl(var(--${color}-${isDark ? '1' : '11'}-hsl)) h calc(s * var(--sat)) l / 0.7)`,
-          '--theme-text-tertiary': `hsl(from hsl(var(--${color}-${isDark ? '2' : '10'}-hsl)) h calc(s * var(--sat)) l / 0.5)`,
-          '--theme-text-muted': `hsl(from hsl(var(--${color}-${isDark ? '3' : '9'}-hsl)) h calc(s * var(--sat)) l / 0.4)`,
-          '--theme-link': `hsl(from hsl(var(--${color}-${isDark ? '3' : '9'}-hsl)) h calc(s * var(--sat)) l / 0.8)`,
-          '--theme-link-hover': `hsl(from hsl(var(--${color}-${isDark ? '2' : '10'}-hsl)) h calc(s * var(--sat)) l / 0.9)`,
-        }
-      }
-
-      // Simple theme functions
-      const setTheme = (theme, color, saturation = 0.2) => {
-        const html = document.documentElement
-        const isDark = theme === 'dark'
-        
-        html.setAttribute('data-theme', theme)
-        html.setAttribute('data-theme-color', color)
-        html.style.backgroundColor = isDark ? 'var(--theme-bg-dark)' : 'var(--theme-bg-light)'
-        html.style.setProperty('--sat', String(saturation))
-        html.style.setProperty('--theme-bg-primary', isDark ? 'var(--theme-bg-dark)' : 'var(--theme-bg-light)')
-        html.style.setProperty('--theme-bg-primary-dark', 'var(--theme-bg-dark)')
-
-        const themeVars = generateThemeVars(color, isDark)
-        Object.entries(themeVars).forEach(([key, value]) => html.style.setProperty(key, value))
-      }
-
-      const setSaturation = (value) => {
-        document.documentElement.style.setProperty('--sat', String(value))
-      }
-
-      const getCurrentColor = () => {
-        // First try to get from data attribute (most reliable)
-        const dataColor = document.documentElement.getAttribute('data-theme-color')
-        if (dataColor) return dataColor
-        
-        // Fallback: try to detect from CSS variable
-        const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--theme-color-primary')
-        for (const color of OPEN_PROPS_COLORS) {
-          if (primaryColor.includes(color)) return color
-        }
-        return 'indigo'
-      }
-
-      const toggleTheme = () => {
-        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light'
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark'
-        const currentColor = getCurrentColor()
-        const currentSat = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sat') || '0.2')
-        setTheme(newTheme, currentColor, currentSat)
-        return newTheme
-      }
-
-      // Make functions globally available
-      window.setTheme = setTheme
-      window.setSaturation = setSaturation
-      window.getCurrentColor = getCurrentColor
-      window.toggleTheme = toggleTheme
-
-      // Initialize theme
-      setTheme(theme, color, saturation);
+    <script is:inline define:vars={{hue: initialHue, sat: initialSat, dark: initialDark}}>
+      import { initTheme } from "@lib/theme.js";
+      initTheme(hue, sat, dark);
     </script>
   </head>
 
@@ -198,16 +108,15 @@ const { basics, meta, ...sections } = resumeData
 
 <style>
   .resume {
-    max-width: var(--theme-container-max-width);
+    max-width: 800px;
     margin: 0 auto;
-    padding: var(--theme-spacing-xl);
-    background: var(--theme-surface-primary);
+    padding: var(--space-xl);
     overflow-x: hidden;
   }
 
   @media (max-width: 768px) {
     .resume {
-      padding: var(--theme-spacing-lg);
+      padding: var(--space-lg);
     }
   }
 </style> 

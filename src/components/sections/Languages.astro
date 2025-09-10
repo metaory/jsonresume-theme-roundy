@@ -52,9 +52,9 @@ const getFluencyConfig = (fluency) => {
 <style>
   .languages-grid {
     display: grid;
-    gap: var(--theme-spacing-lg);
+    gap: var(--space-lg);
     margin-bottom: 0;
-    padding: var(--theme-spacing-md) 0;
+    padding: var(--space-md) 0;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     align-items: start;
   }
@@ -63,8 +63,8 @@ const getFluencyConfig = (fluency) => {
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: start;
-    gap: var(--theme-spacing-md);
-    margin-bottom: var(--theme-spacing-sm);
+    gap: var(--space-md);
+    margin-bottom: var(--space-sm);
   }
 
   .language-header .title {
@@ -76,7 +76,7 @@ const getFluencyConfig = (fluency) => {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: var(--theme-spacing-xs);
+    gap: var(--space-xs);
     max-width: 200px;
   }
 
@@ -90,59 +90,59 @@ const getFluencyConfig = (fluency) => {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    transition: background-color var(--theme-transition-normal);
+    transition: background-color var(--transition);
   }
 
   .fluency-label {
-    font-size: var(--theme-font-size-sm);
-    font-weight: var(--theme-font-weight-semibold);
+    font-size: var(--text-sm);
+    font-weight: 600;
     text-align: right;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   }
 
   /* Level-specific colors using theme variables */
   .level-beginner.filled {
-    background-color: var(--theme-color-primary);
+    background-color: var(--primary);
   }
   .level-beginner.fluency-label {
-    color: var(--theme-color-primary);
+    color: var(--primary);
   }
 
   .level-intermediate.filled {
-    background-color: var(--theme-color-secondary);
+    background-color: var(--secondary);
   }
   .level-intermediate.fluency-label {
-    color: var(--theme-color-secondary);
+    color: var(--secondary);
   }
 
   .level-advanced.filled {
-    background-color: var(--theme-color-accent);
+    background-color: var(--accent);
   }
   .level-advanced.fluency-label {
-    color: var(--theme-color-accent);
+    color: var(--accent);
   }
 
   .level-master.filled {
-    background-color: var(--theme-color-primary);
+    background-color: var(--primary);
   }
   .level-master.fluency-label {
-    color: var(--theme-color-primary);
+    color: var(--primary);
   }
 
   .dot:not(.filled) {
-    background-color: var(--theme-surface-tertiary);
+    background-color: var(--surface);
   }
 
-  @media (max-width: var(--theme-breakpoint-lg)) {
+  @media (max-width: 1024px) {
     .languages-grid {
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     }
   }
 
-  @media (max-width: var(--theme-breakpoint-md)) {
+  @media (max-width: 768px) {
     .languages-grid {
       grid-template-columns: 1fr;
-      gap: var(--theme-spacing-md);
+      gap: var(--space-md);
     }
   }
 </style> 

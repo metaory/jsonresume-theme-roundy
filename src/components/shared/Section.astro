@@ -17,14 +17,15 @@ const sectionIcon = getIconForSection(title, meta)
 
 <style>
   .section {
-    margin-bottom: var(--theme-spacing-3xl);
-    padding: var(--theme-spacing-xl);
+    margin-bottom: var(--space-2xl);
+    padding: var(--space-xl);
     position: relative;
-    background: var(--theme-surface-secondary);
-    border-radius: var(--theme-border-radius-lg);
-    box-shadow: var(--theme-shadow-sm);
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(6px);
     display: grid;
-    gap: var(--theme-spacing-lg);
+    gap: var(--space-lg);
   }
 
   .section:last-child {
@@ -37,21 +38,21 @@ const sectionIcon = getIconForSection(title, meta)
   }
 
   .section-title {
-    font-family: var(--font-main-header);
-    color: var(--theme-color-primary);
-    font-size: var(--theme-font-size-xl);
-    font-weight: var(--theme-font-weight-semibold);
+    font-family: var(--font);
+    color: var(--primary);
+    font-size: var(--text-xl);
+    font-weight: 600;
     position: relative;
-    padding-bottom: var(--theme-spacing-md);
+    padding-bottom: var(--space-md);
     display: flex;
     align-items: center;
-    gap: var(--theme-spacing-sm);
+    gap: var(--space-sm);
     margin: 0;
   }
 
   .section-icon {
     font-size: 1.2em;
-    color: var(--theme-color-accent);
+    color: var(--accent);
   }
 
   .section-title::after {
@@ -61,21 +62,16 @@ const sectionIcon = getIconForSection(title, meta)
     left: 0;
     width: 60px;
     height: 3px;
-    background: var(--theme-color-primary);
-    border-radius: var(--theme-border-radius-full);
+    background: var(--primary);
+    border-radius: var(--radius-full);
   }
 
   /* Grid handles spacing automatically */
 
-  @media (max-width: var(--theme-breakpoint-md)) {
+  @media (max-width: 768px) {
     .section {
-      padding: var(--theme-spacing-lg) 0;
-      margin-bottom: var(--theme-spacing-2xl);
-    }
-
-    .section:nth-child(even) {
-      margin: 0 calc(-1 * var(--theme-spacing-lg));
-      padding: var(--theme-spacing-lg);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-2xl);
     }
   }
 </style> 

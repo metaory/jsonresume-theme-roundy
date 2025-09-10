@@ -43,7 +43,7 @@ function getGPALevel(score) {
   .education-item {
     display: grid;
     grid-template-columns: 1fr auto;
-    gap: var(--theme-spacing-sm);
+    gap: var(--space-sm);
     align-items: start;
   }
 
@@ -55,9 +55,9 @@ function getGPALevel(score) {
   .education-item .gpa-label {
     grid-column: 2;
     grid-row: 1;
-    font-size: var(--theme-font-size-sm);
-    color: var(--theme-text-secondary);
-    font-weight: var(--theme-font-weight-medium);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    font-weight: 500;
     min-width: 30px;
     justify-self: end;
   }
@@ -78,7 +78,7 @@ function getGPALevel(score) {
   }
 
   .education-item .courses-title {
-    color: var(--theme-text-primary);
-    margin: var(--theme-spacing-sm) 0 var(--theme-spacing-xs) 0;
+    color: var(--text);
+    margin: var(--space-sm) 0 var(--space-xs) 0;
   }
 </style> 
