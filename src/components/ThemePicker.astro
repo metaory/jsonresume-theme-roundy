@@ -1,28 +1,31 @@
 ---
 const presets = [
-  // Row 1: Warm Reds to Oranges
-  [0, 80, 'Crimson'],
-  [15, 70, 'Sunset'],
-  [20, 90, 'Fire'],
-  [30, 60, 'Amber'],
-  [45, 50, 'Honey'],
-  [60, 70, 'Lime'],
+  // Row 1: Warm spectrum
+  [0, 75, 'Crimson'],
+  [15, 85, 'Sunset'],
+  [30, 70, 'Amber'],
+  [45, 65, 'Honey'],
+  [60, 80, 'Lime'],
+  [75, 60, 'Yellow'],
+  [90, 65, 'Mint'],
   
-  // Row 2: Greens to Blues
-  [90, 60, 'Mint'],
-  [120, 50, 'Forest'],
-  [150, 40, 'Teal'],
-  [180, 60, 'Ocean'],
-  [200, 70, 'Deep Blue'],
-  [210, 50, 'Sky'],
+  // Row 2: Cool spectrum  
+  [120, 55, 'Forest'],
+  [150, 70, 'Teal'],
+  [180, 65, 'Ocean'],
+  [200, 75, 'Azure'],
+  [220, 60, 'Sky'],
+  [240, 70, 'Royal'],
+  [260, 65, 'Indigo'],
   
-  // Row 3: Purples to Pinks
-  [240, 60, 'Royal'],
-  [270, 70, 'Purple'],
-  [300, 80, 'Magenta'],
-  [320, 75, 'Fuchsia'],
-  [330, 60, 'Rose'],
-  [350, 70, 'Coral']
+  // Row 3: Warm spectrum
+  [280, 70, 'Purple'],
+  [300, 75, 'Magenta'],
+  [320, 80, 'Fuchsia'],
+  [340, 70, 'Rose'],
+  [350, 75, 'Coral'],
+  [10, 60, 'Brick'],
+  [25, 55, 'Bronze']
 ]
 ---
 
@@ -70,15 +73,14 @@ createThemePicker()
   .theme-picker {
     position: fixed;
     top: 50%;
-    right: -320px;
+    right: -360px;
     transform: translateY(-50%);
     z-index: 1000;
     transition: right 0.5s cubic-bezier(0.3, 1.5, 0.6, 1);
-    width: 400px;
+    width: 420px;
     height: auto;
-    max-height: 200px;
     border-radius: var(--radius-lg);
-    padding: var(--space-lg);
+    padding: var(--space-md);
     backdrop-filter: blur(4px);
     background: var(--surface);
     border: none;
@@ -119,12 +121,12 @@ createThemePicker()
     position: absolute;
     width: 48px;
     height: 48px;
-    background: conic-gradient(from 0deg, #009494, #b1323b, #ba482e, #69314b, #0135a8, #009494);
+    background: conic-gradient(from 0deg, var(--primary), var(--secondary), var(--accent), var(--primary));
     border-radius: 50%;
     opacity: 0.8;
     animation: blobRotate 4s linear infinite;
     filter: blur(8px);
-    box-shadow: 0 0 20px rgba(0, 148, 148, 0.3);
+    box-shadow: 0 0 20px var(--primary);
   }
 
   @keyframes pulse { 0%, 100% { opacity: 0.7; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
@@ -132,41 +134,44 @@ createThemePicker()
 
   .presets {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    gap: var(--space-sm);
-    margin-bottom: var(--space-lg);
+    grid-template-columns: repeat(7, 1fr);
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
     width: 100%;
   }
 
   .preset-circle {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
     border: none;
     cursor: pointer;
     background: hsl(var(--preset-hue) var(--preset-sat) 50%);
-    box-shadow: 0 0 8px currentColor;
+    box-shadow: 0 2px 6px hsl(var(--preset-hue) var(--preset-sat) 30% / 0.4);
     transition: all var(--transition);
     position: relative;
   }
 
   .preset-circle:hover {
-    transform: scale(1.2);
-    box-shadow: 0 0 12px currentColor;
+    transform: scale(1.25);
+    box-shadow: 0 4px 12px hsl(var(--preset-hue) var(--preset-sat) 40% / 0.6);
   }
 
   .controls { 
     display: flex; 
     flex-direction: column; 
-    gap: var(--space-lg);
-    height: 100%;
+    gap: var(--space-md);
   }
   .control-group { 
-    display: flex; 
-    flex-direction: column; 
-    gap: var(--space-sm);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    gap: var(--space-xs) var(--space-sm);
+    align-items: center;
   }
+  .control-group .control-label { grid-column: 1; grid-row: 1; }
+  .control-group .control-value { grid-column: 2; grid-row: 1; }
+  .control-group .slider { grid-column: 1 / -1; grid-row: 2; }
 
   .control-label { 
     font-family: 'Fredoka', sans-serif;
@@ -181,7 +186,8 @@ createThemePicker()
     font-size: var(--text-sm); 
     color: var(--text); 
     font-weight: 600; 
-    text-align: right; 
+    text-align: right;
+    min-width: 3em;
   }
 
   .slider {
@@ -244,28 +250,16 @@ createThemePicker()
 
   @media (max-width: 768px) {
     .theme-picker { 
-      right: -280px; 
-      transform: translateY(-50%) scale(0.9); 
-      width: 320px; 
-      max-height: 180px;
-      padding: var(--space-md); 
+      right: -300px; 
+      width: 340px; 
+      padding: var(--space-sm); 
     }
     .theme-picker:hover { 
       right: -4px; 
-      transform: translateY(-50%) scale(1); 
     }
-  }
-
-  @media (max-width: 480px) {
-    .theme-picker { 
-      right: -240px; 
-      transform: translateY(-50%) scale(0.8); 
-      width: 280px; 
-      max-height: 160px;
-    }
-    .theme-picker:hover { 
-      right: -4px; 
-      transform: translateY(-50%) scale(0.9); 
+    .preset-circle {
+      width: 16px;
+      height: 16px;
     }
   }
 

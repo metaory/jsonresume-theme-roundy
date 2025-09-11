@@ -1,9 +1,9 @@
 const LEVELS = [
-  { keywords: ['beginner', 'basic'], width: '25%', class: 'level-beginner' },
-  { keywords: ['intermediate', 'conversational'], width: '50%', class: 'level-intermediate' },
-  { keywords: ['advanced', 'fluent'], width: '75%', class: 'level-advanced' },
-  { keywords: ['master', 'native'], width: '100%', class: 'level-master' },
-  { keywords: ['expert'], width: '100%', class: 'level-expert' }
+  { keywords: ['beginner', 'basic'], width: '25%', class: 'level-beginner', dots: 2 },
+  { keywords: ['intermediate', 'conversational'], width: '50%', class: 'level-intermediate', dots: 3 },
+  { keywords: ['advanced', 'fluent'], width: '75%', class: 'level-advanced', dots: 4 },
+  { keywords: ['master', 'native'], width: '100%', class: 'level-master', dots: 5 },
+  { keywords: ['expert'], width: '100%', class: 'level-expert', dots: 5 }
 ]
 
 const findLevelMapping = (level) => {
@@ -16,3 +16,4 @@ const findLevelMapping = (level) => {
 export const getLevelMapping = findLevelMapping
 export const getLevelWidth = (level) => findLevelMapping(level).width
 export const getLevelClass = (level) => findLevelMapping(level).class
+export const getLevelDots = (level) => findLevelMapping(level).dots

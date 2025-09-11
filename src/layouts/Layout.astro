@@ -13,7 +13,7 @@ const {
 ---
 
 <!DOCTYPE html>
-<html lang="en" style="--hue: 240; --sat: 60;" data-theme-options={JSON.stringify(themeOptions)}>
+<html lang="en" style={`--hue: ${themeOptions.hue || 240}; --sat: ${themeOptions.sat || 60};`}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -30,11 +30,8 @@ const {
       import 'iconify-icon';
     </script>
     
-    <script>
+    <script define:vars={{ themeOptions }}>
       import { initTheme } from '@lib/theme.js'
-      
-      // Get theme options from data attribute
-      const themeOptions = JSON.parse(document.documentElement.dataset.themeOptions || '{}')
       
       // Initialize theme with options from JSON data
       initTheme(themeOptions)

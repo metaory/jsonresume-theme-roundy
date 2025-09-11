@@ -1,5 +1,6 @@
 ---
 import Basics from '@sections/Basics.astro'
+import SectionRenderer from '@components/SectionRenderer.astro'
 import Divider from '@shared/Divider.astro'
 import Layout from '@layouts/Layout.astro'
 import { getAvailableResumes, getResumeData, getResumeInfo } from '@lib/resume.js'
@@ -27,22 +28,6 @@ const { resume } = Astro.params
 const resumeInfo = getResumeInfo(resume)
 const resumeData = await getResumeData(resumeInfo.name)
 
-// Auto-import all section components using import.meta.glob (excluding Basics)
-const sectionModules = import.meta.glob('../components/sections/!(Basics).astro', { eager: true })
-
-// Create component mapping from imported components
-const components: Record<string, any> = {}
-for (const [filePath, module] of Object.entries(sectionModules)) {
-  // Extract component name from file path (e.g., "Work" from "Work.astro")
-  const fileName = filePath.split('/').pop()?.replace('.astro', '')
-
-  if (fileName && fileName !== 'Basics') {
-    const key = fileName.toLowerCase()
-    const mod = module as any
-    components[key] = mod.default || mod
-  }
-}
-
 const { basics, meta, ...sections } = resumeData
 ---
 
@@ -60,13 +45,7 @@ const { basics, meta, ...sections } = resumeData
   <Divider variant="accent" />
   <Divider variant="gradient" />
 
-  {Object.entries(sections).map(([key, data]) => {
-    const Component = components[key]
-
-    if (Component && data) {
-      const props = { [key]: data, meta, resumeData }
-      return <Component {...props} />
-    }
-    return null
-  })}
+  {Object.entries(sections).map(([key, data]) => 
+    data && <SectionRenderer sectionKey={key} data={data} meta={meta} />
+  )}
 </Layout> 

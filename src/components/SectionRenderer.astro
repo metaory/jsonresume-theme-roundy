@@ -1,0 +1,135 @@
+---
+import Section from '@shared/Section.astro'
+import Item from '@shared/Item.astro'
+import Card from '@shared/Card.astro'
+import CardGrid from '@shared/CardGrid.astro'
+import Title from '@shared/Title.astro'
+import Subtitle from '@shared/Subtitle.astro'
+import Dates from '@shared/Dates.astro'
+import Description from '@shared/Description.astro'
+import List from '@shared/List.astro'
+import Keywords from '@shared/Keywords.astro'
+import LevelBar from '@shared/LevelBar.astro'
+import FluencyDots from '@shared/FluencyDots.astro'
+
+const { sectionKey, data, meta } = Astro.props
+
+// Section configuration - single source of truth
+const sections = {
+  work: { 
+    title: "Work Experience", layout: "list",
+    fields: ['name>title', 'position>subtitle', 'startDate,endDate>dates', 'summary>description', 'highlights>list', 'keywords', 'seniority>level', 'url']
+  },
+  projects: { 
+    title: "Projects", layout: "list",
+    fields: ['name>title', 'description', 'highlights>list', 'keywords:secondary', 'complexity>level', 'url']
+  },
+  education: { 
+    title: "Education", layout: "list",
+    fields: ['institution>title', 'studyType,area>subtitle', 'startDate,endDate>dates', 'score', 'courses>list', 'url']
+  },
+  volunteer: { 
+    title: "Volunteer", layout: "list", 
+    fields: ['organization>title', 'position>subtitle', 'startDate,endDate>dates', 'summary>description', 'highlights>list', 'url']
+  },
+  publications: { 
+    title: "Publications", layout: "list",
+    fields: ['name>title', 'publisher>subtitle', 'releaseDate>dates', 'url']
+  },
+  references: { 
+    title: "References", layout: "list",
+    fields: ['name>title', 'reference>subtitle']
+  },
+  awards: { 
+    title: "Awards", layout: "list",
+    fields: ['title>title', 'awarder>subtitle', 'date>dates', 'summary>description']
+  },
+  certificates: { 
+    title: "Certificates", layout: "list",
+    fields: ['name>title', 'issuer>subtitle', 'date>dates', 'url']
+  },
+  skills: { 
+    title: "Skills", layout: "cards",
+    fields: ['name>title', 'keywords', 'level']
+  },
+  languages: { 
+    title: "Languages", layout: "cards",
+    fields: ['language>title', 'fluency']
+  },
+  interests: { 
+    title: "Interests", layout: "cards",
+    fields: ['name>title', 'keywords', 'level']
+  }
+}
+
+const config = sections[sectionKey] || { title: sectionKey, layout: "list", fields: [] }
+const title = meta?.themeOptions?.sectionTitles?.[sectionKey] || config.title
+const items = Array.isArray(data) ? data : []
+const Component = config.layout === "cards" ? Card : Item
+
+// Field processors with custom logic for specific cases
+const processors = {
+  'studyType,area': (item) => `${item.studyType || ''} in ${item.area || ''}`.trim(),
+  'startDate,endDate': (item) => `${item.startDate || ''} - ${item.endDate || 'Present'}`.replace(/^[\s-]+|[\s-]+$/g, ''),
+  subtitle: (item, fields) => processors[fields]?.(item) || item[fields],
+  dates: (item, fields) => processors[fields]?.(item) || item[fields],
+  description: (item, field) => item[field] || item.summary,
+  default: (item, field) => item[field]
+}
+
+// Process field definitions into render data
+const processItem = (item) => {
+  const result = {}
+  
+  config.fields.forEach(fieldDef => {
+    const [sourceFields, targetType = sourceFields] = fieldDef.split('>')
+    const [type, variant] = targetType.split(':')
+    const processor = processors[type] || processors.default
+    
+    const value = processor(item, sourceFields)
+    if (!value || (Array.isArray(value) && !value.length)) return
+    
+    result[type] = { value, variant }
+  })
+  
+  return result
+}
+
+---
+
+{(() => {
+  const renderMap = {
+    title: ({ value }) => <Title>{value}</Title>,
+    subtitle: ({ value }) => <Subtitle>{value}</Subtitle>,
+    dates: ({ value }) => <Dates>{value}</Dates>,
+    description: ({ value }) => <Description>{value}</Description>,
+    list: ({ value }) => <List>{value.map(item => <li>{item}</li>)}</List>,
+    keywords: ({ value, variant = 'primary' }) => <Keywords keywords={value} variant={variant} size="sm" meta={meta} />,
+    level: ({ value }) => <LevelBar level={value} />,
+    fluency: ({ value }) => <FluencyDots fluency={value} />,
+    url: ({ value }) => <a href={value} target="_blank" rel="noopener">{value}</a>,
+    score: ({ value }) => <span>{value}</span>
+  }
+  
+  const renderField = (type, data) => renderMap[type]?.(data) || null
+
+  const renderItem = (item) => (
+    <Component>
+      {Object.entries(processItem(item)).map(([type, data]) => 
+        data && typeof data === 'object' && 'value' in data && 'variant' in data ? renderField(type, data) : null
+      )}
+    </Component>
+  )
+
+  return (
+    <Section title={title} meta={meta}>
+      {config.layout === "cards" ? (
+        <CardGrid>
+          {items.map(renderItem)}
+        </CardGrid>
+      ) : (
+        items.map(renderItem)
+      )}
+    </Section>
+  )
+})()}

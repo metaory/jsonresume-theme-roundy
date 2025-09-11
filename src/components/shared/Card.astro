@@ -1,0 +1,56 @@
+---
+const { class: className = '' } = Astro.props
+---
+
+<article class={`card ${className}`}>
+  <slot />
+</article>
+
+<style>
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    backdrop-filter: blur(4px);
+    transition: all var(--transition);
+    border: 1px solid transparent;
+    box-shadow: var(--shadow);
+    display: grid;
+    gap: var(--space-xs);
+    height: fit-content;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    border-color: hsl(from var(--primary) h s l / 0.3);
+  }
+
+  .card :global(.title) { 
+    font-size: var(--text-base); 
+    margin-bottom: var(--space-xs);
+  }
+  
+  .card :global(.subtitle) { 
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-xs);
+  }
+  
+  .card :global(.dates) { font-size: var(--text-sm); }
+  .card :global(.description) { line-height: 1.5; }
+  
+  .card :global(a) {
+    font-size: var(--text-sm);
+    word-break: break-all;
+  }
+
+  .card :global(.level-bar),
+  .card :global(.fluency-dots) {
+    justify-self: start;
+  }
+
+  .card :global(.keywords) {
+    margin-top: var(--space-xs);
+  }
+</style>
