@@ -8,7 +8,7 @@ const {
   class: className = ''
 } = Astro.props;
 
-const variants = ['default', 'primary', 'secondary', 'outline', 'ghost', 'link']
+const variants = ['default', 'primary', 'secondary', 'outline', 'ghost', 'link', 'subtle']
 const sizes = ['sm', 'md', 'lg']
 
 const getVariantClass = (variant) => `tag-${variant}`
@@ -57,6 +57,13 @@ const tagProps = href ? { href, target: '_blank', rel: 'noopener' } : {};
   .tag-outline { --tag-bg: transparent; --tag-color: var(--text); }
   .tag-ghost { --tag-bg: transparent; --tag-color: var(--text-muted); }
   .tag-link { --tag-bg: transparent; --tag-color: var(--link); text-decoration: underline; }
+  .tag-subtle { 
+    --tag-bg: var(--surface); 
+    --tag-color: var(--text-muted); 
+    border-radius: var(--radius-full);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
 
   .tag {
     background: var(--tag-bg);

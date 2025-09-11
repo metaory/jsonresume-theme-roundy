@@ -34,7 +34,7 @@ const computeColors = (h, s, isDark) => {
   const accentHue = (h + 60) % 360
   const textSat = clamp(s * 0.1, 5, 20)
   const mode = isDark ? 'dark' : 'light'
-  
+
   return colorConfigs[mode](h, s, secondaryHue, accentHue, textSat)
 }
 
@@ -42,7 +42,7 @@ const setProp = ([name, value]) => document.documentElement.style.setProperty(`-
 
 const applyTheme = (h, s, isDark) => {
   const colors = computeColors(h, s, isDark)
-  
+
   const props = [
     ['hue', String(h)],
     ['sat', String(s)],
@@ -58,7 +58,7 @@ const applyTheme = (h, s, isDark) => {
     ['link', colors.link],
     ['link-hover', colors.linkHover]
   ]
-  
+
   props.forEach(setProp)
 }
 
@@ -66,27 +66,14 @@ const setThemeAttr = (isDark) => {
   document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light')
 }
 
-export const initTheme = (themeOptions = {}) => {
-  const hue = clamp(Math.round(themeOptions.hue ?? THEME_DEFAULTS.hue), 0, 360)
-  const sat = clamp(Math.round(themeOptions.sat ?? THEME_DEFAULTS.sat), 0, 100)
-  const isDark = themeOptions.dark ?? THEME_DEFAULTS.dark
-  
-  setThemeAttr(isDark)
-  applyTheme(hue, sat, isDark)
-  
-  // Update theme state directly without triggering proxy
-  Object.assign(theme, { hue, sat, dark: isDark })
-  
-  return { hue, sat, isDark }
-}
 
 export const toggleThemeMode = () => {
   const nextIsDark = !theme.dark
-  
+
   theme.dark = nextIsDark
   setThemeAttr(nextIsDark)
   applyTheme(theme.hue, theme.sat, nextIsDark)
-  
+
   return nextIsDark ? 'dark' : 'light'
 }
 
@@ -106,33 +93,33 @@ const updateTheme = debounce((hue, sat) => {
 export const createThemePicker = () => {
   const elements = ['hue', 'sat', 'hue-value', 'sat-value'].map(id => document.getElementById(id))
   const [hueEl, satEl, hueVal, satVal] = elements
-  
+
   if (!elements.every(Boolean)) return
-  
+
   const updateSliders = (hue, sat) => {
     hueEl.value = hue
     satEl.value = sat
     hueVal.textContent = `${hue}°`
     satVal.textContent = `${sat}%`
   }
-  
+
   updateSliders(theme.hue, theme.sat)
-  
+
   const createSliderHandler = (prop, suffix, getThemeArgs) => () => {
     const value = Number(document.getElementById(prop).value)
     document.getElementById(`${prop}-value`).textContent = `${value}${suffix}`
     updateTheme(...getThemeArgs(value))
   }
-  
+
   const sliderHandlers = {
     hue: createSliderHandler('hue', '°', (hue) => [hue, theme.sat]),
     sat: createSliderHandler('sat', '%', (sat) => [theme.hue, sat])
   }
-  
+
   Object.entries(sliderHandlers).forEach(([id, handler]) => {
     document.getElementById(id)?.addEventListener('input', handler)
   })
-  
+
   document.querySelectorAll('.preset-circle').forEach(circle => {
     circle.addEventListener('click', () => {
       const hue = parseInt(circle.dataset.hue || '0')
@@ -159,7 +146,17 @@ const propHandlers = {
   }
 }
 
-export const theme = new Proxy(THEME_DEFAULTS, {
+const getInitialTheme = () => {
+  if (typeof document === 'undefined') return THEME_DEFAULTS
+  const style = getComputedStyle(document.documentElement)
+  return {
+    ...THEME_DEFAULTS,
+    hue: parseInt(style.getPropertyValue('--hue')) || THEME_DEFAULTS.hue,
+    sat: parseInt(style.getPropertyValue('--sat')) || THEME_DEFAULTS.sat
+  }
+}
+
+export const theme = new Proxy(getInitialTheme(), {
   set(target, prop, value) {
     const handler = propHandlers[prop]
     if (handler) handler(target, value)

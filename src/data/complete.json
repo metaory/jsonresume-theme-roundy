@@ -2,8 +2,8 @@
   "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
   "basics": {
     "email": "xorg@gmail.com",
-    "image": "/.dev/me.png",
-    "logo": "/.dev/logo.png",
+    "image": "public/avatar-m.png",
+    "logo": "public/logo.svg",
     "label": "<i>some label</i> # ZoA <br> ::IoI::",
     "url": "https://github.com/xorg",
     "location": {
