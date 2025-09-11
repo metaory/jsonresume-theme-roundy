@@ -47,7 +47,7 @@ const { basics } = Astro.props
   </div>
 
   <div class="profiles">
-    {(basics.profiles || []).map(profile => (
+    {(basics.profiles || []).map((profile: { network?: string, username?: string, url?: string }) => (
       <ContactTag
         text={profile.username}
         icon={`mdi:${profile.network?.toLowerCase()}`}

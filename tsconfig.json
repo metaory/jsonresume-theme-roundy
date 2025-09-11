@@ -15,6 +15,8 @@
     "noImplicitOverride": false,
     "allowUnusedLabels": true,
     "allowUnreachableCode": true,
+    "skipLibCheck": true,
+    "noErrorTruncation": true,
     "paths": {
       "@/*": [
         "src/*"
