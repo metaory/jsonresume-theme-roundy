@@ -1,5 +1,29 @@
 ---
-// Theme picker with hue and saturation sliders
+const presets = [
+  // Row 1: Warm Reds to Oranges
+  [0, 80, 'Crimson'],
+  [15, 70, 'Sunset'],
+  [20, 90, 'Fire'],
+  [30, 60, 'Amber'],
+  [45, 50, 'Honey'],
+  [60, 70, 'Lime'],
+  
+  // Row 2: Greens to Blues
+  [90, 60, 'Mint'],
+  [120, 50, 'Forest'],
+  [150, 40, 'Teal'],
+  [180, 60, 'Ocean'],
+  [200, 70, 'Deep Blue'],
+  [210, 50, 'Sky'],
+  
+  // Row 3: Purples to Pinks
+  [240, 60, 'Royal'],
+  [270, 70, 'Purple'],
+  [300, 80, 'Magenta'],
+  [320, 75, 'Fuchsia'],
+  [330, 60, 'Rose'],
+  [350, 70, 'Coral']
+]
 ---
 
 <div class="theme-picker">
@@ -7,6 +31,18 @@
     <iconify-icon width="48" height="48" icon="solar:pallete-2-bold-duotone"></iconify-icon>
     <div class="logo-blob"></div>
   </button>
+
+  <div class="presets">
+    {presets.map(([hue, sat, name]) => (
+      <button 
+        class="preset-circle" 
+        style={`--preset-hue: ${String(hue)}; --preset-sat: ${String(sat)};`}
+        title={String(name)}
+        data-hue={String(hue)}
+        data-sat={String(sat)}
+      ></button>
+    ))}
+  </div>
   
   <div class="controls">
     <div class="control-group">
@@ -26,7 +62,7 @@
 <script>
 import { createThemePicker } from '@lib/theme.js'
 
-// Initialize theme picker
+// Initialize theme picker (includes preset handlers)
 createThemePicker()
 </script>
 
@@ -39,7 +75,8 @@ createThemePicker()
     z-index: 1000;
     transition: right 0.5s cubic-bezier(0.3, 1.5, 0.6, 1);
     width: 400px;
-    height: 120px;
+    height: auto;
+    max-height: 200px;
     border-radius: var(--radius-lg);
     padding: var(--space-lg);
     backdrop-filter: blur(4px);
@@ -92,6 +129,32 @@ createThemePicker()
 
   @keyframes pulse { 0%, 100% { opacity: 0.7; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
   @keyframes blobRotate { to { transform: rotate(360deg); } }
+
+  .presets {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+    width: 100%;
+  }
+
+  .preset-circle {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background: hsl(var(--preset-hue) var(--preset-sat) 50%);
+    box-shadow: 0 0 8px currentColor;
+    transition: all var(--transition);
+    position: relative;
+  }
+
+  .preset-circle:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 12px currentColor;
+  }
 
   .controls { 
     display: flex; 
@@ -184,7 +247,7 @@ createThemePicker()
       right: -280px; 
       transform: translateY(-50%) scale(0.9); 
       width: 320px; 
-      height: 100px;
+      max-height: 180px;
       padding: var(--space-md); 
     }
     .theme-picker:hover { 
@@ -198,7 +261,7 @@ createThemePicker()
       right: -240px; 
       transform: translateY(-50%) scale(0.8); 
       width: 280px; 
-      height: 90px;
+      max-height: 160px;
     }
     .theme-picker:hover { 
       right: -4px; 

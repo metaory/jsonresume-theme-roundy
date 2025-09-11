@@ -8,11 +8,14 @@
 </button>
 
 <script>
-import { toggleThemeMode } from '@lib/theme.js'
+import { toggleThemeMode, initTheme } from '@lib/theme.js'
+
+// Initialize theme from server options
+const serverOptions = JSON.parse(document.querySelector('script[type="application/json"]')?.textContent || '{}')
+initTheme(serverOptions)
 
 document.querySelector('.theme-toggle')?.addEventListener('click', () => {
   toggleThemeMode()
-  document.documentElement.setAttribute('data-theme-manual', 'true')
 })
 </script>
 

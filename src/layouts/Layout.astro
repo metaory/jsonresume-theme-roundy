@@ -28,20 +28,6 @@ const {
 
     <script>
       import 'iconify-icon';
-      import { initTheme } from '@lib/theme.js';
-      
-      // Initialize theme with options from server
-      const themeOptions = {
-        hue: parseInt(document.documentElement.style.getPropertyValue('--hue') || '240'),
-        sat: parseInt(document.documentElement.style.getPropertyValue('--sat') || '60'),
-        dark: document.documentElement.getAttribute('data-theme') === 'dark'
-      };
-      
-      // Merge with server-provided options
-      const serverOptions = JSON.parse(document.querySelector('script[type="application/json"]')?.textContent || '{}');
-      const finalOptions = { ...themeOptions, ...serverOptions };
-      
-      initTheme(finalOptions);
     </script>
     
     <script type="application/json" set:html={JSON.stringify(themeOptions)}></script>
