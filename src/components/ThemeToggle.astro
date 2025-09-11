@@ -1,18 +1,10 @@
----
-// Theme toggle component
----
-
 <button class="theme-toggle" aria-label="Toggle theme">
     <iconify-icon width="48" height="48" class="light-icon" icon="line-md:sunny-filled-loop-to-moon-filled-alt-loop-transition"></iconify-icon>
     <iconify-icon width="48" height="48" class="dark-icon" icon="line-md:moon-filled-alt-to-sunny-filled-loop-transition"></iconify-icon>
 </button>
 
 <script>
-import { toggleThemeMode, initTheme } from '@lib/theme.js'
-
-// Initialize theme from server options
-const serverOptions = JSON.parse(document.querySelector('script[type="application/json"]')?.textContent || '{}')
-initTheme(serverOptions)
+import { toggleThemeMode } from '@lib/theme.js'
 
 document.querySelector('.theme-toggle')?.addEventListener('click', () => {
   toggleThemeMode()
