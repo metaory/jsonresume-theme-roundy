@@ -1,8 +1,6 @@
 ---
-import { getAvailableResumes } from '@lib/resume.js'
+import { getDefaultResume } from '@lib/resume.js'
 
-// Redirect to default resume (first available)
-const availableResumes = getAvailableResumes()
-const defaultResume = availableResumes[0] || 'resume'
-return Astro.redirect(`/${defaultResume}`)
+// Redirect to default resume
+return Astro.redirect(`/${getDefaultResume()}`)
 ---

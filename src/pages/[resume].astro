@@ -2,7 +2,7 @@
 import Basics from '@sections/Basics.astro'
 import Divider from '@shared/Divider.astro'
 import Layout from '@layouts/Layout.astro'
-import { getAvailableResumes, getResumeData } from '@lib/resume.js'
+import { getAvailableResumes, getResumeData, getResumeInfo } from '@lib/resume.js'
 
 // Fontsource imports - these automatically add @font-face rules
 import '@fontsource/bungee-shade'
@@ -23,10 +23,9 @@ export function getStaticPaths() {
 // Get resume name from path param
 const { resume } = Astro.params
 
-// Get available resumes and load data
-const availableResumes = getAvailableResumes()
-const validResume = resume && availableResumes.includes(resume) ? resume : availableResumes[0]
-const resumeData = await getResumeData(validResume)
+// Get resume info and load data
+const resumeInfo = getResumeInfo(resume)
+const resumeData = await getResumeData(resumeInfo.name)
 
 // Auto-import all section components using import.meta.glob (excluding Basics)
 const sectionModules = import.meta.glob('../components/sections/!(Basics).astro', { eager: true })
@@ -45,20 +44,14 @@ for (const [filePath, module] of Object.entries(sectionModules)) {
 }
 
 const { basics, meta, ...sections } = resumeData
-const themeDefaults = { hue: 240, sat: 60 }
-const initialHue = meta?.themeOptions?.hue ?? themeDefaults.hue
-const initialSat = meta?.themeOptions?.sat ?? themeDefaults.sat
-const initialDark = typeof meta?.themeOptions?.dark === 'boolean' ? meta.themeOptions.dark : undefined
 ---
 
 <Layout 
   title={basics?.name || 'Resume'}
   description="Professional Resume"
-  initialHue={initialHue}
-  initialSat={initialSat}
-  initialDark={initialDark}
-  currentResume={validResume}
-  availableResumes={availableResumes}
+  themeOptions={meta?.themeOptions}
+  currentResume={resumeInfo.name}
+  availableResumes={getAvailableResumes()}
 >
   <Basics basics={basics} meta={meta} />
 

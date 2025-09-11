@@ -8,27 +8,18 @@ const {
   class: className = ''
 } = Astro.props;
 
-const variants = {
-  default: 'tag-default',
-  primary: 'tag-primary',
-  secondary: 'tag-secondary',
-  outline: 'tag-outline',
-  ghost: 'tag-ghost',
-  link: 'tag-link'
-};
+const variants = ['default', 'primary', 'secondary', 'outline', 'ghost', 'link']
+const sizes = ['sm', 'md', 'lg']
 
-const sizes = {
-  sm: 'tag-sm',
-  md: 'tag-md',
-  lg: 'tag-lg'
-};
+const getVariantClass = (variant) => `tag-${variant}`
+const getSizeClass = (size) => `tag-${size}`
 
 const TagElement = href ? 'a' : 'span';
 const tagProps = href ? { href, target: '_blank', rel: 'noopener' } : {};
 ---
 
 <TagElement
-  class={`tag ${variants[variant]} ${sizes[size]} ${className}`}
+  class={`tag ${getVariantClass(variant)} ${getSizeClass(size)} ${className}`}
   {...tagProps}
 >
   {icon && <iconify-icon icon={icon} class="tag-icon" />}
@@ -60,50 +51,21 @@ const tagProps = href ? { href, target: '_blank', rel: 'noopener' } : {};
   }
 
   /* Tag Variants */
-  .tag-default {
-    background: var(--surface);
-    color: var(--text-muted);
-  }
+  .tag-default { --tag-bg: var(--surface); --tag-color: var(--text-muted); }
+  .tag-primary { --tag-bg: var(--primary); --tag-color: white; }
+  .tag-secondary { --tag-bg: var(--secondary); --tag-color: white; }
+  .tag-outline { --tag-bg: transparent; --tag-color: var(--text); }
+  .tag-ghost { --tag-bg: transparent; --tag-color: var(--text-muted); }
+  .tag-link { --tag-bg: transparent; --tag-color: var(--link); text-decoration: underline; }
 
-  .tag-primary {
-    background: var(--primary);
-    color: white;
-  }
-
-  .tag-secondary {
-    background: var(--secondary);
-    color: white;
-  }
-
-  .tag-outline {
-    background: transparent;
-    color: var(--text);
-  }
-
-  .tag-ghost {
-    background: transparent;
-    color: var(--text-muted);
-  }
-
-  .tag-link {
-    background: transparent;
-    color: var(--link);
-    text-decoration: underline;
+  .tag {
+    background: var(--tag-bg);
+    color: var(--tag-color);
   }
 
   /* Tag Sizes */
-  .tag-sm {
-    padding: var(--space-xs);
-    font-size: var(--text-xs);
-    border-radius: var(--radius);
-  }
-
-  .tag-md {
-    padding: var(--space-xs) var(--space-sm);
-    font-size: var(--text-sm);
-    border-radius: var(--radius);
-  }
-
+  .tag-sm { padding: var(--space-xs); font-size: var(--text-xs); }
+  .tag-md { padding: var(--space-xs) var(--space-sm); font-size: var(--text-sm); }
   .tag-lg {
     padding: var(--space-sm) var(--space-md);
     font-size: var(--text-base);

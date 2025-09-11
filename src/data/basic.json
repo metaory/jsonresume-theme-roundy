@@ -278,9 +278,9 @@
   ],
   "meta": {
     "themeOptions": {
-      "hue": 240,
+      "hue": 140,
       "sat": 50,
-      "dark": true,
+      "dark": false,
       "sectionTitles": {
         "contacts": "Contact Information",
         "summary": "Professional Summary",

@@ -6,16 +6,14 @@ import ResumeNav from '@components/ResumeNav.astro';
 const {
   title = 'Resume',
   description = 'Professional Resume',
-  initialHue = 240,
-  initialSat = 60,
-  initialDark,
+  themeOptions = {},
   currentResume,
   availableResumes = []
 } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en" data-theme={initialDark ? 'dark' : 'light'} style={`--hue: ${initialHue}; --sat: ${initialSat};`}>
+<html lang="en" data-theme="light" style="--hue: 240; --sat: 60;">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -29,10 +27,24 @@ const {
     </style>
 
     <script>
-      import { initTheme } from '@lib/theme.js'
       import 'iconify-icon';
-      initTheme()
+      import { initTheme } from '@lib/theme.js';
+      
+      // Initialize theme with options from server
+      const themeOptions = {
+        hue: parseInt(document.documentElement.style.getPropertyValue('--hue') || '240'),
+        sat: parseInt(document.documentElement.style.getPropertyValue('--sat') || '60'),
+        dark: document.documentElement.getAttribute('data-theme') === 'dark'
+      };
+      
+      // Merge with server-provided options
+      const serverOptions = JSON.parse(document.querySelector('script[type="application/json"]')?.textContent || '{}');
+      const finalOptions = { ...themeOptions, ...serverOptions };
+      
+      initTheme(finalOptions);
     </script>
+    
+    <script type="application/json" set:html={JSON.stringify(themeOptions)}></script>
   </head>
 
   <body>

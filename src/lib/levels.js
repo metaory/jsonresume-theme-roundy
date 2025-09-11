@@ -1,42 +1,18 @@
-export const LEVEL_MAPPINGS = {
-  beginner: {
-    keywords: ['beginner', 'basic'],
-    width: '25%',
-    class: 'level-beginner'
-  },
-  intermediate: {
-    keywords: ['intermediate', 'conversational'],
-    width: '50%',
-    class: 'level-intermediate'
-  },
-  advanced: {
-    keywords: ['advanced', 'fluent'],
-    width: '75%',
-    class: 'level-advanced'
-  },
-  master: {
-    keywords: ['master', 'native'],
-    width: '100%',
-    class: 'level-master'
-  },
-  expert: {
-    keywords: ['expert'],
-    width: '100%',
-    class: 'level-expert'
-  }
-}
+const LEVELS = [
+  { keywords: ['beginner', 'basic'], width: '25%', class: 'level-beginner' },
+  { keywords: ['intermediate', 'conversational'], width: '50%', class: 'level-intermediate' },
+  { keywords: ['advanced', 'fluent'], width: '75%', class: 'level-advanced' },
+  { keywords: ['master', 'native'], width: '100%', class: 'level-master' },
+  { keywords: ['expert'], width: '100%', class: 'level-expert' }
+]
 
-export const getLevelMapping = (level) => {
+const findLevelMapping = (level) => {
   const normalized = level?.toLowerCase()
-  
-  for (const [key, mapping] of Object.entries(LEVEL_MAPPINGS)) {
-    if (mapping.keywords.some(k => normalized?.includes(k))) {
-      return mapping
-    }
-  }
-  
-  return LEVEL_MAPPINGS.intermediate
+  return LEVELS.find(levelMapping => 
+    levelMapping.keywords.some(keyword => normalized?.includes(keyword))
+  ) || LEVELS[1] // fallback to intermediate
 }
 
-export const getLevelWidth = (level) => getLevelMapping(level).width
-export const getLevelClass = (level) => getLevelMapping(level).class
+export const getLevelMapping = findLevelMapping
+export const getLevelWidth = (level) => findLevelMapping(level).width
+export const getLevelClass = (level) => findLevelMapping(level).class

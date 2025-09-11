@@ -51,53 +51,20 @@ const levelClass = getLevelClass(level)
   }
 
   /* Level-specific colors using theme variables */
-  .level-beginner .bar-fill {
-    background: linear-gradient(90deg, var(--primary), var(--primary)dd);
+  .level-beginner { --level-color: var(--primary); }
+  .level-intermediate { --level-color: var(--secondary); }
+  .level-advanced { --level-color: var(--accent); }
+  .level-master { --level-color: var(--primary); }
+  .level-expert { --level-color: var(--accent); }
+
+  .level-bar .bar-fill {
+    background: linear-gradient(90deg, var(--level-color), var(--level-color)dd);
   }
-  .level-beginner .bar-glow {
-    background: var(--primary)40;
+  .level-bar .bar-glow {
+    background: var(--level-color)40;
   }
-  .level-beginner .level-text {
-    color: var(--primary);
+  .level-bar .level-text {
+    color: var(--level-color);
   }
 
-  .level-intermediate .bar-fill {
-    background: linear-gradient(90deg, var(--secondary), var(--secondary)dd);
-  }
-  .level-intermediate .bar-glow {
-    background: var(--secondary)40;
-  }
-  .level-intermediate .level-text {
-    color: var(--secondary);
-  }
-
-  .level-advanced .bar-fill {
-    background: linear-gradient(90deg, var(--accent), var(--accent)dd);
-  }
-  .level-advanced .bar-glow {
-    background: var(--accent)40;
-  }
-  .level-advanced .level-text {
-    color: var(--accent);
-  }
-
-  .level-master .bar-fill {
-    background: linear-gradient(90deg, var(--primary), var(--primary)dd);
-  }
-  .level-master .bar-glow {
-    background: var(--primary)40;
-  }
-  .level-master .level-text {
-    color: var(--primary);
-  }
-
-  .level-expert .bar-fill {
-    background: linear-gradient(90deg, var(--secondary), var(--secondary)dd);
-  }
-  .level-expert .bar-glow {
-    background: var(--secondary)40;
-  }
-  .level-expert .level-text {
-    color: var(--secondary);
-  }
 </style>
