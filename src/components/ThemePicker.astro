@@ -12,13 +12,13 @@
     <div class="control-group">
       <label for="hue" class="control-label">hue</label>
       <span id="hue-value" class="control-value">240°</span>
-      <input id="hue" class="hue-slider" type="range" min="0" max="360" step="1" />
+      <input id="hue" class="slider" type="range" min="0" max="360" step="1" />
     </div>
     
     <div class="control-group">
-      <label for="sat" class="control-label">saturation</label>
+      <label for="sat" class="control-label">sat</label>
       <span id="sat-value" class="control-value">60%</span>
-      <input id="sat" class="sat-slider" type="range" min="0" max="100" step="1" />
+      <input id="sat" class="slider" type="range" min="0" max="100" step="1" />
     </div>
   </div>
 </div>
@@ -26,48 +26,45 @@
 <script>
 import { readHue, readSat, theme } from '@lib/theme.js'
 
-const hueEl = document.getElementById('hue')
-const satEl = document.getElementById('sat')
-const hueVal = document.getElementById('hue-value')
-const satVal = document.getElementById('sat-value')
+const hueEl = document.getElementById('hue') as HTMLInputElement
+const satEl = document.getElementById('sat') as HTMLInputElement
+const hueVal = document.getElementById('hue-value') as HTMLElement
+const satVal = document.getElementById('sat-value') as HTMLElement
 
-if (hueEl instanceof HTMLInputElement && satEl instanceof HTMLInputElement && hueVal && satVal) {
-  const initHue = readHue()
-  const initSat = readSat()
-  hueEl.value = String(initHue)
-  satEl.value = String(initSat)
-  hueVal.textContent = `${initHue}°`
-  satVal.textContent = `${initSat}%`
 
-  const onChange = () => {
-    const h = Number(hueEl.value)
-    const s = Number(satEl.value)
-    hueVal.textContent = `${h}°`
-    satVal.textContent = `${s}%`
-    document.documentElement.setAttribute('data-theme-manual', 'true')
-    theme.hue = h
-    theme.sat = s
-  }
+const initHue = readHue()
+const initSat = readSat()
+hueEl.value = String(initHue)
+satEl.value = String(initSat)
+hueVal.textContent = `${initHue}°`
+satVal.textContent = `${initSat}%`
 
-  hueEl.addEventListener('input', onChange)
-  satEl.addEventListener('input', onChange)
+const onChange = () => {
+  const h = Number(hueEl.value)
+  const s = Number(satEl.value)
+  hueVal.textContent = `${h}°`
+  satVal.textContent = `${s}%`
+  document.documentElement.setAttribute('data-theme-manual', 'true')
+  theme.hue = h
+  theme.sat = s
 }
+
+hueEl.addEventListener('input', onChange)
+satEl.addEventListener('input', onChange)
 </script>
 
 <style>
   .theme-picker {
     position: fixed;
     top: 50%;
-    right: -200px;
+    right: -320px;
     transform: translateY(-50%);
     z-index: 1000;
     transition: right 0.5s cubic-bezier(0.3, 1.5, 0.6, 1);
-    width: 280px;
+    width: 400px;
+    height: 120px;
     border-radius: var(--radius-lg);
     padding: var(--space-lg);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-lg);
     backdrop-filter: blur(4px);
     background: var(--surface);
     border: none;
@@ -77,6 +74,10 @@ if (hueEl instanceof HTMLInputElement && satEl instanceof HTMLInputElement && hu
   .theme-picker:hover { right: -4px; }
 
   .picker-tab {
+    position: absolute;
+    left: -60px;
+    top: 50%;
+    transform: translateY(-50%);
     background: none;
     border: none;
     cursor: pointer;
@@ -87,7 +88,8 @@ if (hueEl instanceof HTMLInputElement && satEl instanceof HTMLInputElement && hu
     align-items: center;
     justify-content: center;
     transition: all var(--transition);
-    position: relative;
+    width: 60px;
+    height: 60px;
   }
 
   .theme-picker iconify-icon {
@@ -108,17 +110,41 @@ if (hueEl instanceof HTMLInputElement && satEl instanceof HTMLInputElement && hu
     opacity: 0.8;
     animation: blobRotate 4s linear infinite;
     filter: blur(8px);
+    box-shadow: 0 0 20px rgba(0, 148, 148, 0.3);
   }
 
   @keyframes pulse { 0%, 100% { opacity: 0.7; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
   @keyframes blobRotate { to { transform: rotate(360deg); } }
 
-  .controls { display: flex; flex-direction: column; gap: var(--space-lg); }
-  .control-group { display: flex; flex-direction: column; gap: var(--space-sm); }
-  .control-label { font-size: var(--text-sm); color: var(--text-muted); text-transform: lowercase; font-weight: 500; }
-  .control-value { font-size: var(--text-sm); color: var(--text); font-weight: 600; text-align: right; }
+  .controls { 
+    display: flex; 
+    flex-direction: column; 
+    gap: var(--space-lg);
+    height: 100%;
+  }
+  .control-group { 
+    display: flex; 
+    flex-direction: column; 
+    gap: var(--space-sm);
+  }
 
-  .hue-slider, .sat-slider {
+  .control-label { 
+    font-family: 'Fredoka', sans-serif;
+    font-size: var(--text-sm); 
+    color: var(--text-muted); 
+    text-transform: lowercase; 
+    font-weight: 500; 
+  }
+
+  .control-value { 
+    font-family: 'Fredoka', sans-serif;
+    font-size: var(--text-sm); 
+    color: var(--text); 
+    font-weight: 600; 
+    text-align: right; 
+  }
+
+  .slider {
     appearance: none;
     width: 100%;
     height: 8px;
@@ -128,7 +154,7 @@ if (hueEl instanceof HTMLInputElement && satEl instanceof HTMLInputElement && hu
     transition: all var(--transition);
   }
 
-  .hue-slider {
+  #hue.slider {
     background: linear-gradient(to right,
       hsl(0, 100%, 50%),
       hsl(60, 100%, 50%),
@@ -140,47 +166,67 @@ if (hueEl instanceof HTMLInputElement && satEl instanceof HTMLInputElement && hu
     );
   }
 
-  .sat-slider { background: linear-gradient(to right, hsl(var(--hue), 0%, 50%), hsl(var(--hue), 100%, 50%)); }
+  #sat.slider { 
+    background: linear-gradient(to right, hsl(var(--hue), 0%, 50%), hsl(var(--hue), 100%, 50%)); 
+  }
 
-  .hue-slider::-webkit-slider-thumb,
-  .sat-slider::-webkit-slider-thumb {
+  .slider::-webkit-slider-thumb {
     appearance: none;
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: white;
-    border: 3px solid var(--primary);
+    background: var(--primary);
     cursor: pointer;
     transition: all var(--transition);
-    box-shadow: var(--shadow);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   }
 
-  .hue-slider::-webkit-slider-thumb:hover,
-  .sat-slider::-webkit-slider-thumb:hover { transform: scale(1.1); box-shadow: var(--shadow-lg); }
+  .slider::-webkit-slider-thumb:hover { 
+    transform: scale(1.1); 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); 
+  }
 
-  .hue-slider::-moz-range-thumb,
-  .sat-slider::-moz-range-thumb {
+  .slider::-moz-range-thumb {
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: white;
-    border: 3px solid var(--primary);
+    background: var(--primary);
     cursor: pointer;
     transition: all var(--transition);
-    box-shadow: var(--shadow);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   }
 
-  .hue-slider::-moz-range-track,
-  .sat-slider::-moz-range-track { height: 8px; border-radius: var(--radius); border: none; }
+  .slider::-moz-range-track { 
+    height: 8px; 
+    border-radius: var(--radius); 
+    border: none; 
+  }
 
   @media (max-width: 768px) {
-    .theme-picker { right: -200px; transform: translateY(-50%) scale(0.9); width: 240px; padding: var(--space-md); }
-    .theme-picker:hover { right: -4px; transform: translateY(-50%) scale(1); }
+    .theme-picker { 
+      right: -280px; 
+      transform: translateY(-50%) scale(0.9); 
+      width: 320px; 
+      height: 100px;
+      padding: var(--space-md); 
+    }
+    .theme-picker:hover { 
+      right: -4px; 
+      transform: translateY(-50%) scale(1); 
+    }
   }
 
   @media (max-width: 480px) {
-    .theme-picker { right: -180px; transform: translateY(-50%) scale(0.8); width: 200px; }
-    .theme-picker:hover { right: -4px; transform: translateY(-50%) scale(0.9); }
+    .theme-picker { 
+      right: -240px; 
+      transform: translateY(-50%) scale(0.8); 
+      width: 280px; 
+      height: 90px;
+    }
+    .theme-picker:hover { 
+      right: -4px; 
+      transform: translateY(-50%) scale(0.9); 
+    }
   }
 
   @media print { .theme-picker { display: none !important; } }
