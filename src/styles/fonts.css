@@ -1,26 +1,24 @@
-/* Custom font family definitions */
+/* Font family definitions */
 :root {
-  /* Top header - name */
-  --font-top-header: 'Bungee', cursive;
+  /* Style fonts (named by what they are) */
+  --font-marker: 'Permanent Marker', cursive;
+  --font-blackout: 'Blackout Midnight', system-ui;
+  --font-bungee: 'Bungee', cursive;
+  --font-bungee-shade: 'Bungee Shade', cursive;
+  --font-baloo: 'Baloo 2', cursive;
+  --font-fredoka: 'Fredoka', sans-serif;
+  --font-rubik: 'Rubik', sans-serif;
   
-  /* Main headers */
-  --font-main-header: 'Bungee Shade', cursive;
+  /* Functional fonts (named by purpose) */
+  --font-top-header: var(--font-bungee);
+  --font-main-header: var(--font-bungee-shade);
+  --font-sub-header: var(--font-baloo);
+  --font-links: var(--font-fredoka);
+  --font-dates: var(--font-rubik);
+  --font-description: var(--font-rubik);
+  --font-tags: var(--font-fredoka);
   
-  /* Sub headers */
-  --font-sub-header: 'Baloo 2', cursive;
-  
-  /* Links */
-  --font-links: 'Fredoka', sans-serif;
-  
-  /* Dates */
-  --font-dates: 'Rubik', sans-serif;
-  
-  /* Description */
-  --font-description: 'Rubik', sans-serif;
-  
-  /* Keywords and tags */
-  --font-tags: 'Fredoka', sans-serif;
-  
-  /* Fallback font stack */
+  /* Base font system */
+  --font: var(--font-baloo);
   --font-fallback: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 } 

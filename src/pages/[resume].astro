@@ -5,13 +5,6 @@ import Divider from '@shared/Divider.astro'
 import Layout from '@layouts/Layout.astro'
 import { getAvailableResumes, getResumeData, getResumeInfo } from '@lib/resume.js'
 
-// Fontsource imports - these automatically add @font-face rules
-import '@fontsource/bungee-shade'
-import '@fontsource/bungee'
-import '@fontsource/baloo-2'
-import '@fontsource/rubik'
-import '@fontsource/fredoka'
-
 // Generate static paths for all resume files
 export function getStaticPaths() {
   const availableResumes = getAvailableResumes()

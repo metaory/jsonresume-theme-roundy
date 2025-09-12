@@ -21,9 +21,11 @@
   },
   "dependencies": {
     "@fontsource/baloo-2": "^5.2.6",
+    "@fontsource/blackout-midnight": "^5.2.5",
     "@fontsource/bungee": "^5.2.6",
     "@fontsource/bungee-shade": "^5.2.6",
     "@fontsource/fredoka": "^5.2.8",
+    "@fontsource/permanent-marker": "^5.2.6",
     "@fontsource/rubik": "^5.2.6",
     "astro": "^5.13.6",
     "iconify-icon": "^3.0.0"
