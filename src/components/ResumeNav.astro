@@ -41,12 +41,10 @@ const resumeFiles = resumes.map(name => getResumeInfo(name))
     color: var(--text-muted);
     font-size: var(--text-sm);
     font-weight: 500;
-    transition: all var(--transition);
     box-shadow: 0 0 0 1px transparent;
   }
 
-  .nav-link:hover { color: var(--text); background: var(--text-muted); box-shadow: 0 4px 20px var(--text-muted); }
-  .nav-link.active { color: var(--primary); background: var(--text-muted); box-shadow: 0 4px 20px var(--text-muted); }
+  .nav-link.active { color: var(--primary); background: var(--surface); }
 
   @media print { .resume-nav { display: none !important; } }
 </style>

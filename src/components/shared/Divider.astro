@@ -1,5 +1,5 @@
 ---
-const { class: className = '', variant = 'default' } = Astro.props
+const { variant = 'default' } = Astro.props
 
 const variants = {
   default: 'divider-default',
@@ -9,7 +9,7 @@ const variants = {
 }
 ---
 
-<div class={`divider ${variants[variant]} ${className}`}></div>
+<div class={`divider ${variants[variant]}`}></div>
 
 <style>
   .divider {

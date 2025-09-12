@@ -1,8 +1,7 @@
 ---
-const { class: className = '' } = Astro.props
 ---
 
-<div class={`item ${className}`}>
+<div class="item">
   <slot />
 </div>
 
@@ -11,17 +10,11 @@ const { class: className = '' } = Astro.props
     background: var(--surface);
     border-radius: var(--radius-lg);
     padding: var(--space-md);
-    transition: all var(--transition);
-    height: fit-content;
     box-shadow: var(--shadow);
     display: grid;
     gap: var(--space-xs);
     backdrop-filter: blur(4px);
+    height: fit-content;
   }
-
-
-  /* Grid spacing handled by parent section */
-
-  /* hover effects removed for PDF-first output */
 
 </style>

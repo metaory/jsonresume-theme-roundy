@@ -1,6 +1,5 @@
 ---
 const { 
-  class: className = '', 
   columns = 'auto-fit',
   minWidth = '200px',
   gap = 'md'
@@ -22,7 +21,7 @@ const gridColumns = columns === 'auto-fit'
 ---
 
 <div 
-  class={`card-grid ${className}`}
+  class="card-grid"
   style={`--grid-columns: ${gridColumns}; --grid-gap: ${gapValue};`}
 >
   <slot />

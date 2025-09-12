@@ -1,9 +1,9 @@
 const LEVELS = [
-  { keywords: ['beginner', 'basic'], width: '25%', class: 'level-beginner', dots: 2 },
-  { keywords: ['intermediate', 'conversational'], width: '50%', class: 'level-intermediate', dots: 3 },
-  { keywords: ['advanced', 'fluent'], width: '75%', class: 'level-advanced', dots: 4 },
-  { keywords: ['master', 'native'], width: '100%', class: 'level-master', dots: 5 },
-  { keywords: ['expert'], width: '100%', class: 'level-expert', dots: 5 }
+  { keywords: ['beginner', 'basic'], dots: 2, color: 'var(--primary)' },
+  { keywords: ['intermediate', 'conversational'], dots: 3, color: 'var(--secondary)' },
+  { keywords: ['advanced', 'fluent'], dots: 4, color: 'var(--accent)' },
+  { keywords: ['master', 'native'], dots: 5, color: 'var(--primary)' },
+  { keywords: ['expert'], dots: 5, color: 'var(--accent)' }
 ]
 
 const findLevelMapping = (level) => {
@@ -13,7 +13,4 @@ const findLevelMapping = (level) => {
   ) || LEVELS[1] // fallback to intermediate
 }
 
-export const getLevelMapping = findLevelMapping
-export const getLevelWidth = (level) => findLevelMapping(level).width
-export const getLevelClass = (level) => findLevelMapping(level).class
-export const getLevelDots = (level) => findLevelMapping(level).dots
+export const getLevelConfig = findLevelMapping

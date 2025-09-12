@@ -35,8 +35,9 @@ const {
   <body>
     <ThemeToggle />
     {import.meta.env.DEV && <ThemePicker />}
-    {availableResumes.length > 0 && <ResumeNav currentResume={currentResume} availableResumes={availableResumes} />}
-
+    {availableResumes.length > 0 && 
+      <ResumeNav currentResume={currentResume} availableResumes={availableResumes} />
+    }
     <main class="resume">
       <slot />
     </main>

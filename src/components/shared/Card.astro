@@ -1,8 +1,7 @@
 ---
-const { class: className = '' } = Astro.props
 ---
 
-<article class={`card ${className}`}>
+<article class="card">
   <slot />
 </article>
 
@@ -12,18 +11,10 @@ const { class: className = '' } = Astro.props
     border-radius: var(--radius-lg);
     padding: var(--space-md);
     backdrop-filter: blur(4px);
-    transition: all var(--transition);
-    border: 1px solid transparent;
     box-shadow: var(--shadow);
     display: grid;
     gap: var(--space-xs);
     height: fit-content;
-  }
-
-  .card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-    border-color: hsl(from var(--primary) h s l / 0.3);
   }
 
   .card :global(.title) { 
@@ -45,8 +36,7 @@ const { class: className = '' } = Astro.props
     word-break: break-all;
   }
 
-  .card :global(.level-bar),
-  .card :global(.fluency-dots) {
+  .card :global(.level-dots) {
     justify-self: start;
   }
 

@@ -1,8 +1,7 @@
 ---
-const { class: className = '' } = Astro.props
 ---
 
-<p class={`dates ${className}`}>
+<p class="dates">
   <slot />
 </p>
 
@@ -14,9 +13,4 @@ const { class: className = '' } = Astro.props
     margin: var(--space-sm) 0;
   }
 
-  /* Compact dates for grid items */
-  .projects-grid .dates {
-    margin: var(--space-xs) 0;
-    font-size: var(--text-xs);
-  }
 </style> 

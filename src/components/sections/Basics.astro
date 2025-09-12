@@ -1,5 +1,5 @@
 ---
-import ContactTag from '@shared/ContactTag.astro'
+import Tag from '@shared/Tag.astro'
 
 const { basics } = Astro.props
 ---
@@ -26,21 +26,21 @@ const { basics } = Astro.props
   </div>
 
   <div class="contact-info">
-    <ContactTag
+    <Tag
       text={basics.email}
       icon="mdi:email"
       href={`mailto:${basics.email}`}
       variant="subtle"
     />
 
-    <ContactTag
+    <Tag
       text={basics.phone}
       icon="mdi:phone"
       href={`tel:${basics.phone}`}
       variant="subtle"
     />
 
-    <ContactTag
+    <Tag
       text={basics.url}
       icon="mdi:web"
       href={basics.url}
@@ -49,7 +49,7 @@ const { basics } = Astro.props
   </div>
 
   <div class="location">
-    <ContactTag
+    <Tag
       text={[
         basics.location?.address,
         basics.location?.city,
@@ -63,7 +63,7 @@ const { basics } = Astro.props
 
   <div class="profiles">
     {(basics.profiles || []).map((profile: { network?: string, username?: string, url?: string }) => (
-      <ContactTag
+      <Tag
         text={profile.username}
         icon={`mdi:${profile.network?.toLowerCase()}`}
         href={profile.url}

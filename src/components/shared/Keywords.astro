@@ -6,12 +6,11 @@ const {
   keywords = [], 
   variant = 'default',
   size = 'sm',
-  class: className = '',
   meta
 } = Astro.props
 ---
 
-<div class={`keywords ${className}`}>
+<div class="keywords">
   {keywords.map((keyword: string) => (
     <Tag 
       text={keyword} 

@@ -9,8 +9,7 @@ import Dates from '@shared/Dates.astro'
 import Description from '@shared/Description.astro'
 import List from '@shared/List.astro'
 import Keywords from '@shared/Keywords.astro'
-import LevelBar from '@shared/LevelBar.astro'
-import FluencyDots from '@shared/FluencyDots.astro'
+import LevelDots from '@shared/LevelDots.astro'
 
 const { sectionKey, data, meta } = Astro.props
 
@@ -105,8 +104,8 @@ const processItem = (item) => {
     description: ({ value }) => <Description>{value}</Description>,
     list: ({ value }) => <List>{value.map(item => <li>{item}</li>)}</List>,
     keywords: ({ value, variant = 'primary' }) => <Keywords keywords={value} variant={variant} size="sm" meta={meta} />,
-    level: ({ value }) => <LevelBar level={value} />,
-    fluency: ({ value }) => <FluencyDots fluency={value} />,
+    level: ({ value }) => <LevelDots level={value} />,
+    fluency: ({ value }) => <LevelDots level={value} />,
     url: ({ value }) => <a href={value} target="_blank" rel="noopener">{value}</a>,
     score: ({ value }) => <span>{value}</span>
   }
