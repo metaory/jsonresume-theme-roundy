@@ -10,10 +10,12 @@ import '@fontsource/blackout-midnight'
 import ThemeToggle from '@components/ThemeToggle.astro';
 import ThemePicker from '@components/ThemePicker.astro';
 import ResumeNav from '@components/ResumeNav.astro';
+import { THEME_DEFAULTS } from '@lib/theme.js';
+import pkg from '../../package.json';
 
 const {
-  title = 'Resume',
-  description = 'Professional Resume',
+  title = pkg.name,
+  description = pkg.description,
   themeOptions = {},
   currentResume,
   availableResumes = []
@@ -21,13 +23,24 @@ const {
 ---
 
 <!DOCTYPE html>
-<html lang="en" style={`--hue: ${themeOptions.hue || 240}; --sat: ${themeOptions.sat || 60};`}>
+<html lang="en" style={`--hue: ${themeOptions.hue || THEME_DEFAULTS.hue}; --sat: ${themeOptions.sat || THEME_DEFAULTS.sat};`} data-theme={themeOptions.dark ? 'dark' : 'light'}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="theme-color" content="#3b82f6" />
+    
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/logo.png" />
+    <meta property="og:url" content={pkg.homepage || Astro.url} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="/logo.png" />
 
     <style is:global>
       @import '@styles/global.css';

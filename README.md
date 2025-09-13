@@ -1,3 +1,21 @@
+<div align="center">
+  <img height="70" src="public/logo.png">
+  <br>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="public/wordmark-dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="public/wordmark-light.png">
+    <img height="60" alt="JSON Resume Theme Roundy" src="public/wordmark-light.png">
+  </picture>
+  <br>
+  <i><small>jsonresume theme v7.x</small></i><br>
+  <a href="https://metaory.github.io/jsonresume-theme-legacy">demo</a> |
+  <a href="out/sample.pdf">sample.pdf</a>
+</div>
+
+<p align="center">
+  <img src=".github/assets/screenshot.png" width="80%" />
+</p>
+
 # JSON Resume Theme - Roundy
 
 A modern, customizable JSON Resume theme with dynamic theming and dark mode support.
@@ -56,15 +74,16 @@ Add theme options to your resume JSON:
 
 #### Theme Options
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `hue` | number | 240 | Primary hue (0-360) |
-| `sat` | number | 60 | Saturation (0-100) |
-| `dark` | boolean | false | Dark mode |
+| Option | Type    | Default | Description         |
+| ------ | ------- | ------- | ------------------- |
+| `hue`  | number  | 240     | Primary hue (0-360) |
+| `sat`  | number  | 60      | Saturation (0-100)  |
+| `dark` | boolean | false   | Dark mode           |
 
 #### Live Theme Editor
 
 In development mode, use the theme picker on the right side to:
+
 - Adjust hue and saturation with sliders
 - Select from preset color combinations
 - Preview changes in real-time

@@ -1,13 +1,19 @@
 <button class="theme-toggle" aria-label="Toggle theme">
-    <iconify-icon width="48" height="48" class="light-icon" icon="line-md:sunny-filled-loop-to-moon-filled-alt-loop-transition"></iconify-icon>
-    <iconify-icon width="48" height="48" class="dark-icon" icon="line-md:moon-filled-alt-to-sunny-filled-loop-transition"></iconify-icon>
+    <iconify-icon width="48" height="48" icon="line-md:sunny-filled-loop-to-moon-filled-alt-loop-transition"></iconify-icon>
 </button>
 
 <script>
 import { toggleThemeMode } from '@lib/theme.js'
 
+const icons = {
+  light: 'line-md:sunny-filled-loop-to-moon-filled-alt-loop-transition',
+  dark: 'line-md:moon-filled-alt-to-sunny-filled-loop-transition'
+}
+
+const icon = document.querySelector('.theme-toggle iconify-icon')
+
 document.querySelector('.theme-toggle')?.addEventListener('click', () => {
-  toggleThemeMode()
+  icon.setAttribute('icon', icons[toggleThemeMode()])
 })
 </script>
 
@@ -32,21 +38,10 @@ document.querySelector('.theme-toggle')?.addEventListener('click', () => {
   }
 
   .theme-toggle iconify-icon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 24px;
-    height: 24px;
-    transform: translate(-50%, -50%);
-    transition: opacity var(--transition);
+    width: 48px;
+    height: 48px;
+    color: var(--primary);
   }
-
-  .light-icon { color: var(--accent); }
-  .dark-icon { color: var(--primary); }
-  .light-icon { opacity: 1; }
-  .dark-icon { opacity: 0; }
-  [data-theme="dark"] .light-icon { opacity: 0; }
-  [data-theme="dark"] .dark-icon { opacity: 1; }
 
   @media print { .theme-toggle { display: none !important; } }
 </style>

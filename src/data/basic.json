@@ -3,7 +3,7 @@
     "name": "John Doe",
     "email": "john@gmail.com",
     "image": "/avatar-f.png",
-    "logo": "/logo.svg",
+    "logo": "/logo.png",
     "phone": "(912) 555-4321",
     "url": "https://github.com/metaory",
     "label": "Cyngsbez Ratvarre · Yrnq  Fbyhgvba Nepuvgrpg · QriBcf Shyy-Fgnpx · NJF · Yhn   Abqr · Yvahk · aIvz",
@@ -280,9 +280,9 @@
   ],
   "meta": {
     "themeOptions": {
-      "hue": 220,
-      "sat": 50,
-      "dark": false,
+      "hue": 120,
+      "sat": 40,
+      "dark": true,
       "sectionTitles": {
         "contacts": "Contact Information",
         "summary": "Professional Summary",

@@ -4,6 +4,7 @@ import SectionRenderer from '@components/SectionRenderer.astro'
 import Divider from '@shared/Divider.astro'
 import Layout from '@layouts/Layout.astro'
 import { getAvailableResumes, getResumeData, getResumeInfo } from '@lib/resume.js'
+import pkg from '../../package.json'
 
 // Generate static paths for all resume files
 export function getStaticPaths() {
@@ -25,8 +26,7 @@ const { basics, meta, ...sections } = resumeData
 ---
 
 <Layout 
-  title={basics?.name || 'Resume'}
-  description="Professional Resume"
+  title={`${pkg.name.split('-').pop()}·${basics.name}`}
   themeOptions={meta?.themeOptions}
   currentResume={resumeInfo.name}
   availableResumes={getAvailableResumes()}

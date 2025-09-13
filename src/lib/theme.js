@@ -149,17 +149,29 @@ const propHandlers = {
 const getInitialTheme = () => {
   if (typeof document === 'undefined') return THEME_DEFAULTS
   const style = getComputedStyle(document.documentElement)
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark'
   return {
     ...THEME_DEFAULTS,
     hue: parseInt(style.getPropertyValue('--hue')) || THEME_DEFAULTS.hue,
-    sat: parseInt(style.getPropertyValue('--sat')) || THEME_DEFAULTS.sat
+    sat: parseInt(style.getPropertyValue('--sat')) || THEME_DEFAULTS.sat,
+    dark: isDark
   }
 }
 
-export const theme = new Proxy(getInitialTheme(), {
+const initializeTheme = () => {
+  const initialTheme = getInitialTheme()
+  if (typeof document !== 'undefined') {
+    applyTheme(initialTheme.hue, initialTheme.sat, initialTheme.dark)
+    setThemeAttr(initialTheme.dark)
+  }
+  return initialTheme
+}
+
+export const theme = new Proxy(initializeTheme(), {
   set(target, prop, value) {
     const handler = propHandlers[prop]
     if (handler) handler(target, value)
     return true
   }
 })
+

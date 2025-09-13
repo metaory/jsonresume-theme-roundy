@@ -8,18 +8,7 @@
   --hue-secondary: 60;
   --hue-accent: 300;
 
-  /* Primary palette */
-  --primary: hsl(var(--hue) var(--sat) 50%);
-  --secondary: hsl(var(--hue-secondary) var(--sat) 50%);
-  --accent: hsl(var(--hue-accent) var(--sat) 60%);
-
-  /* Base surfaces (computed & overridden from JS for stronger hue response) */
-  --bg: hsl(var(--hue) 10% 94%);
-  --surface: hsl(var(--hue) 18% 96% / 0.85);
-  --text: hsl(var(--hue) 15% 15%);
-  --text-muted: hsl(var(--hue) 10% 35%);
-  --link: hsl(var(--hue) var(--sat) 50%);
-  --link-hover: hsl(var(--hue) calc(var(--sat) + 10%) 45%);
+  /* Colors set dynamically by JS - no fallbacks needed for PDF export */
 
   /* Design tokens */
 
@@ -37,14 +26,13 @@
   --space-xl: 1.5rem;
   --space-2xl: 2rem;
 
-  --radius: 0.5rem;
-  --radius-lg: 1rem;
-  --radius-full: 9999px;
+  --radius: 0.6rem;
+  --radius-lg: 1.2rem;
+  --radius-xl: 1.8rem;
+  --radius-full: 50%;
 
   --shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
   --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.18);
-
-  --transition: 0.2s ease;
 }
 
 /* Base styles */
@@ -54,7 +42,6 @@
 
 html {
   background: var(--bg);
-  transition: background-color var(--transition);
   overflow-x: hidden;
 }
 
@@ -65,7 +52,6 @@ body {
   color: var(--text);
   margin: 0;
   padding: 0;
-  transition: color var(--transition), background-color var(--transition);
   overflow-x: hidden;
 }
 
@@ -81,7 +67,6 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 0 var(--space-md) 0;
   font-weight: 600;
   color: var(--text);
-  transition: color var(--transition);
 }
 
 h1 { font-size: var(--text-2xl); }
@@ -92,7 +77,6 @@ h3 { font-size: var(--text-lg); }
 a {
   color: var(--link);
   text-decoration: none;
-  transition: color var(--transition);
 }
 
 a:hover {
@@ -111,31 +95,18 @@ iconify-icon {
 [data-theme="light"] { color-scheme: light; }
 
 
-/* Print styles */
+/* Print styles - minimal, only disable animations and hover states */
 @media print {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+
   *:hover {
     transform: none !important;
-    box-shadow: none !important;
-    background: none !important;
-    color: inherit !important;
   }
 
   .resume {
     page-break-inside: avoid;
-  }
-
-  body {
-    color: black !important;
-    background: white !important;
-  }
-
-  a {
-    color: black !important;
-    text-decoration: underline !important;
-  }
-
-  * {
-    transition: none !important;
-    animation: none !important;
   }
 }

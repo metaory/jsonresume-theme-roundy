@@ -93,8 +93,8 @@ const { basics } = Astro.props
   }
 
   .logo-img {
-    width: 80px;
-    height: 80px;
+    width: 68px;
+    height: 68px;
     object-fit: contain;
     filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
   }
@@ -118,7 +118,7 @@ const { basics } = Astro.props
   .avatar {
     width: 100px;
     height: 100px;
-    border-radius: var(--radius-full);
+    border-radius: var(--radius-xl);
     object-fit: cover;
     border: 3px solid var(--primary);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
@@ -129,7 +129,7 @@ const { basics } = Astro.props
   }
 
   .name {
-    font-family: var(--font-top-header);
+    font-family: var(--font-marker);
     font-size: 2.5rem;
     font-weight: 700;
     color: var(--text);
@@ -137,7 +137,11 @@ const { basics } = Astro.props
     text-shadow: 
       2px 2px 0 var(--primary),
       4px 4px 0 var(--secondary),
-      6px 6px 8px rgba(0, 0, 0, 0.2);
+      6px 6px 0 var(--accent),
+      8px 8px 0 var(--primary),
+      10px 10px 0 var(--secondary),
+      12px 12px 16px rgba(0, 0, 0, 0.4),
+      16px 16px 24px rgba(0, 0, 0, 0.2);
   }
 
   .label {
@@ -204,41 +208,13 @@ const { basics } = Astro.props
   }
 
   @media (max-width: 768px) {
-    .logo-img {
-      width: 60px;
-      height: 60px;
-    }
-
-    .name-title {
-      flex-direction: column;
-      gap: var(--space-md);
-    }
-
-    .name-content {
-      text-align: center;
-    }
-
     .name {
       font-size: 2rem;
-      text-shadow: 
-        1px 1px 0 var(--primary),
-        2px 2px 0 var(--secondary),
-        3px 3px 6px rgba(0, 0, 0, 0.2);
     }
 
     .avatar {
       width: 80px;
       height: 80px;
-    }
-
-    .contact-info {
-      grid-template-columns: 1fr;
-      gap: var(--space-sm);
-    }
-
-    .profiles {
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: var(--space-sm);
     }
 
     .summary-card {
