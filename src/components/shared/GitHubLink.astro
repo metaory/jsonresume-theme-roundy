@@ -5,7 +5,7 @@ const githubUrl = pkg.homepage || pkg.repository
 ---
 
 <a href={githubUrl} target="_blank" rel="noopener noreferrer" class="github-link" aria-label="View on GitHub">
-  <iconify-icon icon="tabler:brand-github-filled" width="24" height="24"></iconify-icon>
+  <iconify-icon icon="line-md:github-twotone" width="32" height="32"></iconify-icon>
 </a>
 
 <style>
@@ -14,7 +14,8 @@ const githubUrl = pkg.homepage || pkg.repository
     bottom: var(--space-lg);
     left: var(--space-lg);
     z-index: 100;
-    background: var(--surface);
+    background: var(--primary);
+    color: var(--contrast-primary);
     border-radius: var(--radius-lg);
     padding: var(--space-sm);
     box-shadow: var(--shadow);
@@ -28,16 +29,14 @@ const githubUrl = pkg.homepage || pkg.repository
     transition: transform 0.2s ease;
 
     iconify-icon {
-      color: var(--text-muted);
+      width: 32px;
+      height: 32px;
+      color: var(--contrast-primary);
       transition: color 0.2s ease;
     }
 
     &:hover {
       transform: scale(1.1);
-
-      iconify-icon {
-        color: var(--primary);
-      }
     }
 
     @media print {

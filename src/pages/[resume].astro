@@ -22,7 +22,7 @@ const { resume } = Astro.params
 const resumeInfo = getResumeInfo(resume)
 const resumeData = await getResumeData(resumeInfo.name)
 
-const { basics, meta, ...sections } = resumeData
+const { basics, meta, $schema, ...sections } = resumeData
 ---
 
 <Layout 

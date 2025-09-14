@@ -31,8 +31,14 @@
   --radius-xl: 1.8rem;
   --radius-full: 50%;
 
-  --shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-  --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.18);
+  --shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.2);
+
+  /* Contrast helpers using modern CSS */
+  --contrast-white: color-contrast(var(--surface) vs white, black);
+  --contrast-primary: color-contrast(var(--primary) vs white, black);
+  --contrast-secondary: color-contrast(var(--secondary) vs white, black);
+  --contrast-accent: color-contrast(var(--accent) vs white, black);
 }
 
 /* Base styles */
@@ -43,6 +49,8 @@
 html {
   background: var(--bg);
   overflow-x: hidden;
+  scrollbar-color: var(--primary) var(--surface);
+  scrollbar-width: thin;
 }
 
 body {
@@ -57,6 +65,13 @@ body {
 
 main {
   overflow-x: hidden;
+}
+
+a:focus-visible,
+button:focus-visible {
+  border: none;
+  outline: solid 4px var(--primary);
+  outline-offset: 4px;
 }
 
 .resume{max-width:800px;margin:0 auto;padding:var(--space-xl);overflow-x:hidden}

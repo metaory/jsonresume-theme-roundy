@@ -72,14 +72,13 @@ createThemePicker()
 <style>
   .theme-picker {
     position: fixed;
-    top: 50%;
-    right: -360px;
-    transform: translateY(-50%);
+    top: 30%;
+    right: -240px;
     z-index: 1000;
-    transition: right 0.5s cubic-bezier(0.3, 1.5, 0.6, 1);
-    width: 420px;
+    transition: right 0.5s ease-in-out;
+    width: 300px;
     height: auto;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
     padding: var(--space-md);
     backdrop-filter: blur(4px);
     background: var(--surface);
@@ -93,10 +92,10 @@ createThemePicker()
     iconify-icon {
       height: 48px;
       width: 48px;
-      color: white;
+      color: var(--primary);
       animation: pulse 2s ease-in-out infinite;
       z-index: 1;
-      mix-blend-mode: overlay;
+      mix-blend-mode: plus-lighter;
     }
 
     @media (max-width: 768px) {
@@ -122,7 +121,6 @@ createThemePicker()
     background: none;
     border: none;
     cursor: pointer;
-    color: var(--primary);
     padding: var(--space-md);
     border-radius: var(--radius);
     display: flex;
@@ -206,7 +204,7 @@ createThemePicker()
     .control-label {
       grid-column: 1;
       grid-row: 1;
-      font-family: 'Fredoka', sans-serif;
+      font-family: var(--font-tags);
       font-size: var(--text-sm);
       color: var(--text-muted);
       text-transform: lowercase;
@@ -216,7 +214,7 @@ createThemePicker()
     .control-value {
       grid-column: 2;
       grid-row: 1;
-      font-family: 'Fredoka', sans-serif;
+      font-family: var(--font-tags);
       font-size: var(--text-sm);
       color: var(--text);
       font-weight: 600;

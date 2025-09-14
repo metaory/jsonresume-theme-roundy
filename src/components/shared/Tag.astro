@@ -8,18 +8,12 @@ const {
   class: className = ''
 } = Astro.props;
 
-const variants = ['default', 'primary', 'secondary', 'outline', 'ghost', 'link', 'subtle']
-const sizes = ['sm', 'md', 'lg']
-
-const getVariantClass = (variant) => `tag-${variant}`
-const getSizeClass = (size) => `tag-${size}`
-
 const TagElement = href ? 'a' : 'span';
 const tagProps = href ? { href, target: '_blank', rel: 'noopener' } : {};
 ---
 
 <TagElement
-  class={`tag ${getVariantClass(variant)} ${getSizeClass(size)} ${className}`}
+  class={`tag tag-${variant} tag-${size} ${className}`}
   {...tagProps}
 >
   {icon && <iconify-icon icon={icon} class="tag-icon" />}
@@ -51,17 +45,35 @@ const tagProps = href ? { href, target: '_blank', rel: 'noopener' } : {};
     line-height: 1;
   }
 
-  /* Variants */
-  .tag-default { --tag-bg: var(--surface); --tag-color: var(--text-muted); }
-  .tag-primary { --tag-bg: var(--primary); --tag-color: white; }
-  .tag-secondary { --tag-bg: var(--secondary); --tag-color: white; }
-  .tag-outline { --tag-bg: transparent; --tag-color: var(--text); }
-  .tag-ghost { --tag-bg: transparent; --tag-color: var(--text-muted); }
-  .tag-link { --tag-bg: transparent; --tag-color: var(--link); text-decoration: underline; }
-  .tag-subtle {
+  .tag-default {
     --tag-bg: var(--surface);
+    --tag-color: var(--contrast-white);
+  }
+  .tag-primary {
+    --tag-bg: var(--primary);
+    --tag-color: var(--contrast-primary);
+  }
+  .tag-secondary {
+    --tag-bg: var(--secondary);
+    --tag-color: var(--contrast-secondary);
+  }
+  .tag-outline {
+    --tag-bg: transparent;
+    --tag-color: var(--text);
+  }
+  .tag-ghost {
+    --tag-bg: transparent;
     --tag-color: var(--text-muted);
-    border-radius: var(--radius-full);
+  }
+  .tag-link {
+    --tag-bg: transparent;
+    --tag-color: var(--link);
+    text-decoration: underline;
+  }
+  .tag-subtle {
+    --tag-bg: var(--wash);
+    --tag-color: var(--contrast-white);
+    border-radius: var(--radius-lg);
     backdrop-filter: blur(8px);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }

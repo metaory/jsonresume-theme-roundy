@@ -8,6 +8,7 @@
 <style>
   .card {
     background: var(--surface);
+    color: var(--contrast-white);
     border-radius: var(--radius-lg);
     padding: var(--space-md);
     backdrop-filter: blur(4px);
@@ -16,36 +17,5 @@
     gap: var(--space-xs);
     height: fit-content;
 
-    :global(.title) {
-      font-size: var(--text-base);
-      margin-bottom: var(--space-xs);
-    }
-
-    :global(.subtitle) {
-      color: var(--text-muted);
-      font-size: var(--text-sm);
-      margin-bottom: var(--space-xs);
-    }
-
-    :global(.dates) {
-      font-size: var(--text-sm);
-    }
-
-    :global(.description) {
-      line-height: 1.5;
-    }
-
-    :global(a) {
-      font-size: var(--text-sm);
-      word-break: break-all;
-    }
-
-    :global(.level-dots) {
-      justify-self: start;
-    }
-
-    :global(.keywords) {
-      margin-top: var(--space-xs);
-    }
   }
 </style>

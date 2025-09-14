@@ -155,9 +155,8 @@ const { basics } = Astro.props
 
   .contact-info {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    justify-content: center;
     gap: var(--space-md);
+    grid-auto-flow: column;
     margin-bottom: var(--space-lg);
     max-width: 800px;
     margin-left: auto;
