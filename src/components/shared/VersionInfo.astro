@@ -1,0 +1,49 @@
+---
+import pkg from '@pkg'
+
+const { resumeData } = Astro.props
+const resumeVersion = resumeData?.meta?.version || '1.0.0'
+const themeVersion = pkg.version
+---
+
+<div class="version-info">
+  <span><iconify-icon icon="tabler:file-cv" width="16" height="16"></iconify-icon>v{resumeVersion}</span>
+  <span><iconify-icon icon="tabler:palette" width="16" height="16"></iconify-icon>v{themeVersion}</span>
+</div>
+
+<style>
+  .version-info {
+    position: fixed;
+    bottom: var(--space-lg);
+    right: var(--space-lg);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    background: var(--surface);
+    padding: var(--space-sm);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+
+    span {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-size: var(--text-xs);
+      color: var(--text-muted);
+      font-weight: 500;
+      font-family: monospace;
+      width: 100%;
+    }
+
+    iconify-icon {
+      color: var(--primary);
+      opacity: 0.7;
+    }
+
+    @media print { 
+      display: none !important; 
+    }
+  }
+</style>

@@ -15,32 +15,37 @@
     display: grid;
     gap: var(--space-xs);
     height: fit-content;
-  }
 
-  .card :global(.title) { 
-    font-size: var(--text-base); 
-    margin-bottom: var(--space-xs);
-  }
-  
-  .card :global(.subtitle) { 
-    color: var(--text-muted);
-    font-size: var(--text-sm);
-    margin-bottom: var(--space-xs);
-  }
-  
-  .card :global(.dates) { font-size: var(--text-sm); }
-  .card :global(.description) { line-height: 1.5; }
-  
-  .card :global(a) {
-    font-size: var(--text-sm);
-    word-break: break-all;
-  }
+    :global(.title) {
+      font-size: var(--text-base);
+      margin-bottom: var(--space-xs);
+    }
 
-  .card :global(.level-dots) {
-    justify-self: start;
-  }
+    :global(.subtitle) {
+      color: var(--text-muted);
+      font-size: var(--text-sm);
+      margin-bottom: var(--space-xs);
+    }
 
-  .card :global(.keywords) {
-    margin-top: var(--space-xs);
+    :global(.dates) {
+      font-size: var(--text-sm);
+    }
+
+    :global(.description) {
+      line-height: 1.5;
+    }
+
+    :global(a) {
+      font-size: var(--text-sm);
+      word-break: break-all;
+    }
+
+    :global(.level-dots) {
+      justify-self: start;
+    }
+
+    :global(.keywords) {
+      margin-top: var(--space-xs);
+    }
   }
 </style>

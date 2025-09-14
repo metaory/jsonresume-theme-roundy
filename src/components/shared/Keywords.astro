@@ -2,8 +2,8 @@
 import Tag from '@shared/Tag.astro'
 import { getIconForKeyword } from '@lib/icons.js'
 
-const { 
-  keywords = [], 
+const {
+  keywords = [],
   variant = 'default',
   size = 'sm',
   meta
@@ -12,8 +12,8 @@ const {
 
 <div class="keywords">
   {keywords.map((keyword: string) => (
-    <Tag 
-      text={keyword} 
+    <Tag
+      text={keyword}
       icon={getIconForKeyword(keyword, meta)}
       variant={variant}
       size={size}
@@ -30,11 +30,10 @@ const {
     align-items: flex-start;
     justify-content: center;
     overflow: hidden;
-  }
 
-  /* Compact keywords for grid items */
-  .keywords .tag {
-    margin: 0;
-    font-size: var(--text-xs);
+    .tag {
+      margin: 0;
+      font-size: var(--text-xs);
+    }
   }
-</style> 
+</style>

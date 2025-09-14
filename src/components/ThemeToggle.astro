@@ -35,13 +35,15 @@ document.querySelector('.theme-toggle')?.addEventListener('click', () => {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
 
-  .theme-toggle iconify-icon {
-    width: 48px;
-    height: 48px;
-    color: var(--primary);
-  }
+    iconify-icon {
+      width: 48px;
+      height: 48px;
+      color: var(--primary);
+    }
 
-  @media print { .theme-toggle { display: none !important; } }
+    @media print { 
+      display: none !important; 
+    }
+  }
 </style>

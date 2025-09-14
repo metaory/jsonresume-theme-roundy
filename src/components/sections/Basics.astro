@@ -134,7 +134,7 @@ const { basics } = Astro.props
     font-weight: 700;
     color: var(--text);
     margin: 0 0 var(--space-sm) 0;
-    text-shadow: 
+    text-shadow:
       2px 2px 0 var(--primary),
       4px 4px 0 var(--secondary),
       6px 6px 0 var(--accent),
@@ -189,6 +189,11 @@ const { basics } = Astro.props
     max-width: 700px;
     box-shadow: var(--shadow);
     backdrop-filter: blur(8px);
+
+    @media (max-width: 768px) {
+      padding: var(--space-lg);
+      margin-top: var(--space-lg);
+    }
   }
 
   .summary {
@@ -196,15 +201,15 @@ const { basics } = Astro.props
     color: var(--text-muted);
     line-height: 1.6;
     margin: 0;
-  }
 
-  .summary ul {
-    margin: 0;
-    padding-left: var(--space-lg);
-  }
+    ul {
+      margin: 0;
+      padding-left: var(--space-lg);
+    }
 
-  .summary li {
-    margin-bottom: var(--space-xs);
+    li {
+      margin-bottom: var(--space-xs);
+    }
   }
 
   @media (max-width: 768px) {
@@ -215,11 +220,6 @@ const { basics } = Astro.props
     .avatar {
       width: 80px;
       height: 80px;
-    }
-
-    .summary-card {
-      padding: var(--space-lg);
-      margin-top: var(--space-lg);
     }
   }
 

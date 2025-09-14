@@ -22,6 +22,20 @@ const variants = {
     background-size: 30px 26px;
     background-repeat: space;
     opacity: 0.6;
+
+    @media (max-width: 768px) {
+      margin: var(--space-xl) 0;
+      height: 20px;
+      background-size: 40px 30px;
+    }
+
+    @media print {
+      opacity: 0.4;
+
+      &:hover {
+        opacity: 0.4;
+      }
+    }
   }
 
   /* Variants */
@@ -43,25 +57,5 @@ const variants = {
     height: 2px;
     border-radius: var(--radius-full);
     margin: var(--space-xl) 0;
-  }
-
-  /* Responsive */
-  @media (max-width: 768px) {
-    .divider {
-      margin: var(--space-xl) 0;
-      height: 20px;
-      background-size: 40px 30px;
-    }
-  }
-
-  /* Print styles */
-  @media print {
-    .divider {
-      opacity: 0.4;
-    }
-
-    .divider:hover {
-      opacity: 0.4;
-    }
   }
 </style> 

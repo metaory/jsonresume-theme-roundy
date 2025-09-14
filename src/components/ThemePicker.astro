@@ -8,8 +8,8 @@ const presets = [
   [60, 80, 'Lime'],
   [75, 60, 'Yellow'],
   [90, 65, 'Mint'],
-  
-  // Row 2: Cool spectrum  
+
+  // Row 2: Cool spectrum
   [120, 55, 'Forest'],
   [150, 70, 'Teal'],
   [180, 65, 'Ocean'],
@@ -17,7 +17,7 @@ const presets = [
   [220, 60, 'Sky'],
   [240, 70, 'Royal'],
   [260, 65, 'Indigo'],
-  
+
   // Row 3: Warm spectrum
   [280, 70, 'Purple'],
   [300, 75, 'Magenta'],
@@ -37,8 +37,8 @@ const presets = [
 
   <div class="presets">
     {presets.map(([hue, sat, name]) => (
-      <button 
-        class="preset-circle" 
+      <button
+        class="preset-circle"
         style={`--preset-hue: ${String(hue)}; --preset-sat: ${String(sat)};`}
         title={String(name)}
         data-hue={String(hue)}
@@ -46,14 +46,14 @@ const presets = [
       ></button>
     ))}
   </div>
-  
+
   <div class="controls">
     <div class="control-group">
       <label for="hue" class="control-label">hue</label>
       <span id="hue-value" class="control-value"></span>
       <input id="hue" class="slider" type="range" min="0" max="360" step="1" />
     </div>
-    
+
     <div class="control-group">
       <label for="sat" class="control-label">sat</label>
       <span id="sat-value" class="control-value"></span>
@@ -85,9 +85,34 @@ createThemePicker()
     background: var(--surface);
     border: none;
     box-shadow: var(--shadow-lg);
-  }
 
-  .theme-picker:hover { right: -4px; }
+    &:hover {
+      right: -4px;
+    }
+
+    iconify-icon {
+      height: 48px;
+      width: 48px;
+      color: white;
+      animation: pulse 2s ease-in-out infinite;
+      z-index: 1;
+      mix-blend-mode: overlay;
+    }
+
+    @media (max-width: 768px) {
+      right: -300px;
+      width: 340px;
+      padding: var(--space-sm);
+
+      &:hover {
+        right: -4px;
+      }
+    }
+
+    @media print {
+      display: none !important;
+    }
+  }
 
   .picker-tab {
     position: absolute;
@@ -107,15 +132,6 @@ createThemePicker()
     height: 60px;
   }
 
-  .theme-picker iconify-icon {
-    height: 48px;
-    width: 48px;
-    color: white;
-    animation: pulse 2s ease-in-out infinite;
-    z-index: 1;
-    mix-blend-mode: overlay;
-  }
-
   .logo-blob {
     position: absolute;
     width: 48px;
@@ -128,8 +144,22 @@ createThemePicker()
     box-shadow: 0 0 20px var(--primary);
   }
 
-  @keyframes pulse { 0%, 100% { opacity: 0.7; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
-  @keyframes blobRotate { to { transform: rotate(360deg); } }
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 0.7;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+  }
+
+  @keyframes blobRotate {
+    to {
+      transform: rotate(360deg);
+    }
+  }
 
   .presets {
     display: grid;
@@ -148,53 +178,92 @@ createThemePicker()
     background: hsl(var(--preset-hue) var(--preset-sat) 50%);
     box-shadow: 0 2px 6px hsl(var(--preset-hue) var(--preset-sat) 30% / 0.4);
     position: relative;
+
+    &:hover {
+      transform: scale(1.25);
+      box-shadow: 0 4px 12px hsl(var(--preset-hue) var(--preset-sat) 40% / 0.6);
+    }
+
+    @media (max-width: 768px) {
+      width: 16px;
+      height: 16px;
+    }
   }
 
-  .preset-circle:hover {
-    transform: scale(1.25);
-    box-shadow: 0 4px 12px hsl(var(--preset-hue) var(--preset-sat) 40% / 0.6);
-  }
-
-  .controls { 
-    display: flex; 
-    flex-direction: column; 
+  .controls {
+    display: flex;
+    flex-direction: column;
     gap: var(--space-md);
   }
-  .control-group { 
+
+  .control-group {
     display: grid;
     grid-template-columns: 1fr auto;
     grid-template-rows: auto auto;
     gap: var(--space-xs) var(--space-sm);
     align-items: center;
-  }
-  .control-group .control-label { grid-column: 1; grid-row: 1; }
-  .control-group .control-value { grid-column: 2; grid-row: 1; }
-  .control-group .slider { grid-column: 1 / -1; grid-row: 2; }
 
-  .control-label { 
-    font-family: 'Fredoka', sans-serif;
-    font-size: var(--text-sm); 
-    color: var(--text-muted); 
-    text-transform: lowercase; 
-    font-weight: 500; 
-  }
+    .control-label {
+      grid-column: 1;
+      grid-row: 1;
+      font-family: 'Fredoka', sans-serif;
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+      text-transform: lowercase;
+      font-weight: 500;
+    }
 
-  .control-value { 
-    font-family: 'Fredoka', sans-serif;
-    font-size: var(--text-sm); 
-    color: var(--text); 
-    font-weight: 600; 
-    text-align: right;
-    min-width: 3em;
-  }
+    .control-value {
+      grid-column: 2;
+      grid-row: 1;
+      font-family: 'Fredoka', sans-serif;
+      font-size: var(--text-sm);
+      color: var(--text);
+      font-weight: 600;
+      text-align: right;
+      min-width: 3em;
+    }
 
-  .slider {
-    appearance: none;
-    width: 100%;
-    height: 8px;
-    border-radius: var(--radius);
-    outline: none;
-    cursor: pointer;
+    .slider {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      appearance: none;
+      width: 100%;
+      height: 8px;
+      border-radius: var(--radius);
+      outline: none;
+      cursor: pointer;
+
+      &::-webkit-slider-thumb {
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: var(--primary);
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+        &:hover {
+          transform: scale(1.1);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+      }
+
+      &::-moz-range-thumb {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: var(--primary);
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      &::-moz-range-track {
+        height: 8px;
+        border-radius: var(--radius);
+        border: none;
+      }
+    }
   }
 
   #hue.slider {
@@ -209,54 +278,7 @@ createThemePicker()
     );
   }
 
-  #sat.slider { 
-    background: linear-gradient(to right, hsl(var(--hue), 0%, 50%), hsl(var(--hue), 100%, 50%)); 
+  #sat.slider {
+    background: linear-gradient(to right, hsl(var(--hue), 0%, 50%), hsl(var(--hue), 100%, 50%));
   }
-
-  .slider::-webkit-slider-thumb {
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: var(--primary);
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  }
-
-  .slider::-webkit-slider-thumb:hover { 
-    transform: scale(1.1); 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); 
-  }
-
-  .slider::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: var(--primary);
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  }
-
-  .slider::-moz-range-track { 
-    height: 8px; 
-    border-radius: var(--radius); 
-    border: none; 
-  }
-
-  @media (max-width: 768px) {
-    .theme-picker { 
-      right: -300px; 
-      width: 340px; 
-      padding: var(--space-sm); 
-    }
-    .theme-picker:hover { 
-      right: -4px; 
-    }
-    .preset-circle {
-      width: 16px;
-      height: 16px;
-    }
-  }
-
-  @media print { .theme-picker { display: none !important; } }
 </style>

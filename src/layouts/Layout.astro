@@ -10,15 +10,18 @@ import '@fontsource/blackout-midnight'
 import ThemeToggle from '@components/ThemeToggle.astro';
 import ThemePicker from '@components/ThemePicker.astro';
 import ResumeNav from '@components/ResumeNav.astro';
+import VersionInfo from '@shared/VersionInfo.astro';
+import GitHubLink from '@shared/GitHubLink.astro';
 import { THEME_DEFAULTS } from '@lib/theme.js';
-import pkg from '../../package.json';
+import pkg from '@pkg';
 
 const {
   title = pkg.name,
   description = pkg.description,
   themeOptions = {},
   currentResume,
-  availableResumes = []
+  availableResumes = [],
+  resumeData
 } = Astro.props;
 ---
 
@@ -59,6 +62,8 @@ const {
     {availableResumes.length > 0 && 
       <ResumeNav currentResume={currentResume} availableResumes={availableResumes} />
     }
+    <VersionInfo resumeData={resumeData} />
+    <GitHubLink />
     <main class="resume">
       <slot />
     </main>

@@ -1,4 +1,5 @@
 {
+  "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
   "basics": {
     "name": "John Doe",
     "email": "john@gmail.com",
@@ -305,10 +306,10 @@
         "npm": "tabler:brand-npm-filled",
         "cli": "tabler:terminal-filled",
         "library": "tabler:library-filled"
-      },
-      "lastModified": "2024-09-01T00:00:00.000Z",
-      "canonical": "https://github.com/metaory/jsonresume-theme-legacy",
-      "version": "2.0.0"
-    }
+      }
+    },
+    "lastModified": "2024-09-14T00:00:00.000Z",
+    "canonical": "https://github.com/metaory/jsonresume-theme-roundy/raw/main/src/data/basic.json",
+    "version": "1.0.0"
   }
 }

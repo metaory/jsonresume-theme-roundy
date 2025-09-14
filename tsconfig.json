@@ -41,6 +41,9 @@
       ],
       "@data/*": [
         "src/data/*"
+      ],
+      "@pkg": [
+        "package.json"
       ]
     }
   },

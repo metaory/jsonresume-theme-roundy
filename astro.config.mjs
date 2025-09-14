@@ -13,7 +13,8 @@ export default defineConfig({
         '@layouts': '/src/layouts',
         '@lib': '/src/lib',
         '@styles': '/src/styles',
-        '@data': '/src/data'
+        '@data': '/src/data',
+        '@pkg': '/package.json'
       }
     }
   }

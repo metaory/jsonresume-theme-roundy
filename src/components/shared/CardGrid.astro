@@ -1,5 +1,5 @@
 ---
-const { 
+const {
   columns = 'auto-fit',
   minWidth = '200px',
   gap = 'md'
@@ -7,7 +7,7 @@ const {
 
 const gapValues = {
   sm: 'var(--space-sm)',
-  md: 'var(--space-md)', 
+  md: 'var(--space-md)',
   lg: 'var(--space-lg)',
   xl: 'var(--space-xl)',
   default: 'var(--space-lg)'
@@ -15,12 +15,12 @@ const gapValues = {
 
 const gapValue = gapValues[gap] || gapValues.default
 
-const gridColumns = columns === 'auto-fit' 
+const gridColumns = columns === 'auto-fit'
   ? `repeat(auto-fit, minmax(${minWidth}, 1fr))`
   : `repeat(${columns}, 1fr)`
 ---
 
-<div 
+<div
   class="card-grid"
   style={`--grid-columns: ${gridColumns}; --grid-gap: ${gapValue};`}
 >
@@ -34,25 +34,17 @@ const gridColumns = columns === 'auto-fit'
     gap: var(--grid-gap);
     margin-top: var(--space-sm);
     align-items: start;
-  }
 
-  /* Auto-balance columns on smaller screens */
-  @media (max-width: 1024px) {
-    .card-grid {
+    @media (max-width: 1024px) {
       grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
     }
-  }
 
-  @media (max-width: 640px) {
-    .card-grid {
+    @media (max-width: 640px) {
       grid-template-columns: repeat(auto-fit, minmax(min(160px, 100%), 1fr));
       gap: var(--space-sm);
     }
-  }
 
-  /* Print optimization */
-  @media print {
-    .card-grid {
+    @media print {
       grid-template-columns: repeat(2, 1fr);
       gap: var(--space-sm);
       page-break-inside: avoid;

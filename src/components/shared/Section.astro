@@ -26,15 +26,20 @@ const sectionIcon = getIconForSection(title, meta)
     backdrop-filter: blur(6px);
     display: grid;
     gap: var(--space-lg);
-  }
 
-  .section:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-  }
+    &:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
 
-  .section:last-child .divider {
-    display: none;
+      .divider {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      padding: var(--space-lg);
+      margin-bottom: var(--space-2xl);
+    }
   }
 
   .section-title {
@@ -48,30 +53,21 @@ const sectionIcon = getIconForSection(title, meta)
     align-items: center;
     gap: var(--space-sm);
     margin: 0;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--primary);
+      border-radius: var(--radius-full);
+    }
   }
 
   .section-icon {
     font-size: 1.2em;
     color: var(--accent);
-  }
-
-  .section-title::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 60px;
-    height: 3px;
-    background: var(--primary);
-    border-radius: var(--radius-full);
-  }
-
-  /* Grid handles spacing automatically */
-
-  @media (max-width: 768px) {
-    .section {
-      padding: var(--space-lg);
-      margin-bottom: var(--space-2xl);
-    }
   }
 </style> 
