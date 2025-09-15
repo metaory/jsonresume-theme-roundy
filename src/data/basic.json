@@ -298,7 +298,7 @@
         "references": "References"
       },
       "icons": {
-        "aws": "tabler:brand-aws-filled",
+        "aws": "tabler:brand-aws",
         "docker": "tabler:brand-docker",
         "git": "tabler:brand-git-filled",
         "javascript": "tabler:brand-javascript-filled",

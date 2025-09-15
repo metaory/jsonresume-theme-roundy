@@ -1,14 +1,20 @@
 {
   "name": "jsonresume-theme-roundy",
   "description": "Modern, customizable JSON Resume theme with round design elements",
-  "version": "0.6.0",
+  "version": "0.7.0",
+  "author": "metaory <metaory@gmail.com>",
+  "license": "MIT",
+  "type": "module",
   "homepage": "https://github.com/metaory/jsonresume-theme-roundy",
   "repository": "https://github.com/metaory/jsonresume-theme-roundy.git",
   "bugs": "https://github.com/metaory/jsonresume-theme-roundy/issues",
-  "keywords": ["jsonresume", "resume", "theme", "cv", "portfolio"],
-  "author": "Your Name",
-  "license": "MIT",
-  "type": "module",
+  "keywords": [
+    "jsonresume",
+    "resume",
+    "theme",
+    "cv",
+    "portfolio"
+  ],
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -16,15 +22,9 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
-    "pdf:resume": "chromium --headless --disable-gpu --no-sandbox --disable-dev-shm-usage --no-pdf-header-footer --print-to-pdf=resume.pdf http://localhost:4321/resume",
-    "pdf:private": "chromium --headless --disable-gpu --no-sandbox --disable-dev-shm-usage --no-pdf-header-footer --print-to-pdf=private.pdf http://localhost:4321/private",
-    "pdf:resume-light": "chromium --headless --disable-gpu --no-sandbox --disable-dev-shm-usage --no-pdf-header-footer --print-to-pdf=resume-light.pdf http://localhost:4321/resume?theme=light",
-    "pdf:resume-dark": "chromium --headless --disable-gpu --no-sandbox --disable-dev-shm-usage --no-pdf-header-footer --print-to-pdf=resume-dark.pdf http://localhost:4321/resume?theme=dark",
-    "pdf:private-light": "chromium --headless --disable-gpu --no-sandbox --disable-dev-shm-usage --no-pdf-header-footer --print-to-pdf=private-light.pdf http://localhost:4321/private?theme=light",
-    "pdf:private-dark": "chromium --headless --disable-gpu --no-sandbox --disable-dev-shm-usage --no-pdf-header-footer --print-to-pdf=private-dark.pdf http://localhost:4321/private?theme=dark",
-    "pdf:all": "npm run pdf:resume-light && npm run pdf:resume-dark && npm run pdf:private-light && npm run pdf:private-dark",
-    "pdf:resume-all": "npm run pdf:resume-light && npm run pdf:resume-dark",
-    "pdf:private-all": "npm run pdf:private-light && npm run pdf:private-dark"
+    "pdf:sample": "chromium --headless --disable-gpu --no-sandbox --disable-dev-shm-usage --no-pdf-header-footer --print-to-pdf=out/sample-basic.pdf http://localhost:4321/basic",
+    "pdf:private": "chromium --headless --disable-gpu --no-sandbox --disable-dev-shm-usage --no-pdf-header-footer --print-to-pdf=out/private.pdf http://localhost:4321/private",
+    "build:screenshot": "chromium --headless --disable-gpu --virtual-time-budget=2000 --screenshot=out/screenshot.png --clip=0,0,780,790 http://localhost:4321/basic"
   },
   "dependencies": {
     "@fontsource/baloo-2": "^5.2.6",

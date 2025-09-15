@@ -7,9 +7,9 @@
     <img height="60" alt="JSON Resume Theme Roundy" src="public/wordmark-light.png">
   </picture>
   <br>
-  <i><small>jsonresume theme v7.x</small></i><br>
-  <a href="https://metaory.github.io/jsonresume-theme-legacy">demo</a> |
-  <a href="out/sample.pdf">sample.pdf</a>
+  <i><small>jsonresume theme v0.6.0</small></i><br>
+  <a href="https://metaory.github.io/jsonresume-theme-roundy">demo</a> |
+  <a href="out/sample-basic.pdf">sample.pdf</a>
 </div>
 
 <p align="center">
@@ -27,7 +27,7 @@ npm install
 npm run dev
 ```
 
-Add your resume data to `src/data/resume.json` and visit `http://localhost:4321`
+Add your resume data to `src/data/` and visit `http://localhost:4321`
 
 ## Features
 
@@ -49,12 +49,23 @@ Place your JSON Resume data in `src/data/`:
 
 ```
 src/data/
-├── resume.json     # Default resume
-├── private.json    # Additional resume
-└── portfolio.json  # Another resume
+├── basic.json      # Sample resume (included)
+├── complete.json   # Extended sample (included)
+└── private.json    # Your resume (create this)
 ```
 
-Access resumes at `/resume`, `/private`, `/portfolio` respectively.
+**File Naming & Access:**
+
+- `basic.json` → accessible at `/basic` (sample)
+- `complete.json` → accessible at `/complete` (extended sample)
+- `private.json` → accessible at `/private` (your resume)
+
+**Creating Your Resume:**
+
+1. Copy `basic.json` to `private.json`
+2. Replace sample data with your information
+3. Access at `http://localhost:4321/private`
+4. `private.json` is gitignored to prevent accidental commits
 
 ### Theme Customization
 
@@ -74,11 +85,13 @@ Add theme options to your resume JSON:
 
 #### Theme Options
 
-| Option | Type    | Default | Description         |
-| ------ | ------- | ------- | ------------------- |
-| `hue`  | number  | 240     | Primary hue (0-360) |
-| `sat`  | number  | 60      | Saturation (0-100)  |
-| `dark` | boolean | false   | Dark mode           |
+| Option          | Type    | Default | Description           |
+| --------------- | ------- | ------- | --------------------- |
+| `hue`           | number  | 240     | Primary hue (0-360)   |
+| `sat`           | number  | 60      | Saturation (0-100)    |
+| `dark`          | boolean | false   | Dark mode             |
+| `sectionTitles` | object  | {}      | Custom section titles |
+| `icons`         | object  | {}      | Custom icon mappings  |
 
 #### Live Theme Editor
 
@@ -87,6 +100,114 @@ In development mode, use the theme picker on the right side to:
 - Adjust hue and saturation with sliders
 - Select from preset color combinations
 - Preview changes in real-time
+
+### Icon Customization
+
+Override default icons for both section titles and keywords using Iconify icons:
+
+```json
+{
+  "meta": {
+    "themeOptions": {
+      "icons": {
+        // Section title icons
+        "work": "solar:city-bold-duotone",
+        "skills": "solar:code-square-linear",
+        "education": "solar:diploma-bold-duotone",
+        "volunteer": "solar:hand-heart-bold-duotone",
+        "projects": "solar:rocket-bold-duotone",
+
+        // Keyword icons
+        "aws": "tabler:brand-aws-filled",
+        "docker": "tabler:brand-docker",
+        "git": "tabler:brand-git-filled",
+        "javascript": "tabler:brand-javascript-filled",
+        "react": "tabler:brand-react-filled",
+        "nodejs": "tabler:brand-nodejs"
+      }
+    }
+  }
+}
+```
+
+#### Finding Icons
+
+Browse available icons at these Iconify collections:
+
+- [icones.js.org](https://icones.js.org/) - Interactive icon browser
+- [icon-sets.iconify.design](https://icon-sets.iconify.design/) - Official Iconify collections
+
+#### Icon Format
+
+**✅ Correct format:** `collection:iconname`
+
+```json
+"solar:asteroid-bold-duotone"
+"tabler:brand-github-filled"
+"mdi:code-braces"
+```
+
+**❌ Incorrect formats:**
+
+```json
+"solar-asteroid-bold-duotone"    // Wrong: uses dash
+"solar--asteroid-bold-duotone"   // Wrong: uses double dash
+```
+
+#### Icon Usage Types
+
+Icons are used in two contexts:
+
+**1. Section Title Icons**
+Icons appear next to section titles (e.g., Work Experience, Skills, Education):
+
+```json
+{
+  "meta": {
+    "themeOptions": {
+      "icons": {
+        "work": "solar:city-bold-duotone",
+        "skills": "solar:code-square-linear",
+        "education": "solar:diploma-bold-duotone",
+        "volunteer": "solar:hand-heart-bold-duotone",
+        "projects": "solar:rocket-bold-duotone"
+      }
+    }
+  }
+}
+```
+
+**2. Keyword Icons**
+Icons appear next to keywords within sections (e.g., technology skills, tools):
+
+```json
+{
+  "meta": {
+    "themeOptions": {
+      "icons": {
+        "aws": "tabler:brand-aws-filled",
+        "docker": "tabler:brand-docker",
+        "javascript": "tabler:brand-javascript-filled"
+      }
+    }
+  }
+}
+```
+
+#### Keyword Matching
+
+Icons are matched using case-insensitive, space-normalized matching:
+
+- `"AWS"` → matches `"aws"` in icons
+- `"Node.js"` → matches `"nodejs"` in icons
+- `"React Native"` → matches `"reactnative"` in icons
+- `"CI/CD"` → matches `"cicd"` in icons
+
+Keywords are automatically normalized by:
+
+- Converting to lowercase
+- Removing spaces, dots, slashes, and special characters
+- Trimming whitespace
 
 ### Section Customization
 
@@ -108,7 +229,8 @@ Override default section titles:
 
 ### Section Ordering
 
-Sections display in the order they appear in your JSON file. Reorder sections by changing the key order:
+Sections display in the order they appear in your JSON file.
+Reorder sections by changing the key order:
 
 ```json
 {
@@ -120,24 +242,28 @@ Sections display in the order they appear in your JSON file. Reorder sections by
 }
 ```
 
-### PDF Generation
+### PDF Export
 
 Generate PDFs with headless Chrome:
 
 ```bash
-# Single PDFs
-npm run pdf:resume
-npm run pdf:private
-
-# With specific themes
-npm run pdf:resume-light
-npm run pdf:resume-dark
-
-# All combinations
-npm run pdf:all
+npm run pdf:sample    # Export sample resume → out/sample-basic.pdf
+npm run pdf:private   # Export your resume → out/private.pdf
 ```
 
-PDFs are saved in the project root with automatic print optimization.
+**Output Directory:**
+
+- All exports go to `out/` directory
+- Sample: `out/sample-basic.pdf`
+- Private: `out/private.pdf`
+- Screenshot: `out/screenshot.png`
+
+**Custom Exports:**
+Add your own export scripts to `package.json`:
+
+```json
+"pdf:myresume": "chromium --headless --disable-gpu --no-sandbox --disable-dev-shm-usage --no-pdf-header-footer --print-to-pdf=out/myresume.pdf http://localhost:4321/myresume"
+```
 
 ### Schema Support
 
@@ -156,11 +282,13 @@ Full JSON Resume schema compatibility:
 - `references` - Professional references
 - `projects` - Project portfolio with roles
 
-## Build
+## Development
 
 ```bash
+npm run dev      # Start development server
 npm run build    # Production build
 npm run preview  # Preview build
+npm run check    # Type checking
 ```
 
 ## License
