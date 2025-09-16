@@ -3,19 +3,16 @@ const {
   text,
   icon,
   href,
-  variant = 'default',
-  size = 'md',
-  class: className = ''
+  variant = "default",
+  size = "md",
+  class: className = "",
 } = Astro.props;
 
-const TagElement = href ? 'a' : 'span';
-const tagProps = href ? { href, target: '_blank', rel: 'noopener' } : {};
+const TagElement = href ? "a" : "span";
+const tagProps = href ? { href, target: "_blank", rel: "noopener" } : {};
 ---
 
-<TagElement
-  class={`tag tag-${variant} tag-${size} ${className}`}
-  {...tagProps}
->
+<TagElement class={`tag tag-${variant} tag-${size} ${className}`} {...tagProps}>
   {icon && <iconify-icon icon={icon} class="tag-icon" />}
   <span class="tag-text">{text}</span>
 </TagElement>

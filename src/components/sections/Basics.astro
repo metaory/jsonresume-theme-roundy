@@ -1,23 +1,27 @@
 ---
-import Tag from '@shared/Tag.astro'
+import Tag from "@shared/Tag.astro";
 
-const { basics } = Astro.props
+const { basics } = Astro.props;
 ---
 
 <header class="basics">
-  {basics.logo && (
-    <div class="logo">
-      <img src={basics.logo} alt="Logo" class="logo-img" />
-    </div>
-  )}
+  {
+    basics.logo && (
+      <div class="logo">
+        <img src={basics.logo} alt="Logo" class="logo-img" />
+      </div>
+    )
+  }
 
   <div class="name-section">
     <div class="name-title">
-      {basics.image && (
-        <div class="profile-image">
-          <img src={basics.image} alt={basics.name} class="avatar" />
-        </div>
-      )}
+      {
+        basics.image && (
+          <div class="profile-image">
+            <img src={basics.image} alt={basics.name} class="avatar" />
+          </div>
+        )
+      }
       <div class="name-content">
         <h1 class="name">{basics.name}</h1>
         <p class="label">{basics.label}</p>
@@ -40,12 +44,7 @@ const { basics } = Astro.props
       variant="subtle"
     />
 
-    <Tag
-      text={basics.url}
-      icon="mdi:web"
-      href={basics.url}
-      variant="subtle"
-    />
+    <Tag text={basics.url} icon="mdi:web" href={basics.url} variant="subtle" />
   </div>
 
   <div class="location">
@@ -54,23 +53,29 @@ const { basics } = Astro.props
         basics.location?.address,
         basics.location?.city,
         basics.location?.region,
-        basics.location?.postalCode
-      ].filter(Boolean).join(', ')}
+        basics.location?.postalCode,
+      ]
+        .filter(Boolean)
+        .join(", ")}
       icon="mdi:map-marker"
       variant="subtle"
     />
   </div>
 
   <div class="profiles">
-    {(basics.profiles || []).map((profile: { network?: string, username?: string, url?: string }) => (
-      <Tag
-        text={profile.username}
-        icon={`mdi:${profile.network?.toLowerCase()}`}
-        href={profile.url}
-        variant="subtle"
-        size="md"
-      />
-    ))}
+    {
+      (basics.profiles || []).map(
+        (profile: { network?: string; username?: string; url?: string }) => (
+          <Tag
+            text={profile.username}
+            icon={`mdi:${profile.network?.toLowerCase()}`}
+            href={profile.url}
+            variant="subtle"
+            size="md"
+          />
+        ),
+      )
+    }
   </div>
 
   <div class="summary-card">

@@ -1,50 +1,53 @@
 ---
 const presets = [
   // Row 1: Warm spectrum
-  [0, 75, 'Crimson'],
-  [15, 85, 'Sunset'],
-  [30, 70, 'Amber'],
-  [45, 65, 'Honey'],
-  [60, 80, 'Lime'],
-  [75, 60, 'Yellow'],
-  [90, 65, 'Mint'],
+  [0, 75, "Crimson"],
+  [15, 85, "Sunset"],
+  [30, 70, "Amber"],
+  [45, 65, "Honey"],
+  [60, 80, "Lime"],
+  [75, 60, "Yellow"],
+  [90, 65, "Mint"],
 
   // Row 2: Cool spectrum
-  [120, 55, 'Forest'],
-  [150, 70, 'Teal'],
-  [180, 65, 'Ocean'],
-  [200, 75, 'Azure'],
-  [220, 60, 'Sky'],
-  [240, 70, 'Royal'],
-  [260, 65, 'Indigo'],
+  [120, 55, "Forest"],
+  [150, 70, "Teal"],
+  [180, 65, "Ocean"],
+  [200, 75, "Azure"],
+  [220, 60, "Sky"],
+  [240, 70, "Royal"],
+  [260, 65, "Indigo"],
 
   // Row 3: Warm spectrum
-  [280, 70, 'Purple'],
-  [300, 75, 'Magenta'],
-  [320, 80, 'Fuchsia'],
-  [340, 70, 'Rose'],
-  [350, 75, 'Coral'],
-  [10, 60, 'Brick'],
-  [25, 55, 'Bronze']
-]
+  [280, 70, "Purple"],
+  [300, 75, "Magenta"],
+  [320, 80, "Fuchsia"],
+  [340, 70, "Rose"],
+  [350, 75, "Coral"],
+  [10, 60, "Brick"],
+  [25, 55, "Bronze"],
+];
 ---
 
 <div class="theme-picker">
   <button class="picker-tab" aria-label="Theme picker">
-    <iconify-icon width="48" height="48" icon="solar:pallete-2-bold-duotone"></iconify-icon>
+    <iconify-icon width="48" height="48" icon="solar:pallete-2-bold-duotone"
+    ></iconify-icon>
     <div class="logo-blob"></div>
   </button>
 
   <div class="presets">
-    {presets.map(([hue, sat, name]) => (
-      <button
-        class="preset-circle"
-        style={`--preset-hue: ${String(hue)}; --preset-sat: ${String(sat)};`}
-        title={String(name)}
-        data-hue={String(hue)}
-        data-sat={String(sat)}
-      ></button>
-    ))}
+    {
+      presets.map(([hue, sat, name]) => (
+        <button
+          class="preset-circle"
+          style={`--preset-hue: ${String(hue)}; --preset-sat: ${String(sat)};`}
+          title={String(name)}
+          data-hue={String(hue)}
+          data-sat={String(sat)}
+        />
+      ))
+    }
   </div>
 
   <div class="controls">
@@ -62,18 +65,20 @@ const presets = [
   </div>
 </div>
 
-<script>
-import { createThemePicker } from '@lib/theme.js'
+<div class="theme-blob"></div>
 
-// Initialize theme picker (includes preset handlers)
-createThemePicker()
+<script>
+  import { createThemePicker } from "@lib/theme.js";
+
+  // Initialize theme picker (includes preset handlers)
+  createThemePicker();
 </script>
 
 <style>
   .theme-picker {
     position: fixed;
     top: 30%;
-    right: -240px;
+    right: -300px;
     z-index: 1000;
     transition: right 0.5s ease-in-out;
     width: 300px;
@@ -87,6 +92,12 @@ createThemePicker()
 
     &:hover {
       right: -4px;
+    }
+
+    &:hover ~ .theme-blob {
+      top: 50%;
+      right: 40%;
+      scale: 4;
     }
 
     iconify-icon {
@@ -130,11 +141,58 @@ createThemePicker()
     height: 60px;
   }
 
+  .theme-blob {
+    position: fixed;
+    right: 0;
+    top: 40%;
+    transform: translateY(-50%);
+    width: 300px;
+    height: 300px;
+    background: conic-gradient(
+      from 0deg,
+      #ff0080,
+      #ff8000,
+      #ffff00,
+      #80ff00,
+      #00ff80,
+      #00ffff,
+      #0080ff,
+      #8000ff,
+      #ff0080
+    );
+    border-radius: 50%;
+    opacity: 0.6;
+    transition: all 0.5s ease-in-out;
+    z-index: 1;
+    filter: blur(90px);
+    animation: blobSwingRotate 10s linear infinite;
+    --offset: 240px;
+    --origin: 340px;
+  }
+
+  @keyframes blobSwingRotate {
+    0% {
+      transform: translateY(-50%) translateX(var(--origin)) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-50%) translateX(var(--offset)) rotate(180deg);
+    }
+    100% {
+      transform: translateY(-50%) translateX(var(--origin)) rotate(360deg);
+    }
+  }
+
   .logo-blob {
     position: absolute;
-    width: 48px;
-    height: 48px;
-    background: conic-gradient(from 0deg, var(--primary), var(--secondary), var(--accent), var(--primary));
+    width: 46px;
+    height: 46px;
+    background: conic-gradient(
+      from 0deg,
+      var(--primary),
+      var(--secondary),
+      var(--accent),
+      var(--primary)
+    );
     border-radius: 50%;
     opacity: 0.8;
     animation: blobRotate 4s linear infinite;
@@ -143,13 +201,14 @@ createThemePicker()
   }
 
   @keyframes pulse {
-    0%, 100% {
+    0%,
+    100% {
       opacity: 0.7;
       transform: scale(1);
     }
     50% {
       opacity: 1;
-      transform: scale(1.2);
+      transform: scale(1.05);
     }
   }
 
@@ -265,7 +324,8 @@ createThemePicker()
   }
 
   #hue.slider {
-    background: linear-gradient(to right,
+    background: linear-gradient(
+      to right,
       hsl(0, 100%, 50%),
       hsl(60, 100%, 50%),
       hsl(120, 100%, 50%),
@@ -277,6 +337,10 @@ createThemePicker()
   }
 
   #sat.slider {
-    background: linear-gradient(to right, hsl(var(--hue), 0%, 50%), hsl(var(--hue), 100%, 50%));
+    background: linear-gradient(
+      to right,
+      hsl(var(--hue), 0%, 50%),
+      hsl(var(--hue), 100%, 50%)
+    );
   }
 </style>
