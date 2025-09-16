@@ -1,7 +1,7 @@
 {
   "name": "jsonresume-theme-roundy",
   "description": "Modern, customizable JSON Resume theme with round design elements",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "author": "metaory <metaory@gmail.com>",
   "license": "MIT",
   "type": "module",

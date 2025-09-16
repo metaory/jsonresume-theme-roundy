@@ -4,66 +4,71 @@ export const THEME_DEFAULTS = { hue: 240, sat: 60, dark: false };
 
 const hsl = (h, s, l, a) => `hsl(${h} ${s}% ${l}%${a ? ` / ${a}` : ""})`;
 
+const sharedColors = (h, s, secondaryHue, accentHue) => ({
+  primary: hsl(h, s, 50),
+  secondary: hsl(secondaryHue, s, 50),
+  accent: hsl(accentHue, s, 60),
+});
+
+const enhancedSat = (s, boost) => Math.min(100, s + boost);
+
+const bgSat = (s, base, multiplier) => base + clamp(s * multiplier, 8, 40);
+
 const colorConfigs = {
-  dark: (h, s, secondaryHue, accentHue) => ({
-    primary: hsl(h, s, 50),
-    secondary: hsl(secondaryHue, s, 50),
-    accent: hsl(accentHue, s, 60),
-    bg: hsl(h, clamp(10 + s * 0.25, 18, 60), 8),
-    surface: hsl(h, clamp(10 + s * 0.2, 15, 50), 12, 0.2),
+  dark: (h, s, secondaryHue, accentHue, textSat) => ({
+    ...sharedColors(h, s, secondaryHue, accentHue),
+    bg: hsl(h, bgSat(s, 10, 0.25), 8),
+    surface: hsl(h, bgSat(s, 10, 0.2), 12, 0.2),
     wash: hsl(h, s, 20, 0.4),
-    text: hsl(h, 5, 95),
-    textMuted: hsl(h, 8, 95),
+    text: hsl(h, textSat, 95),
+    "text-muted": hsl(h, textSat, 95),
     link: hsl(h, s, 70),
-    linkHover: hsl(h, Math.min(100, s + 10), 75),
+    "link-hover": hsl(h, enhancedSat(s, 10), 75),
+    edge: 'black',
   }),
   light: (h, s, secondaryHue, accentHue, textSat) => ({
-    primary: hsl(h, s, 50),
-    secondary: hsl(secondaryHue, s, 50),
-    accent: hsl(accentHue, s, 60),
-    bg: hsl(h, clamp(15 + s * 4, 20, 50), 94),
-    surface: hsl(h, clamp(20 + s * 3.5, 25, 45), 96, 0.2),
+    ...sharedColors(h, s, secondaryHue, accentHue),
+    bg: hsl(h, bgSat(s, 15, 4), 94),
+    surface: hsl(h, bgSat(s, 20, 3.5), 96, 0.2),
     wash: hsl(h, s, 80, 0.4),
     text: hsl(h, textSat, 15),
-    textMuted: hsl(h, textSat, 15),
+    "text-muted": hsl(h, textSat, 15),
     link: hsl(h, s, 50),
-    linkHover: hsl(h, Math.min(100, s + 10), 45),
+    "link-hover": hsl(h, enhancedSat(s, 10), 45),
+    edge: 'white',
   }),
 };
 
+const HUE_OFFSETS = { secondary: 180, accent: 60 };
+
+const getHueOffsets = (h) =>
+  Object.fromEntries(
+    Object.entries(HUE_OFFSETS).map(([name, offset]) => [name, (h + offset) % 360])
+  );
+
 const computeColors = (h, s, isDark) => {
-  const secondaryHue = (h + 180) % 360;
-  const accentHue = (h + 60) % 360;
+  const { secondary: secondaryHue, accent: accentHue } = getHueOffsets(h);
   const textSat = clamp(s * 0.1, 5, 20);
   const mode = isDark ? "dark" : "light";
 
   return colorConfigs[mode](h, s, secondaryHue, accentHue, textSat);
 };
 
-const setProp = ([name, value]) =>
-  document.documentElement.style.setProperty(`--${name}`, value);
-
 const applyTheme = (h, s, isDark) => {
   const colors = computeColors(h, s, isDark);
+  const { secondary, accent } = getHueOffsets(h);
 
-  const props = [
-    ["hue", String(h)],
-    ["sat", String(s)],
-    ["hue-secondary", String((h + 180) % 360)],
-    ["hue-accent", String((h + 60) % 360)],
-    ["primary", colors.primary],
-    ["secondary", colors.secondary],
-    ["accent", colors.accent],
-    ["bg", colors.bg],
-    ["surface", colors.surface],
-    ["wash", colors.wash],
-    ["text", colors.text],
-    ["text-muted", colors.textMuted],
-    ["link", colors.link],
-    ["link-hover", colors.linkHover],
-  ];
+  const allProps = {
+    hue: String(h),
+    sat: String(s),
+    "hue-secondary": String(secondary),
+    "hue-accent": String(accent),
+    ...colors,
+  };
 
-  props.forEach(setProp);
+  Object.entries(allProps).forEach(([name, value]) =>
+    document.documentElement.style.setProperty(`--${name}`, value)
+  );
 };
 
 const setThemeAttr = (isDark) => {
@@ -74,13 +79,8 @@ const setThemeAttr = (isDark) => {
 };
 
 export const toggleThemeMode = () => {
-  const nextIsDark = !theme.dark;
-
-  theme.dark = nextIsDark;
-  setThemeAttr(nextIsDark);
-  applyTheme(theme.hue, theme.sat, nextIsDark);
-
-  return nextIsDark ? "dark" : "light";
+  theme.dark = !theme.dark;
+  return theme.dark ? "dark" : "light";
 };
 
 const debounce = (fn, delay) => {
@@ -97,35 +97,34 @@ const updateTheme = debounce((hue, sat) => {
 }, 16);
 
 export const createThemePicker = () => {
-  const elements = ["hue", "sat", "hue-value", "sat-value"].map((id) =>
-    document.getElementById(id),
-  );
-  const [hueEl, satEl, hueVal, satVal] = elements;
+  const sliderConfigs = [
+    { prop: "hue", suffix: "°", getArgs: (hue) => [hue, theme.sat] },
+    { prop: "sat", suffix: "%", getArgs: (sat) => [theme.hue, sat] },
+  ];
 
-  if (!elements.every(Boolean)) return;
+  const elementIds = sliderConfigs.flatMap(({ prop }) => [prop, `${prop}-value`]);
+  const elements = Object.fromEntries(
+    elementIds.map(id => [id.replace("-", ""), document.getElementById(id)])
+  );
+
+  if (!Object.values(elements).every(Boolean)) return;
 
   const updateSliders = (hue, sat) => {
-    hueEl.value = hue;
-    satEl.value = sat;
-    hueVal.textContent = `${hue}°`;
-    satVal.textContent = `${sat}%`;
+    const values = { hue, sat };
+    sliderConfigs.forEach(({ prop, suffix }) => {
+      elements[prop].value = values[prop];
+      elements[`${prop}value`].textContent = `${values[prop]}${suffix}`;
+    });
   };
 
   updateSliders(theme.hue, theme.sat);
 
-  const createSliderHandler = (prop, suffix, getThemeArgs) => () => {
-    const value = Number(document.getElementById(prop).value);
-    document.getElementById(`${prop}-value`).textContent = `${value}${suffix}`;
-    updateTheme(...getThemeArgs(value));
-  };
-
-  const sliderHandlers = {
-    hue: createSliderHandler("hue", "°", (hue) => [hue, theme.sat]),
-    sat: createSliderHandler("sat", "%", (sat) => [theme.hue, sat]),
-  };
-
-  Object.entries(sliderHandlers).forEach(([id, handler]) => {
-    document.getElementById(id)?.addEventListener("input", handler);
+  sliderConfigs.forEach(({ prop, suffix, getArgs }) => {
+    elements[prop]?.addEventListener("input", () => {
+      const value = Number(elements[prop].value);
+      elements[`${prop}value`].textContent = `${value}${suffix}`;
+      updateTheme(...getArgs(value));
+    });
   });
 
   document.querySelectorAll(".preset-circle").forEach((circle) => {
@@ -138,20 +137,22 @@ export const createThemePicker = () => {
   });
 };
 
-const propHandlers = {
-  hue: (target, value) => {
-    target.hue = clamp(Math.round(value), 0, 360);
-    applyTheme(target.hue, target.sat, target.dark);
-  },
-  sat: (target, value) => {
-    target.sat = clamp(Math.round(value), 0, 100);
-    applyTheme(target.hue, target.sat, target.dark);
-  },
-  dark: (target, value) => {
-    target.dark = Boolean(value);
-    setThemeAttr(target.dark);
-    applyTheme(target.hue, target.sat, target.dark);
-  },
+const propTransforms = {
+  hue: (value) => clamp(Math.round(value), 0, 360),
+  sat: (value) => clamp(Math.round(value), 0, 100),
+  dark: (value) => Boolean(value),
+};
+
+const handlePropChange = (target, prop, value) => {
+  const transform = propTransforms[prop];
+  if (!transform) return false;
+
+  target[prop] = transform(value);
+
+  if (prop === "dark") setThemeAttr(target.dark);
+  applyTheme(target.hue, target.sat, target.dark);
+
+  return true;
 };
 
 const getInitialTheme = () => {
@@ -177,8 +178,6 @@ const initializeTheme = () => {
 
 export const theme = new Proxy(initializeTheme(), {
   set(target, prop, value) {
-    const handler = propHandlers[prop];
-    if (handler) handler(target, value);
-    return true;
+    return handlePropChange(target, prop, value);
   },
 });

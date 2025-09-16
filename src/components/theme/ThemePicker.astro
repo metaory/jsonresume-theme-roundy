@@ -41,10 +41,10 @@ const presets = [
       presets.map(([hue, sat, name]) => (
         <button
           class="preset-circle"
-          style={`--preset-hue: ${String(hue)}; --preset-sat: ${String(sat)};`}
-          title={String(name)}
-          data-hue={String(hue)}
-          data-sat={String(sat)}
+          style={`--preset-hue: ${hue}; --preset-sat: ${sat};`}
+          title={name.toString()}
+          data-hue={hue}
+          data-sat={sat}
         />
       ))
     }
@@ -78,12 +78,12 @@ const presets = [
   .theme-picker {
     position: fixed;
     top: 30%;
-    right: -300px;
+    left: -286px;
     z-index: 1000;
-    transition: right 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
     width: 300px;
     height: auto;
-    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
     padding: var(--space-md);
     backdrop-filter: blur(4px);
     background: var(--surface);
@@ -91,13 +91,14 @@ const presets = [
     box-shadow: var(--shadow-lg);
 
     &:hover {
-      right: -4px;
+      left: -4px;
     }
 
     &:hover ~ .theme-blob {
       top: 50%;
-      right: 40%;
+      left: 40%;
       scale: 4;
+      background: var(--primary);
     }
 
     iconify-icon {
@@ -110,13 +111,8 @@ const presets = [
     }
 
     @media (max-width: 768px) {
-      right: -300px;
       width: 340px;
       padding: var(--space-sm);
-
-      &:hover {
-        right: -4px;
-      }
     }
 
     @media print {
@@ -126,7 +122,7 @@ const presets = [
 
   .picker-tab {
     position: absolute;
-    left: -60px;
+    right: -60px;
     top: 50%;
     transform: translateY(-50%);
     background: none;
@@ -143,22 +139,16 @@ const presets = [
 
   .theme-blob {
     position: fixed;
-    right: 0;
+    left: 0;
     top: 40%;
     transform: translateY(-50%);
     width: 300px;
     height: 300px;
     background: conic-gradient(
       from 0deg,
-      #ff0080,
-      #ff8000,
-      #ffff00,
-      #80ff00,
-      #00ff80,
-      #00ffff,
-      #0080ff,
-      #8000ff,
-      #ff0080
+      var(--primary),
+      var(--secondary),
+      var(--primary)
     );
     border-radius: 50%;
     opacity: 0.6;
@@ -166,8 +156,8 @@ const presets = [
     z-index: 1;
     filter: blur(90px);
     animation: blobSwingRotate 10s linear infinite;
-    --offset: 240px;
-    --origin: 340px;
+    --offset: -260px;
+    --origin: -300px;
   }
 
   @keyframes blobSwingRotate {

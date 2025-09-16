@@ -8,8 +8,10 @@ export default defineConfig({
       alias: {
         '@': '/src',
         '@components': '/src/components',
-        '@shared': '/src/components/shared',
-        '@sections': '/src/components/sections',
+        '@ui': '/src/components/ui',
+        '@theme': '/src/components/theme',
+        '@resume': '/src/components/resume',
+        '@meta': '/src/components/meta',
         '@layouts': '/src/layouts',
         '@lib': '/src/lib',
         '@styles': '/src/styles',

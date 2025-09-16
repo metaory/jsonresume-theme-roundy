@@ -1,0 +1,63 @@
+---
+---
+
+<div class="theme-stat">
+  <span><iconify-icon icon="tabler:palette"></iconify-icon><b></b></span>
+  <span><iconify-icon icon="tabler:droplet"></iconify-icon><b></b></span>
+  <span class="theme"><iconify-icon icon="tabler:moon"></iconify-icon></span>
+</div>
+
+<script>
+  import { theme } from '@lib/theme.js';
+  
+  const [hue, sat] = document.querySelectorAll('.theme-stat b');
+  
+  hue.textContent = theme.hue + '°';
+  sat.textContent = theme.sat + '%';
+</script>
+
+<style>
+  .theme-stat {
+    position: fixed;
+    bottom: var(--space-lg);
+    left: calc(var(--space-lg) + 60px);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    background: var(--surface);
+    padding: var(--space-sm);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+
+    span {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-size: var(--text-xs);
+      color: var(--text-muted);
+      font-weight: 500;
+      font-family: monospace;
+    }
+
+    iconify-icon {
+      width: 16px;
+      height: 16px;
+      color: var(--primary);
+      opacity: 0.7;
+    }
+
+
+    @media print {
+      display: none;
+    }
+  }
+
+  [data-theme="dark"] .theme::after {
+    content: "dark";
+  }
+  [data-theme="light"] .theme::after {
+    content: "light";
+  }
+</style>
