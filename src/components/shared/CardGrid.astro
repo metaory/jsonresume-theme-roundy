@@ -1,23 +1,20 @@
 ---
-const {
-  columns = 'auto-fit',
-  minWidth = '200px',
-  gap = 'md'
-} = Astro.props
+const { columns = "auto-fit", minWidth = "200px", gap = "md" } = Astro.props;
 
 const gapValues = {
-  sm: 'var(--space-sm)',
-  md: 'var(--space-md)',
-  lg: 'var(--space-lg)',
-  xl: 'var(--space-xl)',
-  default: 'var(--space-lg)'
-}
+  sm: "var(--space-sm)",
+  md: "var(--space-md)",
+  lg: "var(--space-lg)",
+  xl: "var(--space-xl)",
+  default: "var(--space-lg)",
+};
 
-const gapValue = gapValues[gap] || gapValues.default
+const gapValue = gapValues[gap] || gapValues.default;
 
-const gridColumns = columns === 'auto-fit'
-  ? `repeat(auto-fit, minmax(${minWidth}, 1fr))`
-  : `repeat(${columns}, 1fr)`
+const gridColumns =
+  columns === "auto-fit"
+    ? `repeat(auto-fit, minmax(${minWidth}, 1fr))`
+    : `repeat(${columns}, 1fr)`;
 ---
 
 <div

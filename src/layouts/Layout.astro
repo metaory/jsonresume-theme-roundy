@@ -1,19 +1,19 @@
 ---
-import '@fontsource/bungee-shade'
-import '@fontsource/bungee'
-import '@fontsource/baloo-2'
-import '@fontsource/rubik'
-import '@fontsource/fredoka'
-import '@fontsource/permanent-marker'
-import '@fontsource/blackout-midnight'
+import "@fontsource/bungee-shade";
+import "@fontsource/bungee";
+import "@fontsource/baloo-2";
+import "@fontsource/rubik";
+import "@fontsource/fredoka";
+import "@fontsource/permanent-marker";
+import "@fontsource/blackout-midnight";
 
-import ThemeToggle from '@components/ThemeToggle.astro';
-import ThemePicker from '@components/ThemePicker.astro';
-import ResumeNav from '@components/ResumeNav.astro';
-import VersionInfo from '@shared/VersionInfo.astro';
-import GitHubLink from '@shared/GitHubLink.astro';
-import { THEME_DEFAULTS } from '@lib/theme.js';
-import pkg from '@pkg';
+import ThemeToggle from "@components/ThemeToggle.astro";
+import ThemePicker from "@components/ThemePicker.astro";
+import ResumeNav from "@components/ResumeNav.astro";
+import VersionInfo from "@shared/VersionInfo.astro";
+import GitHubLink from "@shared/GitHubLink.astro";
+import { THEME_DEFAULTS } from "@lib/theme.js";
+import pkg from "@pkg";
 
 const {
   title = pkg.name,
@@ -21,12 +21,16 @@ const {
   themeOptions = {},
   currentResume,
   availableResumes = [],
-  resumeData
+  resumeData,
 } = Astro.props;
 ---
 
-<!DOCTYPE html>
-<html lang="en" style={`--hue: ${themeOptions.hue || THEME_DEFAULTS.hue}; --sat: ${themeOptions.sat || THEME_DEFAULTS.sat};`} data-theme={themeOptions.dark ? 'dark' : 'light'}>
+<!doctype html>
+<html
+  lang="en"
+  style={`--hue: ${themeOptions.hue || THEME_DEFAULTS.hue}; --sat: ${themeOptions.sat || THEME_DEFAULTS.sat};`}
+  data-theme={themeOptions.dark ? "dark" : "light"}
+>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -46,21 +50,25 @@ const {
     <meta name="twitter:image" content="/logo.png" />
 
     <style is:global>
-      @import '@styles/global.css';
-      @import '@styles/fonts.css';
+      @import "@styles/global.css";
+      @import "@styles/fonts.css";
     </style>
 
     <script>
-      import 'iconify-icon';
+      import "iconify-icon";
     </script>
-
   </head>
 
   <body>
     <ThemeToggle />
     {import.meta.env.DEV && <ThemePicker />}
-    {availableResumes.length > 0 &&
-      <ResumeNav currentResume={currentResume} availableResumes={availableResumes} />
+    {
+      availableResumes.length > 0 && (
+        <ResumeNav
+          currentResume={currentResume}
+          availableResumes={availableResumes}
+        />
+      )
     }
     <VersionInfo resumeData={resumeData} />
     <GitHubLink />

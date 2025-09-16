@@ -1,12 +1,12 @@
 ---
-import { getLevelConfig } from '@lib/levels.js'
+import { getLevelConfig } from "@lib/levels.js";
 
-const { level } = Astro.props
-const { dots, color } = getLevelConfig(level)
+const { level } = Astro.props;
+const { dots, color } = getLevelConfig(level);
 ---
 
 <div class="level-dots" style={`--level-color: ${color}`}>
-  {Array.from({ length: dots }, () => <div class="dot"></div>)}
+  {Array.from({ length: dots }, () => <div class="dot" />)}
 </div>
 
 <style>

@@ -1,20 +1,24 @@
 <button class="theme-toggle" aria-label="Toggle theme">
-    <iconify-icon width="48" height="48" icon="line-md:sunny-filled-loop-to-moon-filled-alt-loop-transition"></iconify-icon>
+  <iconify-icon
+    width="48"
+    height="48"
+    icon="line-md:sunny-filled-loop-to-moon-filled-alt-loop-transition"
+  ></iconify-icon>
 </button>
 
 <script>
-import { toggleThemeMode } from '@lib/theme.js'
+  import { toggleThemeMode } from "@lib/theme.js";
 
-const icons = {
-  light: 'line-md:sunny-filled-loop-to-moon-filled-alt-loop-transition',
-  dark: 'line-md:moon-filled-alt-to-sunny-filled-loop-transition'
-}
+  const icons = {
+    light: "line-md:sunny-filled-loop-to-moon-filled-alt-loop-transition",
+    dark: "line-md:moon-filled-alt-to-sunny-filled-loop-transition",
+  };
 
-const icon = document.querySelector('.theme-toggle iconify-icon')
+  const icon = document.querySelector(".theme-toggle iconify-icon");
 
-document.querySelector('.theme-toggle')?.addEventListener('click', () => {
-  icon.setAttribute('icon', icons[toggleThemeMode()])
-})
+  document.querySelector(".theme-toggle")?.addEventListener("click", () => {
+    icon.setAttribute("icon", icons[toggleThemeMode()]);
+  });
 </script>
 
 <style>
@@ -42,8 +46,8 @@ document.querySelector('.theme-toggle')?.addEventListener('click', () => {
       color: var(--primary);
     }
 
-    @media print { 
-      display: none !important; 
+    @media print {
+      display: none !important;
     }
   }
 </style>

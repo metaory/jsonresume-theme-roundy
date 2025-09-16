@@ -1,12 +1,12 @@
 ---
-const { variant = 'default' } = Astro.props
+const { variant = "default" } = Astro.props;
 
 const variants = {
-  default: 'divider-default',
-  subtle: 'divider-subtle',
-  accent: 'divider-accent',
-  gradient: 'divider-gradient'
-}
+  default: "divider-default",
+  subtle: "divider-subtle",
+  accent: "divider-accent",
+  gradient: "divider-gradient",
+};
 ---
 
 <div class={`divider ${variants[variant]}`}></div>
@@ -18,7 +18,7 @@ const variants = {
     position: relative;
     margin: var(--space-2xl) 0;
     width: 100%;
-    background-image: url('/src/assets/line.svg');
+    background-image: url("/src/assets/line.svg");
     background-size: 30px 26px;
     background-repeat: space;
     opacity: 0.6;
@@ -53,7 +53,12 @@ const variants = {
   }
 
   .divider-gradient {
-    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--primary),
+      transparent
+    );
     height: 2px;
     border-radius: 2px;
     margin: var(--space-xl) 0;

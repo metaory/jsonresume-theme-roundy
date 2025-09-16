@@ -1,24 +1,21 @@
 ---
-import Tag from '@shared/Tag.astro'
-import { getIconForKeyword } from '@lib/icons.js'
+import Tag from "@shared/Tag.astro";
+import { getIconForKeyword } from "@lib/icons.js";
 
-const {
-  keywords = [],
-  variant = 'default',
-  size = 'sm',
-  meta
-} = Astro.props
+const { keywords = [], variant = "default", size = "sm", meta } = Astro.props;
 ---
 
 <div class="keywords">
-  {keywords.map((keyword: string) => (
-    <Tag
-      text={keyword}
-      icon={getIconForKeyword(keyword, meta)}
-      variant={variant}
-      size={size}
-    />
-  ))}
+  {
+    keywords.map((keyword: string) => (
+      <Tag
+        text={keyword}
+        icon={getIconForKeyword(keyword, meta)}
+        variant={variant}
+        size={size}
+      />
+    ))
+  }
 </div>
 
 <style>

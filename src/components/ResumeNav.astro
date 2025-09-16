@@ -1,22 +1,24 @@
 ---
-import { getResumeInfo } from '@lib/resume.js'
+import { getResumeInfo } from "@lib/resume.js";
 
 /** @type {{ currentResume?: string, availableResumes?: string[] }} */
-const p = Astro.props
-const currentResume = p.currentResume ?? 'resume'
-const resumes = /** @type {string[]} */ (p.availableResumes ?? [])
-const resumeFiles = resumes.map(name => getResumeInfo(name))
+const p = Astro.props;
+const currentResume = p.currentResume ?? "resume";
+const resumes = /** @type {string[]} */ (p.availableResumes ?? []);
+const resumeFiles = resumes.map((name) => getResumeInfo(name));
 ---
 
 <nav class="resume-nav">
-  {resumeFiles.map((file) => (
-    <a
-      href={`/${file.name}`}
-      class={`nav-link ${currentResume === file.name ? 'active' : ''}`}
-    >
-      {file.displayName}
-    </a>
-  ))}
+  {
+    resumeFiles.map((file) => (
+      <a
+        href={`/${file.name}`}
+        class={`nav-link ${currentResume === file.name ? "active" : ""}`}
+      >
+        {file.displayName}
+      </a>
+    ))
+  }
 </nav>
 
 <style>

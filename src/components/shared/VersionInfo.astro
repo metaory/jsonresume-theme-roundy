@@ -1,14 +1,20 @@
 ---
-import pkg from '@pkg'
+import pkg from "@pkg";
 
-const { resumeData } = Astro.props
-const resumeVersion = resumeData?.meta?.version || '1.0.0'
-const themeVersion = pkg.version
+const { resumeData } = Astro.props;
+const resumeVersion = resumeData?.meta?.version || "1.0.0";
+const themeVersion = pkg.version;
 ---
 
 <div class="version-info">
-  <span><iconify-icon icon="tabler:file-cv" width="16" height="16"></iconify-icon>v{resumeVersion}</span>
-  <span><iconify-icon icon="tabler:palette" width="16" height="16"></iconify-icon>v{themeVersion}</span>
+  <span
+    ><iconify-icon icon="tabler:file-cv" width="16" height="16"
+    ></iconify-icon>v{resumeVersion}</span
+  >
+  <span
+    ><iconify-icon icon="tabler:palette" width="16" height="16"
+    ></iconify-icon>v{themeVersion}</span
+  >
 </div>
 
 <style>
@@ -42,8 +48,8 @@ const themeVersion = pkg.version
       opacity: 0.7;
     }
 
-    @media print { 
-      display: none !important; 
+    @media print {
+      display: none !important;
     }
   }
 </style>

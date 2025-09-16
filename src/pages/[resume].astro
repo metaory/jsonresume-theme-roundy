@@ -1,32 +1,36 @@
 ---
-import Basics from '@sections/Basics.astro'
-import SectionRenderer from '@components/SectionRenderer.astro'
-import Divider from '@shared/Divider.astro'
-import Layout from '@layouts/Layout.astro'
-import { getAvailableResumes, getResumeData, getResumeInfo } from '@lib/resume.js'
-import pkg from '@pkg'
+import Basics from "@sections/Basics.astro";
+import SectionRenderer from "@components/SectionRenderer.astro";
+import Divider from "@shared/Divider.astro";
+import Layout from "@layouts/Layout.astro";
+import {
+  getAvailableResumes,
+  getResumeData,
+  getResumeInfo,
+} from "@lib/resume.js";
+import pkg from "@pkg";
 
 // Generate static paths for all resume files
 export function getStaticPaths() {
-  const availableResumes = getAvailableResumes()
-  return availableResumes.map(resume => ({
+  const availableResumes = getAvailableResumes();
+  return availableResumes.map((resume) => ({
     params: { resume },
-    props: { resume }
-  }))
+    props: { resume },
+  }));
 }
 
 // Get resume name from path param
-const { resume } = Astro.params
+const { resume } = Astro.params;
 
 // Get resume info and load data
-const resumeInfo = getResumeInfo(resume)
-const resumeData = await getResumeData(resumeInfo.name)
+const resumeInfo = getResumeInfo(resume);
+const resumeData = await getResumeData(resumeInfo.name);
 
-const { basics, meta, $schema, ...sections } = resumeData
+const { basics, meta, $schema, ...sections } = resumeData;
 ---
 
-<Layout 
-  title={`${pkg.name.split('-').pop()}·${basics.name}`}
+<Layout
+  title={`${pkg.name.split("-").pop()}·${basics.name}`}
   themeOptions={meta?.themeOptions}
   currentResume={resumeInfo.name}
   availableResumes={getAvailableResumes()}
@@ -39,7 +43,10 @@ const { basics, meta, $schema, ...sections } = resumeData
   <Divider variant="accent" />
   <Divider variant="gradient" />
 
-  {Object.entries(sections).map(([key, data]) => 
-    data && <SectionRenderer sectionKey={key} data={data} meta={meta} />
-  )}
-</Layout> 
+  {
+    Object.entries(sections).map(
+      ([key, data]) =>
+        data && <SectionRenderer sectionKey={key} data={data} meta={meta} />,
+    )
+  }
+</Layout>

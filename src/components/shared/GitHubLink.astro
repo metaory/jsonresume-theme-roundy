@@ -1,11 +1,18 @@
 ---
-import pkg from '@pkg'
+import pkg from "@pkg";
 
-const githubUrl = pkg.homepage || pkg.repository
+const githubUrl = pkg.homepage || pkg.repository;
 ---
 
-<a href={githubUrl} target="_blank" rel="noopener noreferrer" class="github-link" aria-label="View on GitHub">
-  <iconify-icon icon="line-md:github-twotone" width="32" height="32"></iconify-icon>
+<a
+  href={githubUrl}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="github-link"
+  aria-label="View on GitHub"
+>
+  <iconify-icon icon="line-md:github-twotone" width="32" height="32"
+  ></iconify-icon>
 </a>
 
 <style>
