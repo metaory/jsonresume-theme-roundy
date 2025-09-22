@@ -12,7 +12,7 @@ const resumeFiles = resumes.map((name) => getResumeInfo(name));
   {
     resumeFiles.map((file) => (
       <a
-        href={`/${file.name}`}
+        href={`${import.meta.env.BASE_URL}${file.name}`}
         class={`nav-link ${currentResume === file.name ? "active" : ""}`}
       >
         {file.displayName}

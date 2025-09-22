@@ -2,7 +2,10 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://metaory.github.io',
+  base: '/jsonresume-theme-roundy/',
   integrations: [],
+  trailingSlash: 'always',
   vite: {
     resolve: {
       alias: {

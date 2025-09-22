@@ -1,6 +1,5 @@
 ---
 import { getDefaultResume } from "@lib/resume.js";
 
-// Redirect to default resume
-return Astro.redirect(`/${getDefaultResume()}`);
+return Astro.redirect(`./${getDefaultResume()}`);
 ---
