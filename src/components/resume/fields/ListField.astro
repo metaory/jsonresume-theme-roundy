@@ -1,0 +1,9 @@
+---
+import List from "@ui/List.astro";
+
+const { value } = Astro.props;
+---
+
+<List>
+  {value.map(item => <li>{item}</li>)}
+</List>

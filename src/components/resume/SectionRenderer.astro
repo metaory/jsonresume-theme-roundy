@@ -1,15 +1,7 @@
 ---
 import Section from "@ui/Section.astro";
-import Item from "@ui/Item.astro";
-import Card from "@ui/Card.astro";
-import CardGrid from "@ui/CardGrid.astro";
-import Title from "@ui/Title.astro";
-import Subtitle from "@ui/Subtitle.astro";
-import Dates from "@ui/Dates.astro";
-import Description from "@ui/Description.astro";
-import List from "@ui/List.astro";
-import Keywords from "@ui/Keywords.astro";
-import LevelDots from "@ui/LevelDots.astro";
+import ListLayout from "./ListLayout.astro";
+import CardLayout from "./CardLayout.astro";
 
 const { sectionKey, data, meta } = Astro.props;
 
@@ -114,7 +106,6 @@ const config = sections[sectionKey] || {
 };
 const title = meta?.themeOptions?.sectionTitles?.[sectionKey] || config.title;
 const items = Array.isArray(data) ? data : [];
-const Component = config.layout === "cards" ? Card : Item;
 
 // Field processors with custom logic for specific cases
 const processors = {
@@ -148,58 +139,14 @@ const processItem = (item) => {
 
   return result;
 };
+
+const processedItems = items.map(processItem);
 ---
 
-{
-  (() => {
-    const renderMap = {
-      title: ({ value }) => <Title>{value}</Title>,
-      subtitle: ({ value }) => <Subtitle>{value}</Subtitle>,
-      dates: ({ value }) => <Dates>{value}</Dates>,
-      description: ({ value }) => <Description>{value}</Description>,
-      list: ({ value }) => (
-        <List>
-          {value.map((item) => (
-            <li>{item}</li>
-          ))}
-        </List>
-      ),
-      keywords: ({ value, variant = "primary" }) => (
-        <Keywords keywords={value} variant={variant} size="sm" meta={meta} />
-      ),
-      level: ({ value }) => <LevelDots level={value} />,
-      fluency: ({ value }) => <LevelDots level={value} />,
-      url: ({ value }) => (
-        <a href={value} target="_blank" rel="noopener">
-          {value}
-        </a>
-      ),
-      score: ({ value }) => <span>{value}</span>,
-    };
-
-    const renderField = (type, data) => renderMap[type]?.(data) || null;
-
-    const renderItem = (item) => (
-      <Component>
-        {Object.entries(processItem(item)).map(([type, data]) =>
-          data &&
-          typeof data === "object" &&
-          "value" in data &&
-          "variant" in data
-            ? renderField(type, data)
-            : null,
-        )}
-      </Component>
-    );
-
-    return (
-      <Section title={title} meta={meta}>
-        {config.layout === "cards" ? (
-          <CardGrid>{items.map(renderItem)}</CardGrid>
-        ) : (
-          items.map(renderItem)
-        )}
-      </Section>
-    );
-  })()
-}
+<Section title={title} meta={meta}>
+  {config.layout === "cards" ? (
+    <CardLayout processedItems={processedItems} meta={meta} />
+  ) : (
+    <ListLayout processedItems={processedItems} meta={meta} />
+  )}
+</Section>

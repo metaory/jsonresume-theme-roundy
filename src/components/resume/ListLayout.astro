@@ -1,0 +1,9 @@
+---
+import ItemRenderer from "./ItemRenderer.astro";
+
+const { items, processedItems, meta } = Astro.props;
+---
+
+{processedItems.map((itemData) => (
+  <ItemRenderer itemData={itemData} layout="list" meta={meta} />
+))}

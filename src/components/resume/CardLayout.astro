@@ -1,0 +1,12 @@
+---
+import CardGrid from "@ui/CardGrid.astro";
+import ItemRenderer from "./ItemRenderer.astro";
+
+const { items, processedItems, meta } = Astro.props;
+---
+
+<CardGrid>
+  {processedItems.map((itemData) => (
+    <ItemRenderer itemData={itemData} layout="cards" meta={meta} />
+  ))}
+</CardGrid>

@@ -1,0 +1,24 @@
+---
+import Item from "@ui/Item.astro";
+import Card from "@ui/Card.astro";
+import FieldRenderer from "./FieldRenderer.astro";
+
+const { itemData, layout, meta } = Astro.props;
+const Component = layout === "cards" ? Card : Item;
+---
+
+<Component>
+  {Object.entries(itemData).map(([type, data]) => (
+    data && 
+    typeof data === "object" && 
+    "value" in data && 
+    "variant" in data && (
+      <FieldRenderer 
+        type={type} 
+        value={data.value} 
+        variant={data.variant} 
+        meta={meta} 
+      />
+    )
+  ))}
+</Component>

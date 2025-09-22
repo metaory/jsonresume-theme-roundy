@@ -1,0 +1,7 @@
+---
+import Keywords from "@ui/Keywords.astro";
+
+const { value, variant = "primary", meta } = Astro.props;
+---
+
+<Keywords keywords={value} variant={variant} size="sm" meta={meta} />
