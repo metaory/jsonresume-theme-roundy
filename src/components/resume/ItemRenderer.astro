@@ -1,13 +1,11 @@
 ---
-import Item from "@ui/Item.astro";
 import Card from "@ui/Card.astro";
 import FieldRenderer from "./FieldRenderer.astro";
 
 const { itemData, layout, meta } = Astro.props;
-const Component = layout === "cards" ? Card : Item;
 ---
 
-<Component>
+<Card layout={layout === "cards" ? "card" : "item"}>
   {Object.entries(itemData).map(([type, data]) => (
     data && 
     typeof data === "object" && 
@@ -21,4 +19,4 @@ const Component = layout === "cards" ? Card : Item;
       />
     )
   ))}
-</Component>
+</Card>

@@ -1,21 +1,21 @@
 ---
-import TitleField from "./fields/TitleField.astro";
-import SubtitleField from "./fields/SubtitleField.astro";
-import DatesField from "./fields/DatesField.astro";
-import DescriptionField from "./fields/DescriptionField.astro";
-import LevelField from "./fields/LevelField.astro";
-import ListField from "./fields/ListField.astro";
-import KeywordsField from "./fields/KeywordsField.astro";
-import UrlField from "./fields/UrlField.astro";
-import ScoreField from "./fields/ScoreField.astro";
+import Title from "@ui/Title.astro";
+import Subtitle from "@ui/Subtitle.astro";
+import Dates from "@ui/Dates.astro";
+import Description from "@ui/Description.astro";
+import LevelField from "./LevelField.astro";
+import ListField from "./ListField.astro";
+import KeywordsField from "./KeywordsField.astro";
+import UrlField from "./UrlField.astro";
+import ScoreField from "./ScoreField.astro";
 
 const { type, value, variant, meta } = Astro.props;
 
 const componentMap = {
-  title: TitleField,
-  subtitle: SubtitleField,
-  dates: DatesField,
-  description: DescriptionField,
+  title: Title,
+  subtitle: Subtitle,
+  dates: Dates,
+  description: Description,
   level: LevelField,
   fluency: LevelField,
   list: ListField,

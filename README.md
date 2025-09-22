@@ -7,18 +7,23 @@
     <img height="60" alt="JSON Resume Theme Roundy" src="public/wordmark-light.png">
   </picture>
   <br>
-  <i><small>jsonresume theme v0.6.0</small></i><br>
+  <i><small>jsonresume theme v0.10.0</small></i><br>
   <a href="https://metaory.github.io/jsonresume-theme-roundy">demo</a> |
   <a href="out/sample-basic.pdf">sample.pdf</a>
+  <p>A modern, customizable JSON Resume theme with dynamic theming and dark mode support</p>
 </div>
 
 <p align="center">
-  <img src=".github/assets/screenshot.png" width="80%" />
+  <img src="out/screenshot.png" width="80%" />
 </p>
 
-# JSON Resume Theme - Roundy
+---
 
-A modern, customizable JSON Resume theme with dynamic theming and dark mode support.
+> [!WARNING]
+> **Work in progress.**  
+> This is under active development and is **not production ready**.
+
+---
 
 ## Quick Start
 

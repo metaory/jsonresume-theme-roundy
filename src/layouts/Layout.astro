@@ -10,8 +10,7 @@ import "@fontsource/blackout-midnight";
 import ThemeToggle from "@theme/ThemeToggle.astro";
 import ThemePicker from "@theme/ThemePicker.astro";
 import ResumeNav from "@resume/ResumeNav.astro";
-import ThemeStat from "@theme/ThemeStat.astro";
-import VersionInfo from "@meta/VersionInfo.astro";
+import StatusPanel from "@meta/StatusPanel.astro";
 import GitHubLink from "@meta/GitHubLink.astro";
 import { THEME_DEFAULTS } from "@lib/theme.js";
 import pkg from "@pkg";
@@ -71,8 +70,7 @@ const {
         />
       )
     }
-    <ThemeStat />
-    <VersionInfo resumeData={resumeData} />
+    <StatusPanel resumeData={resumeData} />
     <GitHubLink />
     <main class="resume">
       <slot />

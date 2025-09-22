@@ -1,0 +1,131 @@
+---
+import pkg from "@pkg";
+
+const { resumeData } = Astro.props;
+const resumeVersion = resumeData?.meta?.version || "1.0.0";
+const themeVersion = pkg.version;
+---
+
+<div class="status-panel">
+  <span>
+    <iconify-icon icon="tabler:file-cv" width="16" height="16"></iconify-icon>
+    v{resumeVersion}
+  </span>
+  <span>
+    <iconify-icon icon="tabler:palette" width="16" height="16"></iconify-icon>
+    v{themeVersion}
+  </span>
+  
+  <hr>
+  
+  <span>
+    <iconify-icon icon="tabler:palette" width="16" height="16"></iconify-icon>
+    <b data-stat="hue"></b>
+  </span>
+  <span>
+    <iconify-icon icon="tabler:droplet" width="16" height="16"></iconify-icon>
+    <b data-stat="sat"></b>
+  </span>
+  <span>
+    <iconify-icon icon="tabler:moon" width="16" height="16"></iconify-icon>
+    <b data-stat="theme"></b>
+  </span>
+</div>
+
+<script>
+  import { theme } from '@lib/theme.js';
+  
+  const updateStats = () => {
+    const hueEl = document.querySelector('[data-stat="hue"]');
+    const satEl = document.querySelector('[data-stat="sat"]');
+    const themeEl = document.querySelector('[data-stat="theme"]');
+    
+    if (hueEl) hueEl.textContent = theme.hue + '°';
+    if (satEl) satEl.textContent = theme.sat + '%';
+    if (themeEl) {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      themeEl.textContent = isDark ? 'dark' : 'light';
+    }
+  };
+  
+  // Initial update
+  updateStats();
+  
+  // Watch for theme changes with MutationObserver for real-time updates
+  const observer = new MutationObserver(() => {
+    updateStats();
+  });
+  
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['style', 'data-theme']
+  });
+  
+  // Also listen for property changes on CSS custom properties
+  const style = getComputedStyle(document.documentElement);
+  let lastHue = parseInt(style.getPropertyValue('--hue')) || 240;
+  let lastSat = parseInt(style.getPropertyValue('--sat')) || 60;
+  
+  const checkForChanges = () => {
+    const currentHue = parseInt(style.getPropertyValue('--hue')) || 240;
+    const currentSat = parseInt(style.getPropertyValue('--sat')) || 60;
+    
+    if (currentHue !== lastHue || currentSat !== lastSat) {
+      lastHue = currentHue;
+      lastSat = currentSat;
+      updateStats();
+    }
+    
+    requestAnimationFrame(checkForChanges);
+  };
+  
+  checkForChanges();
+</script>
+
+<style>
+  .status-panel {
+    position: fixed;
+    bottom: var(--space-lg);
+    right: var(--space-lg);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    background: var(--surface);
+    padding: var(--space-sm);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+  }
+
+  .status-panel span {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    font-weight: 500;
+    font-family: monospace;
+    white-space: nowrap;
+  }
+
+  .status-panel hr {
+    border: none;
+    height: 1px;
+    background: var(--text-muted);
+    opacity: 0.2;
+    margin: var(--space-xs) 0;
+  }
+
+  iconify-icon {
+    color: var(--primary);
+    opacity: 0.7;
+    flex-shrink: 0;
+  }
+
+  @media print {
+    .status-panel {
+      display: none !important;
+    }
+  }
+</style>

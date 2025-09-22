@@ -1,9 +1,9 @@
 ---
-
+const { value } = Astro.props;
 ---
 
 <p class="subtitle">
-  <slot />
+  {value}
 </p>
 
 <style>

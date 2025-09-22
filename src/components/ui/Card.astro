@@ -1,21 +1,29 @@
 ---
-
+const { layout = "card", ...props } = Astro.props;
+const Element = layout === "card" ? "article" : "div";
 ---
 
-<article class="card">
+<Element class={`container container-${layout}`} {...props}>
   <slot />
-</article>
+</Element>
 
 <style>
-  .card {
+  .container {
     background: var(--surface);
     color: var(--contrast-white);
     border-radius: var(--radius-lg);
     padding: var(--space-md);
-    backdrop-filter: blur(4px);
     box-shadow: var(--shadow);
     display: grid;
     gap: var(--space-xs);
     height: fit-content;
+  }
+  
+  .container-card {
+    backdrop-filter: blur(4px);
+  }
+  
+  .container-item {
+    backdrop-filter: blur(4px);
   }
 </style>
