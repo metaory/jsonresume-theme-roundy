@@ -22,6 +22,34 @@
 > [!WARNING]
 > **Work in progress.**  
 > This is under active development and is **not production ready**.
+> 
+> **For a stable, production-ready version**, use our legacy theme:
+
+<div align="center">
+  <i><small>jsonresume-theme-legacy v7.x</small></i><br>
+  legacy
+  <a href="https://metaory.github.io/jsonresume-theme-legacy">demo</a> |
+  <a href="https://github.com/metaory/jsonresume-theme-legacy/blob/master/out/sample.pdf">sample.pdf</a>
+  <br><br>
+  <a href="https://github.com/metaory/jsonresume-theme-legacy">https://github.com/metaory/jsonresume-theme-legacy</a>
+  <br>
+  <img src="https://raw.githubusercontent.com/metaory/jsonresume-theme-legacy/refs/heads/master/.github/assets/screenshot.png" width="60%" />
+</div>
+
+## Why the Rewrite?
+
+This roundy theme is a complete rewrite of our legacy theme, focusing on simplicity and modern architecture:
+
+- **Technology**: Pure Astro instead of Handlebars + Vite
+- **Code size**: Reduced from ~3,110 lines to ~1,535 lines (50% smaller)
+- **Approach**: Modern web standards and cleaner component architecture
+- **Maintenance**: Simpler codebase for better long-term maintainability
+
+The legacy version remains fully functional and production-ready while we refine this new implementation.
+
+
+
+
 
 ---
 
