@@ -34,7 +34,7 @@
     "@fontsource/fredoka": "^5.2.8",
     "@fontsource/permanent-marker": "^5.2.6",
     "@fontsource/rubik": "^5.2.6",
-    "astro": "^5.14.3",
+    "astro": "^5.15.6",
     "iconify-icon": "^3.0.0"
   },
   "devDependencies": {
