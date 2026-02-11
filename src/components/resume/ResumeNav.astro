@@ -45,11 +45,17 @@ const resumeFiles = resumes.map((name) => getResumeInfo(name));
   .nav-link {
     padding: var(--space-xs) var(--space-sm);
     border-radius: var(--radius);
+    border: 1px dashed transparent;
     text-decoration: none;
     color: var(--text-muted);
     font-size: var(--text-sm);
     font-weight: 500;
-    box-shadow: 0 0 0 1px transparent;
+    transition: border-color 0.2s, color 0.2s;
+
+    &:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
 
     &.active {
       color: var(--primary);

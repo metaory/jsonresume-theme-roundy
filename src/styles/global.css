@@ -31,8 +31,20 @@
   --radius-xl: 1.8rem;
   --radius-full: 50%;
 
-  --shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  --shadow:0 0px 32px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.2);
+
+  /* Heading convention (semantic tokens; section=primary, card/sub from theme) */
+  --heading-section-color: var(--primary);
+  --heading-section-size: var(--text-xl);
+  --heading-card-color: var(--heading-card);
+  --heading-card-size: var(--text-xl);
+  --heading-sub-color: var(--heading-sub);
+  --heading-sub-size: var(--text-sm);
+
+  /* Elevated surface (section/card/summary) */
+  --surface-elevated-padding: var(--space-xl);
+  --surface-elevated-padding-sm: var(--space-lg);
 
   /* Contrast helpers using modern CSS */
   --contrast-white: color-contrast(var(--surface) vs white, black);
@@ -83,16 +95,31 @@ button:focus-visible {
 .resume{max-width:800px;margin:0 auto;padding:var(--space-xl);overflow-x:hidden}
 @media (max-width:768px){.resume{padding:var(--space-lg)}}
 
-/* Typography */
+/* Typography - convention-based heading tokens */
 h1, h2, h3, h4, h5, h6 {
   margin: 0 0 var(--space-md) 0;
   font-weight: 600;
-  color: var(--text);
 }
 
-h1 { font-size: var(--text-2xl); }
-h2 { font-size: var(--text-xl); }
-h3 { font-size: var(--text-lg); }
+h1 { font-size: var(--text-2xl); color: var(--text); }
+h2 { font-size: var(--heading-section-size); color: var(--heading-section-color); }
+h3 { font-size: var(--heading-card-size); color: var(--heading-card-color); }
+h4, h5, h6 { font-size: var(--text-lg); color: var(--text); }
+
+/* Elevated surface - section, card, summary block */
+.surface-elevated {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  color: var(--contrast-white);
+}
+
+.surface-elevated-inset {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  color: var(--contrast-white);
+}
 
 /* Links */
 a {

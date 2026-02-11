@@ -5,7 +5,7 @@ export default defineConfig({
   site: 'https://metaory.github.io',
   base: '/jsonresume-theme-roundy/',
   integrations: [],
-  trailingSlash: 'always',
+  // trailingSlash: 'always',
   vite: {
     resolve: {
       alias: {

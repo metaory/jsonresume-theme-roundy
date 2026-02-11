@@ -78,13 +78,13 @@ const presets = [
   .theme-picker {
     position: fixed;
     top: 30%;
-    left: -286px;
+    left: -300px;
     z-index: 1000;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.4s ease-in-out;
     width: 300px;
     height: auto;
     border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
-    padding: var(--space-md);
+    padding: var(--space-xl);
     backdrop-filter: blur(4px);
     background: var(--surface);
     border: none;
@@ -92,6 +92,11 @@ const presets = [
 
     &:hover {
       left: -4px;
+    }
+
+    &:hover .picker-tab {
+      transform: translateY(-50%) translateX(-500px);
+      opacity: 0;
     }
 
     &:hover ~ .theme-blob {
@@ -112,7 +117,7 @@ const presets = [
 
     @media (max-width: 768px) {
       width: 340px;
-      padding: var(--space-sm);
+      padding: var(--space-lg);
     }
 
     @media print {
@@ -125,6 +130,7 @@ const presets = [
     right: -60px;
     top: 50%;
     transform: translateY(-50%);
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
     background: none;
     border: none;
     cursor: pointer;

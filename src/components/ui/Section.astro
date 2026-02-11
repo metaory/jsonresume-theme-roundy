@@ -11,7 +11,7 @@ const {
 const sectionIcon = getIconForSection(title, meta);
 ---
 
-<section class="section">
+<section class="section surface-elevated">
   <h2 class="section-title">
     <iconify-icon icon={sectionIcon} class="section-icon"></iconify-icon>
     {title}
@@ -23,12 +23,8 @@ const sectionIcon = getIconForSection(title, meta);
 <style>
   .section {
     margin-bottom: var(--space-2xl);
-    padding: var(--space-xl);
+    padding: var(--surface-elevated-padding);
     position: relative;
-    background: var(--surface);
-    color: var(--contrast-white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow);
     backdrop-filter: blur(6px);
     display: grid;
     gap: var(--space-lg);
@@ -43,15 +39,15 @@ const sectionIcon = getIconForSection(title, meta);
     }
 
     @media (max-width: 768px) {
-      padding: var(--space-lg);
+      padding: var(--surface-elevated-padding-sm);
       margin-bottom: var(--space-2xl);
     }
   }
 
   .section-title {
     font-family: var(--font);
-    color: var(--primary);
-    font-size: var(--text-xl);
+    color: var(--heading-section-color);
+    font-size: var(--heading-section-size);
     font-weight: 600;
     position: relative;
     padding-bottom: var(--space-md);
@@ -67,7 +63,7 @@ const sectionIcon = getIconForSection(title, meta);
       left: 0;
       width: 60px;
       height: 3px;
-      background: var(--primary);
+      background: var(--heading-section-color);
       border-radius: 4px;
     }
   }

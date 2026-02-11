@@ -2,13 +2,22 @@
 import Tag from "@ui/Tag.astro";
 
 const { basics } = Astro.props;
+const base = import.meta.env.BASE_URL ?? "/";
+const resolveAsset = (path) =>
+  !path
+    ? ""
+    : /^https?:\/\//i.test(path)
+      ? path
+      : `${base}${path.replace(/^\//, "")}`;
+const logoUrl = resolveAsset(basics.logo);
+const imageUrl = resolveAsset(basics.image);
 ---
 
 <header class="basics">
   {
-    basics.logo && (
+    logoUrl && (
       <div class="logo">
-        <img src={basics.logo} alt="Logo" class="logo-img" />
+        <img src={logoUrl} alt="Logo" class="logo-img" />
       </div>
     )
   }
@@ -16,38 +25,36 @@ const { basics } = Astro.props;
   <div class="name-section">
     <div class="name-title">
       {
-        basics.image && (
+        imageUrl && (
           <div class="profile-image">
-            <img src={basics.image} alt={basics.name} class="avatar" />
+            <img src={imageUrl} alt={basics.name} class="avatar" />
           </div>
         )
       }
       <div class="name-content">
         <h1 class="name">{basics.name}</h1>
-        <p class="label">{basics.label}</p>
+        <p class="label" set:html={basics.label} />
       </div>
     </div>
   </div>
 
-  <div class="contact-info">
-    <Tag
-      text={basics.email}
-      icon="mdi:email"
-      href={`mailto:${basics.email}`}
-      variant="subtle"
-    />
-
-    <Tag
-      text={basics.phone}
-      icon="mdi:phone"
-      href={`tel:${basics.phone}`}
-      variant="subtle"
-    />
-
-    <Tag text={basics.url} icon="mdi:web" href={basics.url} variant="subtle" />
-  </div>
-
-  <div class="location">
+  <div class="contact-card surface-elevated">
+    <div class="contact-info">
+      <Tag
+        text={basics.email}
+        icon="mdi:email"
+        href={`mailto:${basics.email}`}
+        variant="subtle"
+      />
+      <Tag
+        text={basics.phone}
+        icon="mdi:phone"
+        href={`tel:${basics.phone}`}
+        variant="subtle"
+      />
+      <Tag text={basics.url} icon="mdi:web" href={basics.url} variant="subtle" />
+    </div>
+    <div class="location">
     <Tag
       text={[
         basics.location?.address,
@@ -60,25 +67,25 @@ const { basics } = Astro.props;
       icon="mdi:map-marker"
       variant="subtle"
     />
+    </div>
+    <div class="profiles">
+      {
+        (basics.profiles || []).map(
+          (profile: { network?: string; username?: string; url?: string }) => (
+            <Tag
+              text={profile.username}
+              icon={`mdi:${profile.network?.toLowerCase()}`}
+              href={profile.url}
+              variant="subtle"
+              size="md"
+            />
+          ),
+        )
+      }
+    </div>
   </div>
 
-  <div class="profiles">
-    {
-      (basics.profiles || []).map(
-        (profile: { network?: string; username?: string; url?: string }) => (
-          <Tag
-            text={profile.username}
-            icon={`mdi:${profile.network?.toLowerCase()}`}
-            href={profile.url}
-            variant="subtle"
-            size="md"
-          />
-        ),
-      )
-    }
-  </div>
-
-  <div class="summary-card">
+  <div class="summary-card surface-elevated">
     <div class="summary" set:html={basics.summary} />
   </div>
 </header>
@@ -88,6 +95,7 @@ const { basics } = Astro.props;
     position: relative;
     text-align: center;
     margin-bottom: var(--space-2xl);
+    padding-top: var(--space-2xl);
   }
 
   .logo {
@@ -105,7 +113,9 @@ const { basics } = Astro.props;
   }
 
   .name-section {
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-xl);
+    border-bottom: 1px solid color-mix(in srgb, var(--text-muted) 22%, transparent);
   }
 
   .name-title {
@@ -150,28 +160,34 @@ const { basics } = Astro.props;
   }
 
   .label {
-    font-family: var(--font-links);
+    font-family: var(--font-bungee);
     font-size: 1.125rem;
-    color: var(--text-muted);
+    color: var(--heading-sub-color);
     margin: 0;
     font-weight: 500;
-    line-height: 1.4;
+    line-height: 1.5;
+  }
+
+  .contact-card {
+    padding: var(--surface-elevated-padding);
+    margin: var(--space-xl) auto 0;
+    max-width: 700px;
+    display: grid;
+    gap: var(--space-lg);
   }
 
   .contact-info {
     display: grid;
     gap: var(--space-md);
     grid-auto-flow: column;
-    margin-bottom: var(--space-lg);
     max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
   }
 
   .location {
     display: flex;
     justify-content: center;
-    margin-bottom: var(--space-lg);
+    margin: 0;
   }
 
   .profiles {
@@ -179,23 +195,27 @@ const { basics } = Astro.props;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     justify-content: center;
     gap: var(--space-md);
-    margin-bottom: var(--space-xl);
+    margin: 0;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
   }
 
   .summary-card {
-    background: var(--surface);
-    border-radius: var(--radius-lg);
-    padding: var(--space-xl);
+    padding: var(--surface-elevated-padding);
     margin: var(--space-xl) auto 0;
     max-width: 700px;
-    box-shadow: var(--shadow);
     backdrop-filter: blur(8px);
+  }
 
-    @media (max-width: 768px) {
-      padding: var(--space-lg);
+  @media (max-width: 768px) {
+    .contact-card {
+      padding: var(--surface-elevated-padding-sm);
+      margin-top: var(--space-lg);
+    }
+
+    .summary-card {
+      padding: var(--surface-elevated-padding-sm);
       margin-top: var(--space-lg);
     }
   }

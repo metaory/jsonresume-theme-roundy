@@ -3,26 +3,22 @@ const { layout = "card", ...props } = Astro.props;
 const Element = layout === "card" ? "article" : "div";
 ---
 
-<Element class={`container container-${layout}`} {...props}>
+<Element class={`container container-${layout} surface-elevated-inset`} {...props}>
   <slot />
 </Element>
 
 <style>
   .container {
-    background: var(--surface);
-    color: var(--contrast-white);
-    border-radius: var(--radius-lg);
-    padding: var(--space-md);
-    box-shadow: var(--shadow);
+    padding: var(--surface-elevated-padding-sm);
     display: grid;
     gap: var(--space-xs);
     height: fit-content;
   }
-  
+
   .container-card {
     backdrop-filter: blur(4px);
   }
-  
+
   .container-item {
     backdrop-filter: blur(4px);
   }

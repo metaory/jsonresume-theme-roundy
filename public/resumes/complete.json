@@ -1,0 +1,671 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+  "basics": {
+    "email": "xorg@gmail.com",
+    "image": "public/avatar-m.png",
+    "logo": "public/logo.svg",
+    "label": "<i>some label</i> # ZoA <br> ::IoI::",
+    "url": "https://github.com/xorg",
+    "location": {
+      "city": "Kuala Lumpur",
+      "region": "Dutamas",
+      "countryCode": "Malaysia",
+      "residency": "Expat"
+    },
+    "name": "xor not",
+    "phone": "+808 2233 66",
+    "profiles": [
+      {
+        "network": "GitHub",
+        "username": "xorg",
+        "url": "https://github.com/xorg"
+      },
+      {
+        "network": "LinkedIn",
+        "username": "xor-not",
+        "url": "https://linkedin.com/in/xor-not"
+      },
+      {
+        "network": "Cal",
+        "username": "schedule",
+        "url": "https://cal.com/xor-not/intro"
+      }
+    ],
+    "summary": "<ul style='margin-bottom: 0px'> <li>16+ years building full-stack, distributed platforms and cloud architecture</li> <li>Deep expertise in JavaScript runtimes, Linux internals, and browser engines</li> <li>Spec-first, zero-dependency, framework-agnostic, minimal code, web standards</li> <li>Driven by automation, composability, and reducing complexity</li> <li>Modern, declarative code in Lua, JavaScript, Go, and Bash</li> <li>Functional programming, proxy patterns, and thin abstractions</li> <li>Builder of editors, window managers, multiplexers, and automation tools</li> <li>Lives in Tmux, Neovim, and AwesomeWM on bare-metal Arch Linux</li> </ul>"
+  },
+  "interests": [
+    {
+      "name": "Unix Workflow",
+      "keywords": [
+        "Automation",
+        "Pipelines",
+        "Workflow",
+        "CLIs",
+        "TUIs"
+      ]
+    },
+    {
+      "name": "Web Standards",
+      "keywords": [
+        "W3C",
+        "WASM",
+        "ECMA-262",
+        "Web Components",
+        "Extensions API"
+      ]
+    },
+    {
+      "name": "Build & Extend",
+      "keywords": [
+        "Fix",
+        "Patch",
+        "Fork",
+        "Extend",
+        "Create"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "Paradigms",
+      "level": "Master",
+      "keywords": [
+        "Functional",
+        "Declarative",
+        "OOP",
+        "TDD",
+        "DDD",
+        "BDD"
+      ]
+    },
+    {
+      "name": "Patterns",
+      "level": "Master",
+      "keywords": [
+        "Proxy",
+        "Mediator",
+        "Observer",
+        "Saga",
+        "CQRS",
+        "Event Sourcing"
+      ]
+    },
+    {
+      "name": "Infrastructure",
+      "level": "Advanced",
+      "keywords": [
+        "CI/CD",
+        "DevOps",
+        "DevSecOps",
+        "Docker",
+        "GitOps",
+        "SRE",
+        "Terraform"
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "language": "Lua",
+      "fluency": "Master"
+    },
+    {
+      "language": "Bash",
+      "fluency": "Master"
+    },
+    {
+      "language": "JavaScript",
+      "fluency": "Master"
+    },
+    {
+      "language": "Go",
+      "fluency": "Advanced"
+    },
+    {
+      "language": "Elixir",
+      "fluency": "Intermediate"
+    },
+    {
+      "language": "Haskell",
+      "fluency": "Beginner"
+    },
+    {
+      "language": "Python",
+      "fluency": "Beginner"
+    },
+    {
+      "language": "Rust",
+      "fluency": "Beginner"
+    },
+    {
+      "language": "Zig",
+      "fluency": "Beginner"
+    }
+  ],
+  "work": [
+    {
+      "name": "OPEN-SOURCE (non-profit)",
+      "location": "REMOTE",
+      "position": "Open‑source Developer",
+      "summary": "On hiatus; contributing to open‑source. Work published under public domain on GitHub.",
+      "url": "https://opensource.org",
+      "startDate": "2024-08",
+      "endDate": "current",
+      "keywords": [
+        "open‑source"
+      ],
+      "highlights": [
+        "Znwbe CEf gb 4+ cebwrpgf",
+        "Fgnegrq 5+ cebwrpgf"
+      ]
+    },
+    {
+      "name": "Cvpxyrf",
+      "location": "Nhfgenyvn · ULOEVQ",
+      "position": "Principal Software Engineer",
+      "summary": "Cvpxyrf vf Nhfgenyvn'f yrnqvat nffrg erznexrgvat cyngsbez, qryvirevat uvtu-ibyhzr nhpgvba naq ybtvfgvpf fbyhgvbaf sbe iruvpyrf, znpuvarel, naq fhecyhf nffrgf.",
+      "url": "uggcf://cvpxyrf.pbz.nh",
+      "startDate": "2024-09",
+      "endDate": "2025-01",
+      "keywords": [
+        "Platform",
+        "SRE",
+        "Chaos",
+        "Performance",
+        "k6",
+        "Observability",
+        "Node.js",
+        "Go",
+        "AWS",
+        "Terraform",
+        "CI/CD",
+        "GitHub Actions",
+        "Microservices",
+        "Containers",
+        "Monitoring",
+        "Incident Response",
+        "SLOs",
+        "IaC"
+      ],
+      "highlights": [
+        "Planned org‑wide chaos drills to validate resilience",
+        "Built k6 suites; set baselines and thresholds",
+        "Tuned dashboards and SLOs for latency paths",
+        "Co‑authored IR playbooks and fault‑injection strategies",
+        "Shaped microservices modernization and DevOps roadmap"
+      ]
+    },
+    {
+      "name": "Mbyb",
+      "location": "Fvatncber · ERZBGR",
+      "position": "Head of Engineering",
+      "summary": "NV nffvfgnag pbairegvat JungfNcc beqref gb onpx‑bssvpr flfgrzf.",
+      "url": "uggcf://mbybzneg.pb",
+      "startDate": "2023-12",
+      "endDate": "2024-08",
+      "keywords": [
+        "AI",
+        "AWS",
+        "Architecture",
+        "Bash",
+        "CI/CD",
+        "CloudFormation",
+        "DevOps",
+        "DevSecOps",
+        "Docker",
+        "GitOps",
+        "IssueOps",
+        "Node.js",
+        "Queues",
+        "Serverless",
+        "Performance",
+        "Terraform",
+        "Backup"
+      ],
+      "highlights": [
+        "Built CI/CD pipelines",
+        "Defined engineering strategy",
+        "Designed scalable, fault‑tolerant cloud",
+        "Built integrations, webhooks, and APIs",
+        "Raised code quality via reviews",
+        "Drove product delivery",
+        "Established guidelines and best practices",
+        "Led team; partnered with Product and stakeholders",
+        "Managed budgets",
+        "Hired team to own freelancer MVP",
+        "Set up APM and error monitoring"
+      ]
+    },
+    {
+      "name": "Erfcbaq.vb",
+      "location": "Xhnyn Yhzche, Znynlfvn · BA-FVGR",
+      "position": "Senior DevOps Engineer",
+      "summary": "Ragrecevfr pbairefngvbany pbzzrepr cyngsbez; 10x+ pbzcnavrf npebff 86 pbhagevrf.",
+      "url": "uggcf://erfcbaq.vb",
+      "startDate": "2022-08",
+      "endDate": "2023-07",
+      "keywords": [
+        "AI",
+        "AWS",
+        "Architecture",
+        "Bash",
+        "CI/CD",
+        "CloudFormation",
+        "DevOps",
+        "DevSecOps",
+        "Docker",
+        "GitOps",
+        "IssueOps",
+        "Messaging",
+        "Node.js",
+        "Queues",
+        "Serverless",
+        "Performance",
+        "Templating",
+        "Terraform",
+        "Vulnerability"
+      ],
+      "highlights": [
+        "Designed, built, and operated core services",
+        "Automated internal workflows",
+        "Designed features; built prototypes",
+        "Improved developer experience",
+        "Built internal tooling",
+        "Wrote IaC; automated provisioning",
+        "Profiled and removed bottlenecks"
+      ]
+    },
+    {
+      "name": "UryybTbyq",
+      "description": "Njrfbzr",
+      "summary": "UryybTbyq vf n fgneg-hc gung perngrf fvzcyr naq npprffvoyr tbyq cebqhpgf sbe rirelbar.",
+      "location": "Xhnyn Yhzche, Znynlfvn · ERZBGR",
+      "url": "uggcf://uryybtbyq.pbz",
+      "position": "Senior Architect & Fullstack Engineer",
+      "startDate": "2021-05",
+      "endDate": "2023-01",
+      "keywords": [
+        "AWS",
+        "Architecture",
+        "Bash",
+        "CI/CD",
+        "CloudFormation",
+        "DevOps",
+        "DevSecOps",
+        "Docker",
+        "Fintech",
+        "Heroku",
+        "Linux",
+        "Node.js",
+        "OIDC",
+        "React",
+        "Svelte",
+        "Terraform",
+        "Integrations",
+        "Payments",
+        "Serverless"
+      ],
+      "highlights": [
+        "Led Heroku→AWS Well‑Architected migration",
+        "Built serverless webhooks",
+        "Built serverless JSON proxy; open‑sourced proxy‑api‑transformer",
+        "Led and mentored team; code reviews",
+        "Shipped features; fixed bugs",
+        "Migrated auth to AWS Cognito"
+      ]
+    },
+    {
+      "name": "Chyfvsv",
+      "description": "Njrfbzr",
+      "summary": "Chyfvsv'f Crbcyr Qngn Cyngsbez fvtavsvpnagyl vzcebirf dhnyvgl naq rssvpvrapl va Gnyrag Npdhvfvgvba naq Znantrzrag jvgu Cerqvpgvir NV.",
+      "url": "uggcf://chyfvsv.zr",
+      "location": "Xhnyn Yhzche, Znynlfvn · BA-FVGR",
+      "position": "Solution Architect",
+      "startDate": "2020-01",
+      "endDate": "2021-04",
+      "keywords": [
+        "AI",
+        "AWS",
+        "Architecture",
+        "CI/CD",
+        "CloudFormation",
+        "Data Masking",
+        "DevSecOps",
+        "ETL",
+        "Node.js",
+        "Pandas",
+        "Queues",
+        "Serverless",
+        "Terraform"
+      ],
+      "highlights": [
+        "Designed, built, and operated services",
+        "Led and mentored team; code reviews",
+        "Owned AWS infra, monitoring, automation, DRP"
+      ]
+    },
+    {
+      "name": "Chyfvsv",
+      "description": "Njrfbzr",
+      "location": "Xhnyn Yhzche, Znynlfvn · BA-FVGR",
+      "url": "uggcf://chyfvsv.zr",
+      "position": "Senior DevOps & Fullstack engineer",
+      "startDate": "2019-04",
+      "endDate": "2020-01",
+      "keywords": [
+        "AI",
+        "AWS",
+        "Angular",
+        "CI/CD",
+        "NLP",
+        "Node.js",
+        "Serverless"
+      ],
+      "highlights": [
+        "Rewrote CI/CD pipelines",
+        "Led and mentored team; code reviews",
+        "Containerized legacy EC2 services",
+        "Managed AWS infra; monitoring, automation"
+      ]
+    },
+    {
+      "name": "PngpuGungOhf",
+      "summary": "Bayvar nttertngbe sbe vagrepvgl ohfrf",
+      "location": "Xhnyn Yhzche, Znynlfvn · BA-FVGR",
+      "url": "uggcf://z.pngpugungohf.pbz",
+      "position": "System Analyst",
+      "startDate": "2017-04",
+      "endDate": "2019-03",
+      "keywords": [
+        "AWS",
+        "Architecture",
+        "CI/CD",
+        "Cordova",
+        "DevOps",
+        "Fintech",
+        "Linux",
+        "Node.js",
+        "Data Mining",
+        "Integrations",
+        "Patching",
+        "Payments",
+        "SSR",
+        "Vue"
+      ],
+      "highlights": [
+        "Owned SDLC and pipelines; redesigned infra; migrated EB→ECS/Lambda",
+        "Solo‑built CTS & PIDS on Raspberry Pi",
+        "Built POS thermal printer driver (Electron)",
+        "Built provider‑agnostic scraper with Step Functions",
+        "Rewrote mobile web (PWA SSR m.*); shipped to app stores; Boost integration"
+      ]
+    },
+    {
+      "name": "PngpuGungOhf",
+      "location": "Xhnyn Yhzche, Znynlfvn · BA-FVGR",
+      "url": "uggcf://pngpugungohf.pbz",
+      "position": "Senior Fullstack Engineer",
+      "startDate": "2015-04",
+      "endDate": "2017-04",
+      "keywords": [
+        "AWS",
+        "Docker",
+        "Fintech",
+        "Linux",
+        "Node.js",
+        "DynamoDB",
+        "Electron",
+        "Express",
+        "Performance",
+        "RDS",
+        "Redis",
+        "WebSocket"
+      ],
+      "highlights": [
+        "Built CTB's first Node team",
+        "Rewrote legacy stack in Node",
+        "Built headless CMS in Node for web/native apps",
+        "Built internal CRM and inventory dashboards"
+      ]
+    },
+    {
+      "name": "Genpgvir fqa ouq",
+      "description": "Njrfbzr",
+      "summary": "Ohvyqf jro naq zbovyr nccf naq bssref qvtvgny fvtantr fbyhgvbaf.",
+      "location": "Xhnyn Yhzche, Znynlfvn · BA-FVGR",
+      "url": "uggcf://genpgvir.pbz.zl",
+      "position": "Senior Cloud Engineer",
+      "startDate": "2013",
+      "endDate": "2015",
+      "keywords": [
+        "ARM",
+        "Architecture",
+        "Backbone.js",
+        "DevOps",
+        "IoT",
+        "Linux",
+        "Node.js",
+        "DigitalOcean",
+        "MongoDB",
+        "MQTT",
+        "WebSocket"
+      ],
+      "highlights": [
+        "Solo‑delivered fault‑tolerant distributed signage platform"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "markon",
+      "url": "https://github.com/xorg/markon",
+      "description": "Distraction‑free Markdown editor with GFM, resizable preview, syntax highlighting; local‑only",
+      "roles": [
+        "JavaScript"
+      ],
+      "startDate": "2025-08-12",
+      "endDate": "2025-09-03",
+      "keywords": [
+        "markdown",
+        "editor",
+        "vanilla",
+        "offline"
+      ]
+    },
+    {
+      "name": "bit-grid-component",
+      "url": "https://github.com/xorg/bit-grid-component",
+      "description": "CSS Grid component library; customizable layouts; zero dependencies",
+      "roles": [
+        "JavaScript"
+      ],
+      "startDate": "2025-08-03",
+      "endDate": "2025-09-02",
+      "keywords": [
+        "npm",
+        "library",
+        "web component",
+        "vanilla"
+      ]
+    },
+    {
+      "name": "coloruv",
+      "url": "https://github.com/xorg/coloruv",
+      "description": "Minimal natural color picker; screen as palette; horizontal=hue, vertical=sat/bright",
+      "roles": [
+        "JavaScript"
+      ],
+      "startDate": "2025-08-07",
+      "endDate": "2025-09-09",
+      "keywords": [
+        "color",
+        "picker",
+        "vanilla",
+        "minimal"
+      ]
+    },
+    {
+      "name": "glitcher-app",
+      "url": "https://github.com/xorg/glitcher-app",
+      "description": "Web glitch generator with real‑time preview; SVG/GIF/WebM/PNG/MP4",
+      "roles": [
+        "JavaScript"
+      ],
+      "startDate": "2025-04-20",
+      "endDate": "2025-05-13",
+      "keywords": [
+        "glitch",
+        "generator",
+        "svg",
+        "gif",
+        "webm"
+      ]
+    },
+    {
+      "name": "gradient-gl",
+      "url": "https://github.com/xorg/gradient-gl",
+      "description": "Tiny WebGL library for seed‑driven procedural gradient animations",
+      "roles": [
+        "JavaScript"
+      ],
+      "startDate": "2025-03-28",
+      "endDate": "2025-06-03",
+      "keywords": [
+        "animation",
+        "npm",
+        "library",
+        "gradient",
+        "seed",
+        "shaders",
+        "webgl"
+      ]
+    },
+    {
+      "name": "jsonresume-theme-legacy",
+      "url": "https://github.com/xorg/jsonresume-theme-legacy",
+      "description": "Vite‑based JSONResume theme with Iconify, custom colors, and PDF export",
+      "roles": [
+        "Handlebars"
+      ],
+      "startDate": "2024-09-09",
+      "endDate": "2025-06-10",
+      "keywords": [
+        "jsonresume",
+        "vite",
+        "pdf"
+      ]
+    },
+    {
+      "name": "markup.json",
+      "url": "https://github.com/xorg/markup.json",
+      "description": "Minimal JSON markup DSL/AST; outputs HTML/SVG via CLI or JS",
+      "roles": [
+        "JavaScript"
+      ],
+      "startDate": "2024-08-12",
+      "endDate": "2025-05-09",
+      "keywords": [
+        "ast",
+        "cli",
+        "dsl",
+        "html",
+        "npm",
+        "transpiler"
+      ]
+    },
+    {
+      "name": "pcall.js",
+      "url": "https://github.com/xorg/pcall.js",
+      "description": "Minimal Result monad (Lua/Elixir/Rust inspired) with lifecycle hooks; zero deps",
+      "roles": [
+        "JavaScript"
+      ],
+      "startDate": "2024-04-18",
+      "endDate": "2025-04-01",
+      "keywords": [
+        "async",
+        "library",
+        "lua",
+        "middleware",
+        "npm",
+        "promise",
+        "safecall"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Limkokwing University Cyberjaya",
+      "area": "MY",
+      "studyType": "B.S. SWE",
+      "url": "https://limkokwing.net",
+      "startDate": "2011-09",
+      "endDate": "discontinued"
+    },
+    {
+      "institution": "Azad University",
+      "studyType": "B.CS.",
+      "area": "IR",
+      "startDate": "2009",
+      "endDate": "2011"
+    },
+    {
+      "institution": "Dehkhoda University",
+      "studyType": "B.Sc. IT",
+      "area": "IR",
+      "startDate": "2005",
+      "endDate": "2007"
+    }
+  ],
+  "publications": [
+    {
+      "name": "junk-activity-scanner",
+      "publisher": "xorg",
+      "releaseDate": "2024-10-02",
+      "url": "https://gist.github.com/xorg/89652931a467d04c0847342f0b83c718",
+      "summary": "Day‑271 TEA Protocol Slayer origin story. Project launched. <a href='https://github.com/xorg/junk-activity-scanner'>repo</a>"
+    },
+    {
+      "name": "nilbase",
+      "publisher": "xorg",
+      "releaseDate": "2025-01-23",
+      "url": "https://gist.github.com/xorg/2fb9348705b681db2329bb4156dfdae9",
+      "summary": "Zero‑infrastructure SaaS for privacy‑first distributed apps"
+    },
+    {
+      "name": "Impono",
+      "publisher": "xorg",
+      "releaseDate": "2025-05-08",
+      "url": "https://gist.github.com/xorg/ff00bec7ad72238ee4df06937a357688",
+      "summary": "Autonomous behavioral modules — behavior over components/utilities/libraries"
+    }
+  ],
+  "meta": {
+    "lastModified": "2024-09-01T00:00:00.000Z",
+    "canonical": "https://github.com/xorg/jsonresume-theme-legacy",
+    "version": "0.1.0",
+    "themeOptions": {
+      "hue": 240,
+      "sat": 60,
+      "dark": false,
+      "sectionTitles": {
+        "projects": "Open Source Projects",
+        "work": "Professional Experience",
+        "skills": "Technical Expertise",
+        "interests": "Areas of Interest"
+      },
+      "icons": {
+        "lua": "tabler:brand-lua-filled",
+        "bash": "tabler:terminal-filled",
+        "javascript": "tabler:brand-javascript-filled",
+        "go": "tabler:brand-golang-filled",
+        "aws": "tabler:brand-aws-filled",
+        "docker": "tabler:brand-docker-filled",
+        "terraform": "tabler:brand-terraform-filled",
+        "ci/cd": "tabler:brand-github-filled",
+        "devops": "tabler:server-filled",
+        "performance": "tabler:gauge-filled"
+      }
+    }
+  }
+}

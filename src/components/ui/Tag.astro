@@ -36,6 +36,7 @@ const tagProps = href ? { href, target: "_blank", rel: "noopener" } : {};
   .tag-icon {
     font-size: 0.9em;
     color: var(--accent);
+    mix-blend-mode: difference;
   }
 
   .tag-text {
@@ -43,16 +44,16 @@ const tagProps = href ? { href, target: "_blank", rel: "noopener" } : {};
   }
 
   .tag-default {
-    --tag-bg: var(--surface);
-    --tag-color: var(--contrast-white);
+    --tag-bg: var(--tag-default-bg, var(--surface));
+    --tag-color: var(--tag-default-color, var(--contrast-white));
   }
   .tag-primary {
-    --tag-bg: var(--primary);
-    --tag-color: var(--contrast-primary);
+    --tag-bg: var(--tag-primary-bg, var(--primary));
+    --tag-color: var(--tag-primary-color, var(--contrast-primary));
   }
   .tag-secondary {
-    --tag-bg: var(--secondary);
-    --tag-color: var(--contrast-secondary);
+    --tag-bg: var(--tag-secondary-bg, var(--secondary));
+    --tag-color: var(--tag-secondary-color, var(--contrast-secondary));
   }
   .tag-outline {
     --tag-bg: transparent;
@@ -68,8 +69,8 @@ const tagProps = href ? { href, target: "_blank", rel: "noopener" } : {};
     text-decoration: underline;
   }
   .tag-subtle {
-    --tag-bg: var(--wash);
-    --tag-color: var(--contrast-white);
+    --tag-bg: var(--tag-subtle-bg, var(--wash));
+    --tag-color: var(--tag-subtle-color, var(--contrast-white));
     border-radius: var(--radius-lg);
     backdrop-filter: blur(8px);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);

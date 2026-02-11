@@ -4,15 +4,19 @@ export const THEME_DEFAULTS = { hue: 240, sat: 60, dark: false };
 
 const hsl = (h, s, l, a) => `hsl(${h} ${s}% ${l}%${a ? ` / ${a}` : ""})`;
 
+const headingSat = (s) => Math.min(100, s + 14);
+
 const sharedColors = (h, s, secondaryHue, accentHue) => ({
-  primary: hsl(h, s, 50),
-  secondary: hsl(secondaryHue, s, 50),
-  accent: hsl(accentHue, s, 60),
+  primary: hsl(h, headingSat(s), 50),
+  secondary: hsl(secondaryHue, headingSat(s), 50),
+  accent: hsl(accentHue, headingSat(s), 60),
 });
 
 const enhancedSat = (s, boost) => Math.min(100, s + boost);
 
 const bgSat = (s, base, multiplier) => base + clamp(s * multiplier, 8, 40);
+
+const tagSat = (s) => Math.min(35, s * 0.5);
 
 const colorConfigs = {
   dark: (h, s, secondaryHue, accentHue, textSat) => ({
@@ -20,8 +24,18 @@ const colorConfigs = {
     bg: hsl(h, bgSat(s, 10, 0.25), 8),
     surface: hsl(h, bgSat(s, 10, 0.2), 12, 0.2),
     wash: hsl(h, s, 20, 0.4),
+    "tag-default-bg": hsl(h, tagSat(s), 18),
+    "tag-default-color": hsl(h, textSat, 92),
+    "tag-subtle-bg": hsl(h, tagSat(s), 22),
+    "tag-subtle-color": hsl(h, textSat, 90),
+    "tag-primary-bg": hsl(h, tagSat(s), 28),
+    "tag-primary-color": hsl(h, textSat, 90),
+    "tag-secondary-bg": hsl(secondaryHue, tagSat(s), 28),
+    "tag-secondary-color": hsl(h, textSat, 90),
     text: hsl(h, textSat, 95),
-    "text-muted": hsl(h, textSat, 95),
+    "text-muted": hsl(h, textSat, 72),
+    "heading-card": hsl(h, headingSat(s) * 0.7, 82),
+    "heading-sub": hsl(h, clamp(s * 0.3, 10, 35), 70),
     link: hsl(h, s, 70),
     "link-hover": hsl(h, enhancedSat(s, 10), 75),
     edge: 'black',
@@ -31,8 +45,18 @@ const colorConfigs = {
     bg: hsl(h, bgSat(s, 15, 4), 94),
     surface: hsl(h, bgSat(s, 20, 3.5), 96, 0.2),
     wash: hsl(h, s, 80, 0.4),
+    "tag-default-bg": hsl(h, tagSat(s), 92),
+    "tag-default-color": hsl(h, textSat, 18),
+    "tag-subtle-bg": hsl(h, tagSat(s), 88),
+    "tag-subtle-color": hsl(h, textSat, 22),
+    "tag-primary-bg": hsl(h, tagSat(s), 88),
+    "tag-primary-color": hsl(h, textSat, 22),
+    "tag-secondary-bg": hsl(secondaryHue, tagSat(s), 88),
+    "tag-secondary-color": hsl(h, textSat, 22),
     text: hsl(h, textSat, 15),
-    "text-muted": hsl(h, textSat, 15),
+    "text-muted": hsl(h, textSat, 42),
+    "heading-card": hsl(h, headingSat(s) * 0.65, 32),
+    "heading-sub": hsl(h, clamp(s * 0.35, 12, 40), 42),
     link: hsl(h, s, 50),
     "link-hover": hsl(h, enhancedSat(s, 10), 45),
     edge: 'white',
